@@ -9,4 +9,4 @@
 
 - [FileZilla Client](https://filezilla-project.org/download.php?type=client)
 - [Putty](https://putty.org/)
-- [MobaXterm](./packages/MobaXterm)
+- [MobaXterm](./packages/MobaXterm.zip)
