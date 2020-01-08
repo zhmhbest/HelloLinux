@@ -5,6 +5,8 @@
 - [Putty](https://putty.org/)
 - [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)
 
+#### *start.cmd*
+
 ```batch
 REM Step1: 删除目录“%UserProfile%\Documents\MobaXterm”
 REM Step2: 在“MobaXterm.exe”所在目录下建立“start.cmd”
