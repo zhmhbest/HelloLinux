@@ -95,6 +95,8 @@ www/files/centos7
         local.repo
 ```
 
+#### *BUILD.bat*
+
 ```batch
 REM 建立本地仓库
 
