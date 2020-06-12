@@ -28,13 +28,14 @@ Last Login: ...
 cd /etc/sysconfig/network-scripts; ls -l ifcfg-*
 # -rw-r--r--. 1 root root 279 6月  13 2020 ifcfg-ens33
 # -rw-r--r--. 1 root root 254 3月  29 2019 ifcfg-lo
+enscfg=ifcfg-ens33
 
-tail -n 2 ifcfg-ens33
+tail -n 2 $enscfg
 # DEVICE=ens33
 # ONBOOT=no
 
-sed -i '/ONBOOT/s/no/yes/' ifcfg-ens33
-tail -n 2 ifcfg-ens33
+sed -i '/ONBOOT/s/no/yes/' $enscfg
+tail -n 2 $enscfg
 # DEVICE=ens33
 # ONBOOT=yes
 
@@ -82,7 +83,8 @@ REM    ...
 ***Step2***：（虚拟机环境）测试真机地址
 
 ```bash
-rip=169.254.114.15
+# VMnet1
+rip=192.168.202.1
 
 # 测试1
 ping -c 3 $rip

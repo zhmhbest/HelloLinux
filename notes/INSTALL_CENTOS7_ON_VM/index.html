@@ -287,13 +287,14 @@ Last Login: ...
 </code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">cd</span> /etc/sysconfig/network-scripts<span class="token punctuation">;</span> <span class="token function">ls</span> -l ifcfg-*
 <span class="token comment"># -rw-r--r--. 1 root root 279 6&#x6708;  13 2020 ifcfg-ens33</span>
 <span class="token comment"># -rw-r--r--. 1 root root 254 3&#x6708;  29 2019 ifcfg-lo</span>
+enscfg<span class="token operator">=</span>ifcfg-ens33
 
-<span class="token function">tail</span> -n 2 ifcfg-ens33
+<span class="token function">tail</span> -n 2 <span class="token variable">$enscfg</span>
 <span class="token comment"># DEVICE=ens33</span>
 <span class="token comment"># ONBOOT=no</span>
 
-<span class="token function">sed</span> -i <span class="token string">&apos;/ONBOOT/s/no/yes/&apos;</span> ifcfg-ens33
-<span class="token function">tail</span> -n 2 ifcfg-ens33
+<span class="token function">sed</span> -i <span class="token string">&apos;/ONBOOT/s/no/yes/&apos;</span> <span class="token variable">$enscfg</span>
+<span class="token function">tail</span> -n 2 <span class="token variable">$enscfg</span>
 <span class="token comment"># DEVICE=ens33</span>
 <span class="token comment"># ONBOOT=yes</span>
 
@@ -327,7 +328,8 @@ yum -y <span class="token function">install</span> net-tools
 <span class="token comment">REM    &#x81EA;&#x52A8;&#x914D;&#x7F6E; IPv4 &#x5730;&#x5740;  . . . . . . . : &lt;IP2&gt;</span>
 <span class="token comment">REM    ...</span>
 </pre><p><em><strong>Step2</strong></em>&#xFF1A;&#xFF08;&#x865A;&#x62DF;&#x673A;&#x73AF;&#x5883;&#xFF09;&#x6D4B;&#x8BD5;&#x771F;&#x673A;&#x5730;&#x5740;</p>
-<pre data-role="codeBlock" data-info="bash" class="language-bash">rip<span class="token operator">=</span>169.254.114.15
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># VMnet1</span>
+rip<span class="token operator">=</span>192.168.202.1
 
 <span class="token comment"># &#x6D4B;&#x8BD5;1</span>
 <span class="token function">ping</span> -c 3 <span class="token variable">$rip</span>
