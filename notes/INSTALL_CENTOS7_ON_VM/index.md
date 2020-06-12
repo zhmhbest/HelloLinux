@@ -1,10 +1,9 @@
-# CentOS 7虚拟机
+<link rel="stylesheet" href="https://zhmhbest.gitee.io/hellomathematics/style/index.css">
+<script src="https://zhmhbest.gitee.io/hellomathematics/style/index.js"></script>
 
-## 安装
+# [在VM上安装CentOS7](../index.html)
 
-- ![](./images/vm1.png)
-- ![](./images/vm2.png)
-- ![](./images/vm3.png)
+- ![](./images/vm_disk.png)
 - ![](./images/adapter.png)
 - ![](./images/vm_adapter.png)
 - ![](./images/centos7_install.png)
@@ -14,9 +13,9 @@
 - ![](./images/centos7_disk1.png)
 - ![](./images/centos7_disk2.png)
 - ![](./images/centos7_disk3.png)
-- ![](./images/centos7_root.png)
+- ![](./images/vm_ssh.png)
 
-## 登录和初始化
+## 获取虚拟机IP
 
 ```
 localhost login: root
@@ -26,59 +25,83 @@ Last Login: ...
 ```
 
 ```bash
-# 必备包（最小化安装后需要补充安装的包）
-yum -y install net-tools wget
+cd /etc/sysconfig/network-scripts; ls -l ifcfg-*
+# -rw-r--r--. 1 root root 279 6月  13 2020 ifcfg-ens33
+# -rw-r--r--. 1 root root 254 3月  29 2019 ifcfg-lo
 
-# 查看本机IP
-cd /etc/sysconfig/network-scripts
-ls -l ifcfg-*
-vi ifcfg-ens33
+tail -n 2 ifcfg-ens33
+# DEVICE=ens33
+# ONBOOT=no
+
+sed -i '/ONBOOT/s/no/yes/' ifcfg-ens33
+tail -n 2 ifcfg-ens33
+# DEVICE=ens33
 # ONBOOT=yes
+
 systemctl restart network
+yum -y install net-tools
 ifconfig
 ```
 
 ```
 ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.229.130  netmask 255.255.255.0  broadcast 192.168.229.255
-        ...
-ens34: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.124.133  netmask 255.255.255.0  broadcast 192.168.124.255
+        inet 192.168.???.???  netmask *  broadcast *
         ...
 ```
 
-### 使用MobaXterm连接虚拟机
+## 关闭SELINUX
 
-- ![](./images/moba1.png)
-- ![](./images/moba2.png)
+```bash
+# getenforce              #获取状态
+# setenforce 0            #临时关闭
+# vi /etc/selinux/config #永久关闭 SELINUX=disabled
+sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'
+more '/etc/selinux/config'
+```
 
 ## 设置本地源
 
->确保真机HTTP服务启动，DVD-ISO文件挂载正常。
+***Step1***：（真机环境）获得真机地址
 
-### 测试地址
+```batch
+ipconfig
 
-```bash
-# IP地址为真机适配器VMWare Network Adapter VMnet（Host-Only）的静态地址
+REM 以太网适配器 VMware Network Adapter VMnet1:
+REM 
+REM    ...
+REM    自动配置 IPv4 地址  . . . . . . . : <IP1>
+REM    ...
 
-# 测试1
-ping -c 3 192.168.229.1
-
-# 测试2
-wget http://192.168.229.1/files/centos7/test; clear; more test; rm -f ./test
+REM 以太网适配器 VMware Network Adapter VMnet8:
+REM 
+REM    ...
+REM    自动配置 IPv4 地址  . . . . . . . : <IP2>
+REM    ...
 ```
 
-### 建立本地仓库
+***Step2***：（虚拟机环境）测试真机地址
+
+```bash
+rip=169.254.114.15
+
+# 测试1
+ping -c 3 $rip
+
+# 测试2
+wget http://$rip/files/centos7/test; clear; more test; rm -f ./test
+```
+
+***Step3***：建立本地仓库
 
 ```
 www/files/centos7
-│  BUILD.bat
-│  RPM-GPG-KEY-CentOS-7
-│  RPM-GPG-KEY-CentOS-Testing-7
-│  test
+│  BUILD.bat                                    详见下文
+│  RPM-GPG-KEY-CentOS-7                         AUTO_COPY
+│  RPM-GPG-KEY-CentOS-Testing-7                 AUTO_COPY
+│  test                                         AUTO_BUILD
 │
-├─Packages
-├─repodata
+├─Packages                                      AUTO_LINK
+├─repodata                                      AUTO_BUILD
 │      <sha256>-primary.xml.gz
 │      <sha256>-other.sqlite.bz2
 │      <sha256>-filelists.sqlite.bz2
@@ -92,10 +115,8 @@ www/files/centos7
 │      TRANS.TBL
 │
 └─repofiles
-        local.repo
+        local.repo                              AUTO_BUILD
 ```
-
-#### *BUILD.bat*
 
 ```batch
 REM 建立本地仓库
@@ -153,7 +174,7 @@ ECHO Everything is OK.
 PAUSE
 ```
 
-### 虚拟机配置
+***Step4***：配置虚拟机
 
 ```bash
 cd '/etc/yum.repos.d'
@@ -161,13 +182,4 @@ if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null
 # mv ./backups/CentOS-* ./; rmdir ./backups
 wget -O ./DVD-ISO.repo  http://192.168.229.1/files/centos7/repofiles/local.repo
 yum makecache
-```
-
-## 关闭SELINUX
-
-```bash
-# getenforce              #获取状态
-# setenforce 0            #临时关闭
-# vi /etc/selinux/config #永久关闭 SELINUX=disabled
-sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'; more '/etc/selinux/config'
 ```
