@@ -17,6 +17,8 @@
 
 ## 获取虚拟机IP
 
+获得虚拟机IP的目的是方便在真机环境中使用SSH协议登录。
+
 ```
 localhost login: root
 Password:
@@ -53,14 +55,16 @@ ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 ## 关闭SELINUX
 
 ```bash
-# getenforce              #获取状态
-# setenforce 0            #临时关闭
-# vi /etc/selinux/config #永久关闭 SELINUX=disabled
+# getenforce                # 获取状态
+# setenforce 0              # 临时关闭
+# vi /etc/selinux/config    # 永久关闭 SELINUX=disabled
 sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'
 more '/etc/selinux/config'
 ```
 
 ## 设置本地源
+
+将安装镜像挂载为驱动器，并利用[Nginx](http://nginx.org/en/download.html)提供服务，使真机成为下载服务器。
 
 ***Step1***：（真机环境）获得真机地址
 
@@ -78,22 +82,15 @@ REM
 REM    ...
 REM    自动配置 IPv4 地址  . . . . . . . : <IP2>
 REM    ...
+
+REM （管理员）允许真机被Ping
+netsh advfirewall firewall add rule name="ICMP V4 Echo Request" protocol=icmpv4:8,any dir=in action=allow
+
+REM （管理员）调试完成后删除规则
+netsh advfirewall firewall delete rule name="ICMP V4 Echo Request"
 ```
 
-***Step2***：（虚拟机环境）测试真机地址
-
-```bash
-# VMnet1
-rip=192.168.202.1
-
-# 测试1
-ping -c 3 $rip
-
-# 测试2
-wget http://$rip/files/centos7/test; clear; more test; rm -f ./test
-```
-
-***Step3***：建立本地仓库
+***Step2***：建立本地仓库
 
 ```
 www/files/centos7
@@ -121,10 +118,13 @@ www/files/centos7
 ```
 
 ```batch
-REM 建立本地仓库
+REM 【建立本地缓存】
 
+REM Param1：镜像挂载磁盘
 @SET DVD_ISO_DRIVE=G:
-@SET VMNET_HOST_ONLY_DOMAIN=192.168.229.1
+REM Param2：真机地址（VMnet1.IP）
+@SET SERVER_DOMAIN=192.168.202.1
+REM Param3：文件目录
 @SET HTTP_CENTOS_URL=/files/centos7
 
 @ECHO OFF
@@ -160,7 +160,7 @@ IF NOT EXIST .\repodata (
 )
 
 REM 建立仓库文件（用于wegt获取）
-SET repo_url=http://%VMNET_HOST_ONLY_DOMAIN%%HTTP_CENTOS_URL%
+SET repo_url=http://%SERVER_DOMAIN%%HTTP_CENTOS_URL%
 set repo_gpgkey=RPM-GPG-KEY-CentOS-7
 IF NOT EXIST .\repofiles (
     MKDIR .\repofiles
@@ -176,12 +176,26 @@ ECHO Everything is OK.
 PAUSE
 ```
 
+***Step2***：（虚拟机环境）测试真机地址
+
+```bash
+# VMnet1.IP
+rip=192.168.202.1
+
+# 测试1
+ping -c 3 $rip
+
+# 测试2：启动Nginx后测试
+yum -y install wget
+wget http://$rip/files/centos7/test; clear; more test; rm -f ./test
+```
+
 ***Step4***：配置虚拟机
 
 ```bash
 cd '/etc/yum.repos.d'
 if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
 # mv ./backups/CentOS-* ./; rmdir ./backups
-wget -O ./DVD-ISO.repo  http://192.168.229.1/files/centos7/repofiles/local.repo
+wget -O ./DVD-ISO.repo  http://$rip/files/centos7/repofiles/local.repo
 yum makecache
 ```
