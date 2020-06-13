@@ -176,7 +176,7 @@ ECHO Everything is OK.
 PAUSE
 ```
 
-***Step2***：（虚拟机环境）测试真机地址
+***Step3***：（虚拟机环境）测试真机地址
 
 ```bash
 # VMnet1.IP
