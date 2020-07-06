@@ -1,16 +1,9 @@
-## 辅助工具
-
-- [VMware Workstation Pro 15](https://my.vmware.com/en/web/vmware/info/slug/desktop_end_user_computing/vmware_workstation_pro/15_0)
-- [FileZilla Client](https://filezilla-project.org/download.php?type=client)
-- [Putty](https://putty.org/)
-- [MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)
-
-#### *start.cmd*
+***MobaStart.cmd***
 
 ```batch
 REM Step1: 删除目录“%UserProfile%\Documents\MobaXterm”
-REM Step2: 在“MobaXterm.exe”所在目录下建立“start.cmd”
-REM Step3: 双击运行“start.cmd”
+REM Step2: 在“MobaXterm.exe”所在目录下建立“MobaStart.cmd”
+REM Step3: 双击运行“MobaStart.cmd”
 @ECHO OFF
 CD /D %~dp0
 SET LocMobaXterm=.\tmp

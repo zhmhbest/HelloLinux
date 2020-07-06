@@ -1,5 +1,5 @@
 <!DOCTYPE html><html><head>
-      <title>index</title>
+      <title>INSTALL_CENTOS7_ON_VM</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
@@ -266,6 +266,19 @@ pre[data-line] .line-highlight[data-end]:after {
 <h1 class="mume-header" id="%E5%9C%A8vm%E4%B8%8A%E5%AE%89%E8%A3%85centos7indexhtml"><a href="../index.html">&#x5728;VM&#x4E0A;&#x5B89;&#x88C5;CentOS7</a></h1>
 
 <ul>
+<li><a href="#%E5%9C%A8vm%E4%B8%8A%E5%AE%89%E8%A3%85centos7indexhtml">&#x5728;VM&#x4E0A;&#x5B89;&#x88C5;CentOS7</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85centos">&#x5B89;&#x88C5;CentOS</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85mobaxterm">&#x5B89;&#x88C5;MobaXterm</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E8%99%9A%E6%8B%9F%E6%9C%BAip">&#x83B7;&#x53D6;&#x865A;&#x62DF;&#x673A;IP</a></li>
+<li><a href="#%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90">&#x8BBE;&#x7F6E;&#x672C;&#x5730;&#x6E90;</a></li>
+</ul>
+</li>
+</ul>
+<h2 class="mume-header" id="%E5%AE%89%E8%A3%85centos">&#x5B89;&#x88C5;CentOS</h2>
+
+<ul>
 <li><img src="./images/vm_disk.png" alt></li>
 <li><img src="./images/adapter.png" alt></li>
 <li><img src="./images/vm_adapter.png" alt></li>
@@ -278,7 +291,38 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><img src="./images/centos7_disk3.png" alt></li>
 <li><img src="./images/vm_ssh.png" alt></li>
 </ul>
-<h2 class="mume-header" id="%E8%8E%B7%E5%8F%96%E8%99%9A%E6%8B%9F%E6%9C%BAip">&#x83B7;&#x53D6;&#x865A;&#x62DF;&#x673A;IP</h2>
+<h2 class="mume-header" id="%E5%AE%89%E8%A3%85mobaxterm">&#x5B89;&#x88C5;MobaXterm</h2>
+
+<p><em><strong>MobaStart.cmd</strong></em></p>
+<pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token comment">REM Step1: &#x5220;&#x9664;&#x76EE;&#x5F55;&#x201C;%UserProfile%\Documents\MobaXterm&#x201D;</span>
+<span class="token comment">REM Step2: &#x5728;&#x201C;MobaXterm.exe&#x201D;&#x6240;&#x5728;&#x76EE;&#x5F55;&#x4E0B;&#x5EFA;&#x7ACB;&#x201C;MobaStart.cmd&#x201D;</span>
+<span class="token comment">REM Step3: &#x53CC;&#x51FB;&#x8FD0;&#x884C;&#x201C;MobaStart.cmd&#x201D;</span>
+<span class="token operator">@</span><span class="token command"><span class="token keyword">ECHO</span> OFF</span>
+<span class="token command"><span class="token keyword">CD</span> <span class="token parameter attr-name">/D</span> <span class="token variable">%~dp0</span></span>
+<span class="token command"><span class="token keyword">SET</span> <span class="token variable">LocMobaXterm</span><span class="token operator">=</span>.\tmp</span>
+<span class="token command"><span class="token keyword">SET</span> <span class="token variable">DocMobaXterm</span><span class="token operator">=</span><span class="token string">&quot;%UserProfile%\Documents\MobaXterm&quot;</span></span>
+<span class="token command"><span class="token keyword">SET</span> <span class="token variable">BinMobaXterm</span><span class="token operator">=</span>MobaXterm.exe</span>
+<span class="token command"><span class="token keyword">IF</span> <span class="token keyword">EXIST</span> <span class="token variable">%DocMobaXterm%</span></span> <span class="token punctuation">(</span>
+    <span class="token command"><span class="token keyword">START</span> <span class="token string">&quot;&quot;</span> <span class="token variable">%BinMobaXterm%</span></span>
+<span class="token punctuation">)</span> <span class="token command"><span class="token keyword">ELSE</span></span> <span class="token punctuation">(</span>
+    <span class="token comment">REM &#x5173;&#x8054;&#x914D;&#x7F6E;</span>
+    <span class="token command"><span class="token keyword">IF</span> <span class="token keyword">NOT</span> <span class="token keyword">EXIST</span> <span class="token variable">%LocMobaXterm%</span></span> <span class="token command"><span class="token keyword">MKDIR</span> <span class="token variable">%LocMobaXterm%</span></span>
+    <span class="token command"><span class="token keyword">MKLINK</span> <span class="token parameter attr-name">/J</span> <span class="token variable">%DocMobaXterm%</span> <span class="token variable">%LocMobaXterm%</span></span>
+    <span class="token comment">REM &#x684C;&#x9762;&#x56FE;&#x6807;</span>
+    <span class="token command"><span class="token keyword">CALL</span> <span class="token label property">:SHOUTCUT</span> MobaXterm <span class="token string">&quot;%CD%\start.cmd&quot;</span> <span class="token string">&quot;%CD%\MobaXterm.exe&quot;</span></span>
+<span class="token punctuation">)</span>
+<span class="token command"><span class="token keyword">GOTO</span> <span class="token label property">:EOF</span></span>
+<span class="token label property">:SHOUTCUT</span>
+<span class="token operator">@</span><span class="token command"><span class="token keyword">SET</span> VBSCript=<span class="token string">&quot;%Temp%\###$%RANDOM%_SHOUTCUT_%RANDOM%$.vbs&quot;</span></span>
+<span class="token operator">@</span><span class="token command"><span class="token keyword">ECHO</span> Set argv=WScript.Arguments&gt;<span class="token variable">%VBSCript%</span></span>
+<span class="token operator">@</span><span class="token command"><span class="token keyword">ECHO</span> Set s=WScript.CreateObject<span class="token operator">^</span>(<span class="token string">&quot;WScript.Shell&quot;</span><span class="token operator">^</span>)&gt;&gt;<span class="token variable">%VBSCript%</span></span>
+<span class="token operator">@</span><span class="token command"><span class="token keyword">ECHO</span> Set l=s.CreateShortcut<span class="token operator">^</span>(s.SpecialFolders<span class="token operator">^</span>(<span class="token string">&quot;Desktop&quot;</span><span class="token operator">^</span>) <span class="token operator">^</span>&amp; <span class="token string">&quot;\&quot;</span> <span class="token operator">^</span>&amp; argv<span class="token operator">^</span>(<span class="token number">0</span><span class="token operator">^</span>) <span class="token operator">^</span>&amp; <span class="token string">&quot;.lnk&quot;</span><span class="token operator">^</span>)&gt;&gt;<span class="token variable">%VBSCript%</span></span>
+<span class="token operator">@</span><span class="token command"><span class="token keyword">ECHO</span> l.TargetPath = argv<span class="token operator">^</span>(<span class="token number">1</span><span class="token operator">^</span>):l.IconLocation = argv<span class="token operator">^</span>(<span class="token number">2</span><span class="token operator">^</span>)&gt;&gt;<span class="token variable">%VBSCript%</span></span>
+<span class="token operator">@</span><span class="token command"><span class="token keyword">ECHO</span> l.Save:Set l = Nothing:Set s = Nothing:WScript.Quit&gt;&gt;<span class="token variable">%VBSCript%</span></span>
+<span class="token operator">@</span><span class="token command"><span class="token keyword">cscript</span> /<span class="token parameter attr-name">/nologo</span> <span class="token variable">%VBSCript%</span> <span class="token string">&quot;%~1&quot;</span> <span class="token string">&quot;%~2&quot;</span> <span class="token string">&quot;%~3&quot;</span></span>
+<span class="token command"><span class="token keyword">DEL</span> <span class="token parameter attr-name">/F</span> <span class="token parameter attr-name">/Q</span> <span class="token variable">%VBSCript%</span></span>
+<span class="token command"><span class="token keyword">GOTO</span> <span class="token label property">:EOF</span></span>
+</pre><h2 class="mume-header" id="%E8%8E%B7%E5%8F%96%E8%99%9A%E6%8B%9F%E6%9C%BAip">&#x83B7;&#x53D6;&#x865A;&#x62DF;&#x673A;IP</h2>
 
 <p>&#x83B7;&#x5F97;&#x865A;&#x62DF;&#x673A;IP&#x7684;&#x76EE;&#x7684;&#x662F;&#x65B9;&#x4FBF;&#x5728;&#x771F;&#x673A;&#x73AF;&#x5883;&#x4E2D;&#x4F7F;&#x7528;SSH&#x534F;&#x8BAE;&#x767B;&#x5F55;&#x3002;</p>
 <pre data-role="codeBlock" data-info class="language-"><code>localhost login: root
@@ -314,7 +358,7 @@ yum -y <span class="token function">install</span> net-tools
 <span class="token function">more</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
 </pre><h2 class="mume-header" id="%E8%AE%BE%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90">&#x8BBE;&#x7F6E;&#x672C;&#x5730;&#x6E90;</h2>
 
-<p>&#x5C06;&#x5B89;&#x88C5;&#x955C;&#x50CF;&#x6302;&#x8F7D;&#x4E3A;&#x9A71;&#x52A8;&#x5668;&#xFF0C;&#x5E76;&#x5229;&#x7528;<a href="http://nginx.org/en/download.html">Nginx</a>&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x4F7F;&#x771F;&#x673A;&#x6210;&#x4E3A;&#x4E0B;&#x8F7D;&#x670D;&#x52A1;&#x5668;&#x3002;</p>
+<p>&#x5C06;&#x5B89;&#x88C5;&#x955C;&#x50CF;&#x6302;&#x8F7D;&#x4E3A;&#x9A71;&#x52A8;&#x5668;&#xFF0C;&#x5E76;&#x5229;&#x7528;Nginx&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x4F7F;&#x771F;&#x673A;&#x6210;&#x4E3A;&#x4E0B;&#x8F7D;&#x670D;&#x52A1;&#x5668;&#x3002;&#x8BE5;&#x6B65;&#x9AA4;&#x5E76;&#x975E;&#x5FC5;&#x8981;&#x7A0B;&#x5E8F;&#xFF0C;&#x8FDB;&#x884C;&#x6B64;&#x64CD;&#x4F5C;&#x53EF;&#x5728;&#x65E0;&#x7F51;&#x7EDC;&#x73AF;&#x5883;&#x4E0B;&#x7EE7;&#x7EED;&#x8FDB;&#x884C;&#x5E38;&#x7528;&#x5E94;&#x7528;&#x7684;&#x5B89;&#x88C5;&#x3002;</p>
 <p><em><strong>Step1</strong></em>&#xFF1A;&#xFF08;&#x771F;&#x673A;&#x73AF;&#x5883;&#xFF09;&#x83B7;&#x5F97;&#x771F;&#x673A;&#x5730;&#x5740;</p>
 <pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token command"><span class="token keyword">ipconfig</span></span>
 
@@ -358,7 +402,8 @@ yum -y <span class="token function">install</span> net-tools
 &#x2502;
 &#x2514;&#x2500;repofiles
         local.repo                              AUTO_BUILD
-</code></pre><pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token comment">REM &#x3010;&#x5EFA;&#x7ACB;&#x672C;&#x5730;&#x7F13;&#x5B58;&#x3011;</span>
+</code></pre><p><em><strong>BUILD.bat</strong></em></p>
+<pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token comment">REM &#x3010;&#x5EFA;&#x7ACB;&#x672C;&#x5730;&#x7F13;&#x5B58;&#x3011;</span>
 
 <span class="token comment">REM Param1&#xFF1A;&#x955C;&#x50CF;&#x6302;&#x8F7D;&#x78C1;&#x76D8;</span>
 <span class="token operator">@</span><span class="token command"><span class="token keyword">SET</span> DVD_ISO_DRIVE=G:</span>
