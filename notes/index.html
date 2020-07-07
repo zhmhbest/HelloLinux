@@ -265,6 +265,55 @@ pre[data-line] .line-highlight[data-end]:after {
 <script src="https://zhmhbest.gitee.io/hellomathematics/style/index.js"></script>
 <h1 class="mume-header" id="linux">Linux</h1>
 
+<ul>
+<li><a href="#linux">Linux</a>
+<ul>
+<li><a href="#images">Images</a></li>
+<li><a href="#ready">Ready</a></li>
+<li><a href="#system">System</a>
+<ul>
+<li><a href="#%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8">&#x5F00;&#x673A;&#x542F;&#x52A8;</a>
+<ul>
+<li><a href="#%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD">&#x5F00;&#x673A;&#x6302;&#x8F7D;</a></li>
+<li><a href="#%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8C">&#x5F00;&#x673A;&#x8FD0;&#x884C;</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81">&#x7CFB;&#x7EDF;&#x72B6;&#x6001;</a></li>
+<li><a href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86">&#x7528;&#x6237;&#x7BA1;&#x7406;</a></li>
+<li><a href="#%E6%97%B6%E9%97%B4">&#x65F6;&#x95F4;</a></li>
+</ul>
+</li>
+<li><a href="#package">Package</a>
+<ul>
+<li><a href="#tar">tar</a></li>
+<li><a href="#rpm">rpm</a></li>
+<li><a href="#yum">yum</a></li>
+</ul>
+</li>
+<li><a href="#network">Network</a>
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</a></li>
+</ul>
+</li>
+<li><a href="#process">Process</a>
+<ul>
+<li><a href="#cpu%E4%BF%A1%E6%81%AF">CPU&#x4FE1;&#x606F;</a></li>
+<li><a href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86">&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;</a></li>
+<li><a href="#%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B">&#x540E;&#x53F0;&#x8FDB;&#x7A0B;</a></li>
+</ul>
+</li>
+<li><a href="#filesystem">FileSystem</a>
+<ul>
+<li><a href="#ntfs">NTFS</a></li>
+<li><a href="#uuid">UUID</a></li>
+<li><a href="#directory">Directory</a></li>
+<li><a href="#disk">Disk</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 class="mume-header" id="images">Images</h2>
 
 <ul>
@@ -292,7 +341,381 @@ pre[data-line] .line-highlight[data-end]:after {
 <p><a href="./ready/INSTALL_CENTOS7_ON_VM.html">&#x5728;VM&#x4E0A;&#x5B89;&#x88C5;CentOS7</a></p>
 </li>
 </ul>
+<h2 class="mume-header" id="system">System</h2>
 
+<h3 class="mume-header" id="%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8">&#x5F00;&#x673A;&#x542F;&#x52A8;</h3>
+
+<h4 class="mume-header" id="%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD">&#x5F00;&#x673A;&#x6302;&#x8F7D;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x4FEE;&#x6539;&#x5F00;&#x673A;&#x81EA;&#x52A8;&#x6302;&#x8F7D;&#x7684;&#x5206;&#x533A;</span>
+<span class="token function">vi</span> /etc/fstab
+<span class="token comment"># &#x8BBE;&#x5907;&#xFF08;UUID&#x6216;&#x6807;&#x8BC6;&#x76EE;&#x5F55;&#x7B49;&#xFF09; &#x6302;&#x8F7D;&#x70B9; &#x6587;&#x4EF6;&#x7CFB;&#x7EDF; defaults 0 0</span>
+</pre><h4 class="mume-header" id="%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8C">&#x5F00;&#x673A;&#x8FD0;&#x884C;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6DFB;&#x52A0;&#x5F00;&#x673A;&#x65F6;&#x81EA;&#x52A8;&#x8FD0;&#x884C;&#x7684;&#x547D;&#x4EE4;&#xFF08;&#x4E5F;&#x53EF;&#x542F;&#x52A8;&#x670D;&#x52A1;&#xFF09;</span>
+<span class="token function">chmod</span> 744 <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span><span class="token punctuation">;</span> <span class="token function">vi</span> <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
+<span class="token comment"># &#x7981;&#x7528;</span>
+<span class="token comment"># chmod 644 &apos;/etc/rc.d/rc.local&apos;</span>
+</pre><h3 class="mume-header" id="%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81">&#x7CFB;&#x7EDF;&#x72B6;&#x6001;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x7CFB;&#x7EDF;&#x72B6;&#x6001;&#x63A7;&#x5236;</span>
+<span class="token function">shutdown</span> -r now     <span class="token comment"># &#x91CD;&#x542F; = reboot</span>
+<span class="token function">shutdown</span> -h now     <span class="token comment"># &#x5173;&#x673A; = poweroff</span>
+<span class="token function">shutdown</span> -h +10     <span class="token comment"># Type1: 10&#x5206;&#x949F;&#x540E;&#x5173;&#x673A;</span>
+<span class="token function">shutdown</span> -h 23:30   <span class="token comment"># Type2: &#x5B9A;&#x65F6;&#x5173;&#x673A;</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x542F;&#x52A8;&#x7EA7;&#x522B;</span>
+runlevel
+<span class="token function">sudo</span> systemctl get-default
+
+<span class="token comment"># &#x7CFB;&#x7EDF;&#x542F;&#x52A8;&#x7EA7;&#x522B;</span>
+init 0 <span class="token comment"># &#x5173;&#x673A;&#x72B6;&#x6001;</span>
+init 1 <span class="token comment"># &#x5355;&#x7528;&#x6237;&#x6A21;&#x5F0F;&#xFF08;&#x7981;&#x6B62;&#x8FDC;&#x7A0B;&#x767B;&#x5F55;&#xFF09;</span>
+init 2 <span class="token comment"># &#x591A;&#x7528;&#x6237;&#x6A21;&#x5F0F;&#xFF08;&#x65E0;NFS&#x548C;&#x7F51;&#x7EDC;&#xFF09;</span>
+init 3 <span class="token comment"># &#x591A;&#x7528;&#x6237;&#x6A21;&#x5F0F;&#xFF08;&#x670D;&#x52A1;&#x5668;&#x63A8;&#x8350;&#xFF09;</span>
+init 4 <span class="token comment"># &#x4FDD;&#x7559;</span>
+init 5 <span class="token comment"># GUI&#x6A21;&#x5F0F;</span>
+init 6 <span class="token comment"># &#x91CD;&#x65B0;&#x542F;&#x52A8;</span>
+
+<span class="token comment"># &#x4FEE;&#x6539;&#x542F;&#x52A8;&#x7EA7;&#x522B;</span>
+<span class="token comment"># CentOS-7&#x4E0D;&#x518D;&#x4F7F;&#x7528;&apos;/etc/inittab&apos;&#x8BBE;&#x7F6E;&#x9ED8;&#x8BA4;&#x542F;&#x52A8;&#x7EA7;&#x522B;</span>
+<span class="token function">sudo</span> systemctl set-default multi-user.target <span class="token comment"># init 3</span>
+<span class="token function">sudo</span> systemctl set-default graphical.target  <span class="token comment"># init 5</span>
+</pre><h3 class="mume-header" id="%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86">&#x7528;&#x6237;&#x7BA1;&#x7406;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;ID&#x5206;&#x914D;&#x89C4;&#x5219;</span>
+<span class="token function">egrep</span> -v <span class="token string">&quot;^$|^#&quot;</span> /etc/login.defs <span class="token comment">#&#x8FC7;&#x6EE4;#&#x5F00;&#x5934;&#x548C;&#x7A7A;&#x884C;</span>
+
+<span class="token comment"># &#x65B0;&#x5EFA;&#x7528;&#x6237;</span>
+<span class="token comment"># useradd [-d &lt;&#x5BB6;&#x76EE;&#x5F55;&gt; | -M] [-u &lt;&#x7528;&#x6237;ID&gt;] [-g &lt;&#x4E3B;&#x7EC4;(&#x5DF2;&#x5B58;&#x5728;)&gt;] [-G &lt;&#x9644;&#x52A0;&#x7EC4;&gt;[,...]] [-s /bin/bash] &lt;&#x7528;&#x6237;&#x540D;&gt;</span>
+<span class="token comment"># -M: &#x6CA1;&#x6709;&#x5BB6;&#x76EE;&#x5F55;</span>
+<span class="token function">useradd</span> <span class="token operator">&lt;</span>&#x7528;&#x6237;&#x540D;<span class="token operator">&gt;</span>
+<span class="token function">tail</span> -2 /etc/passwd
+
+<span class="token comment"># &#x67E5;&#x770B;&#x7528;&#x6237;ID</span>
+<span class="token function">id</span> <span class="token operator">&lt;</span>&#x7528;&#x6237;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x5220;&#x9664;&#x7528;&#x6237;&#x548C;&#x5BB6;&#x76EE;&#x5F55;</span>
+<span class="token function">userdel</span> -r <span class="token operator">&lt;</span>&#x7528;&#x6237;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x5BC6;&#x7801;&#xFF08;HASH&#x503C;&#xFF09;</span>
+<span class="token function">head</span> -5 /etc/shadow
+
+<span class="token comment"># &#x66F4;&#x6539;&#x7528;&#x6237;&#x5BC6;&#x7801;&#xFF08;2&#x9009;1&#xFF09;</span>
+<span class="token function">passwd</span> <span class="token operator">&lt;</span>&#x7528;&#x6237;&#x540D;<span class="token operator">&gt;</span>
+<span class="token keyword">echo</span> <span class="token operator">&lt;</span>&#x5BC6;&#x7801;<span class="token operator">&gt;</span> <span class="token operator">|</span> <span class="token function">passwd</span> --stdin <span class="token operator">&lt;</span>&#x7528;&#x6237;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x66F4;&#x6539;&#x7528;&#x6237;&#x4FE1;&#x606F;</span>
+<span class="token function">usermod</span> <span class="token punctuation">[</span>-md <span class="token operator">&lt;</span>&#x5BB6;&#x76EE;&#x5F55;<span class="token operator">&gt;</span> <span class="token operator">|</span> -M<span class="token punctuation">]</span> <span class="token punctuation">[</span>-u <span class="token operator">&lt;</span>&#x7528;&#x6237;ID<span class="token operator">&gt;</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>-g <span class="token operator">&lt;</span>&#x4E3B;&#x7EC4;<span class="token punctuation">(</span>&#x5DF2;&#x5B58;&#x5728;<span class="token punctuation">)</span><span class="token operator">&gt;</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>-G <span class="token operator">&lt;</span>&#x9644;&#x52A0;&#x7EC4;<span class="token operator">&gt;</span><span class="token punctuation">[</span>,<span class="token punctuation">..</span>.<span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token punctuation">[</span>-s /bin/bash<span class="token punctuation">]</span> <span class="token operator">&lt;</span>&#x7528;&#x6237;&#x540D;<span class="token operator">&gt;</span>
+<span class="token comment"># -md &#x79FB;&#x52A8;&#x5BB6;&#x76EE;&#x5F55;</span>
+<span class="token comment"># -M &#x6CA1;&#x6709;&#x5BB6;&#x76EE;&#x5F55;</span>
+
+<span class="token comment"># &#x4FEE;&#x590D;&#x7528;&#x6237;bash&#x4FE1;&#x606F;&#x4E0D;&#x5B8C;&#x6574;</span>
+ll /etc/skel/.bash*
+ll ~/.bash*
+<span class="token function">cp</span> /etc/skel/.bash* ~/
+<span class="token function">chown</span> -R <span class="token variable"><span class="token variable">`</span><span class="token function">whoami</span><span class="token variable">`</span></span><span class="token keyword">:</span><span class="token variable"><span class="token variable">`</span><span class="token function">whoami</span><span class="token variable">`</span></span> ~/.bash*
+</pre><h3 class="mume-header" id="%E6%97%B6%E9%97%B4">&#x65F6;&#x95F4;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;</span>
+hwclock
+<span class="token function">date</span>
+<span class="token comment"># UTC: &#x4E16;&#x754C;&#x6807;&#x51C6;&#x65F6;&#x95F4;</span>
+<span class="token comment"># GMT: &#x683C;&#x6797;&#x5C3C;&#x6CBB;&#x65F6;&#x95F4;</span>
+<span class="token comment"># CST: &#x4E2D;&#x56FD;&#x6807;&#x51C6;&#x65F6;&#x95F4;</span>
+
+<span class="token comment"># &#x683C;&#x5F0F;&#x5316;&#x65F6;&#x95F4;</span>
+<span class="token function">date</span> <span class="token string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span>                <span class="token comment"># &#x683C;&#x5F0F;&#x5316;&#x663E;&#x793A;&#x5F53;&#x524D;&#x65F6;&#x95F4;</span>
+<span class="token function">date</span> -d <span class="token string">&quot;1996-10-16 12:33:23&quot;</span>            <span class="token comment"># Type1: &#x663E;&#x793A;&#x5B57;&#x7B26;&#x4E32;&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x65F6;&#x95F4;</span>
+<span class="token function">date</span> -d <span class="token string">&quot;-2 months&quot;</span>                      <span class="token comment"># Type2: &#x663E;&#x793A;&#x5B57;&#x7B26;&#x4E32;&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x65F6;&#x95F4;</span>
+<span class="token function">date</span> -d <span class="token string">&quot;-2 months&quot;</span> <span class="token string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span> <span class="token comment"># Type3: &#x663E;&#x793A;&#x5B57;&#x7B26;&#x4E32;&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x65F6;&#x95F4;</span>
+
+<span class="token comment"># &#x4FEE;&#x6539;&#x65F6;&#x95F4;</span>
+<span class="token function">date</span> -s <span class="token string">&quot;1996-10-16 12:33:23&quot;</span>           <span class="token comment"># &#x8BBE;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x65F6;&#x95F4;</span>
+</pre><h2 class="mume-header" id="package">Package</h2>
+
+<h3 class="mume-header" id="tar">tar</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6253;&#x5305;&#x6587;&#x4EF6;</span>
+<span class="token function">tar</span> <span class="token punctuation">[</span>--exclude <span class="token operator">&lt;</span>&#x6587;&#x4EF6;<span class="token operator">&gt;</span><span class="token punctuation">]</span> -cvf  <span class="token operator">&lt;</span>&#x5305;&#x540D;.tar<span class="token operator">&gt;</span>     <span class="token operator">&lt;</span>&#x6253;&#x5305;&#x6587;&#x4EF6;<span class="token operator">&gt;</span> <span class="token comment"># &#x65B0;&#x5EFA;&#x5305;</span>
+<span class="token function">tar</span> <span class="token punctuation">[</span>--exclude <span class="token operator">&lt;</span>&#x6587;&#x4EF6;<span class="token operator">&gt;</span><span class="token punctuation">]</span> -zcvf <span class="token operator">&lt;</span>&#x5305;&#x540D;.tar.gz<span class="token operator">&gt;</span>  <span class="token operator">&lt;</span>&#x6253;&#x5305;&#x6587;&#x4EF6;<span class="token operator">&gt;</span> <span class="token comment"># &#x65B0;&#x5EFA;&#x5305;&#x5E76;&#x538B;&#x7F29;</span>
+<span class="token function">tar</span> <span class="token punctuation">[</span>--exclude <span class="token operator">&lt;</span>&#x6587;&#x4EF6;<span class="token operator">&gt;</span><span class="token punctuation">]</span> -jcvf <span class="token operator">&lt;</span>&#x5305;&#x540D;.tar.bz2<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>&#x6253;&#x5305;&#x6587;&#x4EF6;<span class="token operator">&gt;</span> <span class="token comment"># &#x65B0;&#x5EFA;&#x5305;&#x5E76;&#x538B;&#x7F29;&#xFF08;&#x63A8;&#x8350;&#xFF09;</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x5305;&#x5185;&#x6587;&#x4EF6;</span>
+<span class="token function">tar</span> -tvf  <span class="token operator">&lt;</span>&#x5305;.tar<span class="token operator">&gt;</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5C55;&#x5F00;&#x5305;</span>
+<span class="token function">tar</span> -xvf  <span class="token operator">&lt;</span>&#x5305;&#x540D;.tar<span class="token operator">&gt;</span>      <span class="token punctuation">[</span>-C <span class="token operator">&lt;</span>&#x5C55;&#x5F00;&#x76EE;&#x5F55;<span class="token operator">&gt;</span><span class="token punctuation">]</span>
+<span class="token function">tar</span> -zxvf <span class="token operator">&lt;</span>&#x5305;&#x540D;.tar.gz<span class="token operator">&gt;</span>   <span class="token punctuation">[</span>-C <span class="token operator">&lt;</span>&#x5C55;&#x5F00;&#x76EE;&#x5F55;<span class="token operator">&gt;</span><span class="token punctuation">]</span>
+<span class="token function">tar</span> -jxvf <span class="token operator">&lt;</span>&#x5305;&#x540D;.tar.bz2<span class="token operator">&gt;</span>  <span class="token punctuation">[</span>-C <span class="token operator">&lt;</span>&#x5C55;&#x5F00;&#x76EE;&#x5F55;<span class="token operator">&gt;</span><span class="token punctuation">]</span>
+</pre><h3 class="mume-header" id="rpm">rpm</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6302;&#x8F7D;DVD-ISO&#x6587;&#x4EF6;</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d /mnt/cd <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> /mnt/cd<span class="token punctuation">;</span> <span class="token keyword">fi</span>
+<span class="token function">mount</span> /dev/cdrom /mnt/cd<span class="token punctuation">;</span> <span class="token function">cd</span> /mnt/cd/Packages
+ll bash-*
+
+<span class="token comment"># &#x5378;&#x8F7D;DVD-ISO&#x6587;&#x4EF6;</span>
+<span class="token function">cd</span> ~/<span class="token punctuation">;</span> <span class="token function">umount</span> /dev/cdrom
+</pre><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x5305;&#x540D;</th>
+<th style="text-align:center">&#x8F6F;&#x4EF6;&#x540D;</th>
+<th style="text-align:center">&#x7248;&#x672C;&#x53F7;</th>
+<th style="text-align:center">&#x53D1;&#x884C;&#x53F7;</th>
+<th style="text-align:center">&#x652F;&#x6301;&#x7CFB;&#x7EDF;</th>
+<th style="text-align:center">&#x7CFB;&#x7EDF;&#x67B6;&#x6784;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">bash-4.2.46-31.el7.x86_64</td>
+<td style="text-align:center">bash</td>
+<td style="text-align:center">4.2.46</td>
+<td style="text-align:center">31</td>
+<td style="text-align:center">el7</td>
+<td style="text-align:center">x86_64</td>
+</tr>
+</tbody>
+</table>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">rpm</span> <span class="token punctuation">[</span>options<span class="token punctuation">..</span>.<span class="token punctuation">]</span>
+</pre><table>
+<thead>
+<tr>
+<th style="text-align:center">&#x6307;&#x4EE4;</th>
+<th style="text-align:left">&#x4F5C;&#x7528;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-i</td>
+<td style="text-align:left">&#x5B89;&#x88C5;</td>
+</tr>
+<tr>
+<td style="text-align:center">-U</td>
+<td style="text-align:left">&#x5347;&#x7EA7;</td>
+</tr>
+<tr>
+<td style="text-align:center">-e</td>
+<td style="text-align:left">&#x5378;&#x8F7D;</td>
+</tr>
+<tr>
+<td style="text-align:center">-q</td>
+<td style="text-align:left">&#x67E5;&#x8BE2;</td>
+</tr>
+<tr>
+<td style="text-align:center">-V</td>
+<td style="text-align:left">&#x9A8C;&#x8BC1;</td>
+</tr>
+<tr>
+<td style="text-align:center">-a</td>
+<td style="text-align:left">&#x67E5;&#x8BE2;/&#x9A8C;&#x8BC1;&#x6240;&#x6709;&#x8F6F;&#x4EF6;&#x5305;</td>
+</tr>
+<tr>
+<td style="text-align:center">-f</td>
+<td style="text-align:left">&#x67E5;&#x8BE2;/&#x9A8C;&#x8BC1;&#x6587;&#x4EF6;&#x5C5E;&#x4E8E;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</td>
+</tr>
+<tr>
+<td style="text-align:center">-p</td>
+<td style="text-align:left">&#x67E5;&#x8BE2;/&#x9A8C;&#x8BC1;&#x4E00;&#x4E2A;&#x8F6F;&#x4EF6;&#x5305;</td>
+</tr>
+<tr>
+<td style="text-align:center">-h</td>
+<td style="text-align:left">&#x5B89;&#x88C5;&#x65F6;&#x5217;&#x51FA;&#x54C8;&#x5E0C;&#x6807;&#x8BB0;</td>
+</tr>
+<tr>
+<td style="text-align:center">-v</td>
+<td style="text-align:left">&#x8F93;&#x51FA;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;</td>
+</tr>
+<tr>
+<td style="text-align:center">--nodeps</td>
+<td style="text-align:left">&#x4E0D;&#x9A8C;&#x8BC1;&#x4F9D;&#x8D56;</td>
+</tr>
+</tbody>
+</table>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># rpm&#x6821;&#x9A8C;&#x7F13;&#x5B58;&#x76EE;&#x5F55;</span>
+ll /var/lib/rpm
+
+<span class="token comment"># &#x5B89;&#x88C5;&#x6216;&#x5347;&#x7EA7;&#x672C;&#x5730;&#x8F6F;&#x4EF6;&#x5305;</span>
+<span class="token function">rpm</span> -ivh <span class="token operator">&lt;</span>&#x5305;&#x540D;.rpm<span class="token operator">&gt;</span> <span class="token comment"># &#x5B89;&#x88C5;</span>
+<span class="token function">rpm</span> -Uvh <span class="token operator">&lt;</span>&#x5305;&#x540D;.rpm<span class="token operator">&gt;</span> <span class="token comment"># &#x5347;&#x7EA7;</span>
+
+<span class="token comment"># &#x5378;&#x8F7D;&#x5305;</span>
+<span class="token function">rpm</span> -e <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>            <span class="token comment"># &#x6B64;&#x5904;&#x4E0D;&#x9700;&#x8981;&#x5305;&#x540D;</span>
+<span class="token function">rpm</span> -e --nodeps <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>   <span class="token comment"># &#x4E0D;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x6B64;&#x547D;&#x4EE4;&#x5378;&#x8F7D;&#x542B;&#x6709;&#x4F9D;&#x8D56;&#x5173;&#x7CFB;&#x7684;&#x5305;</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x8BE2;&#x8F6F;&#x4EF6;&#x5305;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;</span>
+<span class="token function">rpm</span> -qpi <span class="token operator">&lt;</span>&#x5305;&#x540D;.rpm<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x8F6F;&#x4EF6;&#x5305;&#x4F1A;&#x5B89;&#x88C5;&#x54EA;&#x4E9B;&#x6587;&#x4EF6;</span>
+<span class="token function">rpm</span> -qpl <span class="token operator">&lt;</span>&#x5305;&#x540D;.rpm<span class="token operator">&gt;</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x8BE2;&#x6587;&#x4EF6;&#x6240;&#x5C5E;&#x7684;&#x5305;</span>
+<span class="token function">rpm</span> -qf /usr/bin/bash
+
+<span class="token comment"># &#x67E5;&#x770B;&#x6587;&#x4EF6;&#x662F;&#x5426;&#x4E0E;&#x5305;&#x5185;&#x5185;&#x5BB9;&#x4E00;&#x81F4;</span>
+<span class="token function">rpm</span> -Vf /usr/bin/bash   <span class="token comment"># &#x4EC0;&#x4E48;&#x90FD;&#x6CA1;&#x6709;&#x8F93;&#x51FA;&#x5219;&#x6CA1;&#x6709;&#x88AB;&#x4FEE;&#x6539;</span>
+<span class="token function">rpm</span> -Va                 <span class="token comment"># &#x68C0;&#x67E5;&#x6240;&#x6709;&#x5DF2;&#x5B89;&#x88C5;&#x5305;</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x8BE2;&#x6240;&#x6709;&#x5DF2;&#x5B89;&#x88C5;&#x8F6F;&#x4EF6;</span>
+<span class="token function">rpm</span> -qa
+
+<span class="token comment"># &#x67E5;&#x8BE2;&#x5DF2;&#x5B89;&#x88C5;&#x8F6F;&#x4EF6;</span>
+<span class="token function">rpm</span> -q openssh-server
+
+<span class="token comment"># &#x67E5;&#x8BE2;&#x5DF2;&#x5B89;&#x88C5;&#x8F6F;&#x4EF6;&#x6240;&#x5C5E;&#x5305;&#x7684;&#x8BE6;&#x7EC6;&#x4FE1;&#x606F;</span>
+<span class="token function">rpm</span> -qi openssh-server
+</pre><h3 class="mume-header" id="yum">yum</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x589E;&#x52A0;aliyun&#x6E90;</span>
+<span class="token function">wget</span> -O /etc/yum.repos.d/aliyun_epel7.repo http://mirrors.aliyun.com/repo/epel-7.repo
+ll /etc/yum.repos.d/
+
+<span class="token comment"># &#x91CD;&#x65B0;&#x6839;&#x636E;&#x6E90;&#x751F;&#x6210;&#x7F13;&#x5B58;</span>
+yum clean all<span class="token punctuation">;</span> yum makecache
+
+<span class="token comment"># &#x5217;&#x51FA;&#x6E90;&#x6240;&#x5305;&#x542B;&#x7684;&#x6240;&#x6709;&#x8F6F;&#x4EF6;&#x5305;</span>
+yum list
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;/&#x5347;&#x7EA7;/&#x5378;&#x8F7D;</span>
+yum -y <span class="token function">install</span> <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
+yum -y update  <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>  <span class="token comment"># &#x5347;&#x7EA7;&#x5E76;&#x6539;&#x53D8;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF08;&#x6709;&#x53EF;&#x80FD;&#x6539;&#x53D8;&#x5185;&#x6838;&#xFF09;</span>
+yum -y upgrade <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>  <span class="token comment"># &#x4EC5;&#x5347;&#x7EA7;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;</span>
+yum -y remove  <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
+</pre><h2 class="mume-header" id="network">Network</h2>
+
+<h3 class="mume-header" id="%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</span>
+nmtui
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x5DF2;&#x6709;&#x7F51;&#x5361;</span>
+<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;ens&apos;</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">&apos;s/:.*$//&apos;</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;IP</span>
+<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet &apos;</span>
+
+<span class="token comment"># &#x7F51;&#x5361;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">ls</span> -l /etc/sysconfig/network-scripts/ifcfg-* 
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x4E34;&#x65F6;&#x4FEE;&#x6539;IP</span>
+<span class="token function">ifconfig</span> <span class="token operator">&lt;</span>&#x7F51;&#x5361;&#x540D;&#x79F0;<span class="token punctuation">[</span>:0<span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span> <span class="token punctuation">[</span>netmask <span class="token operator">&lt;</span>mask<span class="token operator">&gt;</span><span class="token punctuation">]</span> <span class="token comment"># &#x4E34;&#x65F6;&#x6DFB;&#x52A0;</span>
+<span class="token function">ifconfig</span> <span class="token operator">&lt;</span>&#x7F51;&#x5361;&#x540D;&#x79F0;<span class="token punctuation">[</span>:0<span class="token punctuation">]</span><span class="token operator">&gt;</span> del <span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span>              <span class="token comment"># &#x4E34;&#x65F6;&#x5220;&#x9664;</span>
+
+<span class="token comment"># DNS&#x670D;&#x52A1;&#x5668;</span>
+<span class="token function">cat</span> /etc/resolv.conf
+
+<span class="token comment"># HOST&#x89E3;&#x6790;</span>
+<span class="token function">cat</span> /etc/hosts
+
+<span class="token comment"># &#x4E3B;&#x673A;&#x540D;</span>
+<span class="token function">cat</span> /etc/hostname
+</pre><h3 class="mume-header" id="%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># systemctl {status | stop | start | disable | enable} firewalld.service</span>
+
+<span class="token comment"># &#x9632;&#x706B;&#x5899;-&#x72B6;&#x6001;</span>
+firewall-cmd --state
+
+<span class="token comment"># #&#x9632;&#x706B;&#x5899;-&#x6240;&#x6709;&#x652F;&#x6301;&#x7684;&#x670D;&#x52A1;</span>
+firewall-cmd --get-service
+
+<span class="token comment"># &#x9632;&#x706B;&#x5899;-&#x6D3B;&#x52A8;&#x7F51;&#x53E3;&#xFF08;&#x7F51;&#x5361;&#xFF09;</span>
+firewall-cmd --get-active-zones
+
+<span class="token comment"># &#x67E5;&#x770B;&#x89C4;&#x5219;</span>
+firewall-cmd --list-all
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --list-all
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --list-services
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --list-ports
+
+<span class="token comment"># &#x6DFB;&#x52A0;&#x89C4;&#x5219;</span>
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-service<span class="token operator">=</span>ftp
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-port<span class="token operator">=</span>40000-40010/tcp
+firewall-cmd --reload
+
+<span class="token comment"># &#x5220;&#x9664;&#x89C4;&#x5219;</span>
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --remove-port<span class="token operator">=</span>8080/tcp
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --remove-service<span class="token operator">=</span>https
+firewall-cmd --reload
+</pre><h2 class="mume-header" id="process">Process</h2>
+
+<h3 class="mume-header" id="cpu%E4%BF%A1%E6%81%AF">CPU&#x4FE1;&#x606F;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;CPU&#x4FE1;&#x606F;</span>
+<span class="token function">cat</span> /proc/cpuinfo
+<span class="token comment"># &#x67E5;&#x770B;CPU&#x8D1F;&#x8F7D;</span>
+<span class="token function">uptime</span>
+</pre><h3 class="mume-header" id="%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86">&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x8FDB;&#x7A0B;&#x5FEB;&#x7167;</span>
+<span class="token function">ps</span> -auf
+<span class="token function">ps</span> -ef
+<span class="token function">ps</span> -aux
+
+<span class="token comment"># &#x5B9E;&#x65F6;&#x67E5;&#x770B;&#x8FDB;&#x7A0B;</span>
+<span class="token function">top</span>
+<span class="token function">top</span> -p <span class="token operator">&lt;</span>pid<span class="token operator">&gt;</span> <span class="token comment"># &#x76EF;&#x4F4F;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;</span>
+
+<span class="token comment"># &#x5173;&#x95ED;&#x8FDB;&#x7A0B;</span>
+<span class="token function">kill</span> -l <span class="token comment"># &#x5217;&#x51FA;&#x53EF;&#x7528;&#x4FE1;&#x53F7;</span>
+<span class="token function">kill</span> -9 <span class="token operator">&lt;</span>pid<span class="token operator">&gt;</span>
+<span class="token function">killall</span> <span class="token operator">&lt;</span>pid<span class="token operator">&gt;</span>
+<span class="token function">pkill</span> <span class="token operator">&lt;</span>&#x8FDB;&#x7A0B;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x8FDB;&#x7A0B;&#x4F18;&#x5148;&#x7EA7;</span>
+<span class="token function">nice</span> -n 5 <span class="token function">bash</span>  <span class="token comment"># &#x4EE5;&#x4F18;&#x5148;&#x7EA7;5&#x6253;&#x5F00;&#x4E00;&#x4E2A;&#x65B0;bash</span>
+<span class="token function">renice</span> 10 <span class="token operator">&lt;</span>pid<span class="token operator">&gt;</span> <span class="token comment"># &#x4FEE;&#x6539;&#x8FDB;&#x7A0B;&#x4F18;&#x5148;&#x7EA7;</span>
+</pre><h3 class="mume-header" id="%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B">&#x540E;&#x53F0;&#x8FDB;&#x7A0B;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#xFF08;&#x524D;&#x53F0;&#x5173;&#x8054;&#xFF09;</span>
+<span class="token function">bash</span><span class="token operator">&amp;</span>        <span class="token comment"># &#x8FD0;&#x884C;&#x4E00;&#x4E2A;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;</span>
+<span class="token function">jobs</span>         <span class="token comment"># &#x67E5;&#x770B;&#x540E;&#x53F0;&#x8FDB;&#x7A0B;</span>
+<span class="token function">fg</span> <span class="token operator">&lt;</span>JOBNUM<span class="token operator">&gt;</span>  <span class="token comment"># &#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#x653E;&#x5230;&#x524D;&#x53F0;</span>
+<span class="token function">bg</span> <span class="token operator">&lt;</span>JOBNUM<span class="token operator">&gt;</span>  <span class="token comment"># &#x524D;&#x53F0;&#x8FDB;&#x7A0B;&#x653E;&#x5230;&#x540E;&#x53F0;</span>
+<span class="token comment"># Ctrl + Z   # &#x5F53;&#x524D;&#x8FD0;&#x884C;&#x8FDB;&#x7A0B;&#x653E;&#x5230;&#x540E;&#x53F0;</span>
+
+<span class="token comment"># &#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#xFF08;&#x65E0;&#x5173;&#x524D;&#x53F0;&#xFF09;</span>
+<span class="token comment"># yum -y install screen</span>
+<span class="token function">screen</span> -ls              <span class="token comment"># &#x67E5;&#x770B;&#x4F1A;&#x8BDD;</span>
+<span class="token function">screen</span> -S SessionName   <span class="token comment"># &#x521B;&#x5EFA;&#x65B0;&#x4F1A;&#x8BDD;</span>
+<span class="token comment"># Ctrl + A + D           # &#x5206;&#x79BB;&#x5F53;&#x524D;&#x4F1A;&#x8BDD;&#x653E;&#x5230;&#x540E;&#x53F0;</span>
+<span class="token function">screen</span> -d SessionName   <span class="token comment"># &#x5206;&#x79BB;&#x4F1A;&#x8BDD;</span>
+<span class="token function">screen</span> -r SessionName   <span class="token comment"># &#x91CD;&#x65B0;&#x8FDE;&#x63A5;&#x4F1A;&#x8BDD;&#xFF08;&#x7528;&#x4F1A;&#x8BDD;&#x540D;&#x79F0;&#xFF09;</span>
+<span class="token function">screen</span> -r SessionID     <span class="token comment"># &#x91CD;&#x65B0;&#x8FDE;&#x63A5;&#x4F1A;&#x8BDD;&#xFF08;&#x7528;&#x4F1A;&#x8BDD;ID&#xFF09;</span>
+</pre><h2 class="mume-header" id="filesystem">FileSystem</h2>
+
+<h3 class="mume-header" id="ntfs">NTFS</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x589E;&#x52A0;NTFS&#x652F;&#x6301;&#xFF08;&#x9700;&#x8981;&#x589E;&#x52A0;Aliyun&#x6E90;&#xFF09;</span>
+yum -y <span class="token function">install</span> fuse-ntfs-3g
+</pre><h3 class="mume-header" id="uuid">UUID</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x78C1;&#x76D8;UUID&#x548C;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</span>
+blkid
+
+<span class="token comment"># &#x67E5;&#x770B;&#x78C1;&#x76D8;UUID</span>
+<span class="token function">ls</span> -l /dev/disk/by-uuid
+</pre><h3 class="mume-header" id="directory">Directory</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x76EE;&#x5F55;&#x5927;&#x5C0F;</span>
+<span class="token function">du</span> -sh /etc
+
+<span class="token comment"># &#x5217;&#x51FA;&#x6587;&#x4EF6;</span>
+<span class="token function">ls</span> -l
+ll
+</pre><h3 class="mume-header" id="disk">Disk</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">mkdir</span> /tmp/filesystem<span class="token punctuation">;</span> <span class="token function">cd</span> /tmp/filesystem
+
+<span class="token comment"># &#x78C1;&#x76D8;&#x7BA1;&#x7406;&#xFF08;&#x4EA4;&#x4E92;&#x5F0F;&#xFF09;</span>
+<span class="token function">dd</span> if<span class="token operator">=</span>/dev/zero of<span class="token operator">=</span>vdisk.img bs<span class="token operator">=</span>1M count<span class="token operator">=</span>500
+<span class="token function">fdisk</span> ./vdisk.img
+<span class="token comment">#q: &#x9000;&#x51FA;</span>
+
+<span class="token comment"># &#x521B;&#x5EFA;&#x6587;&#x4EF6;&#x3001;&#x683C;&#x5F0F;&#x5316;&#x865A;&#x62DF;&#x76D8;&#x3001;&#x6302;&#x8F7D;&#x865A;&#x62DF;&#x76D8;</span>
+<span class="token function">dd</span> if<span class="token operator">=</span>/dev/zero of<span class="token operator">=</span>vdisk.img bs<span class="token operator">=</span>1M count<span class="token operator">=</span>500
+<span class="token function">mkfs</span> -t xfs ./vdisk.img
+<span class="token function">mkdir</span> vmount<span class="token punctuation">;</span> <span class="token function">mount</span> vdisk.img vmount/<span class="token punctuation">;</span> <span class="token function">cd</span> vmount/
+
+<span class="token function">touch</span> file<span class="token punctuation">{</span>0<span class="token punctuation">..</span>10<span class="token punctuation">}</span> <span class="token comment">#&#x521B;&#x5EFA;file0~file10</span>
+<span class="token function">touch</span> -d <span class="token string">&quot;20181019 21:30&quot;</span> filename<span class="token punctuation">;</span> ll  filename <span class="token comment">#&#x6307;&#x5B9A;&#x521B;&#x5EFA;&#x65F6;&#x95F4;</span>
+<span class="token function">mkdir</span> -p ./a/b/c  <span class="token comment">#&#x521B;&#x5EFA;&#x76EE;&#x5F55;&#xFF0C;&#x5FC5;&#x8981;&#x65F6;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x7236;&#x76EE;&#x5F55;</span>
+<span class="token function">mkdir</span> -p ./1/2/3  <span class="token comment">#&#x521B;&#x5EFA;&#x76EE;&#x5F55;&#xFF0C;&#x5FC5;&#x8981;&#x65F6;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x7236;&#x76EE;&#x5F55;</span>
+<span class="token function">chmod</span> -R 700  ./a <span class="token comment">#&#x540C;&#x65F6;&#x4FEE;&#x6539;&#x5B50;&#x76EE;&#x5F55;&#x53CA;&#x6587;&#x4EF6;&#x6743;&#x9650;</span>
+</pre>
       </div>
       
       
