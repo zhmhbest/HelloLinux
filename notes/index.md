@@ -24,6 +24,19 @@
 
 ## System
 
+### SSH免密登录
+
+```bash
+ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+cd ~/.ssh; ll
+# -rw------- 1 root root 1679 * id_rsa
+# -rw-r--r-- 1 root root  408 * id_rsa.pub
+# id_rsa     : 私钥（个人本地持有）
+# id_rsa.pub : 公钥（远程主机持有）
+cp ./id_rsa.pub ./authorized_keys
+# ssh -l root -i %UserProfile%\.ssh\id_vm 192.168.202.195
+```
+
 ### 开机启动
 
 #### 开机挂载
