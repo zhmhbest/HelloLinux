@@ -34,7 +34,7 @@ cd ~/.ssh; ll
 # id_rsa     : 私钥（个人本地持有）
 # id_rsa.pub : 公钥（远程主机持有）
 cp ./id_rsa.pub ./authorized_keys
-# ssh -l root -i %UserProfile%\.ssh\id_vm 192.168.202.195
+# ssh -l root -i <私钥> <地址>
 ```
 
 ### 开机启动
