@@ -78,7 +78,10 @@ if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null
 ```bash
 cd '/etc/yum.repos.d'
 wget -O ./CentOS-Base-Aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O ./epel-7.repo http://mirrors.aliyun.com/repo/epel-7.repo
+yum clean all
 yum makecache
+yum install -y epel-release
 ```
 
 ## 关闭SELINUX

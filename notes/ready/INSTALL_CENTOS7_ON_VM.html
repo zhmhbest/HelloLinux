@@ -352,7 +352,10 @@ yum <span class="token function">install</span> -y <span class="token function">
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">cd</span> <span class="token string">&apos;/etc/yum.repos.d&apos;</span>
 <span class="token function">wget</span> -O ./CentOS-Base-Aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+<span class="token function">wget</span> -O ./epel-7.repo http://mirrors.aliyun.com/repo/epel-7.repo
+yum clean all
 yum makecache
+yum <span class="token function">install</span> -y epel-release
 </pre><h2 class="mume-header" id="%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># getenforce                # &#x83B7;&#x53D6;&#x72B6;&#x6001;</span>
