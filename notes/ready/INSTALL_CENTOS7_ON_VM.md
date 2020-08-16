@@ -19,15 +19,11 @@
 - ![](./images/centos7_disk3.png)
 - ![](./images/vm_ssh.png)
 
-## 安装MobaXterm
-
-@import "./codes/MobaStart.md"
-
 ## 获取虚拟机IP
 
-获得虚拟机IP的目的是方便在真机环境中使用SSH协议登录。
+### 开启网卡
 
-```
+```txt
 localhost login: root
 Password:
 Last Login: ...
@@ -50,14 +46,39 @@ tail -n 2 $enscfg
 # ONBOOT=yes
 
 systemctl restart network
-yum -y install net-tools
-ifconfig
 ```
 
+### 获得地址
+
+获得虚拟机IP的目的是方便在真机环境中使用SSH协议登录。
+
+![cping](images/cping.png)
+
+使用[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)（[MobaStart.cmd](./codes/MobaStart.cmd)）登录。
+
+## 配置境内源
+
+### 安装基础工具
+
+```bash
+yum install -y net-tools
+yum install -y wget
 ```
-ens33: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-        inet 192.168.???.???  netmask *  broadcast *
-        ...
+
+### 备份当前源
+
+```bash
+cd '/etc/yum.repos.d'
+if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
+# mv ./backups/CentOS-* ./; rmdir ./backups
+```
+
+### 创建新源
+
+```bash
+cd '/etc/yum.repos.d'
+wget -O ./CentOS-Base-Aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+yum makecache
 ```
 
 ## 关闭SELINUX
@@ -74,19 +95,19 @@ more '/etc/selinux/config'
 
 将安装镜像挂载为驱动器，并利用Nginx提供服务，使真机成为下载服务器。该步骤并非必要程序，进行此操作可在无网络环境下继续进行常用应用的安装。
 
-***Step1***：（真机环境）获得真机地址
+### 获得真机地址（真机环境）
 
 ```batch
 ipconfig
 
 REM 以太网适配器 VMware Network Adapter VMnet1:
-REM 
+REM
 REM    ...
 REM    自动配置 IPv4 地址  . . . . . . . : <IP1>
 REM    ...
 
 REM 以太网适配器 VMware Network Adapter VMnet8:
-REM 
+REM
 REM    ...
 REM    自动配置 IPv4 地址  . . . . . . . : <IP2>
 REM    ...
@@ -98,9 +119,11 @@ REM （管理员）调试完成后删除规则
 netsh advfirewall firewall delete rule name="ICMP V4 Echo Request"
 ```
 
-***Step2***：建立本地仓库
+### 建立本地仓库
 
-```
+- [BUILD.cmd](./codes/BUILD.cmd)
+
+```txt
 www/files/centos7
 │  BUILD.bat                                    详见下文
 │  RPM-GPG-KEY-CentOS-7                         AUTO_COPY
@@ -125,9 +148,7 @@ www/files/centos7
         local.repo                              AUTO_BUILD
 ```
 
-@import "./codes/BUILD.md"
-
-***Step3***：（虚拟机环境）测试真机地址
+### 测试真机地址（虚拟机环境）
 
 ```bash
 # VMnet1.IP
@@ -137,16 +158,13 @@ rip=192.168.202.1
 ping -c 3 $rip
 
 # 测试2：启动Nginx后测试
-yum -y install wget
 wget http://$rip/files/centos7/test; clear; more test; rm -f ./test
 ```
 
-***Step4***：配置虚拟机
+### 配置虚拟机
 
 ```bash
 cd '/etc/yum.repos.d'
-if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
-# mv ./backups/CentOS-* ./; rmdir ./backups
-wget -O ./DVD-ISO.repo  http://$rip/files/centos7/repofiles/local.repo
+wget -O ./CentOS-Base-DVDISO.repo  http://$rip/files/centos7/repofiles/local.repo
 yum makecache
 ```

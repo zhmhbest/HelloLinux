@@ -1,9 +1,6 @@
-***MobaStart.cmd***
-
-```batch
-REM Step1: åˆ é™¤ç›®å½•â€œ%UserProfile%\Documents\MobaXtermâ€
-REM Step2: åœ¨â€œMobaXterm.exeâ€æ‰€åœ¨ç›®å½•ä¸‹å»ºç«‹â€œMobaStart.cmdâ€
-REM Step3: åŒå‡»è¿è¡Œâ€œMobaStart.cmdâ€
+REM Step1: É¾³ıÄ¿Â¼¡°%UserProfile%\Documents\MobaXterm¡±
+REM Step2: ÔÚ¡°MobaXterm.exe¡±ËùÔÚÄ¿Â¼ÏÂ½¨Á¢¡°MobaStart.cmd¡±
+REM Step3: Ë«»÷ÔËĞĞ¡°MobaStart.cmd¡±
 @ECHO OFF
 CD /D %~dp0
 SET LocMobaXterm=.\tmp
@@ -12,10 +9,10 @@ SET BinMobaXterm=MobaXterm.exe
 IF EXIST %DocMobaXterm% (
     START "" %BinMobaXterm%
 ) ELSE (
-    REM å…³è”é…ç½®
+    REM ¹ØÁªÅäÖÃ
     IF NOT EXIST %LocMobaXterm% MKDIR %LocMobaXterm%
     MKLINK /J %DocMobaXterm% %LocMobaXterm%
-    REM æ¡Œé¢å›¾æ ‡
+    REM ×ÀÃæÍ¼±ê
     CALL :SHOUTCUT MobaXterm "%CD%\start.cmd" "%CD%\MobaXterm.exe"
 )
 GOTO :EOF
@@ -29,4 +26,3 @@ GOTO :EOF
 @cscript //nologo %VBSCript% "%~1" "%~2" "%~3"
 DEL /F /Q %VBSCript%
 GOTO :EOF
-```

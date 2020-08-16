@@ -1,48 +1,45 @@
-***BUILD.bat***
+REM ¡¾½¨Á¢±¾µØ»º´æ¡¿
 
-```batch
-REM ã€å»ºç«‹æœ¬åœ°ç¼“å­˜ã€‘
-
-REM Param1ï¼šé•œåƒæŒ‚è½½ç£ç›˜
+REM Param1£º¾µÏñ¹ÒÔØ´ÅÅÌ
 @SET DVD_ISO_DRIVE=G:
-REM Param2ï¼šçœŸæœºåœ°å€ï¼ˆVMnet1.IPï¼‰
+REM Param2£ºÕæ»úµØÖ·£¨VMnet1.IP£©
 @SET SERVER_DOMAIN=192.168.202.1
-REM Param3ï¼šæ–‡ä»¶ç›®å½•
+REM Param3£ºÎÄ¼şÄ¿Â¼
 @SET HTTP_CENTOS_URL=/files/centos7
 
 @ECHO OFF
 CD /D %~dp0
 IF NOT EXIST "%DVD_ISO_DRIVE%" (
-    ECHO æ²¡æœ‰æŒ‚è½½é•œåƒæ–‡ä»¶ï¼
+    ECHO Ã»ÓĞ¹ÒÔØ¾µÏñÎÄ¼ş£¡
     PAUSE>NUL
     EXIT
 )
 
-REM å»ºç«‹æµ‹è¯•æ–‡ä»¶
+REM ½¨Á¢²âÊÔÎÄ¼ş
 IF NOT EXIST .\test ECHO OK>.\test
 
-REM æ˜ å°„Packages
+REM Ó³ÉäPackages
 IF NOT EXIST .\Packages (
     MKLINK /J Packages "%DVD_ISO_DRIVE%\Packages"
 ) ELSE (
     RMDIR .\Packages 2>NUL && MKLINK /J Packages "%DVD_ISO_DRIVE%\Packages"
 )
 
-REM æ‹·è´RPM-GPG-KEY-CentOS
+REM ¿½±´RPM-GPG-KEY-CentOS
 XCOPY /Y "%DVD_ISO_DRIVE%\RPM-GPG-KEY-CentOS*" .\
 
-REM æ‹·è´repodata
+REM ¿½±´repodata
 IF NOT EXIST .\repodata (
     MKDIR .\repodata
     XCOPY "%DVD_ISO_DRIVE%\repodata" .\repodata
-    REM ä¿®æ­£repodata
+    REM ĞŞÕırepodata
     PUSHD .\repodata
     ECHO Sub print^(item^):Wscript.Echo item:End Sub:Set XML = CreateObject^("Microsoft.XMLDOM"^):Set FSO = CreateObject^("Scripting.FileSystemObject"^):XML.load^("repomd.xml"^):Set objNodes = XML.SelectNodes^("/repomd/data"^):For Each objNode in objNodes:    h = objNode.SelectSingleNode^("./checksum"^).text:    h = Trim^(h^):    f = objNode.SelectSingleNode^("./location"^).GetAttributeNode^("href"^).nodevalue:    f = Trim^(Split^(f, "repodata/"^)^(1^)^):    If FSO.FileExists^(h^) Then:        print h:        FSO.MoveFile h, f:    End If:Next>.\_.vbs
     cscript .\_.vbs
     POPD
 )
 
-REM å»ºç«‹ä»“åº“æ–‡ä»¶ï¼ˆç”¨äºwegtè·å–ï¼‰
+REM ½¨Á¢²Ö¿âÎÄ¼ş£¨ÓÃÓÚwegt»ñÈ¡£©
 SET repo_url=http://%SERVER_DOMAIN%%HTTP_CENTOS_URL%
 set repo_gpgkey=RPM-GPG-KEY-CentOS-7
 IF NOT EXIST .\repofiles (
@@ -57,4 +54,3 @@ IF NOT EXIST .\repofiles (
 )
 ECHO Everything is OK.
 PAUSE
-```
