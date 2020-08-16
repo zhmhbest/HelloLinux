@@ -82,6 +82,7 @@ wget -O ./epel-7.repo http://mirrors.aliyun.com/repo/epel-7.repo
 yum clean all
 yum makecache
 yum install -y epel-release
+yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 ```
 
 ## 关闭SELINUX
