@@ -253,6 +253,9 @@ yum clean all; yum makecache
 
 # 列出源所包含的所有软件包
 yum list
+
+# 查看源内提供的软件版本
+yum provides <软件名>
 ```
 
 ```bash
