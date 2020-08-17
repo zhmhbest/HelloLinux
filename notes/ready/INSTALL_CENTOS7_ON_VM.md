@@ -7,19 +7,18 @@
 
 ## 安装CentOS
 
-- ![](./images/vm_disk.png)
-- ![](./images/adapter.png)
-- ![](./images/vm_adapter.png)
-- ![](./images/centos7_install.png)
-- ![](./images/centos7_kdump.png)
-- ![](./images/centos7_net1.png)
-- ![](./images/centos7_net2.png)
-- ![](./images/centos7_disk1.png)
-- ![](./images/centos7_disk2.png)
-- ![](./images/centos7_disk3.png)
-- ![](./images/vm_ssh.png)
+- ![setup_disk](./images/setup_disk.png)
+- ![adapter](./images/adapter.png)
+- ![vm_adapter](./images/vm_adapter.png)
+- ![install](./images/centos7_install.png)
+- ![include](./images/centos7_include.png)
+- ![disk1](./images/centos7_disk1.png)
+- ![disk2](./images/centos7_disk2.png)
+- ![disk3](./images/centos7_disk3.png)
+- ![net1](./images/centos7_net1.png)
+- ![kdump](./images/centos7_kdump.png)
 
-## 获取虚拟机IP
+## 远程登录
 
 ### 开启网卡
 
@@ -48,42 +47,11 @@ tail -n 2 $enscfg
 systemctl restart network
 ```
 
-### 获得地址
+### 登录SSH
 
-获得虚拟机IP的目的是方便在真机环境中使用SSH协议登录。
+![vm_ssh](./images/vm_ssh.png)
 
-![cping](images/cping.png)
-
-使用[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)（[MobaStart.cmd](./codes/MobaStart.cmd)）登录。
-
-## 配置境内源
-
-### 安装基础工具
-
-```bash
-yum install -y net-tools
-yum install -y wget
-```
-
-### 备份当前源
-
-```bash
-cd '/etc/yum.repos.d'
-if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
-# mv ./backups/CentOS-* ./; rmdir ./backups
-```
-
-### 创建新源
-
-```bash
-cd '/etc/yum.repos.d'
-wget -O ./CentOS-Base-Aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-wget -O ./epel-7.repo http://mirrors.aliyun.com/repo/epel-7.repo
-yum clean all
-yum makecache
-yum install -y epel-release
-yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-```
+也可使用[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)（[MobaStart.cmd](./codes/MobaStart.cmd)）登录。
 
 ## 关闭SELINUX
 
@@ -93,6 +61,39 @@ yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 # vi /etc/selinux/config    # 永久关闭 SELINUX=disabled
 sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'
 more '/etc/selinux/config'
+```
+
+## 配置境内源
+
+### 安装基本工具
+
+```bash
+# 加载镜像包
+if [ ! -d '/mnt/cdrom' ]; then mkdir '/mnt/cdrom'; mount '/dev/cdrom' '/mnt/cdrom'; fi
+cd '/mnt/cdrom/Packages'
+
+# 必备软件
+rpm -ivh wget-*
+rpm -ivh net-tools-*
+```
+
+### 使用境内源
+
+添加**网络适配器**，使用**net**模式。
+
+```bash
+# 备份当前源
+cd '/etc/yum.repos.d'
+if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
+# mv ./backups/CentOS-* ./; rmdir ./backups
+
+# 使用Aliyun基础源
+wget -O ./CentOS-Base-Aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O ./CentOS-epel-Aliyun.repo http://mirrors.aliyun.com/repo/epel-7.repo
+# yum install -y epel-release
+yum clean all
+yum makecache
+yum repolist
 ```
 
 ## 设置本地源

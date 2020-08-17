@@ -1,6 +1,6 @@
-REM Step1: 删除目录“%UserProfile%\Documents\MobaXterm”
-REM Step2: 在“MobaXterm.exe”所在目录下建立“MobaStart.cmd”
-REM Step3: 双击运行“MobaStart.cmd”
+@REM Step1: 删除目录“%UserProfile%\Documents\MobaXterm”
+@REM Step2: 在“MobaXterm.exe”所在目录下建立“MobaStart.cmd”
+@REM Step3: 双击运行“MobaStart.cmd”
 @ECHO OFF
 CD /D %~dp0
 SET LocMobaXterm=.\tmp
