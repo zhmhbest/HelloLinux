@@ -87,10 +87,19 @@ cd '/etc/yum.repos.d'
 if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
 # mv ./backups/CentOS-* ./; rmdir ./backups
 
-# 使用Aliyun基础源
-wget -O ./CentOS-Base-Aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-wget -O ./CentOS-epel-Aliyun.repo http://mirrors.aliyun.com/repo/epel-7.repo
-# yum install -y epel-release
+# Aliyun源
+wget -O ./Aliyun-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+wget -O ./Aliyun-epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+wget -O ./Aliyun-epel-cloud.repo http://mirrors.aliyun.com/repoepel-7-cloud
+
+# Remi源（包含最新版本PHP和MySQL）
+yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
+# Repoforge源
+# https://mirrors.tuna.tsinghua.edu.cn/help/repoforge/
+# http://repoforge.org/use/
+
+# 更新源缓存
 yum clean all
 yum makecache
 yum repolist

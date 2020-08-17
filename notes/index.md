@@ -247,6 +247,9 @@ rpm -qi openssh-server
 wget -O /etc/yum.repos.d/aliyun_epel7.repo http://mirrors.aliyun.com/repo/epel-7.repo
 ll /etc/yum.repos.d/
 
+# 列出所有源
+yum repolist
+
 # 重新根据源生成缓存
 yum clean all; yum makecache
 
@@ -263,6 +266,9 @@ yum -y install <软件名>
 yum -y update  <软件名>  # 升级并改变配置文件（有可能改变内核）
 yum -y upgrade <软件名>  # 仅升级二进制文件
 yum -y remove  <软件名>
+
+# 从指定源安装
+yum -y --enablerepo=<源名称> install <软件名>
 ```
 
 ## Network
@@ -436,3 +442,73 @@ mkdir -p ./a/b/c  #创建目录，必要时同时创建父目录
 mkdir -p ./1/2/3  #创建目录，必要时同时创建父目录
 chmod -R 700  ./a #同时修改子目录及文件权限
 ```
+
+## LAMP
+
+### Apache2
+
+```bash
+# 安装
+yum install -y httpd
+# 防火墙
+firewall-cmd --permanent --zone=public --add-service=http
+firewall-cmd --permanent --zone=public --add-service=https
+firewall-cmd --reload
+# 启动
+systemctl enable httpd
+systemctl start  httpd
+```
+
+### Mariadb
+
+```bash
+# 安装
+yum install -y mariadb mariadb-server
+# 启动
+systemctl enable mariadb
+systemctl start  mariadb
+# 配置
+mysql_secure_installation
+# 登录
+mysql -uroot -p
+```
+
+```SQL
+SHOW DATABASES;
+CREATE DATABASE `db_name` CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER 'user_name'@'localhost' IDENTIFIED BY 'password';
+REVOKE ALL ON *.* FROM 'user_name'@'localhost';
+GRANT ALL PRIVILEGES ON `db_name`.* TO 'user_name'@'localhost' WITH GRANT OPTION;
+```
+
+### PHP
+
+```bash
+# 安装
+# yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum install --enablerepo=remi-php73 -y php
+# 启动
+systemctl enable mariadb
+systemctl start  mariadb
+# 配置
+yum install -y vim
+vim '/etc/php.ini'
+# 测试
+cd '/var/www/html'
+echo '<?php phpinfo(); ?>'>info.php
+# 打开<IP>/info.php
+```
+
+<!-- ### NextCloud
+
+```bash
+cd '/var/www/html'
+# https://download.nextcloud.com/server/releases/
+wget 'https://download.nextcloud.com/server/releases/nextcloud-14.0.14.zip'
+yum install -y unzip
+unzip nextcloud-*
+# rm -rf ./nextcloud
+chown -R apache:apache nextcloud
+chmod -R 775 nextcloud
+# /etc/pki/tls/openssl.cnf
+``` -->

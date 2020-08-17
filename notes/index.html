@@ -312,6 +312,13 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#disk">Disk</a></li>
 </ul>
 </li>
+<li><a href="#lamp">LAMP</a>
+<ul>
+<li><a href="#apache2">Apache2</a></li>
+<li><a href="#mariadb">Mariadb</a></li>
+<li><a href="#php">PHP</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -574,6 +581,9 @@ ll /var/lib/rpm
 <span class="token function">wget</span> -O /etc/yum.repos.d/aliyun_epel7.repo http://mirrors.aliyun.com/repo/epel-7.repo
 ll /etc/yum.repos.d/
 
+<span class="token comment"># &#x5217;&#x51FA;&#x6240;&#x6709;&#x6E90;</span>
+yum repolist
+
 <span class="token comment"># &#x91CD;&#x65B0;&#x6839;&#x636E;&#x6E90;&#x751F;&#x6210;&#x7F13;&#x5B58;</span>
 yum clean all<span class="token punctuation">;</span> yum makecache
 
@@ -587,6 +597,9 @@ yum -y <span class="token function">install</span> <span class="token operator">
 yum -y update  <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>  <span class="token comment"># &#x5347;&#x7EA7;&#x5E76;&#x6539;&#x53D8;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF08;&#x6709;&#x53EF;&#x80FD;&#x6539;&#x53D8;&#x5185;&#x6838;&#xFF09;</span>
 yum -y upgrade <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>  <span class="token comment"># &#x4EC5;&#x5347;&#x7EA7;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;</span>
 yum -y remove  <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x4ECE;&#x6307;&#x5B9A;&#x6E90;&#x5B89;&#x88C5;</span>
+yum -y --enablerepo<span class="token operator">=</span><span class="token operator">&lt;</span>&#x6E90;&#x540D;&#x79F0;<span class="token operator">&gt;</span> <span class="token function">install</span> <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
 </pre><h2 class="mume-header" id="network">Network</h2>
 
 <h3 class="mume-header" id="%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</h3>
@@ -726,6 +739,50 @@ ll
 <span class="token function">mkdir</span> -p ./a/b/c  <span class="token comment">#&#x521B;&#x5EFA;&#x76EE;&#x5F55;&#xFF0C;&#x5FC5;&#x8981;&#x65F6;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x7236;&#x76EE;&#x5F55;</span>
 <span class="token function">mkdir</span> -p ./1/2/3  <span class="token comment">#&#x521B;&#x5EFA;&#x76EE;&#x5F55;&#xFF0C;&#x5FC5;&#x8981;&#x65F6;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x7236;&#x76EE;&#x5F55;</span>
 <span class="token function">chmod</span> -R 700  ./a <span class="token comment">#&#x540C;&#x65F6;&#x4FEE;&#x6539;&#x5B50;&#x76EE;&#x5F55;&#x53CA;&#x6587;&#x4EF6;&#x6743;&#x9650;</span>
+</pre><h2 class="mume-header" id="lamp">LAMP</h2>
+
+<h3 class="mume-header" id="apache2">Apache2</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
+yum <span class="token function">install</span> -y httpd
+<span class="token comment"># &#x9632;&#x706B;&#x5899;</span>
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-service<span class="token operator">=</span>http
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-service<span class="token operator">=</span>https
+firewall-cmd --reload
+<span class="token comment"># &#x542F;&#x52A8;</span>
+systemctl <span class="token function">enable</span> httpd
+systemctl start  httpd
+</pre><h3 class="mume-header" id="mariadb">Mariadb</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
+yum <span class="token function">install</span> -y mariadb mariadb-server
+<span class="token comment"># &#x542F;&#x52A8;</span>
+systemctl <span class="token function">enable</span> mariadb
+systemctl start  mariadb
+<span class="token comment"># &#x914D;&#x7F6E;</span>
+mysql_secure_installation
+<span class="token comment"># &#x767B;&#x5F55;</span>
+mysql -uroot -p
+</pre><pre data-role="codeBlock" data-info="SQL" class="language-sql"><span class="token keyword">SHOW</span> <span class="token keyword">DATABASES</span><span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">DATABASE</span> <span class="token punctuation">`</span>db_name<span class="token punctuation">`</span> <span class="token keyword">CHARACTER</span> <span class="token keyword">SET</span> utf8 <span class="token keyword">COLLATE</span> utf8_general_ci<span class="token punctuation">;</span>
+<span class="token keyword">CREATE</span> <span class="token keyword">USER</span> <span class="token string">&apos;user_name&apos;</span><span class="token variable">@&apos;localhost&apos;</span> IDENTIFIED <span class="token keyword">BY</span> <span class="token string">&apos;password&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">REVOKE</span> <span class="token keyword">ALL</span> <span class="token keyword">ON</span> <span class="token operator">*</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token string">&apos;user_name&apos;</span><span class="token variable">@&apos;localhost&apos;</span><span class="token punctuation">;</span>
+<span class="token keyword">GRANT</span> <span class="token keyword">ALL</span> <span class="token keyword">PRIVILEGES</span> <span class="token keyword">ON</span> <span class="token punctuation">`</span>db_name<span class="token punctuation">`</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">TO</span> <span class="token string">&apos;user_name&apos;</span><span class="token variable">@&apos;localhost&apos;</span> <span class="token keyword">WITH</span> <span class="token keyword">GRANT</span> <span class="token keyword">OPTION</span><span class="token punctuation">;</span>
+</pre><h3 class="mume-header" id="php">PHP</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
+<span class="token comment"># yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm</span>
+yum <span class="token function">install</span> --enablerepo<span class="token operator">=</span>remi-php73 -y php
+<span class="token comment"># &#x542F;&#x52A8;</span>
+systemctl <span class="token function">enable</span> mariadb
+systemctl start  mariadb
+<span class="token comment"># &#x914D;&#x7F6E;</span>
+yum <span class="token function">install</span> -y <span class="token function">vim</span>
+<span class="token function">vim</span> <span class="token string">&apos;/etc/php.ini&apos;</span>
+<span class="token comment"># &#x6D4B;&#x8BD5;</span>
+<span class="token function">cd</span> <span class="token string">&apos;/var/www/html&apos;</span>
+<span class="token keyword">echo</span> <span class="token string">&apos;&lt;?php phpinfo(); ?&gt;&apos;</span><span class="token operator">&gt;</span>info.php
+<span class="token comment"># &#x6253;&#x5F00;&lt;IP&gt;/info.php</span>
 </pre>
       </div>
       

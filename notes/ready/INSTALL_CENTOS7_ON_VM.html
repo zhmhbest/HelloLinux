@@ -360,10 +360,19 @@ systemctl restart network
 <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d ./backups <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> ./backups<span class="token punctuation">;</span> <span class="token function">mv</span> ./CentOS-* ./backups 2<span class="token operator">&gt;</span>/dev/null <span class="token operator">||</span> <span class="token keyword">echo</span> Nothing will be moved.<span class="token punctuation">;</span> <span class="token keyword">fi</span>
 <span class="token comment"># mv ./backups/CentOS-* ./; rmdir ./backups</span>
 
-<span class="token comment"># &#x4F7F;&#x7528;Aliyun&#x57FA;&#x7840;&#x6E90;</span>
-<span class="token function">wget</span> -O ./CentOS-Base-Aliyun.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-<span class="token function">wget</span> -O ./CentOS-epel-Aliyun.repo http://mirrors.aliyun.com/repo/epel-7.repo
-<span class="token comment"># yum install -y epel-release</span>
+<span class="token comment"># Aliyun&#x6E90;</span>
+<span class="token function">wget</span> -O ./Aliyun-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+<span class="token function">wget</span> -O ./Aliyun-epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+<span class="token function">wget</span> -O ./Aliyun-epel-cloud.repo http://mirrors.aliyun.com/repoepel-7-cloud
+
+<span class="token comment"># Remi&#x6E90;&#xFF08;&#x5305;&#x542B;&#x6700;&#x65B0;&#x7248;&#x672C;PHP&#x548C;MySQL&#xFF09;</span>
+yum <span class="token function">install</span> -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+
+<span class="token comment"># Repoforge&#x6E90;</span>
+<span class="token comment"># https://mirrors.tuna.tsinghua.edu.cn/help/repoforge/</span>
+<span class="token comment"># http://repoforge.org/use/</span>
+
+<span class="token comment"># &#x66F4;&#x65B0;&#x6E90;&#x7F13;&#x5B58;</span>
 yum clean all
 yum makecache
 yum repolist
