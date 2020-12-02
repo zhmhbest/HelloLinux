@@ -276,7 +276,17 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E6%9F%A5%E7%9C%8Bip">&#x67E5;&#x770B;IP</a></li>
 </ul>
 </li>
-<li><a href="#%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</a></li>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</a>
+<ul>
+<li><a href="#%E8%87%AA%E5%8A%A8%E8%BF%9E%E6%8E%A5">&#x81EA;&#x52A8;&#x8FDE;&#x63A5;</a></li>
+<li><a href="#mobaxterm">MobaXterm</a>
+<ul>
+<li><a href="#x11-forwarding">X11-forwarding</a></li>
+</ul>
+</li>
+<li><a href="#ssh">SSH</a></li>
+</ul>
+</li>
 <li><a href="#%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE%E5%A2%83%E5%86%85%E6%BA%90">&#x914D;&#x7F6E;&#x5883;&#x5185;&#x6E90;</a></li>
 <li><a href="#%E8%AE%BE%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90">&#x8BBE;&#x7F6E;&#x672C;&#x5730;&#x6E90;</a>
@@ -340,9 +350,19 @@ systemctl restart network
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet 192.&apos;</span>
 </pre><h2 class="mume-header" id="%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</h2>
 
+<h3 class="mume-header" id="%E8%87%AA%E5%8A%A8%E8%BF%9E%E6%8E%A5">&#x81EA;&#x52A8;&#x8FDE;&#x63A5;</h3>
+
 <p><img src="./images/vm_ssh.png" alt="vm_ssh"></p>
-<p>&#x4E5F;&#x53EF;&#x4F7F;&#x7528;<a href="https://mobaxterm.mobatek.net/download-home-edition.html">MobaXterm</a>&#xFF08;<a href="./codes/MobaStart.cmd"><code>MobaStart.cmd</code></a>&#xFF09;&#x767B;&#x5F55;&#x3002;</p>
-<h2 class="mume-header" id="%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</h2>
+<h3 class="mume-header" id="mobaxterm">MobaXterm</h3>
+
+<p><a href="https://mobaxterm.mobatek.net/download-home-edition.html">MobaXterm</a>&#xFF08;<a href="./codes/MobaStart.cmd"><code>MobaStart.cmd</code></a>&#xFF09;</p>
+<h4 class="mume-header" id="x11-forwarding">X11-forwarding</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y <span class="token function">install</span> xorg-x11-xauth
+</pre><h3 class="mume-header" id="ssh">SSH</h3>
+
+<pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token command"><span class="token keyword">ssh</span> &lt;IP&gt; <span class="token parameter attr-name">-l</span> root</span>
+</pre><h2 class="mume-header" id="%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># getenforce                # &#x83B7;&#x53D6;&#x72B6;&#x6001;</span>
 <span class="token comment"># setenforce 0              # &#x4E34;&#x65F6;&#x5173;&#x95ED;</span>

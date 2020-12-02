@@ -63,9 +63,25 @@ ifconfig -a | grep 'inet 192.'
 
 ## 远程登录
 
+### 自动连接
+
 ![vm_ssh](./images/vm_ssh.png)
 
-也可使用[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)（[`MobaStart.cmd`](./codes/MobaStart.cmd)）登录。
+### MobaXterm
+
+[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)（[`MobaStart.cmd`](./codes/MobaStart.cmd)）
+
+#### X11-forwarding
+
+```bash
+yum -y install xorg-x11-xauth
+```
+
+### SSH
+
+```batch
+ssh <IP> -l root
+```
 
 ## 关闭SELINUX
 
