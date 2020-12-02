@@ -18,54 +18,7 @@
 - ![net1](./images/centos7_net1.png)
 - ![kdump](./images/centos7_kdump.png)
 
-## 远程登录
-
-### 开启网卡
-
-```txt
-localhost login: root
-Password:
-Last Login: ...
-[root@localhost ~]#
-```
-
-```bash
-cd /etc/sysconfig/network-scripts; ls -l ifcfg-*
-# -rw-r--r--. 1 root root 279 6月  13 2020 ifcfg-ens33
-# -rw-r--r--. 1 root root 254 3月  29 2019 ifcfg-lo
-enscfg=ifcfg-ens33
-
-tail -n 2 $enscfg
-# DEVICE=ens33
-# ONBOOT=no
-
-sed -i '/ONBOOT/s/no/yes/' $enscfg
-tail -n 2 $enscfg
-# DEVICE=ens33
-# ONBOOT=yes
-
-systemctl restart network
-```
-
-### 登录SSH
-
-![vm_ssh](./images/vm_ssh.png)
-
-也可使用[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)（[MobaStart.cmd](./codes/MobaStart.cmd)）登录。
-
-## 关闭SELINUX
-
-```bash
-# getenforce                # 获取状态
-# setenforce 0              # 临时关闭
-# vi /etc/selinux/config    # 永久关闭 SELINUX=disabled
-sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'
-more '/etc/selinux/config'
-```
-
-## 配置境内源
-
-### 安装基本工具
+## 安装基本工具
 
 ```bash
 # 加载镜像包
@@ -77,7 +30,55 @@ rpm -ivh wget-*
 rpm -ivh net-tools-*
 ```
 
-### 使用境内源
+## 查看IP地址
+
+### 开启网卡
+
+```bash
+# 获取网卡配置名称
+# ls -l /etc/sysconfig/network-scripts/ifcfg-e*
+ifcfg=$(echo /etc/sysconfig/network-scripts/ifcfg-e*)
+echo $ifcfg
+
+# 查看网卡是否开启
+tail $ifcfg -n 2
+# DEVICE=ens33
+# ONBOOT=no
+
+# 开启网卡
+sed -i '/ONBOOT/s/no/yes/' $ifcfg
+tail $ifcfg -n 2
+# DEVICE=ens33
+# ONBOOT=yes
+
+# 应用网卡配置
+systemctl restart network
+```
+
+### 查看IP
+
+```bash
+ifconfig -a | grep 'inet 192.'
+```
+
+## 远程登录
+
+![vm_ssh](./images/vm_ssh.png)
+
+也可使用[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)（[`MobaStart.cmd`](./codes/MobaStart.cmd)）登录。
+
+## 关闭SELINUX
+
+```bash
+# getenforce                # 获取状态
+# setenforce 0              # 临时关闭
+# vi /etc/selinux/config    # 永久关闭 SELINUX=disabled
+sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'
+more '/etc/selinux/config'
+# 重启后生效
+```
+
+## 配置境内源
 
 添加**网络适配器**，使用**net**模式。
 
@@ -90,10 +91,9 @@ if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null
 # Aliyun源
 wget -O ./Aliyun-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 wget -O ./Aliyun-epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
-wget -O ./Aliyun-epel-cloud.repo http://mirrors.aliyun.com/repoepel-7-cloud
 
 # Remi源（包含最新版本PHP和MySQL）
-yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+# yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
 # Repoforge源
 # https://mirrors.tuna.tsinghua.edu.cn/help/repoforge/
@@ -135,7 +135,7 @@ netsh advfirewall firewall delete rule name="ICMP V4 Echo Request"
 
 ### 建立本地仓库
 
-- [BUILD.cmd](./codes/BUILD.cmd)
+- [`BUILD.cmd`](./codes/BUILD.cmd)
 
 ```txt
 www/files/centos7

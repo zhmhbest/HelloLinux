@@ -269,19 +269,16 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E5%9C%A8vm%E4%B8%8A%E5%AE%89%E8%A3%85centos7indexhtml">&#x5728;VM&#x4E0A;&#x5B89;&#x88C5;CentOS7</a>
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85centos">&#x5B89;&#x88C5;CentOS</a></li>
-<li><a href="#%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</a>
+<li><a href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7">&#x5B89;&#x88C5;&#x57FA;&#x672C;&#x5DE5;&#x5177;</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8Bip%E5%9C%B0%E5%9D%80">&#x67E5;&#x770B;IP&#x5730;&#x5740;</a>
 <ul>
 <li><a href="#%E5%BC%80%E5%90%AF%E7%BD%91%E5%8D%A1">&#x5F00;&#x542F;&#x7F51;&#x5361;</a></li>
-<li><a href="#%E7%99%BB%E5%BD%95ssh">&#x767B;&#x5F55;SSH</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8Bip">&#x67E5;&#x770B;IP</a></li>
 </ul>
 </li>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</a></li>
 <li><a href="#%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE%E5%A2%83%E5%86%85%E6%BA%90">&#x914D;&#x7F6E;&#x5883;&#x5185;&#x6E90;</a>
-<ul>
-<li><a href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7">&#x5B89;&#x88C5;&#x57FA;&#x672C;&#x5DE5;&#x5177;</a></li>
-<li><a href="#%E4%BD%BF%E7%94%A8%E5%A2%83%E5%86%85%E6%BA%90">&#x4F7F;&#x7528;&#x5883;&#x5185;&#x6E90;</a></li>
-</ul>
-</li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E5%A2%83%E5%86%85%E6%BA%90">&#x914D;&#x7F6E;&#x5883;&#x5185;&#x6E90;</a></li>
 <li><a href="#%E8%AE%BE%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90">&#x8BBE;&#x7F6E;&#x672C;&#x5730;&#x6E90;</a>
 <ul>
 <li><a href="#%E8%8E%B7%E5%BE%97%E7%9C%9F%E6%9C%BA%E5%9C%B0%E5%9D%80%E7%9C%9F%E6%9C%BA%E7%8E%AF%E5%A2%83">&#x83B7;&#x5F97;&#x771F;&#x673A;&#x5730;&#x5740;&#xFF08;&#x771F;&#x673A;&#x73AF;&#x5883;&#xFF09;</a></li>
@@ -307,43 +304,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><img src="./images/centos7_net1.png" alt="net1"></li>
 <li><img src="./images/centos7_kdump.png" alt="kdump"></li>
 </ul>
-<h2 class="mume-header" id="%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</h2>
-
-<h3 class="mume-header" id="%E5%BC%80%E5%90%AF%E7%BD%91%E5%8D%A1">&#x5F00;&#x542F;&#x7F51;&#x5361;</h3>
-
-<pre data-role="codeBlock" data-info="txt" class="language-txt"><code>localhost login: root
-Password:
-Last Login: ...
-[root@localhost ~]#
-</code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">cd</span> /etc/sysconfig/network-scripts<span class="token punctuation">;</span> <span class="token function">ls</span> -l ifcfg-*
-<span class="token comment"># -rw-r--r--. 1 root root 279 6&#x6708;  13 2020 ifcfg-ens33</span>
-<span class="token comment"># -rw-r--r--. 1 root root 254 3&#x6708;  29 2019 ifcfg-lo</span>
-enscfg<span class="token operator">=</span>ifcfg-ens33
-
-<span class="token function">tail</span> -n 2 <span class="token variable">$enscfg</span>
-<span class="token comment"># DEVICE=ens33</span>
-<span class="token comment"># ONBOOT=no</span>
-
-<span class="token function">sed</span> -i <span class="token string">&apos;/ONBOOT/s/no/yes/&apos;</span> <span class="token variable">$enscfg</span>
-<span class="token function">tail</span> -n 2 <span class="token variable">$enscfg</span>
-<span class="token comment"># DEVICE=ens33</span>
-<span class="token comment"># ONBOOT=yes</span>
-
-systemctl restart network
-</pre><h3 class="mume-header" id="%E7%99%BB%E5%BD%95ssh">&#x767B;&#x5F55;SSH</h3>
-
-<p><img src="./images/vm_ssh.png" alt="vm_ssh"></p>
-<p>&#x4E5F;&#x53EF;&#x4F7F;&#x7528;<a href="https://mobaxterm.mobatek.net/download-home-edition.html">MobaXterm</a>&#xFF08;<a href="./codes/MobaStart.cmd">MobaStart.cmd</a>&#xFF09;&#x767B;&#x5F55;&#x3002;</p>
-<h2 class="mume-header" id="%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</h2>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># getenforce                # &#x83B7;&#x53D6;&#x72B6;&#x6001;</span>
-<span class="token comment"># setenforce 0              # &#x4E34;&#x65F6;&#x5173;&#x95ED;</span>
-<span class="token comment"># vi /etc/selinux/config    # &#x6C38;&#x4E45;&#x5173;&#x95ED; SELINUX=disabled</span>
-<span class="token function">sed</span> -i <span class="token string">&apos;/SELINUX/s/enforcing/disabled/&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
-<span class="token function">more</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
-</pre><h2 class="mume-header" id="%E9%85%8D%E7%BD%AE%E5%A2%83%E5%86%85%E6%BA%90">&#x914D;&#x7F6E;&#x5883;&#x5185;&#x6E90;</h2>
-
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7">&#x5B89;&#x88C5;&#x57FA;&#x672C;&#x5DE5;&#x5177;</h3>
+<h2 class="mume-header" id="%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7">&#x5B89;&#x88C5;&#x57FA;&#x672C;&#x5DE5;&#x5177;</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x52A0;&#x8F7D;&#x955C;&#x50CF;&#x5305;</span>
 <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token string">&apos;/mnt/cdrom&apos;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> <span class="token string">&apos;/mnt/cdrom&apos;</span><span class="token punctuation">;</span> <span class="token function">mount</span> <span class="token string">&apos;/dev/cdrom&apos;</span> <span class="token string">&apos;/mnt/cdrom&apos;</span><span class="token punctuation">;</span> <span class="token keyword">fi</span>
@@ -352,7 +313,44 @@ systemctl restart network
 <span class="token comment"># &#x5FC5;&#x5907;&#x8F6F;&#x4EF6;</span>
 <span class="token function">rpm</span> -ivh wget-*
 <span class="token function">rpm</span> -ivh net-tools-*
-</pre><h3 class="mume-header" id="%E4%BD%BF%E7%94%A8%E5%A2%83%E5%86%85%E6%BA%90">&#x4F7F;&#x7528;&#x5883;&#x5185;&#x6E90;</h3>
+</pre><h2 class="mume-header" id="%E6%9F%A5%E7%9C%8Bip%E5%9C%B0%E5%9D%80">&#x67E5;&#x770B;IP&#x5730;&#x5740;</h2>
+
+<h3 class="mume-header" id="%E5%BC%80%E5%90%AF%E7%BD%91%E5%8D%A1">&#x5F00;&#x542F;&#x7F51;&#x5361;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x83B7;&#x53D6;&#x7F51;&#x5361;&#x914D;&#x7F6E;&#x540D;&#x79F0;</span>
+<span class="token comment"># ls -l /etc/sysconfig/network-scripts/ifcfg-e*</span>
+ifcfg<span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span><span class="token keyword">echo</span> /etc/sysconfig/network-scripts/ifcfg-e*<span class="token variable">)</span></span>
+<span class="token keyword">echo</span> <span class="token variable">$ifcfg</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x662F;&#x5426;&#x5F00;&#x542F;</span>
+<span class="token function">tail</span> <span class="token variable">$ifcfg</span> -n 2
+<span class="token comment"># DEVICE=ens33</span>
+<span class="token comment"># ONBOOT=no</span>
+
+<span class="token comment"># &#x5F00;&#x542F;&#x7F51;&#x5361;</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;/ONBOOT/s/no/yes/&apos;</span> <span class="token variable">$ifcfg</span>
+<span class="token function">tail</span> <span class="token variable">$ifcfg</span> -n 2
+<span class="token comment"># DEVICE=ens33</span>
+<span class="token comment"># ONBOOT=yes</span>
+
+<span class="token comment"># &#x5E94;&#x7528;&#x7F51;&#x5361;&#x914D;&#x7F6E;</span>
+systemctl restart network
+</pre><h3 class="mume-header" id="%E6%9F%A5%E7%9C%8Bip">&#x67E5;&#x770B;IP</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet 192.&apos;</span>
+</pre><h2 class="mume-header" id="%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</h2>
+
+<p><img src="./images/vm_ssh.png" alt="vm_ssh"></p>
+<p>&#x4E5F;&#x53EF;&#x4F7F;&#x7528;<a href="https://mobaxterm.mobatek.net/download-home-edition.html">MobaXterm</a>&#xFF08;<a href="./codes/MobaStart.cmd"><code>MobaStart.cmd</code></a>&#xFF09;&#x767B;&#x5F55;&#x3002;</p>
+<h2 class="mume-header" id="%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</h2>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># getenforce                # &#x83B7;&#x53D6;&#x72B6;&#x6001;</span>
+<span class="token comment"># setenforce 0              # &#x4E34;&#x65F6;&#x5173;&#x95ED;</span>
+<span class="token comment"># vi /etc/selinux/config    # &#x6C38;&#x4E45;&#x5173;&#x95ED; SELINUX=disabled</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;/SELINUX/s/enforcing/disabled/&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
+<span class="token function">more</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
+<span class="token comment"># &#x91CD;&#x542F;&#x540E;&#x751F;&#x6548;</span>
+</pre><h2 class="mume-header" id="%E9%85%8D%E7%BD%AE%E5%A2%83%E5%86%85%E6%BA%90">&#x914D;&#x7F6E;&#x5883;&#x5185;&#x6E90;</h2>
 
 <p>&#x6DFB;&#x52A0;<strong>&#x7F51;&#x7EDC;&#x9002;&#x914D;&#x5668;</strong>&#xFF0C;&#x4F7F;&#x7528;<strong>net</strong>&#x6A21;&#x5F0F;&#x3002;</p>
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5907;&#x4EFD;&#x5F53;&#x524D;&#x6E90;</span>
@@ -363,10 +361,9 @@ systemctl restart network
 <span class="token comment"># Aliyun&#x6E90;</span>
 <span class="token function">wget</span> -O ./Aliyun-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 <span class="token function">wget</span> -O ./Aliyun-epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
-<span class="token function">wget</span> -O ./Aliyun-epel-cloud.repo http://mirrors.aliyun.com/repoepel-7-cloud
 
 <span class="token comment"># Remi&#x6E90;&#xFF08;&#x5305;&#x542B;&#x6700;&#x65B0;&#x7248;&#x672C;PHP&#x548C;MySQL&#xFF09;</span>
-yum <span class="token function">install</span> -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+<span class="token comment"># yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm</span>
 
 <span class="token comment"># Repoforge&#x6E90;</span>
 <span class="token comment"># https://mirrors.tuna.tsinghua.edu.cn/help/repoforge/</span>
@@ -403,7 +400,7 @@ yum repolist
 </pre><h3 class="mume-header" id="%E5%BB%BA%E7%AB%8B%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93">&#x5EFA;&#x7ACB;&#x672C;&#x5730;&#x4ED3;&#x5E93;</h3>
 
 <ul>
-<li><a href="./codes/BUILD.cmd">BUILD.cmd</a></li>
+<li><a href="./codes/BUILD.cmd"><code>BUILD.cmd</code></a></li>
 </ul>
 <pre data-role="codeBlock" data-info="txt" class="language-txt"><code>www/files/centos7
 &#x2502;  BUILD.bat                                    &#x8BE6;&#x89C1;&#x4E0B;&#x6587;
