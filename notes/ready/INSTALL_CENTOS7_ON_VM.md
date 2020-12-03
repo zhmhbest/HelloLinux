@@ -75,6 +75,8 @@ ifconfig -a | grep 'inet 192.'
 
 ```bash
 yum -y install xorg-x11-xauth
+yum -y install xorg-x11-apps
+xclock
 ```
 
 ### SSH
