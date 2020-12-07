@@ -295,6 +295,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</a></li>
 <li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</a></li>
 </ul>
 </li>
 <li><a href="#process">Process</a>
@@ -615,14 +616,13 @@ yum -y --enablerepo<span class="token operator">=</span><span class="token opera
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</span>
 nmtui
-</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x5DF2;&#x6709;&#x7F51;&#x5361;</span>
-<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;ens&apos;</span> <span class="token operator">|</span> <span class="token function">sed</span> <span class="token string">&apos;s/:.*$//&apos;</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ifconfig</span> -a
 
 <span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;IP</span>
-<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet &apos;</span>
+<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet&apos;</span>
 
 <span class="token comment"># &#x7F51;&#x5361;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
-<span class="token function">ls</span> -l /etc/sysconfig/network-scripts/ifcfg-* 
+<span class="token function">ls</span> -l /etc/sysconfig/network-scripts/ifcfg-e*
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x4E34;&#x65F6;&#x4FEE;&#x6539;IP</span>
 <span class="token function">ifconfig</span> <span class="token operator">&lt;</span>&#x7F51;&#x5361;&#x540D;&#x79F0;<span class="token punctuation">[</span>:0<span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span> <span class="token punctuation">[</span>netmask <span class="token operator">&lt;</span>mask<span class="token operator">&gt;</span><span class="token punctuation">]</span> <span class="token comment"># &#x4E34;&#x65F6;&#x6DFB;&#x52A0;</span>
 <span class="token function">ifconfig</span> <span class="token operator">&lt;</span>&#x7F51;&#x5361;&#x540D;&#x79F0;<span class="token punctuation">[</span>:0<span class="token punctuation">]</span><span class="token operator">&gt;</span> del <span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span>              <span class="token comment"># &#x4E34;&#x65F6;&#x5220;&#x9664;</span>
@@ -668,6 +668,16 @@ firewall-cmd --reload
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --remove-port<span class="token operator">=</span>8080/tcp
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --remove-service<span class="token operator">=</span>https
 firewall-cmd --reload
+</pre><h3 class="mume-header" id="%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># -a  &#x6240;&#x6709;</span>
+<span class="token comment"># -t  TCP&#x8FDE;&#x63A5;</span>
+<span class="token comment"># -u  UDP&#x8FDE;&#x63A5;</span>
+<span class="token comment"># -n  &#x7981;&#x7528;&#x53CD;&#x5411;&#x57DF;&#x540D;&#x89E3;&#x6790;</span>
+<span class="token comment"># -l  &#x72B6;&#x6001;&#x662F;LISTEN</span>
+<span class="token comment"># -p  &#x67E5;&#x770B;&#x8FDB;&#x7A0B;&#x4FE1;&#x606F;</span>
+
+<span class="token function">netstat</span> -anp
 </pre><h2 class="mume-header" id="process">Process</h2>
 
 <h3 class="mume-header" id="cpu%E4%BF%A1%E6%81%AF">CPU&#x4FE1;&#x606F;</h3>

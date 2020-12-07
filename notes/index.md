@@ -281,14 +281,13 @@ nmtui
 ```
 
 ```bash
-# 查看已有网卡
-ifconfig -a | grep 'ens' | sed 's/:.*$//'
+ifconfig -a
 
 # 查看当前IP
-ifconfig -a | grep 'inet '
+ifconfig -a | grep 'inet'
 
 # 网卡配置文件
-ls -l /etc/sysconfig/network-scripts/ifcfg-* 
+ls -l /etc/sysconfig/network-scripts/ifcfg-e*
 ```
 
 ```bash
@@ -340,6 +339,19 @@ firewall-cmd --reload
 firewall-cmd --permanent --zone=public --remove-port=8080/tcp
 firewall-cmd --permanent --zone=public --remove-service=https
 firewall-cmd --reload
+```
+
+### 网络状态
+
+```bash
+# -a  所有
+# -t  TCP连接
+# -u  UDP连接
+# -n  禁用反向域名解析
+# -l  状态是LISTEN
+# -p  查看进程信息
+
+netstat -anp
 ```
 
 ## Process
