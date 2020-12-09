@@ -398,7 +398,7 @@ fg <JOBNUM>  # 后台进程放到前台
 bg <JOBNUM>  # 前台进程放到后台
 # Ctrl + Z   # 当前运行进程放到后台
 
-# 后台进程（无关前台）
+# screen（无关前台）
 # yum -y install screen
 screen -ls              # 查看会话
 screen -S SessionName   # 创建新会话
@@ -406,6 +406,10 @@ screen -S SessionName   # 创建新会话
 screen -d SessionName   # 分离会话
 screen -r SessionName   # 重新连接会话（用会话名称）
 screen -r SessionID     # 重新连接会话（用会话ID）
+
+# nohup（无关前台）
+nohup 启动文件 > 日志文件.log 2>&1 &
+jobs
 ```
 
 ## FileSystem

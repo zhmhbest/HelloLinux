@@ -715,7 +715,7 @@ firewall-cmd --reload
 <span class="token function">bg</span> <span class="token operator">&lt;</span>JOBNUM<span class="token operator">&gt;</span>  <span class="token comment"># &#x524D;&#x53F0;&#x8FDB;&#x7A0B;&#x653E;&#x5230;&#x540E;&#x53F0;</span>
 <span class="token comment"># Ctrl + Z   # &#x5F53;&#x524D;&#x8FD0;&#x884C;&#x8FDB;&#x7A0B;&#x653E;&#x5230;&#x540E;&#x53F0;</span>
 
-<span class="token comment"># &#x540E;&#x53F0;&#x8FDB;&#x7A0B;&#xFF08;&#x65E0;&#x5173;&#x524D;&#x53F0;&#xFF09;</span>
+<span class="token comment"># screen&#xFF08;&#x65E0;&#x5173;&#x524D;&#x53F0;&#xFF09;</span>
 <span class="token comment"># yum -y install screen</span>
 <span class="token function">screen</span> -ls              <span class="token comment"># &#x67E5;&#x770B;&#x4F1A;&#x8BDD;</span>
 <span class="token function">screen</span> -S SessionName   <span class="token comment"># &#x521B;&#x5EFA;&#x65B0;&#x4F1A;&#x8BDD;</span>
@@ -723,6 +723,10 @@ firewall-cmd --reload
 <span class="token function">screen</span> -d SessionName   <span class="token comment"># &#x5206;&#x79BB;&#x4F1A;&#x8BDD;</span>
 <span class="token function">screen</span> -r SessionName   <span class="token comment"># &#x91CD;&#x65B0;&#x8FDE;&#x63A5;&#x4F1A;&#x8BDD;&#xFF08;&#x7528;&#x4F1A;&#x8BDD;&#x540D;&#x79F0;&#xFF09;</span>
 <span class="token function">screen</span> -r SessionID     <span class="token comment"># &#x91CD;&#x65B0;&#x8FDE;&#x63A5;&#x4F1A;&#x8BDD;&#xFF08;&#x7528;&#x4F1A;&#x8BDD;ID&#xFF09;</span>
+
+<span class="token comment"># nohup&#xFF08;&#x65E0;&#x5173;&#x524D;&#x53F0;&#xFF09;</span>
+<span class="token function">nohup</span> &#x542F;&#x52A8;&#x6587;&#x4EF6; <span class="token operator">&gt;</span> &#x65E5;&#x5FD7;&#x6587;&#x4EF6;.log 2<span class="token operator">&gt;</span><span class="token operator">&amp;</span>1 <span class="token operator">&amp;</span>
+<span class="token function">jobs</span>
 </pre><h2 class="mume-header" id="filesystem">FileSystem</h2>
 
 <h3 class="mume-header" id="ntfs">NTFS</h3>
