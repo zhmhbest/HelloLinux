@@ -1,13 +1,12 @@
 <link rel="stylesheet" href="https://zhmhbest.gitee.io/hellomathematics/style/index.css">
 <script src="https://zhmhbest.gitee.io/hellomathematics/style/index.js"></script>
 
-# [在VM上安装CentOS7](../index.html)
+# [Install](../index.html)
 
 [TOC]
 
 ## 安装CentOS
 
-- ![setup_disk](./images/setup_disk.png)
 - ![adapter](./images/adapter.png)
 - ![vm_adapter](./images/vm_adapter.png)
 - ![install](./images/centos7_install.png)
@@ -22,7 +21,8 @@
 
 ```bash
 # 加载镜像包
-if [ ! -d '/mnt/cdrom' ]; then mkdir '/mnt/cdrom'; mount '/dev/cdrom' '/mnt/cdrom'; fi
+mkdir '/mnt/cdrom'
+mount '/dev/cdrom' '/mnt/cdrom'
 cd '/mnt/cdrom/Packages'
 
 # 必备软件
@@ -63,15 +63,9 @@ ifconfig -a | grep 'inet 192.'
 
 ## 远程登录
 
-### 自动连接
+使用[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)登录机器。
 
-![vm_ssh](./images/vm_ssh.png)
-
-### MobaXterm
-
-[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)（[`MobaStart.cmd`](./codes/MobaStart.cmd)）
-
-#### X11-forwarding
+### X11-forwarding
 
 ```bash
 yum -y install xorg-x11-xauth
@@ -82,7 +76,7 @@ xclock
 ### SSH
 
 ```batch
-ssh <IP> -l root
+ssh -l root <IP>
 ```
 
 ## 关闭SELINUX
@@ -90,6 +84,7 @@ ssh <IP> -l root
 ```bash
 # getenforce                # 获取状态
 # setenforce 0              # 临时关闭
+
 # vi /etc/selinux/config    # 永久关闭 SELINUX=disabled
 sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'
 more '/etc/selinux/config'
@@ -98,24 +93,17 @@ more '/etc/selinux/config'
 
 ## 配置境内源
 
-添加**网络适配器**，使用**net**模式。
+添加**网络适配器**，使用**NAT**模式。
 
 ```bash
 # 备份当前源
 cd '/etc/yum.repos.d'
-if [ ! -d ./backups ]; then mkdir ./backups; mv ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
-# mv ./backups/CentOS-* ./; rmdir ./backups
+if [ ! -d ./backups ]; then mkdir ./backups; cp ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
+# cp ./backups/CentOS-* ./
 
 # Aliyun源
 wget -O ./Aliyun-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
 wget -O ./Aliyun-epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
-
-# Remi源（包含最新版本PHP和MySQL）
-# yum install -y http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-
-# Repoforge源
-# https://mirrors.tuna.tsinghua.edu.cn/help/repoforge/
-# http://repoforge.org/use/
 
 # 更新源缓存
 yum clean all
@@ -184,7 +172,7 @@ www/files/centos7
 
 ```bash
 # VMnet1.IP
-rip=192.168.202.1
+rip=192.168.?.?
 
 # 测试1
 ping -c 3 $rip
@@ -197,6 +185,6 @@ wget http://$rip/files/centos7/test; clear; more test; rm -f ./test
 
 ```bash
 cd '/etc/yum.repos.d'
-wget -O ./CentOS-Base-DVDISO.repo  http://$rip/files/centos7/repofiles/local.repo
+wget -O ./CentOS-DVDISO.repo  http://$rip/files/centos7/repofiles/local.repo
 yum makecache
 ```
