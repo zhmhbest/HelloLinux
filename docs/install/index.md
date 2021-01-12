@@ -97,13 +97,12 @@ more '/etc/selinux/config'
 
 ```bash
 # 备份当前源
-cd '/etc/yum.repos.d'
+pushd '/etc/yum.repos.d'
 if [ ! -d ./backups ]; then mkdir ./backups; cp ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
 # cp ./backups/CentOS-* ./
 
 # Aliyun源
-wget -O ./Aliyun-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-wget -O ./Aliyun-epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+wget -O ./CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 
 # 更新源缓存
 yum clean all

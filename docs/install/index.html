@@ -367,13 +367,12 @@ xclock
 
 <p>&#x6DFB;&#x52A0;<strong>&#x7F51;&#x7EDC;&#x9002;&#x914D;&#x5668;</strong>&#xFF0C;&#x4F7F;&#x7528;<strong>NAT</strong>&#x6A21;&#x5F0F;&#x3002;</p>
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5907;&#x4EFD;&#x5F53;&#x524D;&#x6E90;</span>
-<span class="token builtin class-name">cd</span> <span class="token string">&apos;/etc/yum.repos.d&apos;</span>
+<span class="token function">pushd</span> <span class="token string">&apos;/etc/yum.repos.d&apos;</span>
 <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d ./backups <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> ./backups<span class="token punctuation">;</span> <span class="token function">cp</span> ./CentOS-* ./backups <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null <span class="token operator">||</span> <span class="token builtin class-name">echo</span> Nothing will be moved.<span class="token punctuation">;</span> <span class="token keyword">fi</span>
 <span class="token comment"># cp ./backups/CentOS-* ./</span>
 
 <span class="token comment"># Aliyun&#x6E90;</span>
-<span class="token function">wget</span> -O ./Aliyun-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
-<span class="token function">wget</span> -O ./Aliyun-epel.repo http://mirrors.aliyun.com/repo/epel-7.repo
+<span class="token function">wget</span> -O ./CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 
 <span class="token comment"># &#x66F4;&#x65B0;&#x6E90;&#x7F13;&#x5B58;</span>
 yum clean all
