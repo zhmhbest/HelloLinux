@@ -11,4 +11,6 @@
 
 ## [Package](package.html)
 
+## [Text](text.html)
+
 ## [Software](software/index.html)
