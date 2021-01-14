@@ -23,14 +23,33 @@
 # 加载镜像包
 mkdir '/mnt/cdrom'
 mount '/dev/cdrom' '/mnt/cdrom'
-cd '/mnt/cdrom/Packages'
+pushd '/mnt/cdrom/Packages'
 
 # 必备软件
 rpm -ivh wget-*
 rpm -ivh net-tools-*
+rpm -ivh zip-*
+rpm -ivh unzip-*
+
+# 卸载镜像包
+popd
+umount '/dev/cdrom'
+rmdir '/mnt/cdrom'
 ```
 
-## 查看IP地址
+## 关闭SELINUX
+
+```bash
+getenforce                  # 获取状态
+setenforce 0                # 临时关闭
+
+# vi /etc/selinux/config    # 永久关闭 SELINUX=disabled
+sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'
+egrep '^SELINUX=' '/etc/selinux/config'
+# 重启后生效
+```
+
+## 网络配置
 
 ### 开启网卡
 
@@ -41,15 +60,10 @@ ifcfg=$(echo /etc/sysconfig/network-scripts/ifcfg-e*)
 echo $ifcfg
 
 # 查看网卡是否开启
-tail $ifcfg -n 2
-# DEVICE=ens33
-# ONBOOT=no
+egrep '^(DEVICE|ONBOOT)' $ifcfg
 
 # 开启网卡
 sed -i '/ONBOOT/s/no/yes/' $ifcfg
-tail $ifcfg -n 2
-# DEVICE=ens33
-# ONBOOT=yes
 
 # 应用网卡配置
 systemctl restart network
@@ -58,37 +72,7 @@ systemctl restart network
 ### 查看IP
 
 ```bash
-ifconfig -a | grep 'inet 192.'
-```
-
-## 远程登录
-
-使用[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)登录机器。
-
-### X11-forwarding
-
-```bash
-yum -y install xorg-x11-xauth
-yum -y install xorg-x11-apps
-xclock
-```
-
-### SSH
-
-```batch
-ssh -l root <IP>
-```
-
-## 关闭SELINUX
-
-```bash
-# getenforce                # 获取状态
-# setenforce 0              # 临时关闭
-
-# vi /etc/selinux/config    # 永久关闭 SELINUX=disabled
-sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'
-more '/etc/selinux/config'
-# 重启后生效
+ifconfig -a | grep 'inet '
 ```
 
 ## 配置境内源
@@ -108,6 +92,24 @@ wget -O ./CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
 yum clean all
 yum makecache
 yum repolist
+```
+
+## 远程登录
+
+使用[MobaXterm](https://mobaxterm.mobatek.net/download-home-edition.html)登录机器。
+
+### X11-forwarding
+
+```bash
+yum -y install xorg-x11-xauth
+yum -y install xorg-x11-apps
+xclock
+```
+
+### SSH
+
+```batch
+ssh <user>@<IP>
 ```
 
 ## 设置本地源
@@ -144,7 +146,7 @@ netsh advfirewall firewall delete rule name="ICMP V4 Echo Request"
 
 ```txt
 www/files/centos7
-│  BUILD.bat                                    详见下文
+│  BUILD.bat                                    请下载
 │  RPM-GPG-KEY-CentOS-7                         AUTO_COPY
 │  RPM-GPG-KEY-CentOS-Testing-7                 AUTO_COPY
 │  test                                         AUTO_BUILD

@@ -270,20 +270,20 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85centos">&#x5B89;&#x88C5;CentOS</a></li>
 <li><a href="#%E5%AE%89%E8%A3%85%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7">&#x5B89;&#x88C5;&#x57FA;&#x672C;&#x5DE5;&#x5177;</a></li>
-<li><a href="#%E6%9F%A5%E7%9C%8Bip%E5%9C%B0%E5%9D%80">&#x67E5;&#x770B;IP&#x5730;&#x5740;</a>
+<li><a href="#%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE">&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</a>
 <ul>
 <li><a href="#%E5%BC%80%E5%90%AF%E7%BD%91%E5%8D%A1">&#x5F00;&#x542F;&#x7F51;&#x5361;</a></li>
 <li><a href="#%E6%9F%A5%E7%9C%8Bip">&#x67E5;&#x770B;IP</a></li>
 </ul>
 </li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E5%A2%83%E5%86%85%E6%BA%90">&#x914D;&#x7F6E;&#x5883;&#x5185;&#x6E90;</a></li>
 <li><a href="#%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</a>
 <ul>
 <li><a href="#x11-forwarding">X11-forwarding</a></li>
 <li><a href="#ssh">SSH</a></li>
 </ul>
 </li>
-<li><a href="#%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE%E5%A2%83%E5%86%85%E6%BA%90">&#x914D;&#x7F6E;&#x5883;&#x5185;&#x6E90;</a></li>
 <li><a href="#%E8%AE%BE%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90">&#x8BBE;&#x7F6E;&#x672C;&#x5730;&#x6E90;</a>
 <ul>
 <li><a href="#%E8%8E%B7%E5%BE%97%E7%9C%9F%E6%9C%BA%E5%9C%B0%E5%9D%80%E7%9C%9F%E6%9C%BA%E7%8E%AF%E5%A2%83">&#x83B7;&#x5F97;&#x771F;&#x673A;&#x5730;&#x5740;&#xFF08;&#x771F;&#x673A;&#x73AF;&#x5883;&#xFF09;</a></li>
@@ -313,12 +313,28 @@ pre[data-line] .line-highlight[data-end]:after {
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x52A0;&#x8F7D;&#x955C;&#x50CF;&#x5305;</span>
 <span class="token function">mkdir</span> <span class="token string">&apos;/mnt/cdrom&apos;</span>
 <span class="token function">mount</span> <span class="token string">&apos;/dev/cdrom&apos;</span> <span class="token string">&apos;/mnt/cdrom&apos;</span>
-<span class="token builtin class-name">cd</span> <span class="token string">&apos;/mnt/cdrom/Packages&apos;</span>
+<span class="token function">pushd</span> <span class="token string">&apos;/mnt/cdrom/Packages&apos;</span>
 
 <span class="token comment"># &#x5FC5;&#x5907;&#x8F6F;&#x4EF6;</span>
 <span class="token function">rpm</span> -ivh wget-*
 <span class="token function">rpm</span> -ivh net-tools-*
-</pre><h2 class="mume-header" id="%E6%9F%A5%E7%9C%8Bip%E5%9C%B0%E5%9D%80">&#x67E5;&#x770B;IP&#x5730;&#x5740;</h2>
+<span class="token function">rpm</span> -ivh zip-*
+<span class="token function">rpm</span> -ivh unzip-*
+
+<span class="token comment"># &#x5378;&#x8F7D;&#x955C;&#x50CF;&#x5305;</span>
+<span class="token function">popd</span>
+<span class="token function">umount</span> <span class="token string">&apos;/dev/cdrom&apos;</span>
+<span class="token function">rmdir</span> <span class="token string">&apos;/mnt/cdrom&apos;</span>
+</pre><h2 class="mume-header" id="%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</h2>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash">getenforce                  <span class="token comment"># &#x83B7;&#x53D6;&#x72B6;&#x6001;</span>
+setenforce <span class="token number">0</span>                <span class="token comment"># &#x4E34;&#x65F6;&#x5173;&#x95ED;</span>
+
+<span class="token comment"># vi /etc/selinux/config    # &#x6C38;&#x4E45;&#x5173;&#x95ED; SELINUX=disabled</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;/SELINUX/s/enforcing/disabled/&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
+<span class="token function">egrep</span> <span class="token string">&apos;^SELINUX=&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
+<span class="token comment"># &#x91CD;&#x542F;&#x540E;&#x751F;&#x6548;</span>
+</pre><h2 class="mume-header" id="%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE">&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</h2>
 
 <h3 class="mume-header" id="%E5%BC%80%E5%90%AF%E7%BD%91%E5%8D%A1">&#x5F00;&#x542F;&#x7F51;&#x5361;</h3>
 
@@ -328,41 +344,16 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token builtin class-name">echo</span> <span class="token variable">$ifcfg</span>
 
 <span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x662F;&#x5426;&#x5F00;&#x542F;</span>
-<span class="token function">tail</span> <span class="token variable">$ifcfg</span> -n <span class="token number">2</span>
-<span class="token comment"># DEVICE=ens33</span>
-<span class="token comment"># ONBOOT=no</span>
+<span class="token function">egrep</span> <span class="token string">&apos;^(DEVICE|ONBOOT)&apos;</span> <span class="token variable">$ifcfg</span>
 
 <span class="token comment"># &#x5F00;&#x542F;&#x7F51;&#x5361;</span>
 <span class="token function">sed</span> -i <span class="token string">&apos;/ONBOOT/s/no/yes/&apos;</span> <span class="token variable">$ifcfg</span>
-<span class="token function">tail</span> <span class="token variable">$ifcfg</span> -n <span class="token number">2</span>
-<span class="token comment"># DEVICE=ens33</span>
-<span class="token comment"># ONBOOT=yes</span>
 
 <span class="token comment"># &#x5E94;&#x7528;&#x7F51;&#x5361;&#x914D;&#x7F6E;</span>
 systemctl restart network
 </pre><h3 class="mume-header" id="%E6%9F%A5%E7%9C%8Bip">&#x67E5;&#x770B;IP</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet 192.&apos;</span>
-</pre><h2 class="mume-header" id="%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</h2>
-
-<p>&#x4F7F;&#x7528;<a href="https://mobaxterm.mobatek.net/download-home-edition.html">MobaXterm</a>&#x767B;&#x5F55;&#x673A;&#x5668;&#x3002;</p>
-<h3 class="mume-header" id="x11-forwarding">X11-forwarding</h3>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y <span class="token function">install</span> xorg-x11-xauth
-yum -y <span class="token function">install</span> xorg-x11-apps
-xclock
-</pre><h3 class="mume-header" id="ssh">SSH</h3>
-
-<pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token command"><span class="token keyword">ssh</span> <span class="token parameter attr-name">-l</span> root &lt;IP&gt;</span>
-</pre><h2 class="mume-header" id="%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</h2>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># getenforce                # &#x83B7;&#x53D6;&#x72B6;&#x6001;</span>
-<span class="token comment"># setenforce 0              # &#x4E34;&#x65F6;&#x5173;&#x95ED;</span>
-
-<span class="token comment"># vi /etc/selinux/config    # &#x6C38;&#x4E45;&#x5173;&#x95ED; SELINUX=disabled</span>
-<span class="token function">sed</span> -i <span class="token string">&apos;/SELINUX/s/enforcing/disabled/&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
-<span class="token function">more</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
-<span class="token comment"># &#x91CD;&#x542F;&#x540E;&#x751F;&#x6548;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet &apos;</span>
 </pre><h2 class="mume-header" id="%E9%85%8D%E7%BD%AE%E5%A2%83%E5%86%85%E6%BA%90">&#x914D;&#x7F6E;&#x5883;&#x5185;&#x6E90;</h2>
 
 <p>&#x6DFB;&#x52A0;<strong>&#x7F51;&#x7EDC;&#x9002;&#x914D;&#x5668;</strong>&#xFF0C;&#x4F7F;&#x7528;<strong>NAT</strong>&#x6A21;&#x5F0F;&#x3002;</p>
@@ -378,6 +369,17 @@ xclock
 yum clean all
 yum makecache
 yum repolist
+</pre><h2 class="mume-header" id="%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95">&#x8FDC;&#x7A0B;&#x767B;&#x5F55;</h2>
+
+<p>&#x4F7F;&#x7528;<a href="https://mobaxterm.mobatek.net/download-home-edition.html">MobaXterm</a>&#x767B;&#x5F55;&#x673A;&#x5668;&#x3002;</p>
+<h3 class="mume-header" id="x11-forwarding">X11-forwarding</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y <span class="token function">install</span> xorg-x11-xauth
+yum -y <span class="token function">install</span> xorg-x11-apps
+xclock
+</pre><h3 class="mume-header" id="ssh">SSH</h3>
+
+<pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token command"><span class="token keyword">ssh</span> &lt;user&gt;@&lt;IP&gt;</span>
 </pre><h2 class="mume-header" id="%E8%AE%BE%E7%BD%AE%E6%9C%AC%E5%9C%B0%E6%BA%90">&#x8BBE;&#x7F6E;&#x672C;&#x5730;&#x6E90;</h2>
 
 <p>&#x5C06;&#x5B89;&#x88C5;&#x955C;&#x50CF;&#x6302;&#x8F7D;&#x4E3A;&#x9A71;&#x52A8;&#x5668;&#xFF0C;&#x5E76;&#x5229;&#x7528;<a href="http://nginx.org/en/download.html">Nginx</a>&#x63D0;&#x4F9B;&#x670D;&#x52A1;&#xFF0C;&#x4F7F;&#x771F;&#x673A;&#x6210;&#x4E3A;&#x4E0B;&#x8F7D;&#x670D;&#x52A1;&#x5668;&#x3002;&#x8BE5;&#x6B65;&#x9AA4;&#x5E76;&#x975E;&#x5FC5;&#x8981;&#x7A0B;&#x5E8F;&#xFF0C;&#x8FDB;&#x884C;&#x6B64;&#x64CD;&#x4F5C;&#x53EF;&#x5728;&#x65E0;&#x7F51;&#x7EDC;&#x73AF;&#x5883;&#x4E0B;&#x7EE7;&#x7EED;&#x8FDB;&#x884C;&#x5E38;&#x7528;&#x5E94;&#x7528;&#x7684;&#x5B89;&#x88C5;&#x3002;</p>
@@ -408,7 +410,7 @@ yum repolist
 <li><a href="./codes/BUILD.cmd"><code>BUILD.cmd</code></a></li>
 </ul>
 <pre data-role="codeBlock" data-info="txt" class="language-txt"><code>www/files/centos7
-&#x2502;  BUILD.bat                                    &#x8BE6;&#x89C1;&#x4E0B;&#x6587;
+&#x2502;  BUILD.bat                                    &#x8BF7;&#x4E0B;&#x8F7D;
 &#x2502;  RPM-GPG-KEY-CentOS-7                         AUTO_COPY
 &#x2502;  RPM-GPG-KEY-CentOS-Testing-7                 AUTO_COPY
 &#x2502;  test                                         AUTO_BUILD
