@@ -327,13 +327,17 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token function">rmdir</span> <span class="token string">&apos;/mnt/cdrom&apos;</span>
 </pre><h2 class="mume-header" id="%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</h2>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash">getenforce                  <span class="token comment"># &#x83B7;&#x53D6;&#x72B6;&#x6001;</span>
-setenforce <span class="token number">0</span>                <span class="token comment"># &#x4E34;&#x65F6;&#x5173;&#x95ED;</span>
-
-<span class="token comment"># vi /etc/selinux/config    # &#x6C38;&#x4E45;&#x5173;&#x95ED; SELINUX=disabled</span>
-<span class="token function">sed</span> -i <span class="token string">&apos;/SELINUX/s/enforcing/disabled/&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5F00;&#x542F;&#xFF08;&#x91CD;&#x542F;&#x540E;&#x751F;&#x6548;&#xFF09;</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;/^SELINUX=/s/disabled/enforcing/&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
 <span class="token function">egrep</span> <span class="token string">&apos;^SELINUX=&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
-<span class="token comment"># &#x91CD;&#x542F;&#x540E;&#x751F;&#x6548;</span>
+setenforce <span class="token number">1</span>
+getenforce
+
+<span class="token comment"># &#x5173;&#x95ED;&#xFF08;&#x91CD;&#x542F;&#x540E;&#x751F;&#x6548;&#xFF09;</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;/^SELINUX=/s/enforcing/disabled/&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
+<span class="token function">egrep</span> <span class="token string">&apos;^SELINUX=&apos;</span> <span class="token string">&apos;/etc/selinux/config&apos;</span>
+setenforce <span class="token number">0</span>
+getenforce
 </pre><h2 class="mume-header" id="%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE">&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</h2>
 
 <h3 class="mume-header" id="%E5%BC%80%E5%90%AF%E7%BD%91%E5%8D%A1">&#x5F00;&#x542F;&#x7F51;&#x5361;</h3>

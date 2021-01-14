@@ -40,13 +40,17 @@ rmdir '/mnt/cdrom'
 ## 关闭SELINUX
 
 ```bash
-getenforce                  # 获取状态
-setenforce 0                # 临时关闭
-
-# vi /etc/selinux/config    # 永久关闭 SELINUX=disabled
-sed -i '/SELINUX/s/enforcing/disabled/' '/etc/selinux/config'
+# 开启（重启后生效）
+sed -i '/^SELINUX=/s/disabled/enforcing/' '/etc/selinux/config'
 egrep '^SELINUX=' '/etc/selinux/config'
-# 重启后生效
+setenforce 1
+getenforce
+
+# 关闭（重启后生效）
+sed -i '/^SELINUX=/s/enforcing/disabled/' '/etc/selinux/config'
+egrep '^SELINUX=' '/etc/selinux/config'
+setenforce 0
+getenforce
 ```
 
 ## 网络配置
