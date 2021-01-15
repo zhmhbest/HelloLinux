@@ -36,7 +36,7 @@ ifconfig -a | grep 'inet ' | grep -v '127.0.0.1'
 
 ## sed
 
-`sed [OPTION]... <-e<script> | -f<script-file>> [file]...`
+`sed [OPTION]... { -e<script> | -f<script-file> } [file]...`
 
 ```txt
 OPTION
@@ -87,7 +87,40 @@ sed '/^SELINUX=/s/disabled/enforcing/' ./test
 
 ## awk
 
+`{awk | gawk} [OPTION] { <script> | -f<script-file> } file ...`
+
+```txt
+OPTION
+    -F <ch>         每行字段的分隔符
+    -v <var>=<val>  定义变量
+```
+
+```txt
+SCRIPT
+    $0      整行文本
+    $<n>    该行第n个字段
+    FS      分隔符
+    NF      当前记录中的字段数量
+    NR      记录编号
+    if(){} else if(){} else{}
+    for(;;){}
+    do{} while()
+    length(str1)
+    index(str1, str2)               str2在str1中第一次出现的位置
+    tolower(str1)
+    toupper(str1)
+    substr(str1, start, len)
+    match(str1, pattern)
+    sub(pattern, replaced, str1)    替换第一次
+    gsub(pattern, replaced, str1)   全局搜索替换
+    split(str1, var, str2)          以str2分割str1存入var
+```
+
 ```bash
+# 打印每一行
+gawk '{print}' ./test
+gawk '{print $0}' ./test
 
-
+# 读取inf文件
+gawk -F'=' '{if("1"==NF || /^;/){next} print $1,$2}' ./test
 ```
