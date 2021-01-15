@@ -342,19 +342,29 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token function">sed</span> <span class="token string">&apos;/^SELINUX=/s/disabled/enforcing/&apos;</span> ./test
 </pre><h2 class="mume-header" id="awk">awk</h2>
 
-<p><code>{awk | gawk} [OPTION] { &lt;script&gt; | -f&lt;script-file&gt; } file ...</code></p>
+<blockquote>
+<p><a href="https://www.runoob.com/linux/linux-comm-awk.html">&#x53C2;&#x8003;&#x94FE;&#x63A5;</a></p>
+</blockquote>
+<p><code>{awk | gawk} [OPTION] { &lt;script&gt; | -f&lt;file&gt;.awk } file ...</code></p>
 <pre data-role="codeBlock" data-info="txt" class="language-txt"><code>OPTION
     -F &lt;ch&gt;         &#x6BCF;&#x884C;&#x5B57;&#x6BB5;&#x7684;&#x5206;&#x9694;&#x7B26;
     -v &lt;var&gt;=&lt;val&gt;  &#x5B9A;&#x4E49;&#x53D8;&#x91CF;
 </code></pre><pre data-role="codeBlock" data-info="txt" class="language-txt"><code>SCRIPT
-    $0      &#x6574;&#x884C;&#x6587;&#x672C;
-    $&lt;n&gt;    &#x8BE5;&#x884C;&#x7B2C;n&#x4E2A;&#x5B57;&#x6BB5;
-    FS      &#x5206;&#x9694;&#x7B26;
-    NF      &#x5F53;&#x524D;&#x8BB0;&#x5F55;&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x6570;&#x91CF;
-    NR      &#x8BB0;&#x5F55;&#x7F16;&#x53F7;
+    $0              &#x6574;&#x884C;&#x6587;&#x672C;
+    $&lt;n&gt;            &#x8BE5;&#x884C;&#x7B2C;n&#x4E2A;&#x5B57;&#x6BB5;
+    FS              &#x5206;&#x9694;&#x7B26;
+    NF              &#x5F53;&#x524D;&#x8BB0;&#x5F55;&#x4E2D;&#x7684;&#x5B57;&#x6BB5;&#x6570;&#x91CF;
+    NR              &#x884C;&#x53F7;
+    FILENAME        &#x5F53;&#x524D;&#x641C;&#x7D22;&#x7684;&#x6587;&#x4EF6;&#x540D;
+    IGNORECASE=1    &#x5FFD;&#x7565;&#x5927;&#x5C0F;&#x5199;
+
+    BEGIN{}
+    END{}
     if(){} else if(){} else{}
     for(;;){}
+    for(item in arr){}
     do{} while()
+
     length(str1)
     index(str1, str2)               str2&#x5728;str1&#x4E2D;&#x7B2C;&#x4E00;&#x6B21;&#x51FA;&#x73B0;&#x7684;&#x4F4D;&#x7F6E;
     tolower(str1)

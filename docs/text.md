@@ -87,7 +87,9 @@ sed '/^SELINUX=/s/disabled/enforcing/' ./test
 
 ## awk
 
-`{awk | gawk} [OPTION] { <script> | -f<script-file> } file ...`
+>[参考链接](https://www.runoob.com/linux/linux-comm-awk.html)
+
+`{awk | gawk} [OPTION] { <script> | -f<file>.awk } file ...`
 
 ```txt
 OPTION
@@ -97,14 +99,21 @@ OPTION
 
 ```txt
 SCRIPT
-    $0      整行文本
-    $<n>    该行第n个字段
-    FS      分隔符
-    NF      当前记录中的字段数量
-    NR      记录编号
+    $0              整行文本
+    $<n>            该行第n个字段
+    FS              分隔符
+    NF              当前记录中的字段数量
+    NR              行号
+    FILENAME        当前搜索的文件名
+    IGNORECASE=1    忽略大小写
+
+    BEGIN{}
+    END{}
     if(){} else if(){} else{}
     for(;;){}
+    for(item in arr){}
     do{} while()
+
     length(str1)
     index(str1, str2)               str2在str1中第一次出现的位置
     tolower(str1)
