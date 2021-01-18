@@ -434,26 +434,53 @@ ll /var/lib/rpm
 <span class="token function">rpm</span> -qi openssh-server
 </pre><h3 class="mume-header" id="yum">yum</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x589E;&#x52A0;aliyun&#x6E90;</span>
-<span class="token function">wget</span> -O /etc/yum.repos.d/aliyun_epel7.repo http://mirrors.aliyun.com/repo/epel-7.repo
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5217;&#x51FA;&#x6240;&#x6709;&#x6E90;</span>
 ll /etc/yum.repos.d/
-
-<span class="token comment"># &#x5217;&#x51FA;&#x6240;&#x6709;&#x6E90;</span>
 yum repolist
 
 <span class="token comment"># &#x91CD;&#x65B0;&#x6839;&#x636E;&#x6E90;&#x751F;&#x6210;&#x7F13;&#x5B58;</span>
+<span class="token comment"># all = packages metadata headers</span>
 yum clean all<span class="token punctuation">;</span> yum makecache
 
-<span class="token comment"># &#x5217;&#x51FA;&#x6E90;&#x6240;&#x5305;&#x542B;&#x7684;&#x6240;&#x6709;&#x8F6F;&#x4EF6;&#x5305;</span>
+<span class="token comment"># &#x5217;&#x51FA;&#x5DF2;&#x5B89;&#x88C5;&#x548C;&#x6E90;&#x6240;&#x5305;&#x542B;&#x7684;&#x6240;&#x6709;&#x8F6F;&#x4EF6;&#x5305;</span>
 yum list
 
-<span class="token comment"># &#x67E5;&#x770B;&#x6E90;&#x5185;&#x63D0;&#x4F9B;&#x7684;&#x8F6F;&#x4EF6;&#x7248;&#x672C;</span>
+<span class="token comment"># &#x5217;&#x51FA;&#x6E90;&#x6240;&#x5305;&#x542B;&#x7684;&#x6240;&#x6709;&#x672A;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</span>
+yum list available
+
+<span class="token comment"># &#x5217;&#x51FA;&#x6240;&#x6709;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</span>
+yum list installed
+
+<span class="token comment"># &#x5217;&#x51FA;&#x975E;&#x901A;&#x8FC7;&#x6E90;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</span>
+yum list extras
+
+<span class="token comment"># &#x5217;&#x51FA;&#x6E90;&#x6240;&#x5305;&#x542B;&#x7684;&#x6240;&#x6709;&#x53EF;&#x66F4;&#x65B0;&#x7684;&#x8F6F;&#x4EF6;&#x5305;</span>
+yum list updates
+yum check-update
+
+<span class="token comment"># &#x6839;&#x636E;&#x8F6F;&#x4EF6;&#x540D;&#x641C;&#x7D22;&#x8F6F;&#x4EF6;&#x5305;</span>
+yum search <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x63D0;&#x4F9B;&#x8F6F;&#x4EF6;&#x7684;&#x6E90;</span>
 yum provides <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x63D0;&#x4F9B;&#x8F6F;&#x4EF6;&#x7684;&#x4FE1;&#x606F;</span>
+yum info <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x6587;&#x4EF6;&#x7531;&#x4EC0;&#x4E48;&#x8F6F;&#x4EF6;&#x5305;&#x63D0;&#x4F9B;</span>
+yum whatprovides <span class="token operator">&lt;</span>&#x6587;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;/&#x5347;&#x7EA7;/&#x5378;&#x8F7D;</span>
 yum -y <span class="token function">install</span> <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
 yum -y update  <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>  <span class="token comment"># &#x5347;&#x7EA7;&#x5E76;&#x6539;&#x53D8;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF08;&#x6709;&#x53EF;&#x80FD;&#x6539;&#x53D8;&#x5185;&#x6838;&#xFF09;</span>
 yum -y upgrade <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>  <span class="token comment"># &#x4EC5;&#x5347;&#x7EA7;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;</span>
 yum -y remove  <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x5B89;&#x88C5;/&#x5220;&#x9664;&#x7EC4;&#x4EF6;&#x7684;&#x5168;&#x90E8;&#x8F6F;&#x4EF6;&#x5305;</span>
+yum -y groupinstall <span class="token operator">&lt;</span>&#x7EC4;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
+yum -y groupremove  <span class="token operator">&lt;</span>&#x7EC4;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
+
+<span class="token comment"># &#x5B89;&#x88C5;&#x672C;&#x5730;rpm&#x5305;&#xFF0C;&#x5E76;&#x81EA;&#x52A8;&#x8054;&#x7F51;&#x89E3;&#x51B3;&#x4F9D;&#x8D56;</span>
+yum -y localinstall  <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
 
 <span class="token comment"># &#x4ECE;&#x6307;&#x5B9A;&#x6E90;&#x5B89;&#x88C5;</span>
 yum -y --enablerepo<span class="token operator">=</span><span class="token operator">&lt;</span>&#x6E90;&#x540D;&#x79F0;<span class="token operator">&gt;</span> <span class="token function">install</span> <span class="token operator">&lt;</span>&#x8F6F;&#x4EF6;&#x540D;<span class="token operator">&gt;</span>
