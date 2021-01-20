@@ -268,13 +268,26 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#textindexhtml">Text</a>
 <ul>
+<li><a href="#regexp">regexp</a></li>
 <li><a href="#grep">grep</a></li>
 <li><a href="#sed">sed</a></li>
 <li><a href="#awk">awk</a></li>
 </ul>
 </li>
 </ul>
-<h2 class="mume-header" id="grep">grep</h2>
+<h2 class="mume-header" id="regexp">regexp</h2>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">isdigits</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span> <span class="token operator">=</span>~ ^<span class="token punctuation">[</span><span class="token number">0</span>-9<span class="token punctuation">]</span>+$ <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;Number&quot;</span>
+    <span class="token keyword">else</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;NaN&quot;</span>
+    <span class="token keyword">fi</span>
+<span class="token punctuation">}</span>
+
+isdigits <span class="token number">123</span>
+isdigits qwe
+</pre><h2 class="mume-header" id="grep">grep</h2>
 
 <p><code>grep [OPTION]... PATTERN [FILE]...</code></p>
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># OPTION</span>
