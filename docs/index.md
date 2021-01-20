@@ -13,4 +13,6 @@
 
 ## [Text](text.html)
 
+## [Bash](bash.html)
+
 ## [Software](software/index.html)

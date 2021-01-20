@@ -5,21 +5,6 @@
 
 [TOC]
 
-## regexp
-
-```bash
-function isdigits() {
-    if [[ "$1" =~ ^[0-9]+$ ]]; then
-        echo "Number"
-    else
-        echo "NaN"
-    fi
-}
-
-isdigits 123
-isdigits qwe
-```
-
 ## grep
 
 `grep [OPTION]... PATTERN [FILE]...`

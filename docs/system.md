@@ -146,26 +146,6 @@ cp /etc/skel/.bash* ~/
 chown -R `whoami`:`whoami` ~/.bash*
 ```
 
-## 时间
-
-```bash
-# 查看当前系统时间
-hwclock
-date
-# UTC: 世界标准时间
-# GMT: 格林尼治时间
-# CST: 中国标准时间
-
-# 格式化时间
-date "+%Y-%m-%d %H:%M:%S"                # 格式化显示当前时间
-date -d "1996-10-16 12:33:23"            # Type1: 显示字符串所描述的时间
-date -d "-2 months"                      # Type2: 显示字符串所描述的时间
-date -d "-2 months" "+%Y-%m-%d %H:%M:%S" # Type3: 显示字符串所描述的时间
-
-# 修改时间
-date -s "1996-10-16 12:33:23"           # 设为字符串所描述的时间
-```
-
 ## 进程管理
 
 ```bash
