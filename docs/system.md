@@ -212,6 +212,15 @@ df -h
 ```
 
 ```bash
+# 软连接
+ln –s <source> <link>
+# mklink /j <link> <source>
+
+# 建立硬连接
+ln <source> <link>
+```
+
+```bash
 # 磁盘管理（交互式）
 dd if=/dev/zero of=vdisk.img bs=1M count=128
 fdisk ./vdisk.img

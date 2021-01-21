@@ -6,7 +6,7 @@ yum install -y yum-utils
 vi '/etc/yum.repos.d/nginx.repo'
 ```
 
-[**nginx.repo**](http://nginx.org/en/linux_packages.html#RHEL-CentOS)
+[`nginx.repo`](http://nginx.org/en/linux_packages.html#RHEL-CentOS)
 
 ```ini
 [nginx-stable]
@@ -126,6 +126,16 @@ http {
             index   index.html index.htm;
         }
 
+        # 文件服务器
+        location /files {
+            # root : 实际访问文件路径就是URL中的路径
+            # alias: 实际访问文件路径是除去location后URL中的路径
+            alias   html/files/;
+            autoindex on;               # 显示目录
+            autoindex_exact_size off;   # 显示详细文件大小
+            autoindex_localtime on;     # 显示文件时间
+        }
+
         # Proxy-PHP on 127.0.0.1:80
         # location ~ \.php$ {
         #    proxy_pass     http://127.0.0.1;
@@ -146,7 +156,6 @@ http {
             access_log off;
             log_not_found off;
         }
-
     }
 }
 

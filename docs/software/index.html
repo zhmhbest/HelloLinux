@@ -2,17 +2,17 @@
       <title>index</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      
+
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-      
-      
-      
-      
-      
-      
-      
-      
-      
+
+
+
+
+
+
+
+
+
       <style>
       /**
  * prism.js Github theme based on GitHub's theme.
@@ -231,7 +231,7 @@ pre[data-line] .line-highlight {
   white-space: pre;
 }
 
-pre[data-line] .line-highlight:before, 
+pre[data-line] .line-highlight:before,
 pre[data-line] .line-highlight[data-end]:after {
   content: attr(data-start);
   position: absolute;
@@ -289,7 +289,7 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash">yum <span class="token function">install</span> -y yum-utils
 <span class="token function">vi</span> <span class="token string">&apos;/etc/yum.repos.d/nginx.repo&apos;</span>
-</pre><p><a href="http://nginx.org/en/linux_packages.html#RHEL-CentOS"><strong>nginx.repo</strong></a></p>
+</pre><p><a href="http://nginx.org/en/linux_packages.html#RHEL-CentOS"><code>nginx.repo</code></a></p>
 <pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token selector">[nginx-stable]</span>
 <span class="token constant">name</span><span class="token attr-value"><span class="token punctuation">=</span>nginx stable repo</span>
 <span class="token constant">baseurl</span><span class="token attr-value"><span class="token punctuation">=</span>http://nginx.org/packages/centos/$releasever/$basearch/</span>
@@ -399,6 +399,16 @@ http <span class="token punctuation">{</span>
             index   index.html index.htm<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
 
+        <span class="token comment"># &#x6587;&#x4EF6;&#x670D;&#x52A1;&#x5668;</span>
+        location /files <span class="token punctuation">{</span>
+            <span class="token comment"># root : &#x5B9E;&#x9645;&#x8BBF;&#x95EE;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x5C31;&#x662F;URL&#x4E2D;&#x7684;&#x8DEF;&#x5F84;</span>
+            <span class="token comment"># alias: &#x5B9E;&#x9645;&#x8BBF;&#x95EE;&#x6587;&#x4EF6;&#x8DEF;&#x5F84;&#x662F;&#x9664;&#x53BB;location&#x540E;URL&#x4E2D;&#x7684;&#x8DEF;&#x5F84;</span>
+            <span class="token builtin class-name">alias</span>   html/files/<span class="token punctuation">;</span>
+            autoindex on<span class="token punctuation">;</span>               <span class="token comment"># &#x663E;&#x793A;&#x76EE;&#x5F55;</span>
+            autoindex_exact_size off<span class="token punctuation">;</span>   <span class="token comment"># &#x663E;&#x793A;&#x8BE6;&#x7EC6;&#x6587;&#x4EF6;&#x5927;&#x5C0F;</span>
+            autoindex_localtime on<span class="token punctuation">;</span>     <span class="token comment"># &#x663E;&#x793A;&#x6587;&#x4EF6;&#x65F6;&#x95F4;</span>
+        <span class="token punctuation">}</span>
+
         <span class="token comment"># Proxy-PHP on 127.0.0.1:80</span>
         <span class="token comment"># location ~ \.php$ {</span>
         <span class="token comment">#    proxy_pass     http://127.0.0.1;</span>
@@ -419,7 +429,6 @@ http <span class="token punctuation">{</span>
             access_log off<span class="token punctuation">;</span>
             log_not_found off<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
-
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 
@@ -466,15 +475,15 @@ mysql -uroot -p
 QUIT<span class="token punctuation">;</span>
 </pre>
       </div>
-      
-      
-    
-    
-    
-    
-    
-    
-    
-    
-  
+
+
+
+
+
+
+
+
+
+
+
     </body></html>
