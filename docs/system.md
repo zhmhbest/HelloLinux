@@ -148,23 +148,15 @@ chown -R `whoami`:`whoami` ~/.bash*
 
 ## 进程管理
 
-### id
+### 进程ID
 
-#### PID（Process ID）
+- **PID（Process ID）**：标识Process的唯一数字。在Process退出并被父Process检索到之后，该ID可以释放给新的Process重用。
 
-标识Process的唯一数字。在Process退出并被父Process检索到之后，该ID可以释放给新的Process重用。
+- **PPID（Parent Process ID）**：启动相关Process的Process的PID。
 
-#### PPID（Parent Process ID）
+- **PGID（Process Group ID）**：若`PID == PGID`，则此Process是*Group Leader*。
 
-启动相关Process的Process的PID。
-
-#### PGID（Process Group ID）
-
-若`PID == PGID`，则此Process是*Group Leader*。
-
-#### SID（Session ID）
-
-若`PID == SID`，则此Process为*Session Leader*。
+- **SID（Session ID）**：若`PID == SID`，则此Process为*Session Leader*。
 
 ### 进程快照
 

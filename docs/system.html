@@ -280,14 +280,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86">&#x7528;&#x6237;&#x7BA1;&#x7406;</a></li>
 <li><a href="#%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86">&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;</a>
 <ul>
-<li><a href="#id">id</a>
-<ul>
-<li><a href="#pidprocess-id">PID&#xFF08;Process ID&#xFF09;</a></li>
-<li><a href="#ppidparent-process-id">PPID&#xFF08;Parent Process ID&#xFF09;</a></li>
-<li><a href="#pgidprocess-group-id">PGID&#xFF08;Process Group ID&#xFF09;</a></li>
-<li><a href="#sidsession-id">SID&#xFF08;Session ID&#xFF09;</a></li>
-</ul>
-</li>
+<li><a href="#%E8%BF%9B%E7%A8%8Bid">&#x8FDB;&#x7A0B;ID</a></li>
 <li><a href="#%E8%BF%9B%E7%A8%8B%E5%BF%AB%E7%85%A7">&#x8FDB;&#x7A0B;&#x5FEB;&#x7167;</a></li>
 <li><a href="#%E8%BF%9B%E7%A8%8B%E4%BF%A1%E5%8F%B7">&#x8FDB;&#x7A0B;&#x4FE1;&#x53F7;</a></li>
 <li><a href="#%E8%BF%9B%E7%A8%8B%E4%BC%98%E5%85%88%E7%BA%A7">&#x8FDB;&#x7A0B;&#x4F18;&#x5148;&#x7EA7;</a></li>
@@ -417,20 +410,22 @@ init --help
 <span class="token function">chown</span> -R <span class="token variable"><span class="token variable">`</span><span class="token function">whoami</span><span class="token variable">`</span></span><span class="token builtin class-name">:</span><span class="token variable"><span class="token variable">`</span><span class="token function">whoami</span><span class="token variable">`</span></span> ~/.bash*
 </pre><h2 class="mume-header" id="%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86">&#x8FDB;&#x7A0B;&#x7BA1;&#x7406;</h2>
 
-<h3 class="mume-header" id="id">id</h3>
+<h3 class="mume-header" id="%E8%BF%9B%E7%A8%8Bid">&#x8FDB;&#x7A0B;ID</h3>
 
-<h4 class="mume-header" id="pidprocess-id">PID&#xFF08;Process ID&#xFF09;</h4>
-
-<p>&#x6807;&#x8BC6;Process&#x7684;&#x552F;&#x4E00;&#x6570;&#x5B57;&#x3002;&#x5728;Process&#x9000;&#x51FA;&#x5E76;&#x88AB;&#x7236;Process&#x68C0;&#x7D22;&#x5230;&#x4E4B;&#x540E;&#xFF0C;&#x8BE5;ID&#x53EF;&#x4EE5;&#x91CA;&#x653E;&#x7ED9;&#x65B0;&#x7684;Process&#x91CD;&#x7528;&#x3002;</p>
-<h4 class="mume-header" id="ppidparent-process-id">PPID&#xFF08;Parent Process ID&#xFF09;</h4>
-
-<p>&#x542F;&#x52A8;&#x76F8;&#x5173;Process&#x7684;Process&#x7684;PID&#x3002;</p>
-<h4 class="mume-header" id="pgidprocess-group-id">PGID&#xFF08;Process Group ID&#xFF09;</h4>
-
-<p>&#x82E5;<code>PID == PGID</code>&#xFF0C;&#x5219;&#x6B64;Process&#x662F;<em>Group Leader</em>&#x3002;</p>
-<h4 class="mume-header" id="sidsession-id">SID&#xFF08;Session ID&#xFF09;</h4>
-
-<p>&#x82E5;<code>PID == SID</code>&#xFF0C;&#x5219;&#x6B64;Process&#x4E3A;<em>Session Leader</em>&#x3002;</p>
+<ul>
+<li>
+<p><strong>PID&#xFF08;Process ID&#xFF09;</strong>&#xFF1A;&#x6807;&#x8BC6;Process&#x7684;&#x552F;&#x4E00;&#x6570;&#x5B57;&#x3002;&#x5728;Process&#x9000;&#x51FA;&#x5E76;&#x88AB;&#x7236;Process&#x68C0;&#x7D22;&#x5230;&#x4E4B;&#x540E;&#xFF0C;&#x8BE5;ID&#x53EF;&#x4EE5;&#x91CA;&#x653E;&#x7ED9;&#x65B0;&#x7684;Process&#x91CD;&#x7528;&#x3002;</p>
+</li>
+<li>
+<p><strong>PPID&#xFF08;Parent Process ID&#xFF09;</strong>&#xFF1A;&#x542F;&#x52A8;&#x76F8;&#x5173;Process&#x7684;Process&#x7684;PID&#x3002;</p>
+</li>
+<li>
+<p><strong>PGID&#xFF08;Process Group ID&#xFF09;</strong>&#xFF1A;&#x82E5;<code>PID == PGID</code>&#xFF0C;&#x5219;&#x6B64;Process&#x662F;<em>Group Leader</em>&#x3002;</p>
+</li>
+<li>
+<p><strong>SID&#xFF08;Session ID&#xFF09;</strong>&#xFF1A;&#x82E5;<code>PID == SID</code>&#xFF0C;&#x5219;&#x6B64;Process&#x4E3A;<em>Session Leader</em>&#x3002;</p>
+</li>
+</ul>
 <h3 class="mume-header" id="%E8%BF%9B%E7%A8%8B%E5%BF%AB%E7%85%A7">&#x8FDB;&#x7A0B;&#x5FEB;&#x7167;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x8FDB;&#x7A0B;&#x5FEB;&#x7167;</span>
