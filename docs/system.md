@@ -148,23 +148,66 @@ chown -R `whoami`:`whoami` ~/.bash*
 
 ## 进程管理
 
+### id
+
+#### PID（Process ID）
+
+标识Process的唯一数字。在Process退出并被父Process检索到之后，该ID可以释放给新的Process重用。
+
+#### PPID（Parent Process ID）
+
+启动相关Process的Process的PID。
+
+#### PGID（Process Group ID）
+
+若`PID == PGID`，则此Process是*Group Leader*。
+
+#### SID（Session ID）
+
+若`PID == SID`，则此Process为*Session Leader*。
+
+### 进程快照
+
 ```bash
 # 查看进程快照
-ps -auf
-ps -ef
-ps -aux
+# a      显示（与终端相关）的所有进程
+# x      显示（与终端无关）的所有进程
+# T      显示（当前终端）的所有进程
+# u      显示USER、%CPU、%MEM、VSZ、RSS、START
+# e      显示每个进程使用的环境变量
+# f      以树状结构显示COMMAND
+ps au
+ps aux
 
+# -A     显示所有进程
+# -e     显示所有进程
+# -a     显示所有（与终端相关且不是Session Leader）的进程
+# -d     显示所有（不是Session Leader）的进程
+# -f     显示UID、PPIP、CMD-OPTIONS
+# -l     显示比-f更详细的信息
+# -H     以树状结构显示COMMAND
+ps -ef
+```
+
+```bash
 # 实时查看进程
 top
 top -p <pid> # 盯住一个进程
+```
 
+### 进程信号
+
+```bash
 # 关闭进程
 kill -l # 列出可用信号
 kill -9 <pid>
 killall <pid>
 pkill <进程名>
+```
 
-# 进程优先级
+### 进程优先级
+
+```bash
 nice -n 5 bash  # 以优先级5打开一个新bash
 renice 10 <pid> # 修改进程优先级
 ```
