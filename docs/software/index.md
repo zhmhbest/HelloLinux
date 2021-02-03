@@ -12,3 +12,7 @@
 ## Mariadb
 
 @import "mariadb.md"
+
+## aria2
+
+@import "aria2.md"

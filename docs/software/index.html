@@ -2,17 +2,17 @@
       <title>index</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+      
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-
-
-
-
-
-
-
-
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <style>
       /**
  * prism.js Github theme based on GitHub's theme.
@@ -231,7 +231,7 @@ pre[data-line] .line-highlight {
   white-space: pre;
 }
 
-pre[data-line] .line-highlight:before,
+pre[data-line] .line-highlight:before, 
 pre[data-line] .line-highlight[data-end]:after {
   content: attr(data-start);
   position: absolute;
@@ -278,6 +278,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE-1">&#x914D;&#x7F6E;</a></li>
+</ul>
+</li>
+<li><a href="#aria2">aria2</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</a></li>
 </ul>
 </li>
 </ul>
@@ -473,17 +478,30 @@ mysql -uroot -p
 <span class="token keyword">REVOKE</span> <span class="token keyword">ALL</span> <span class="token keyword">ON</span> <span class="token operator">*</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token string">&apos;user_name&apos;</span><span class="token variable">@&apos;%&apos;</span><span class="token punctuation">;</span>
 <span class="token keyword">GRANT</span> <span class="token keyword">ALL</span> <span class="token keyword">PRIVILEGES</span> <span class="token keyword">ON</span> <span class="token punctuation">`</span>db_name<span class="token punctuation">`</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">TO</span> <span class="token string">&apos;user_name&apos;</span><span class="token variable">@&apos;%&apos;</span> <span class="token keyword">WITH</span> <span class="token keyword">GRANT</span> <span class="token keyword">OPTION</span><span class="token punctuation">;</span>
 QUIT<span class="token punctuation">;</span>
-</pre>
+</pre><h2 class="mume-header" id="aria2">aria2</h2>
+
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</h3>
+
+<pre data-role="codeBlock" data-info class="language-"><code>```bash
+aria2_version=&apos;1.19.0&apos;
+wget &quot;https://jaist.dl.sourceforge.net/project/aria2/stable/aria2-${aria2_version}/aria2-${aria2_version}.tar.gz&quot;
+tar -xvf &quot;aria2-${aria2_version}.tar.gz&quot;
+pushd &quot;aria2-${aria2_version}&quot;
+
+
+./configure --prefix=/usr/local/aria2
+make unistall
+</code></pre>
       </div>
-
-
-
-
-
-
-
-
-
-
-
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
     </body></html>
