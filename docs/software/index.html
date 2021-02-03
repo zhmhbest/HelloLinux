@@ -482,16 +482,20 @@ QUIT<span class="token punctuation">;</span>
 
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</h3>
 
-<pre data-role="codeBlock" data-info class="language-"><code>```bash
-aria2_version=&apos;1.19.0&apos;
-wget &quot;https://jaist.dl.sourceforge.net/project/aria2/stable/aria2-${aria2_version}/aria2-${aria2_version}.tar.gz&quot;
-tar -xvf &quot;aria2-${aria2_version}.tar.gz&quot;
-pushd &quot;aria2-${aria2_version}&quot;
+<pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y groupinstall <span class="token string">&apos;Development Tools&apos;</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">aria2_version</span><span class="token operator">=</span><span class="token string">&apos;1.19.0&apos;</span>
+<span class="token function">wget</span> <span class="token string">&quot;https://jaist.dl.sourceforge.net/project/aria2/stable/aria2-<span class="token variable">${aria2_version}</span>/aria2-<span class="token variable">${aria2_version}</span>.tar.gz&quot;</span>
+<span class="token function">tar</span> -xvf <span class="token string">&quot;aria2-<span class="token variable">${aria2_version}</span>.tar.gz&quot;</span>
+<span class="token function">pushd</span> <span class="token string">&quot;aria2-<span class="token variable">${aria2_version}</span>&quot;</span>
 
+./configure --prefix<span class="token operator">=</span>/usr/local/aria2
+<span class="token function">make</span> -j <span class="token number">4</span>
+<span class="token comment"># make install</span>
+<span class="token function">cp</span> ./src/aria2c /usr/local/bin
+aria2c -v
 
-./configure --prefix=/usr/local/aria2
-make unistall
-</code></pre>
+<span class="token function">popd</span>
+</pre>
       </div>
       
       
