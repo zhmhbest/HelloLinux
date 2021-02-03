@@ -207,10 +207,78 @@ done
 
 ## string
 
+### length
+
 ```bash
 # 字符串长度
-var="Linux is not unix"
+
 echo length=${#var}
+```
+
+### case
+
+```bash
+var="aBcD"
+
+# 转为大写
+echo ${var^^}
+
+# 转为小写
+echo ${var,,}
+```
+
+### substr
+
+```bash
+var="0123456789"
+
+# substr(offset,length)=${variable:offset:length}
+echo ${var:3:3}
+
+# leftdel(length)=${variable:length}
+echo ${var:4}
+
+# rightdel(length)=${variable:0: -length}
+echo ${var:0: -3}
+
+# left(length)=${variable:0:length}
+echo ${var:0:5}
+
+# right(length)=${variable: -length}
+echo ${var: -4}
+```
+
+### replace
+
+```bash
+var="/home/user/.ssh/known_hosts"
+# 特殊符号: *、?、[]
+
+# 从开头惰性匹配，删除匹配的部分
+echo ${var#/*/}
+
+# 从开头贪婪匹配，删除匹配的部分
+echo ${var##/*/}
+
+# 从结尾惰性匹配，删除匹配的部分
+echo ${var%/*}
+
+# 从结尾贪婪匹配，删除匹配的部分
+echo ${var%%/*}
+
+# 惰性匹配
+# ${variable/pattern/string}
+echo ${var/[A-z]/_}
+
+# 贪婪匹配
+# ${variable//pattern/string}
+echo ${var//[A-z]/_}
+```
+
+### split
+
+```bash
+var="Linux is not unix"
 
 # Split( )
 IFS=' '
@@ -224,7 +292,4 @@ for part in "${arr[@]}"; do echo $part; done
 # Split(i)
 arr=($(echo $var | tr "i" "\n"))
 for part in "${arr[@]}"; do echo $part; done
-
-# ${variable:offset:length}
-echo ${var:3:3}
 ```

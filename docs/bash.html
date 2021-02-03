@@ -287,7 +287,15 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#until">until</a></li>
 </ul>
 </li>
-<li><a href="#string">string</a></li>
+<li><a href="#string">string</a>
+<ul>
+<li><a href="#length">length</a></li>
+<li><a href="#case-1">case</a></li>
+<li><a href="#substr">substr</a></li>
+<li><a href="#replace">replace</a></li>
+<li><a href="#split">split</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -457,9 +465,65 @@ isdigits qwe
 <span class="token keyword">done</span>
 </pre><h2 class="mume-header" id="string">string</h2>
 
+<h3 class="mume-header" id="length">length</h3>
+
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;</span>
-<span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">&quot;Linux is not unix&quot;</span>
+
 <span class="token builtin class-name">echo</span> <span class="token assign-left variable">length</span><span class="token operator">=</span><span class="token variable">${<span class="token operator">#</span>var}</span>
+</pre><h3 class="mume-header" id="case-1">case</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">&quot;aBcD&quot;</span>
+
+<span class="token comment"># &#x8F6C;&#x4E3A;&#x5927;&#x5199;</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">^^</span>}</span>
+
+<span class="token comment"># &#x8F6C;&#x4E3A;&#x5C0F;&#x5199;</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">,,</span>}</span>
+</pre><h3 class="mume-header" id="substr">substr</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">&quot;0123456789&quot;</span>
+
+<span class="token comment"># substr(offset,length)=${variable:offset:length}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">:</span>3<span class="token operator">:</span>3}</span>
+
+<span class="token comment"># leftdel(length)=${variable:length}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">:</span>4}</span>
+
+<span class="token comment"># rightdel(length)=${variable:0: -length}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">:</span>0<span class="token operator">:</span> -3}</span>
+
+<span class="token comment"># left(length)=${variable:0:length}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">:</span>0<span class="token operator">:</span>5}</span>
+
+<span class="token comment"># right(length)=${variable: -length}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">:</span> -4}</span>
+</pre><h3 class="mume-header" id="replace">replace</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">&quot;/home/user/.ssh/known_hosts&quot;</span>
+<span class="token comment"># &#x7279;&#x6B8A;&#x7B26;&#x53F7;: *&#x3001;?&#x3001;[]</span>
+
+<span class="token comment"># &#x4ECE;&#x5F00;&#x5934;&#x60F0;&#x6027;&#x5339;&#x914D;&#xFF0C;&#x5220;&#x9664;&#x5339;&#x914D;&#x7684;&#x90E8;&#x5206;</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">#</span><span class="token operator">/</span>*<span class="token operator">/</span>}</span>
+
+<span class="token comment"># &#x4ECE;&#x5F00;&#x5934;&#x8D2A;&#x5A6A;&#x5339;&#x914D;&#xFF0C;&#x5220;&#x9664;&#x5339;&#x914D;&#x7684;&#x90E8;&#x5206;</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">##</span><span class="token operator">/</span>*<span class="token operator">/</span>}</span>
+
+<span class="token comment"># &#x4ECE;&#x7ED3;&#x5C3E;&#x60F0;&#x6027;&#x5339;&#x914D;&#xFF0C;&#x5220;&#x9664;&#x5339;&#x914D;&#x7684;&#x90E8;&#x5206;</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">%</span><span class="token operator">/</span>*}</span>
+
+<span class="token comment"># &#x4ECE;&#x7ED3;&#x5C3E;&#x8D2A;&#x5A6A;&#x5339;&#x914D;&#xFF0C;&#x5220;&#x9664;&#x5339;&#x914D;&#x7684;&#x90E8;&#x5206;</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">%%</span><span class="token operator">/</span>*}</span>
+
+<span class="token comment"># &#x60F0;&#x6027;&#x5339;&#x914D;</span>
+<span class="token comment"># ${variable/pattern/string}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">/</span><span class="token punctuation">[</span>A-z<span class="token punctuation">]</span><span class="token operator">/</span>_}</span>
+
+<span class="token comment"># &#x8D2A;&#x5A6A;&#x5339;&#x914D;</span>
+<span class="token comment"># ${variable//pattern/string}</span>
+<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">/</span><span class="token operator">/</span><span class="token punctuation">[</span>A-z<span class="token punctuation">]</span><span class="token operator">/</span>_}</span>
+</pre><h3 class="mume-header" id="split">split</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">&quot;Linux is not unix&quot;</span>
 
 <span class="token comment"># Split( )</span>
 <span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span><span class="token string">&apos; &apos;</span>
@@ -473,9 +537,6 @@ isdigits qwe
 <span class="token comment"># Split(i)</span>
 <span class="token assign-left variable">arr</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> $var <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">&quot;i&quot;</span> <span class="token string">&quot;<span class="token entity" title="\n">\n</span>&quot;</span><span class="token variable">)</span></span><span class="token punctuation">)</span>
 <span class="token keyword">for</span> <span class="token for-or-select variable">part</span> <span class="token keyword">in</span> <span class="token string">&quot;<span class="token variable">${arr<span class="token punctuation">[</span>@<span class="token punctuation">]</span>}</span>&quot;</span><span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token builtin class-name">echo</span> <span class="token variable">$part</span><span class="token punctuation">;</span> <span class="token keyword">done</span>
-
-<span class="token comment"># ${variable:offset:length}</span>
-<span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">:</span>3<span class="token operator">:</span>3}</span>
 </pre>
       </div>
       
