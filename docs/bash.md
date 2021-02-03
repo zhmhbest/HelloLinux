@@ -211,7 +211,6 @@ done
 
 ```bash
 # 字符串长度
-
 echo length=${#var}
 ```
 
