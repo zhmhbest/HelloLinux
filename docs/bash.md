@@ -139,7 +139,7 @@ isdigits qwe
 
 `INTEGER1 -eq INTEGER2` `INTEGER1 -gt INTEGER2` `INTEGER1 -lt INTEGER2`
 
-`-d FILE` `-e FILE` `-r FILE` `-s FILE` `-w FILE` `-x FILE`
+`-e FILE` `-d FILE` `-r FILE` `-s FILE` `-w FILE` `-x FILE` `-h FILE`
 
 ### case
 
