@@ -292,3 +292,14 @@ for part in "${arr[@]}"; do echo $part; done
 arr=($(echo $var | tr "i" "\n"))
 for part in "${arr[@]}"; do echo $part; done
 ```
+
+## 枚举目录下所有文件
+
+```bash
+IFS=`echo -en "\n\b"`; basePath="."; for i in `ls -R`; do
+    if [ "${i:(-1)}" = ":" ]; then basePath="${i::(-1)}"; else
+        filename="$basePath/$i"; extName="${filename##*.}"
+        echo $filename, $extName
+    fi
+done
+```

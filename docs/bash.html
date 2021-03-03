@@ -296,6 +296,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#split">split</a></li>
 </ul>
 </li>
+<li><a href="#%E6%9E%9A%E4%B8%BE%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6">&#x679A;&#x4E3E;&#x76EE;&#x5F55;&#x4E0B;&#x6240;&#x6709;&#x6587;&#x4EF6;</a></li>
 </ul>
 </li>
 </ul>
@@ -536,6 +537,14 @@ isdigits qwe
 <span class="token comment"># Split(i)</span>
 <span class="token assign-left variable">arr</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> $var <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">&quot;i&quot;</span> <span class="token string">&quot;<span class="token entity" title="\n">\n</span>&quot;</span><span class="token variable">)</span></span><span class="token punctuation">)</span>
 <span class="token keyword">for</span> <span class="token for-or-select variable">part</span> <span class="token keyword">in</span> <span class="token string">&quot;<span class="token variable">${arr<span class="token punctuation">[</span>@<span class="token punctuation">]</span>}</span>&quot;</span><span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token builtin class-name">echo</span> <span class="token variable">$part</span><span class="token punctuation">;</span> <span class="token keyword">done</span>
+</pre><h2 class="mume-header" id="%E6%9E%9A%E4%B8%BE%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6">&#x679A;&#x4E3E;&#x76EE;&#x5F55;&#x4E0B;&#x6240;&#x6709;&#x6587;&#x4EF6;</h2>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">echo</span> -en <span class="token string">&quot;<span class="token entity" title="\n">\n</span><span class="token entity" title="\b">\b</span>&quot;</span><span class="token variable">`</span></span><span class="token punctuation">;</span> <span class="token assign-left variable">basePath</span><span class="token operator">=</span><span class="token string">&quot;.&quot;</span><span class="token punctuation">;</span> <span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">`</span><span class="token function">ls</span> -R<span class="token variable">`</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${i<span class="token operator">:</span>(-1)}</span>&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;:&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token assign-left variable">basePath</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${i<span class="token operator">:</span><span class="token operator">:</span>(-1)}</span>&quot;</span><span class="token punctuation">;</span> <span class="token keyword">else</span>
+        <span class="token assign-left variable">filename</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$basePath</span>/<span class="token variable">$i</span>&quot;</span><span class="token punctuation">;</span> <span class="token assign-left variable">extName</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${filename<span class="token operator">##</span>*.}</span>&quot;</span>
+        <span class="token builtin class-name">echo</span> <span class="token variable">$filename</span>, <span class="token variable">$extName</span>
+    <span class="token keyword">fi</span>
+<span class="token keyword">done</span>
 </pre>
       </div>
       
