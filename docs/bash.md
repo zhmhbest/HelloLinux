@@ -141,6 +141,21 @@ isdigits qwe
 
 `-e FILE` `-d FILE` `-r FILE` `-s FILE` `-w FILE` `-x FILE` `-h FILE`
 
+#### regexp
+
+```bash
+echo "123" | egrep "[0-9]+">/dev/nul && {
+    echo Number
+} || {
+    echo Nan
+}
+echo "abc" | egrep "[0-9]+">/dev/nul && {
+    echo Number
+} || {
+    echo NaN
+}
+```
+
 ### case
 
 ```bash
@@ -293,7 +308,9 @@ arr=($(echo $var | tr "i" "\n"))
 for part in "${arr[@]}"; do echo $part; done
 ```
 
-## 枚举目录下所有文件
+## files
+
+### 递归枚举目录下所有文件
 
 ```bash
 IFS=`echo -en "\n\b"`; basePath="."; for i in `ls -R`; do
