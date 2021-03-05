@@ -40,4 +40,10 @@ aria2c [OPTIONS] [URI | MAGNET | TORRENT_FILE | METALINK_FILE]...
 # --http-user=<USER>
 # --http-passwd=<PASSWD>
 # --load-cookies=<FILE>                 COOKIE（Firefox3 format）
+
+# 首次
+aria2c -k 1M -x 16 -j 5 <url>
+# 续传
+aria2c -c true -k 1M -x 16 -j 5 <url>
 ```
+
