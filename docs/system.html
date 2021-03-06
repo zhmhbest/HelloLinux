@@ -269,11 +269,6 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#systemindexhtml">System</a>
 <ul>
 <li><a href="#%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF">&#x7CFB;&#x7EDF;&#x4FE1;&#x606F;</a></li>
-<li><a href="#ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">SSH&#x514D;&#x5BC6;&#x767B;&#x5F55;</a>
-<ul>
-<li><a href="#%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3">&#x5F02;&#x5E38;&#x89E3;&#x51B3;</a></li>
-</ul>
-</li>
 <li><a href="#%E5%BC%80%E6%9C%BA%E6%93%8D%E4%BD%9C">&#x5F00;&#x673A;&#x64CD;&#x4F5C;</a>
 <ul>
 <li><a href="#%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD">&#x5F00;&#x673A;&#x6302;&#x8F7D;</a></li>
@@ -317,33 +312,7 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <span class="token comment"># &#x8FDE;&#x63A5;&#x7684;&#x7EC8;&#x7AEF;&#x6570;&#x91CF;</span>
 <span class="token function">who</span>
-</pre><h2 class="mume-header" id="ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">SSH&#x514D;&#x5BC6;&#x767B;&#x5F55;</h2>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># -m &#x5BC6;&#x94A5;&#x683C;&#x5F0F; { RFC4716 | PKCS8 | PEM }</span>
-<span class="token comment"># -b &#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#xFF08;&#x5355;&#x4F4D;&#x4E3A;bit&#xFF09;</span>
-<span class="token comment"># -t &#x52A0;&#x5BC6;&#x7B97;&#x6CD5; { dsa | ecdsa | ecdsa-sk | ed25519 | ed25519-sk | rsa }</span>
-<span class="token comment"># -P &#x5BC6;&#x7801;&#x77ED;&#x8BED;</span>
-<span class="token comment"># -C &#x5907;&#x6CE8;&#x4FE1;&#x606F;</span>
-<span class="token comment"># -f &#x4FDD;&#x5B58;&#x7684;&#x6587;&#x4EF6;&#x540D;</span>
-ssh-keygen        -t rsa         -P <span class="token string">&apos;&apos;</span> -f ~/.ssh/id_rsa
-ssh-keygen -m PEM -t rsa -b <span class="token number">4096</span> -P <span class="token string">&apos;&apos;</span> -f ./.ssh/id_rsa
-
-<span class="token builtin class-name">cd</span> ~/.ssh<span class="token punctuation">;</span> ll
-<span class="token comment"># -rw------- 1 root root 1679 * id_rsa</span>
-<span class="token comment"># -rw-r--r-- 1 root root  408 * id_rsa.pub</span>
-<span class="token comment"># id_rsa     : &#x79C1;&#x94A5;&#xFF08;&#x4E2A;&#x4EBA;&#x672C;&#x5730;&#x6301;&#x6709;&#xFF09;</span>
-<span class="token comment"># id_rsa.pub : &#x516C;&#x94A5;&#xFF08;&#x8FDC;&#x7A0B;&#x4E3B;&#x673A;&#x6301;&#x6709;&#xFF09;</span>
-<span class="token function">cp</span> ./id_rsa.pub ./authorized_keys
-<span class="token comment"># ssh -l root -i &lt;&#x79C1;&#x94A5;&gt; &lt;&#x5730;&#x5740;&gt;</span>
-</pre><h3 class="mume-header" id="%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3">&#x5F02;&#x5E38;&#x89E3;&#x51B3;</h3>
-
-<blockquote>
-<p>Couldn&apos;t load this key (OpenSSH SSH-2 private key(old PEM format))</p>
-</blockquote>
-<ul>
-<li><a href="https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe">puttygen.exe</a>&#x3001;Conversations&#x3001;Import keys&#x3001;Save private key</li>
-</ul>
-<h2 class="mume-header" id="%E5%BC%80%E6%9C%BA%E6%93%8D%E4%BD%9C">&#x5F00;&#x673A;&#x64CD;&#x4F5C;</h2>
+</pre><h2 class="mume-header" id="%E5%BC%80%E6%9C%BA%E6%93%8D%E4%BD%9C">&#x5F00;&#x673A;&#x64CD;&#x4F5C;</h2>
 
 <h3 class="mume-header" id="%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD">&#x5F00;&#x673A;&#x6302;&#x8F7D;</h3>
 

@@ -268,30 +268,128 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#softwareindexhtml">Software</a>
 <ul>
+<li><a href="#sshd">sshd</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85">&#x5B89;&#x88C5;</a>
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">&#x914D;&#x7F6E;&#x6587;&#x4EF6;</a></li>
+<li><a href="#%E4%BF%AE%E6%94%B9%E7%AB%AF%E5%8F%A3">&#x4FEE;&#x6539;&#x7AEF;&#x53E3;</a></li>
+<li><a href="#ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">SSH&#x514D;&#x5BC6;&#x767B;&#x5F55;</a>
+<ul>
+<li><a href="#%E7%A6%81%E7%94%A8%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95">&#x7981;&#x7528;&#x5BC6;&#x7801;&#x767B;&#x5F55;</a></li>
+<li><a href="#%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3">&#x5F02;&#x5E38;&#x89E3;&#x51B3;</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><a href="#nginx">Nginx</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE">&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
 <li><a href="#mariadb">Mariadb</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE-1">&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
 <li><a href="#aria2">aria2</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">&#x53C2;&#x6570;&#x8BF4;&#x660E;</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
+<h2 class="mume-header" id="sshd">sshd</h2>
+
+<h2 class="mume-header" id="%E5%AE%89%E8%A3%85">&#x5B89;&#x88C5;</h2>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS</span>
+<span class="token function">sudo</span> yum -y <span class="token function">install</span> openssh-server
+
+<span class="token comment"># Ubuntu</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> openssh-server
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h3>
+
+<p><code>/etc/ssh/sshd_config</code></p>
+<pre data-role="codeBlock" data-info="conf" class="language-conf"><code># Port 22
+#AddressFamily any
+AddressFamily inet
+#ListenAddress 0.0.0.0
+#ListenAddress ::
+
+AuthorizedKeysFile .ssh/authorized_keys
+PasswordAuthentication  yes
+
+X11Forwarding yes
+</code></pre><h3 class="mume-header" id="%E4%BF%AE%E6%94%B9%E7%AB%AF%E5%8F%A3">&#x4FEE;&#x6539;&#x7AEF;&#x53E3;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;&#x7AEF;&#x53E3;</span>
+<span class="token function">egrep</span> <span class="token string">&apos;^(# )?Port &apos;</span> <span class="token string">&apos;/etc/ssh/sshd_config&apos;</span>
+
+<span class="token comment"># &#x4FEE;&#x6539;&#x7AEF;&#x53E3;</span>
+<span class="token function">vim</span> /etc/ssh/sshd_config
+<span class="token comment"># Port 2048</span>
+
+<span class="token comment"># &#x9632;&#x706B;&#x5899;</span>
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-port<span class="token operator">=</span><span class="token number">2048</span>/tcp
+firewall-cmd --reload
+firewall-cmd --permanent --query-port<span class="token operator">=</span><span class="token number">2048</span>/tcp
+
+<span class="token comment"># &#x91CD;&#x542F;&#x670D;&#x52A1;</span>
+systemctl restart sshd
+
+<span class="token comment"># &#x67E5;&#x770B;&#x7AEF;&#x53E3;&#x53F7;</span>
+<span class="token function">netstat</span> -tunlp <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&quot;ssh&quot;</span>
+
+<span class="token comment"># &#x6D4B;&#x8BD5;&#x767B;&#x5F55;</span>
+<span class="token function">ssh</span> root@localhost -p <span class="token number">2048</span>
+</pre><h3 class="mume-header" id="ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">SSH&#x514D;&#x5BC6;&#x767B;&#x5F55;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># -m &#x5BC6;&#x94A5;&#x683C;&#x5F0F; { RFC4716 | PKCS8 | PEM }</span>
+<span class="token comment"># -b &#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#xFF08;&#x5355;&#x4F4D;&#x4E3A;bit&#xFF09;</span>
+<span class="token comment"># -t &#x52A0;&#x5BC6;&#x7B97;&#x6CD5; { dsa | ecdsa | ecdsa-sk | ed25519 | ed25519-sk | rsa }</span>
+<span class="token comment"># -P &#x5BC6;&#x7801;&#x77ED;&#x8BED;</span>
+<span class="token comment"># -C &#x5907;&#x6CE8;&#x4FE1;&#x606F;</span>
+<span class="token comment"># -f &#x4FDD;&#x5B58;&#x7684;&#x6587;&#x4EF6;&#x540D;</span>
+ssh-keygen -m PEM -t rsa -b <span class="token number">4096</span> -P <span class="token string">&apos;&apos;</span> -f ./.ssh/id_rsa
+<span class="token comment"># ssh-keygen      -t rsa         -P &apos;&apos; -f ~/.ssh/id_rsa</span>
+
+<span class="token function">pushd</span> ~/.ssh<span class="token punctuation">;</span> ll
+<span class="token comment"># -rw------- 1 root root 1679 * id_rsa</span>
+<span class="token comment"># -rw-r--r-- 1 root root  408 * id_rsa.pub</span>
+<span class="token comment"># id_rsa     : &#x79C1;&#x94A5;&#xFF08;&#x4E2A;&#x4EBA;&#x672C;&#x5730;&#x6301;&#x6709;&#xFF09;</span>
+<span class="token comment"># id_rsa.pub : &#x516C;&#x94A5;&#xFF08;&#x8FDC;&#x7A0B;&#x4E3B;&#x673A;&#x6301;&#x6709;&#xFF09;</span>
+<span class="token function">cp</span> ./id_rsa.pub ./authorized_keys
+<span class="token comment"># ssh -l root -i &lt;&#x79C1;&#x94A5;&gt; &lt;&#x5730;&#x5740;&gt;</span>
+</pre><h4 class="mume-header" id="%E7%A6%81%E7%94%A8%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95">&#x7981;&#x7528;&#x5BC6;&#x7801;&#x767B;&#x5F55;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x662F;&#x5426;&#x5F00;&#x542F;</span>
+<span class="token function">egrep</span> <span class="token string">&apos;^(# )?PasswordAuthentication &apos;</span> <span class="token string">&apos;/etc/ssh/sshd_config&apos;</span>
+
+<span class="token comment"># &#x5173;&#x95ED;&#x5BC6;&#x7801;&#x767B;&#x5F55;</span>
+<span class="token comment"># vim /etc/ssh/sshd_config</span>
+<span class="token comment"># PasswordAuthentication no</span>
+<span class="token function">sed</span> -i <span class="token string">&apos;/^PasswordAuthentication /s/yes/no/&apos;</span> <span class="token string">&apos;/etc/ssh/sshd_config&apos;</span>
+
+<span class="token comment"># &#x91CD;&#x542F;&#x5E94;&#x7528;</span>
+systemctl restart sshd
+
+<span class="token comment"># &#x68C0;&#x67E5;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x5BC6;&#x7801;&#x767B;&#x5F55;</span>
+<span class="token function">ssh</span> root@localhost -p <span class="token number">2048</span>
+</pre><h4 class="mume-header" id="%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3">&#x5F02;&#x5E38;&#x89E3;&#x51B3;</h4>
+
+<blockquote>
+<p>Couldn&apos;t load this key (OpenSSH SSH-2 private key(old PEM format))</p>
+</blockquote>
+<ul>
+<li><a href="https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe">puttygen.exe</a>&#x3001;Conversations&#x3001;Import keys&#x3001;&#x9009;&#x62E9;<code>id_rsa</code>&#x3001;Save private key</li>
+</ul>
 <h2 class="mume-header" id="nginx">Nginx</h2>
 
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash">yum <span class="token function">install</span> -y yum-utils
 <span class="token function">vi</span> <span class="token string">&apos;/etc/yum.repos.d/nginx.repo&apos;</span>
@@ -446,7 +544,7 @@ stream <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 </pre><h2 class="mume-header" id="mariadb">Mariadb</h2>
 
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
 yum <span class="token function">install</span> -y mariadb mariadb-server
@@ -481,7 +579,7 @@ mysql -uroot -p
 QUIT<span class="token punctuation">;</span>
 </pre><h2 class="mume-header" id="aria2">aria2</h2>
 
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y groupinstall <span class="token string">&apos;Development Tools&apos;</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">aria2_version</span><span class="token operator">=</span><span class="token string">&apos;1.19.0&apos;</span>
