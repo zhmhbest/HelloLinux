@@ -11,6 +11,8 @@
 
 ## [Package](package.html)
 
+## [Vim](vim.html)
+
 ## [Text](text.html)
 
 ## [Bash](bash.html)
