@@ -315,7 +315,15 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token function">who</span>
 </pre><h2 class="mume-header" id="ssh%E5%85%8D%E5%AF%86%E7%99%BB%E5%BD%95">SSH&#x514D;&#x5BC6;&#x767B;&#x5F55;</h2>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash">ssh-keygen -t rsa -P <span class="token string">&apos;&apos;</span> -f ~/.ssh/id_rsa
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># -m &#x5BC6;&#x94A5;&#x683C;&#x5F0F; { RFC4716 | PKCS8 | PEM }</span>
+<span class="token comment"># -b &#x5BC6;&#x94A5;&#x957F;&#x5EA6;&#xFF08;&#x5355;&#x4F4D;&#x4E3A;bit&#xFF09;</span>
+<span class="token comment"># -t &#x52A0;&#x5BC6;&#x7B97;&#x6CD5; { dsa | ecdsa | ecdsa-sk | ed25519 | ed25519-sk | rsa }</span>
+<span class="token comment"># -P &#x5BC6;&#x7801;&#x77ED;&#x8BED;</span>
+<span class="token comment"># -C &#x5907;&#x6CE8;&#x4FE1;&#x606F;</span>
+<span class="token comment"># -f &#x4FDD;&#x5B58;&#x7684;&#x6587;&#x4EF6;&#x540D;</span>
+ssh-keygen        -t rsa         -P <span class="token string">&apos;&apos;</span> -f ~/.ssh/id_rsa
+ssh-keygen -m PEM -t rsa -b <span class="token number">4096</span> -P <span class="token string">&apos;&apos;</span> -f ./.ssh/id_rsa
+
 <span class="token builtin class-name">cd</span> ~/.ssh<span class="token punctuation">;</span> ll
 <span class="token comment"># -rw------- 1 root root 1679 * id_rsa</span>
 <span class="token comment"># -rw-r--r-- 1 root root  408 * id_rsa.pub</span>

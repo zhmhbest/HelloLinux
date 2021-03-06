@@ -33,7 +33,15 @@ who
 ## SSH免密登录
 
 ```bash
-ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+# -m 密钥格式 { RFC4716 | PKCS8 | PEM }
+# -b 密钥长度（单位为bit）
+# -t 加密算法 { dsa | ecdsa | ecdsa-sk | ed25519 | ed25519-sk | rsa }
+# -P 密码短语
+# -C 备注信息
+# -f 保存的文件名
+ssh-keygen        -t rsa         -P '' -f ~/.ssh/id_rsa
+ssh-keygen -m PEM -t rsa -b 4096 -P '' -f ./.ssh/id_rsa
+
 cd ~/.ssh; ll
 # -rw------- 1 root root 1679 * id_rsa
 # -rw-r--r-- 1 root root  408 * id_rsa.pub
