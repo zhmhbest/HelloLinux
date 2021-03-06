@@ -35,6 +35,9 @@ rpm -ivh unzip-*
 popd
 umount '/dev/cdrom'
 rmdir '/mnt/cdrom'
+
+# 直接通过网络安装
+yum -y install wget net-tools zip unzip
 ```
 
 ## 关闭SELINUX
