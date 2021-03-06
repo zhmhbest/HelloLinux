@@ -1,5 +1,5 @@
 
-## 安装
+### 安装
 
 ```bash
 # CentOS
@@ -72,6 +72,12 @@ cp ./id_rsa.pub ./authorized_keys
 # ssh -l root -i <私钥> <地址>
 ```
 
+#### 异常解决
+
+>Couldn't load this key (OpenSSH SSH-2 private key(old PEM format))
+
+- [puttygen.exe](https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe)、Conversations、Import keys、选择`id_rsa`、Save private key
+
 #### 禁用密码登录
 
 ```bash
@@ -89,9 +95,3 @@ systemctl restart sshd
 # 检查是否可以密码登录
 ssh root@localhost -p 2048
 ```
-
-#### 异常解决
-
->Couldn't load this key (OpenSSH SSH-2 private key(old PEM format))
-
-- [puttygen.exe](https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe)、Conversations、Import keys、选择`id_rsa`、Save private key
