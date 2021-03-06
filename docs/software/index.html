@@ -327,11 +327,10 @@ X11Forwarding yes
 </code></pre><h3 class="mume-header" id="%E4%BF%AE%E6%94%B9%E7%AB%AF%E5%8F%A3">&#x4FEE;&#x6539;&#x7AEF;&#x53E3;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;&#x7AEF;&#x53E3;</span>
-<span class="token function">egrep</span> <span class="token string">&apos;^(# )?Port &apos;</span> <span class="token string">&apos;/etc/ssh/sshd_config&apos;</span>
+<span class="token function">egrep</span> <span class="token string">&apos;^Port &apos;</span> <span class="token string">&apos;/etc/ssh/sshd_config&apos;</span>
 
 <span class="token comment"># &#x4FEE;&#x6539;&#x7AEF;&#x53E3;</span>
-<span class="token function">vim</span> /etc/ssh/sshd_config
-<span class="token comment"># Port 2048</span>
+changeConfig /etc/ssh/sshd_config Port <span class="token string">&apos; &apos;</span> <span class="token number">2048</span>
 
 <span class="token comment"># &#x9632;&#x706B;&#x5899;</span>
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-port<span class="token operator">=</span><span class="token number">2048</span>/tcp
@@ -375,12 +374,10 @@ ssh-keygen -m PEM -t rsa -b <span class="token number">4096</span> -P <span clas
 <h4 class="mume-header" id="%E7%A6%81%E7%94%A8%E5%AF%86%E7%A0%81%E7%99%BB%E5%BD%95">&#x7981;&#x7528;&#x5BC6;&#x7801;&#x767B;&#x5F55;</h4>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x662F;&#x5426;&#x5F00;&#x542F;</span>
-<span class="token function">egrep</span> <span class="token string">&apos;^(# )?PasswordAuthentication &apos;</span> <span class="token string">&apos;/etc/ssh/sshd_config&apos;</span>
+<span class="token function">egrep</span> <span class="token string">&apos;^PasswordAuthentication &apos;</span> <span class="token string">&apos;/etc/ssh/sshd_config&apos;</span>
 
 <span class="token comment"># &#x5173;&#x95ED;&#x5BC6;&#x7801;&#x767B;&#x5F55;</span>
-<span class="token comment"># vim /etc/ssh/sshd_config</span>
-<span class="token comment"># PasswordAuthentication no</span>
-<span class="token function">sed</span> -i <span class="token string">&apos;/^PasswordAuthentication /s/yes/no/&apos;</span> <span class="token string">&apos;/etc/ssh/sshd_config&apos;</span>
+changeConfig /etc/ssh/sshd_config PasswordAuthentication <span class="token string">&apos; &apos;</span> no
 
 <span class="token comment"># &#x91CD;&#x542F;&#x5E94;&#x7528;</span>
 systemctl restart sshd

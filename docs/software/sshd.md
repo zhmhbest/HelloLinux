@@ -30,11 +30,10 @@ X11Forwarding yes
 
 ```bash
 # 查看当前端口
-egrep '^(# )?Port ' '/etc/ssh/sshd_config'
+egrep '^Port ' '/etc/ssh/sshd_config'
 
 # 修改端口
-vim /etc/ssh/sshd_config
-# Port 2048
+changeConfig /etc/ssh/sshd_config Port ' ' 2048
 
 # 防火墙
 firewall-cmd --permanent --zone=public --add-port=2048/tcp
@@ -82,12 +81,10 @@ cp ./id_rsa.pub ./authorized_keys
 
 ```bash
 # 查看是否开启
-egrep '^(# )?PasswordAuthentication ' '/etc/ssh/sshd_config'
+egrep '^PasswordAuthentication ' '/etc/ssh/sshd_config'
 
 # 关闭密码登录
-# vim /etc/ssh/sshd_config
-# PasswordAuthentication no
-sed -i '/^PasswordAuthentication /s/yes/no/' '/etc/ssh/sshd_config'
+changeConfig /etc/ssh/sshd_config PasswordAuthentication ' ' no
 
 # 重启应用
 systemctl restart sshd

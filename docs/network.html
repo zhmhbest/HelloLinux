@@ -271,6 +271,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</a></li>
 <li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</a></li>
 <li><a href="#%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</a></li>
+<li><a href="#ping">PING</a></li>
 </ul>
 </li>
 </ul>
@@ -342,6 +343,20 @@ firewall-cmd --reload
 
 <span class="token function">netstat</span> -anp
 <span class="token comment"># Windows&#x4E0B;&#x7B49;&#x6548;&#x547D;&#x4EE4;&#x4E3A; netstat -ano</span>
+</pre><h2 class="mume-header" id="ping">PING</h2>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x4E34;&#x65F6;&#x7981;&#x6B62;</span>
+<span class="token builtin class-name">echo</span> <span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span>/proc/sys/net/ipv4/icmp_echo_ignore_all
+<span class="token comment"># &#x4E34;&#x65F6;&#x542F;&#x7528;</span>
+<span class="token builtin class-name">echo</span> <span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>/proc/sys/net/ipv4/icmp_echo_ignore_all
+
+<span class="token comment"># &#x6C38;&#x4E45;&#x7981;&#x6B62;</span>
+changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all <span class="token operator">=</span> <span class="token number">1</span>
+sysctl -p
+
+<span class="token comment"># &#x6C38;&#x4E45;&#x542F;&#x52A8;</span>
+changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all <span class="token operator">=</span> <span class="token number">0</span>
+sysctl -p
 </pre>
       </div>
       

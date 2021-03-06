@@ -133,3 +133,24 @@ gawk '{print $0}' ./test
 # 读取inf文件
 gawk -F'=' '{if("1"==NF || /^;/){next} print $1,$2}' ./test
 ```
+
+## Scripts
+
+### changeConfig
+
+```bash
+function changeConfig() {
+    # $1 file
+    # $2 key
+    # $3 split
+    # $4 value
+    line=`egrep -n "^\s*${2}\s*${3}" "$1"` && {
+        n=`echo $line|awk -F':' '{print $1}'`
+        sed -i -e "${n}c\\${2}${3}${4}" "$1"
+        echo update
+    } || {
+        echo "${2}${3}${4}">>"$1"
+        echo append
+    }
+}
+```

@@ -271,6 +271,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#grep">grep</a></li>
 <li><a href="#sed">sed</a></li>
 <li><a href="#awk">awk</a></li>
+<li><a href="#scripts">Scripts</a>
+<ul>
+<li><a href="#changeconfig">changeConfig</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -380,6 +385,24 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <span class="token comment"># &#x8BFB;&#x53D6;inf&#x6587;&#x4EF6;</span>
 <span class="token function">gawk</span> -F<span class="token string">&apos;=&apos;</span> <span class="token string">&apos;{if(&quot;1&quot;==NF || /^;/){next} print <span class="token variable">$1</span>,<span class="token variable">$2</span>}&apos;</span> ./test
+</pre><h2 class="mume-header" id="scripts">Scripts</h2>
+
+<h3 class="mume-header" id="changeconfig">changeConfig</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">changeConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment"># $1 file</span>
+    <span class="token comment"># $2 key</span>
+    <span class="token comment"># $3 split</span>
+    <span class="token comment"># $4 value</span>
+    <span class="token assign-left variable">line</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">egrep</span> -n <span class="token string">&quot;^\s*<span class="token variable">${2}</span>\s*<span class="token variable">${3}</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span><span class="token variable">`</span></span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">{</span>
+        <span class="token assign-left variable">n</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">echo</span> $line<span class="token operator">|</span><span class="token function">awk</span> -F<span class="token string">&apos;:&apos;</span> <span class="token string">&apos;{print <span class="token variable">$1</span>}&apos;</span><span class="token variable">`</span></span>
+        <span class="token function">sed</span> -i -e <span class="token string">&quot;<span class="token variable">${n}</span>c<span class="token entity" title="\\">\\</span><span class="token variable">${2}</span><span class="token variable">${3}</span><span class="token variable">${4}</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span>
+        <span class="token builtin class-name">echo</span> update
+    <span class="token punctuation">}</span> <span class="token operator">||</span> <span class="token punctuation">{</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${2}</span><span class="token variable">${3}</span><span class="token variable">${4}</span>&quot;</span><span class="token operator">&gt;&gt;</span><span class="token string">&quot;<span class="token variable">$1</span>&quot;</span>
+        <span class="token builtin class-name">echo</span> append
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
 </pre>
       </div>
       

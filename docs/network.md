@@ -87,3 +87,20 @@ firewall-cmd --reload
 netstat -anp
 # Windows下等效命令为 netstat -ano
 ```
+
+## PING
+
+```bash
+# 临时禁止
+echo 1>/proc/sys/net/ipv4/icmp_echo_ignore_all
+# 临时启用
+echo 0>/proc/sys/net/ipv4/icmp_echo_ignore_all
+
+# 永久禁止
+changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all = 1
+sysctl -p
+
+# 永久启动
+changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all = 0
+sysctl -p
+```
