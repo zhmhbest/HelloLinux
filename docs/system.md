@@ -51,6 +51,12 @@ cp ./id_rsa.pub ./authorized_keys
 # ssh -l root -i <私钥> <地址>
 ```
 
+### 异常解决
+
+>Couldn't load this key (OpenSSH SSH-2 private key(old PEM format))
+
+- [puttygen.exe](https://the.earth.li/~sgtatham/putty/latest/w64/puttygen.exe)、Conversations、Import keys、Save private key
+
 ## 开机操作
 
 ### 开机挂载
