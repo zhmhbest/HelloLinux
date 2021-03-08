@@ -17,39 +17,70 @@
 - ![net1](./images/centos7_net1.png)
 - ![kdump](./images/centos7_kdump.png)
 
-## 安装基本工具
+## 软件
+
+### 备份源
+
+```bash
+pushd '/etc/yum.repos.d'
+
+# 备份当前源
+if [ ! -d ./backups ]; then mkdir ./backups; cp ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
+ls -l
+
+# 清空源配置
+# rm -f ./*.repo
+
+# 还原备份的源
+# cp ./backups/CentOS-* ./
+```
+
+### 镜像源
 
 ```bash
 # 加载镜像包
 mkdir '/mnt/cdrom'
 mount '/dev/cdrom' '/mnt/cdrom'
-pushd '/mnt/cdrom/Packages'
 
-# 必备软件
-rpm -ivh wget-*
-rpm -ivh net-tools-*
-rpm -ivh zip-*
-rpm -ivh unzip-*
+# 创建镜像源配置
+echo -e "[local]\nname=local\nbaseurl=file:///mnt/cdrom\nenabled=1\ngpgcheck=0">'/etc/yum.repos.d/local.repo'
 
-# 卸载镜像包
-popd
-umount '/dev/cdrom'
-rmdir '/mnt/cdrom'
+# 更新源缓存
+yum clean all
+yum makecache
+yum repolist
+```
 
-# 直接通过网络安装
-yum -y install wget net-tools zip unzip
+### 网络源
+
+添加**网络适配器**，使用**NAT**模式。
+
+```bash
+# Aliyun源
+wget -O '/etc/yum.repos.d/CentOS-Aliyun-Base.repo' 'https://mirrors.aliyun.com/repo/Centos-7.repo'
+
+# 更新源缓存
+yum clean all
+yum makecache
+yum repolist
+```
+
+### 基本工具
+
+```bash
+yum -y install wget net-tools zip unzip vim
 ```
 
 ## 关闭SELINUX
 
 ```bash
-# 开启（重启后生效）
+# 开启
 sed -i '/^SELINUX=/s/disabled/enforcing/' '/etc/selinux/config'
 egrep '^SELINUX=' '/etc/selinux/config'
 setenforce 1
 getenforce
 
-# 关闭（重启后生效）
+# 关闭
 sed -i '/^SELINUX=/s/enforcing/disabled/' '/etc/selinux/config'
 egrep '^SELINUX=' '/etc/selinux/config'
 setenforce 0
@@ -64,7 +95,6 @@ getenforce
 # 获取网卡配置名称
 # ls -l /etc/sysconfig/network-scripts/ifcfg-e*
 ifcfg=$(echo /etc/sysconfig/network-scripts/ifcfg-e*)
-echo $ifcfg
 
 # 查看网卡是否开启
 egrep '^(DEVICE|ONBOOT)' $ifcfg
@@ -79,26 +109,7 @@ systemctl restart network
 ### 查看IP
 
 ```bash
-ifconfig -a | grep 'inet '
-```
-
-## 配置境内源
-
-添加**网络适配器**，使用**NAT**模式。
-
-```bash
-# 备份当前源
-pushd '/etc/yum.repos.d'
-if [ ! -d ./backups ]; then mkdir ./backups; cp ./CentOS-* ./backups 2>/dev/null || echo Nothing will be moved.; fi
-# cp ./backups/CentOS-* ./
-
-# Aliyun源
-wget -O ./CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo
-
-# 更新源缓存
-yum clean all
-yum makecache
-yum repolist
+ifconfig -a | grep 'inet ' | awk '{print $2}'
 ```
 
 ## 远程登录
@@ -115,8 +126,15 @@ xclock
 
 ### SSH
 
-```batch
-ssh <user>@<IP>
+```bash
+# 使用密码
+ssh -p 22 -l root 192.168.1.100
+ssh -p 22 root@192.168.1.100
+
+# 使用密钥
+# %Userprofile%\.ssh\id_rsa
+ssh -i "~/.ssh/id_rsa" -p 22 -l root 192.168.1.100
+ssh -i "~/.ssh/id_rsa" -p 22 root@192.168.1.100
 ```
 
 ## 设置本地源
