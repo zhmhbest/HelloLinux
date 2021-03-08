@@ -59,7 +59,7 @@ ssh root@localhost -p 2048
 # -P 密码短语
 # -C 备注信息
 # -f 保存的文件名
-ssh-keygen -m PEM -t rsa -b 4096 -P '' -f ./.ssh/id_rsa
+ssh-keygen -m PEM -t rsa -b 4096 -P '' -f ~/.ssh/id_rsa
 # ssh-keygen      -t rsa         -P '' -f ~/.ssh/id_rsa
 
 pushd ~/.ssh; ll

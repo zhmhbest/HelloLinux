@@ -20,3 +20,7 @@
 ## aria2
 
 @import "aria2.md"
+
+## Python
+
+@import "python.md"

@@ -299,6 +299,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">&#x53C2;&#x6570;&#x8BF4;&#x660E;</a></li>
 </ul>
 </li>
+<li><a href="#python">Python</a>
+<ul>
+<li><a href="#python-27">Python 2.7</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -353,7 +358,7 @@ systemctl restart sshd
 <span class="token comment"># -P &#x5BC6;&#x7801;&#x77ED;&#x8BED;</span>
 <span class="token comment"># -C &#x5907;&#x6CE8;&#x4FE1;&#x606F;</span>
 <span class="token comment"># -f &#x4FDD;&#x5B58;&#x7684;&#x6587;&#x4EF6;&#x540D;</span>
-ssh-keygen -m PEM -t rsa -b <span class="token number">4096</span> -P <span class="token string">&apos;&apos;</span> -f ./.ssh/id_rsa
+ssh-keygen -m PEM -t rsa -b <span class="token number">4096</span> -P <span class="token string">&apos;&apos;</span> -f ~/.ssh/id_rsa
 <span class="token comment"># ssh-keygen      -t rsa         -P &apos;&apos; -f ~/.ssh/id_rsa</span>
 
 <span class="token function">pushd</span> ~/.ssh<span class="token punctuation">;</span> ll
@@ -615,6 +620,12 @@ aria2c -v
 aria2c -k 1M -x <span class="token number">16</span> -j <span class="token number">5</span> <span class="token operator">&lt;</span>url<span class="token operator">&gt;</span>
 <span class="token comment"># &#x7EED;&#x4F20;</span>
 aria2c -c <span class="token boolean">true</span> -k 1M -x <span class="token number">16</span> -j <span class="token number">5</span> <span class="token operator">&lt;</span>url<span class="token operator">&gt;</span>
+</pre><h2 class="mume-header" id="python">Python</h2>
+
+<h3 class="mume-header" id="python-27">Python 2.7</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">wget</span> https://bootstrap.pypa.io/pip/2.7/get-pip.py
+python get-pip.py
 </pre>
       </div>
       
