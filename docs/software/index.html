@@ -304,6 +304,13 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#python-27">Python 2.7</a></li>
 </ul>
 </li>
+<li><a href="#samba">Samba</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-2">&#x914D;&#x7F6E;</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -626,6 +633,45 @@ aria2c -c <span class="token boolean">true</span> -k 1M -x <span class="token nu
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">wget</span> https://bootstrap.pypa.io/pip/2.7/get-pip.py
 python get-pip.py
+</pre><h2 class="mume-header" id="samba">Samba</h2>
+
+<blockquote>
+<p>Samba&#x662F;&#x6A21;&#x4EFF;Windows&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x7684;SMB&#x7684;&#x901A;&#x8BAF;&#x534F;&#x8BAE;&#xFF0C;&#x5C06;Linux&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x201C;&#x5047;&#x88C5;&#x6210;&#x201D;Windows&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x901A;&#x8FC7;&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x8FDB;&#x884C;&#x6587;&#x4EF6;&#x4F20;&#x8F93;&#x7684;&#x3002;</p>
+</blockquote>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;&#x670D;&#x52A1;</span>
+<span class="token function">rpm</span> -qi samba
+yum -y <span class="token function">install</span> samba
+
+<span class="token comment"># &#x670D;&#x52A1;&#x7BA1;&#x7406;</span>
+systemctl status smb
+systemctl start smb
+systemctl stop smb
+systemctl restart smb
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-2">&#x914D;&#x7F6E;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6DFB;&#x52A0;&#x7528;&#x6237;</span>
+<span class="token function">useradd</span> sambauser      <span class="token comment"># &#x6DFB;&#x52A0;&#x7CFB;&#x7EDF;&#x7528;&#x6237;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;sambauser&quot;</span> <span class="token operator">|</span> <span class="token function">passwd</span> --stdin sambauser
+smbpasswd -a sambauser <span class="token comment"># &#x65B0;&#x589E;&#x7528;&#x6237;&#xFF08;&#x5FC5;&#x987B;&#x4E5F;&#x662F;&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#xFF09;</span>
+<span class="token comment"># smbpasswd -d sambauser # &#x51BB;&#x7ED3;&#x7528;&#x6237;</span>
+<span class="token comment"># smbpasswd -e sambauser # &#x6062;&#x590D;&#x7528;&#x6237;</span>
+
+<span class="token function">su</span> - sambauser
+<span class="token comment"># &#x521B;&#x5EFA;&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;</span>
+<span class="token function">mkdir</span> ./share<span class="token punctuation">;</span> <span class="token function">chmod</span> <span class="token number">777</span> ./share
+<span class="token comment"># &#x5907;&#x4EFD;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">mkdir</span> backups<span class="token punctuation">;</span> <span class="token function">cp</span> /etc/samba/* ./backups
+<span class="token comment">#</span>
+<span class="token builtin class-name">exit</span>
+
+<span class="token comment"># &#x7F16;&#x8F91;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">vim</span> /etc/samba/smb.conf
+</pre><pre data-role="codeBlock" data-info="inf" class="language-inf"><code></code></pre><h3 class="mume-header" id="%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</h3>
+
+<pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token comment">REM &#x8BBF;&#x95EE;&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;</span>
+\\&lt;IP&gt;
 </pre>
       </div>
       

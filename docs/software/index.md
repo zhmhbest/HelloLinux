@@ -24,3 +24,7 @@
 ## Python
 
 @import "python.md"
+
+## Samba
+
+@import "samba.md"
