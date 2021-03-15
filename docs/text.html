@@ -379,7 +379,13 @@ pre[data-line] .line-highlight[data-end]:after {
     sub(pattern, replaced, str1)    &#x66FF;&#x6362;&#x7B2C;&#x4E00;&#x6B21;
     gsub(pattern, replaced, str1)   &#x5168;&#x5C40;&#x641C;&#x7D22;&#x66FF;&#x6362;
     split(str1, var, str2)          &#x4EE5;str2&#x5206;&#x5272;str1&#x5B58;&#x5165;var
-</code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6253;&#x5370;&#x6BCF;&#x4E00;&#x884C;</span>
+</code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6253;&#x5370;&#x7B2C;&#x4E8C;&#x884C;</span>
+<span class="token function">awk</span> <span class="token string">&apos;2 == NF&apos;</span> ./test
+
+<span class="token comment"># &#x6253;&#x5370;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;&#x884C;</span>
+<span class="token function">awk</span> <span class="token string">&apos;/^[0-9]+$/&apos;</span> ./test
+
+<span class="token comment"># &#x6253;&#x5370;&#x6BCF;&#x4E00;&#x884C;</span>
 <span class="token function">gawk</span> <span class="token string">&apos;{print}&apos;</span> ./test
 <span class="token function">gawk</span> <span class="token string">&apos;{print <span class="token variable">$0</span>}&apos;</span> ./test
 

@@ -126,6 +126,12 @@ SCRIPT
 ```
 
 ```bash
+# 打印第二行
+awk '2 == NF' ./test
+
+# 打印正则匹配的行
+awk '/^[0-9]+$/' ./test
+
 # 打印每一行
 gawk '{print}' ./test
 gawk '{print $0}' ./test
