@@ -76,16 +76,26 @@ firewall-cmd --reload
 ## 网络状态
 
 ```bash
-# -a  所有
+# -i  网卡信息
+#     状态：ESTABLISHED
+# -a  状态：ALL
+# -l  状态：LISTEN
 # -t  TCP连接
 # -u  UDP连接
 # -n  禁用反向域名解析
-# -l  状态是LISTEN
 # -p  查看进程信息
-# -o  显示时间
 
-netstat -anp
-# Windows下等效命令为 netstat -ano
+# 查看网卡信息
+netstat -i
+
+# 状态：ESTABLISHED
+netstat -tunp
+
+# 状态：LISTEN
+netstat -tunlp
+
+# 状态：ALL
+netstat -tunap
 ```
 
 ## PING

@@ -44,7 +44,7 @@ firewall-cmd --permanent --query-port=2048/tcp
 systemctl restart sshd
 
 # 查看端口号
-netstat -tunlp | grep "ssh"
+netstat -tnlp | grep '/sshd\s*$'
 
 # 测试登录
 ssh root@localhost -p 2048

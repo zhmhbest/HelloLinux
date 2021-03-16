@@ -353,7 +353,7 @@ firewall-cmd --permanent --query-port<span class="token operator">=</span><span 
 systemctl restart sshd
 
 <span class="token comment"># &#x67E5;&#x770B;&#x7AEF;&#x53E3;&#x53F7;</span>
-<span class="token function">netstat</span> -tunlp <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&quot;ssh&quot;</span>
+<span class="token function">netstat</span> -tnlp <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;/sshd\s*$&apos;</span>
 
 <span class="token comment"># &#x6D4B;&#x8BD5;&#x767B;&#x5F55;</span>
 <span class="token function">ssh</span> root@localhost -p <span class="token number">2048</span>
@@ -636,7 +636,7 @@ python get-pip.py
 </pre><h2 class="mume-header" id="samba">Samba</h2>
 
 <blockquote>
-<p>Samba&#x662F;&#x6A21;&#x4EFF;Windows&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x7684;SMB&#x7684;&#x901A;&#x8BAF;&#x534F;&#x8BAE;&#xFF0C;&#x5C06;Linux&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x201C;&#x5047;&#x88C5;&#x6210;&#x201D;Windows&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#xFF0C;&#x901A;&#x8FC7;&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x8FDB;&#x884C;&#x6587;&#x4EF6;&#x4F20;&#x8F93;&#x7684;&#x3002;</p>
+<p>Samba&#x53EF;&#x4EE5;&#x4F7F;Linux&#x5728;Windows&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x4E2D;&#x8FDB;&#x884C;&#x901A;&#x8BAF;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E3B;&#x673A;&#x5FC5;&#x987B;&#x5904;&#x5728;&#x540C;&#x4E00;&#x7F51;&#x6BB5;&#x3002;</p>
 </blockquote>
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</h3>
 

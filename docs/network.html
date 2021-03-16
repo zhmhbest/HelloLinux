@@ -333,16 +333,26 @@ firewall-cmd --permanent --zone<span class="token operator">=</span>public --rem
 firewall-cmd --reload
 </pre><h2 class="mume-header" id="%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</h2>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># -a  &#x6240;&#x6709;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># -i  &#x7F51;&#x5361;&#x4FE1;&#x606F;</span>
+<span class="token comment">#     &#x72B6;&#x6001;&#xFF1A;ESTABLISHED</span>
+<span class="token comment"># -a  &#x72B6;&#x6001;&#xFF1A;ALL</span>
+<span class="token comment"># -l  &#x72B6;&#x6001;&#xFF1A;LISTEN</span>
 <span class="token comment"># -t  TCP&#x8FDE;&#x63A5;</span>
 <span class="token comment"># -u  UDP&#x8FDE;&#x63A5;</span>
 <span class="token comment"># -n  &#x7981;&#x7528;&#x53CD;&#x5411;&#x57DF;&#x540D;&#x89E3;&#x6790;</span>
-<span class="token comment"># -l  &#x72B6;&#x6001;&#x662F;LISTEN</span>
 <span class="token comment"># -p  &#x67E5;&#x770B;&#x8FDB;&#x7A0B;&#x4FE1;&#x606F;</span>
-<span class="token comment"># -o  &#x663E;&#x793A;&#x65F6;&#x95F4;</span>
 
-<span class="token function">netstat</span> -anp
-<span class="token comment"># Windows&#x4E0B;&#x7B49;&#x6548;&#x547D;&#x4EE4;&#x4E3A; netstat -ano</span>
+<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x4FE1;&#x606F;</span>
+<span class="token function">netstat</span> -i
+
+<span class="token comment"># &#x72B6;&#x6001;&#xFF1A;ESTABLISHED</span>
+<span class="token function">netstat</span> -tunp
+
+<span class="token comment"># &#x72B6;&#x6001;&#xFF1A;LISTEN</span>
+<span class="token function">netstat</span> -tunlp
+
+<span class="token comment"># &#x72B6;&#x6001;&#xFF1A;ALL</span>
+<span class="token function">netstat</span> -tunap
 </pre><h2 class="mume-header" id="ping">PING</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x4E34;&#x65F6;&#x7981;&#x6B62;</span>
