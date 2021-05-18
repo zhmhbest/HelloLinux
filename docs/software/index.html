@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css">
       
       
       
@@ -311,6 +311,24 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</a></li>
 </ul>
 </li>
+<li><a href="#drbd">DRBD</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-5">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F">&#x914D;&#x7F6E;&#x4E3B;&#x4ECE;&#x6A21;&#x5F0F;</a>
+<ul>
+<li><a href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99">&#x5173;&#x95ED;&#x9632;&#x706B;&#x5899;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D">&#x914D;&#x7F6E;&#x57DF;&#x540D;</a></li>
+<li><a href="#%E5%90%8C%E6%AD%A5%E6%97%B6%E9%92%9F">&#x540C;&#x6B65;&#x65F6;&#x949F;</a></li>
+<li><a href="#%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97">&#x52A0;&#x8F7D;&#x6A21;&#x5757;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%B0%E7%A3%81%E7%9B%98">&#x914D;&#x7F6E;&#x65B0;&#x78C1;&#x76D8;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AEdrbd">&#x914D;&#x7F6E;DRBD</a></li>
+<li><a href="#%E7%AE%A1%E7%90%86drbd">&#x7BA1;&#x7406;DRBD</a></li>
+<li><a href="#%E6%8C%82%E8%BD%BDdrbd">&#x6302;&#x8F7D;DRBD</a></li>
+<li><a href="#%E6%B5%8B%E8%AF%95%E5%A4%87%E4%BB%BD">&#x6D4B;&#x8BD5;&#x5907;&#x4EFD;</a></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -403,21 +421,21 @@ systemctl restart sshd
 <pre data-role="codeBlock" data-info="bash" class="language-bash">yum <span class="token function">install</span> -y yum-utils
 <span class="token function">vi</span> <span class="token string">&apos;/etc/yum.repos.d/nginx.repo&apos;</span>
 </pre><p><a href="http://nginx.org/en/linux_packages.html#RHEL-CentOS"><code>nginx.repo</code></a></p>
-<pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token selector">[nginx-stable]</span>
-<span class="token constant">name</span><span class="token attr-value"><span class="token punctuation">=</span>nginx stable repo</span>
-<span class="token constant">baseurl</span><span class="token attr-value"><span class="token punctuation">=</span>http://nginx.org/packages/centos/$releasever/$basearch/</span>
-<span class="token constant">gpgcheck</span><span class="token attr-value"><span class="token punctuation">=</span>1</span>
-<span class="token constant">enabled</span><span class="token attr-value"><span class="token punctuation">=</span>1</span>
-<span class="token constant">gpgkey</span><span class="token attr-value"><span class="token punctuation">=</span>https://nginx.org/keys/nginx_signing.key</span>
-<span class="token constant">module_hotfixes</span><span class="token attr-value"><span class="token punctuation">=</span>true</span>
+<pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">nginx-stable</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">name</span><span class="token punctuation">=</span><span class="token value attr-value">nginx stable repo</span>
+<span class="token key attr-name">baseurl</span><span class="token punctuation">=</span><span class="token value attr-value">http://nginx.org/packages/centos/$releasever/$basearch/</span>
+<span class="token key attr-name">gpgcheck</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">enabled</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">gpgkey</span><span class="token punctuation">=</span><span class="token value attr-value">https://nginx.org/keys/nginx_signing.key</span>
+<span class="token key attr-name">module_hotfixes</span><span class="token punctuation">=</span><span class="token value attr-value">true</span>
 
-<span class="token selector">[nginx-mainline]</span>
-<span class="token constant">name</span><span class="token attr-value"><span class="token punctuation">=</span>nginx mainline repo</span>
-<span class="token constant">baseurl</span><span class="token attr-value"><span class="token punctuation">=</span>http://nginx.org/packages/mainline/centos/$releasever/$basearch/</span>
-<span class="token constant">gpgcheck</span><span class="token attr-value"><span class="token punctuation">=</span>1</span>
-<span class="token constant">enabled</span><span class="token attr-value"><span class="token punctuation">=</span>0</span>
-<span class="token constant">gpgkey</span><span class="token attr-value"><span class="token punctuation">=</span>https://nginx.org/keys/nginx_signing.key</span>
-<span class="token constant">module_hotfixes</span><span class="token attr-value"><span class="token punctuation">=</span>true</span>
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">nginx-mainline</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">name</span><span class="token punctuation">=</span><span class="token value attr-value">nginx mainline repo</span>
+<span class="token key attr-name">baseurl</span><span class="token punctuation">=</span><span class="token value attr-value">http://nginx.org/packages/mainline/centos/$releasever/$basearch/</span>
+<span class="token key attr-name">gpgcheck</span><span class="token punctuation">=</span><span class="token value attr-value">1</span>
+<span class="token key attr-name">enabled</span><span class="token punctuation">=</span><span class="token value attr-value">0</span>
+<span class="token key attr-name">gpgkey</span><span class="token punctuation">=</span><span class="token value attr-value">https://nginx.org/keys/nginx_signing.key</span>
+<span class="token key attr-name">module_hotfixes</span><span class="token punctuation">=</span><span class="token value attr-value">true</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
 yum <span class="token function">install</span> -y nginx
 
@@ -636,7 +654,7 @@ python get-pip.py
 </pre><h2 class="mume-header" id="samba">Samba</h2>
 
 <blockquote>
-<p>Samba&#x53EF;&#x4EE5;&#x4F7F;Linux&#x5728;Windows&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x4E2D;&#x8FDB;&#x884C;&#x901A;&#x8BAF;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E3B;&#x673A;&#x5FC5;&#x987B;&#x5904;&#x5728;&#x540C;&#x4E00;&#x7F51;&#x6BB5;&#x3002;</p>
+<p>Samba&#x53EF;&#x4EE5;&#x4F7F;Linux&#x5728;Windows&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x4E2D;&#x8FDB;&#x884C;&#x901A;&#x8BAF;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E3B;&#x673A;&#x95F4;&#x5FC5;&#x987B;&#x5904;&#x5728;&#x540C;&#x4E00;&#x7F51;&#x6BB5;&#x3002;</p>
 </blockquote>
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</h3>
 
@@ -668,10 +686,202 @@ smbpasswd -a sambauser <span class="token comment"># &#x65B0;&#x589E;&#x7528;&#x
 
 <span class="token comment"># &#x7F16;&#x8F91;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
 <span class="token function">vim</span> /etc/samba/smb.conf
-</pre><pre data-role="codeBlock" data-info="inf" class="language-inf"><code></code></pre><h3 class="mume-header" id="%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</h3>
+</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token comment">;;&#x7565;</span>
+</pre><h3 class="mume-header" id="%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</h3>
 
 <pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token comment">REM &#x8BBF;&#x95EE;&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;</span>
 \\&lt;IP&gt;
+</pre><h2 class="mume-header" id="drbd">DRBD</h2>
+
+<blockquote>
+<p><strong>Distributed Replicated Block Device(DRBD)&#x662F;</strong>&#x4E00;&#x4E2A;&#x7528;&#x8F6F;&#x4EF6;&#x5B9E;&#x73B0;&#x7684;&#x3001;&#x65E0;&#x5171;&#x4EAB;&#x7684;&#x3001;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x955C;&#x50CF;&#x5757;&#x8BBE;&#x5907;&#x5185;&#x5BB9;&#x7684;&#x5B58;&#x50A8;&#x590D;&#x5236;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;&#x5176;&#x4E0E;RAID1&#x7684;&#x4E3B;&#x8981;&#x533A;&#x522B;&#x5728;&#x4E8E;&#xFF0C;&#x524D;&#x8005;&#x4F7F;&#x7528;RAID&#x63A7;&#x5236;&#x5668;&#x63A5;&#x5165;&#x5230;&#x4E00;&#x53F0;&#x4E3B;&#x673A;&#x4E0A;&#xFF0C;&#x800C;DRBD&#x662F;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x8282;&#x70B9;&#x4E3B;&#x673A;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x6570;&#x636E;&#x7684;&#x955C;&#x50CF;&#x5907;&#x4EFD;&#x3002;</p>
+</blockquote>
+<p><img src="./images/drbd.png" alt="drbd"></p>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-5">&#x5B89;&#x88C5;</h3>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x7248;&#x672C;</th>
+<th style="text-align:center">&#x5305;</th>
+<th style="text-align:center">&#x5185;&#x6838;&#x6A21;&#x5757;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">8.0</td>
+<td style="text-align:center">drbd-8.0</td>
+<td style="text-align:center">kmod-drbd-8.0</td>
+</tr>
+<tr>
+<td style="text-align:center">8.2</td>
+<td style="text-align:center">drbd82</td>
+<td style="text-align:center">kmod-drbd82</td>
+</tr>
+<tr>
+<td style="text-align:center">8.3</td>
+<td style="text-align:center">drbd83</td>
+<td style="text-align:center">kmod-drbd83</td>
+</tr>
+<tr>
+<td style="text-align:center">8.4</td>
+<td style="text-align:center">drbd84</td>
+<td style="text-align:center">kmod-drbd84</td>
+</tr>
+</tbody>
+</table>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x5185;&#x6838;&#x7248;&#x672C;&#xFF08;&#x8981;&#x6C42;&#x5927;&#x4E8E;2.6.33&#xFF09;</span>
+<span class="token function">uname</span> -r
+
+<span class="token comment"># &#x5B89;&#x88C5;DRDB@Centos5&#xFF08;&#x7248;&#x672C;&#x5C0F;&#x4E8E;&#x5185;&#x6838;&#x8981;&#x6C42;&#xFF09;</span>
+https://vault.centos.org/5.8/extras/x86_64/RPMS/
+<span class="token comment"># &#x4E0B;&#x8F7D; drbd &#x3001;kmod-drbd</span>
+
+<span class="token comment"># &#x5B89;&#x88C5;DRDB@Centos6</span>
+<span class="token comment"># rpm -ivh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm</span>
+yum -y <span class="token function">install</span> https://www.elrepo.org/elrepo-release-6.el6.elrepo.noarch.rpm
+yum -y <span class="token function">install</span> drbd83-utils kmod-drbd83
+<span class="token function">rpm</span> -q drbd83-utils
+
+<span class="token comment"># &#x5B89;&#x88C5;DRDB@Centos7</span>
+yum -y <span class="token function">install</span> https://www.elrepo.org/elrepo-release-7.el7.elrepo.noarch.rpm
+yum -y <span class="token function">install</span> drbd84-utils kmod-drbd84
+<span class="token function">rpm</span> -q drbd84-utils
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F">&#x914D;&#x7F6E;&#x4E3B;&#x4ECE;&#x6A21;&#x5F0F;</h3>
+
+<h4 class="mume-header" id="%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99">&#x5173;&#x95ED;&#x9632;&#x706B;&#x5899;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash">systemctl disable firewalld.service
+systemctl stop firewalld.service
+firewall-cmd --state
+</pre><h4 class="mume-header" id="%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8D">&#x914D;&#x7F6E;&#x57DF;&#x540D;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># hostnamectl set-hostname &apos;drdb.primary&apos;</span>
+<span class="token comment"># hostnamectl set-hostname &apos;drdb.secondary&apos;</span>
+<span class="token function">vim</span> /etc/hosts
+</pre><pre data-role="codeBlock" data-info="txt" class="language-txt">192.168.12.201  drdb.primary
+192.168.12.205  drdb.secondary
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ping</span> -c <span class="token number">3</span> drdb.primary
+<span class="token function">ping</span> -c <span class="token number">3</span> drdb.secondary
+<span class="token function">hostname</span> -f
+</pre><h4 class="mume-header" id="%E5%90%8C%E6%AD%A5%E6%97%B6%E9%92%9F">&#x540C;&#x6B65;&#x65F6;&#x949F;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y <span class="token function">install</span> ntpdate
+
+<span class="token comment"># &#x540C;&#x6B65;</span>
+ntpdate -u asia.pool.ntp.org
+
+<span class="token comment"># &#x67E5;&#x770B;&#x65F6;&#x95F4;</span>
+<span class="token function">date</span> <span class="token string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span>
+</pre><h4 class="mume-header" id="%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97">&#x52A0;&#x8F7D;&#x6A21;&#x5757;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash">modprobe drbd
+lsmod <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;^drbd&apos;</span>
+</pre><h4 class="mume-header" id="%E9%85%8D%E7%BD%AE%E6%96%B0%E7%A3%81%E7%9B%98">&#x914D;&#x7F6E;&#x65B0;&#x78C1;&#x76D8;</h4>
+
+<p>&#x4E3A;&#x6BCF;&#x53F0;&#x673A;&#x5668;&#x65B0;&#x589E;1&#x5757;&#x786C;&#x76D8;</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x683C;&#x5F0F;&#x5316;&#x65B0;&#x786C;&#x76D8;</span>
+<span class="token function">fdisk</span> /dev/sdb
+<span class="token comment"># n&#x3001;p&#x3001;&lt;enter&gt;&#x3001;&lt;enter&gt;&#x3001;&lt;enter&gt;&#x3001;w</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x5206;&#x533A;</span>
+<span class="token function">ls</span> /dev/sd*
+<span class="token function">fdisk</span> -l <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;^/dev&apos;</span>
+
+<span class="token comment"># mknod &#x8BBE;&#x5907;&#x540D;&#x79F0; { b | c | p } &#x4E3B;&#x8BBE;&#x5907;&#x53F7;&#xFF08;&#x8BBE;&#x5907;&#x79CD;&#x7C7B;&#xFF09; &#x4ECE;&#x8BBE;&#x5907;&#x53F7;&#xFF08;&#x552F;&#x4E00;&#x6027;&#xFF09;</span>
+<span class="token function">mknod</span> /dev/drbd0 b <span class="token number">147</span> <span class="token number">0</span>
+</pre><h4 class="mume-header" id="%E9%85%8D%E7%BD%AEdrbd">&#x914D;&#x7F6E;DRBD</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">cat</span> /etc/drbd.conf
+</pre><pre data-role="codeBlock" data-info="conf" class="language-conf"><code>include &quot;drbd.d/global_common.conf&quot;;
+include &quot;drbd.d/*.res&quot;;
+</code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5907;&#x4EFD;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;</span>
+<span class="token function">cp</span> /etc/drbd.d/global_common.conf /etc/drbd.d/global_common.conf.bak
+
+<span class="token comment"># &#x7F16;&#x8F91;&#x914D;&#x7F6E;</span>
+<span class="token function">vim</span> /etc/drbd.d/global_common.conf
+<span class="token comment">#gg dG</span>
+</pre><pre data-role="codeBlock" data-info="conf" class="language-conf"><code>global {
+    usage-count yes;
+}
+common {
+    protocol C;
+    handlers {
+    }
+    startup {
+        wfc-timeout          240;
+        degr-wfc-timeout     240;
+        outdated-wfc-timeout 240;
+    }
+    disk {
+        on-io-error detach;
+    }
+    net {
+        cram-hmac-alg md5;
+        shared-secret &quot;testdrbd&quot;;
+    }
+    syncer {
+        rate 30M;
+    }
+}
+</code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x7F16;&#x8F91;&#x78C1;&#x76D8;&#x914D;&#x7F6E;</span>
+<span class="token function">vim</span> /etc/drbd.d/r0.res
+</pre><pre data-role="codeBlock" data-info="conf" class="language-conf"><code>resource r0 {
+    on drdb.primary {
+        device     /dev/drbd0;          # DRBD&#x865A;&#x62DF;&#x5757;&#x8BBE;&#x5907;&#xFF08;&#x4E8B;&#x5148;&#x4E0D;&#x8981;&#x683C;&#x5F0F;&#x5316;&#xFF09;
+        disk       /dev/sdb1;
+        address    192.168.12.201:7898; # DRBD&#x76D1;&#x542C;&#x7684;&#x5730;&#x5740;&#x548C;&#x7AEF;&#x53E3;&#xFF08;&#x7AEF;&#x53E3;&#x53EF;&#x81EA;&#x5B9A;&#x4E49;&#xFF09;
+        meta-disk  internal;
+    }
+    on drdb.secondary {
+        device     /dev/drbd0;
+        disk       /dev/sdb1;
+        address    192.168.12.205:7898;
+        meta-disk  internal;
+    }
+}
+</code></pre><h4 class="mume-header" id="%E7%AE%A1%E7%90%86drbd">&#x7BA1;&#x7406;DRBD</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x521D;&#x59CB;&#x5316;&#xFF08;&#x90FD;&#x9700;&#x8981;&#xFF09;</span>
+drbdadm create-md r0
+<span class="token comment"># New drbd meta data block successfully created.</span>
+
+<span class="token comment"># &#x542F;&#x52A8;/&#x5173;&#x95ED;&#xFF08;&#x90FD;&#x9700;&#x8981;&#xFF09;</span>
+drbdadm up r0
+drbdadm down r0
+drbdadm status r0
+<span class="token comment"># cat /proc/drbd</span>
+
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x4E3B;&#x8282;&#x70B9;&#xFF08;&#x4EC5;&#x5728;Primary&#x6267;&#x884C;&#xFF09;</span>
+drbdsetup /dev/drbd0 primary --force
+
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x4ECE;&#x8282;&#x70B9;&#xFF08;&#x4EC5;&#x5728;Secondary&#x6267;&#x884C;&#xFF09;</span>
+drbdsetup /dev/drbd0 secondary
+</pre><h4 class="mume-header" id="%E6%8C%82%E8%BD%BDdrbd">&#x6302;&#x8F7D;DRBD</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x683C;&#x5F0F;&#x5316;&#x5206;&#x533A;&#xFF08;&#x4EC5;&#x5728;Primary&#x6267;&#x884C;&#xFF09;</span>
+mkfs.ext4 /dev/drbd0
+
+<span class="token comment"># &#x6302;&#x8F7D;&#x5206;&#x533A;&#xFF08;&#x4EC5;&#x5728;Primary&#x6267;&#x884C;&#xFF09;</span>
+<span class="token function">mkdir</span> /data
+<span class="token function">mount</span> /dev/drbd0 /data
+<span class="token function">df</span> -h
+</pre><h4 class="mume-header" id="%E6%B5%8B%E8%AF%95%E5%A4%87%E4%BB%BD">&#x6D4B;&#x8BD5;&#x5907;&#x4EFD;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6A21;&#x62DF;&#x5199;&#x5165;&#xFF08;&#x4EC5;&#x5728;Primary&#x6267;&#x884C;&#xFF09;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;Hello&apos;</span><span class="token operator">&gt;</span><span class="token string">&apos;/data/Hello.txt&apos;</span>
+
+<span class="token comment"># &#x6A21;&#x62DF;&#x5B95;&#x673A;&#xFF08;&#x4EC5;&#x5728;Primary&#x6267;&#x884C;&#xFF09;</span>
+<span class="token function">umount</span> /data
+<span class="token function">df</span> -h
+drbdsetup /dev/drbd0 secondary
+
+<span class="token comment"># &#x4ECE;&#x8282;&#x70B9;&#x63D0;&#x6743;&#xFF08;&#x4EC5;&#x5728;Secondary&#x6267;&#x884C;&#xFF09;</span>
+drbdsetup /dev/drbd0 primary
+
+<span class="token comment"># &#x6302;&#x8F7D;&#x5206;&#x533A;&#xFF08;&#x4EC5;&#x5728;Secondary&#x6267;&#x884C;&#xFF09;</span>
+<span class="token function">mkdir</span> /data
+<span class="token function">mount</span> /dev/drbd0 /data
 </pre>
       </div>
       
