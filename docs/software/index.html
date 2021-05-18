@@ -329,11 +329,6 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 </ul>
 </li>
-<li><a href="#heartbeat">Heartbeat</a>
-<ul>
-<li><a href="#%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85">&#x7F16;&#x8BD1;&#x5B89;&#x88C5;</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -887,44 +882,6 @@ drbdsetup /dev/drbd0 primary
 <span class="token comment"># &#x6302;&#x8F7D;&#x5206;&#x533A;&#xFF08;&#x4EC5;&#x5728;Secondary&#x6267;&#x884C;&#xFF09;</span>
 <span class="token function">mkdir</span> /data
 <span class="token function">mount</span> /dev/drbd0 /data
-</pre><h2 class="mume-header" id="heartbeat">Heartbeat</h2>
-
-<blockquote>
-<p>Heartbeat&#x5305;&#x62EC;&#x4E24;&#x4E2A;&#x6838;&#x5FC3;&#x90E8;&#x5206;&#xFF0C;<strong>&#x5FC3;&#x8DF3;&#x76D1;&#x6D4B;</strong>&#x548C;<strong>&#x8D44;&#x6E90;&#x63A5;&#x7BA1;</strong>&#xFF0C;&#x5FC3;&#x8DF3;&#x76D1;&#x6D4B;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x94FE;&#x8DEF;&#x548C;&#x4E32;&#x53E3;&#x8FDB;&#x884C;&#xFF0C;&#x4E3B;&#x673A;&#x4E4B;&#x95F4;&#x76F8;&#x4E92;&#x53D1;&#x9001;&#x62A5;&#x6587;&#x6765;&#x544A;&#x8BC9;&#x5BF9;&#x65B9;&#x81EA;&#x5DF1;&#x5F53;&#x524D;&#x7684;&#x72B6;&#x6001;&#xFF0C;&#x5982;&#x679C;&#x5728;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x5185;&#x672A;&#x6536;&#x5230;&#x5BF9;&#x65B9;&#x53D1;&#x9001;&#x7684;&#x62A5;&#x6587;&#xFF0C;&#x5C31;&#x542F;&#x52A8;&#x8D44;&#x6E90;&#x63A5;&#x7BA1;&#x6A21;&#x5757;&#x6765;&#x63A5;&#x7BA1;&#x8FD0;&#x884C;&#x5728;&#x5BF9;&#x65B9;&#x4E3B;&#x673A;&#x4E0A;&#x7684;&#x8D44;&#x6E90;&#x6216;&#x8005;&#x670D;&#x52A1;&#x3002;</p>
-</blockquote>
-<h3 class="mume-header" id="%E7%BC%96%E8%AF%91%E5%AE%89%E8%A3%85">&#x7F16;&#x8BD1;&#x5B89;&#x88C5;</h3>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">groupadd</span> haclient
-<span class="token function">useradd</span> -g haclient hacluster -M -s /sbin/nologin
-<span class="token function">id</span> hacluster
-</pre><ul>
-<li><a href="http://www.linux-ha.org/wiki/Downloads">&#x6E90;&#x7801;&#x4E0B;&#x8F7D;</a></li>
-</ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y groupinstall <span class="token string">&apos;Development Tools&apos;</span>
-yum -y <span class="token function">install</span> libgcrypt-devel libxslt libxslt-devel bzip2-devel libtool-ltdl-devel glib2-devel asciidoc
-
-<span class="token comment"># Cluster Glue</span>
-<span class="token function">pushd</span> ./Reusable-Cluster-Components-glue-*
-./autogen.sh
-./configure <span class="token assign-left variable">LIBS</span><span class="token operator">=</span><span class="token string">&apos;/lib64/libuuid.so.1&apos;</span>
-<span class="token function">make</span> -j <span class="token number">8</span>
-<span class="token function">make</span> <span class="token function">install</span>
-<span class="token function">popd</span>
-
-<span class="token comment"># Resource Agents</span>
-<span class="token function">pushd</span> ./resource-agents-*
-./autogen.sh
-./configure <span class="token assign-left variable">LIBS</span><span class="token operator">=</span><span class="token string">&apos;/lib64/libuuid.so.1&apos;</span>
-<span class="token function">make</span> -j <span class="token number">8</span>
-<span class="token function">make</span> <span class="token function">install</span>
-<span class="token function">popd</span>
-
-<span class="token comment"># Heartbeat</span>
-<span class="token function">pushd</span> ./Heartbeat-*
-./ConfigureMe configure <span class="token assign-left variable">LIBS</span><span class="token operator">=</span><span class="token string">&apos;/lib64/libuuid.so.1&apos;</span>
-<span class="token function">make</span> -j <span class="token number">8</span>
-<span class="token function">make</span> <span class="token function">install</span>
-<span class="token function">popd</span>
 </pre>
       </div>
       

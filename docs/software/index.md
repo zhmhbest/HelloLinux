@@ -32,7 +32,3 @@
 ## DRBD
 
 @import "drbd.md"
-
-## Heartbeat
-
-@import "heartbeat.md"
