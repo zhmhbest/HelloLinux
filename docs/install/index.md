@@ -68,7 +68,7 @@ yum repolist
 ### 基本工具
 
 ```bash
-yum -y install wget net-tools zip unzip vim
+yum -y install wget net-tools bzip2 zip unzip vim
 ```
 
 ## 关闭SELINUX
