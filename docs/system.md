@@ -18,7 +18,7 @@ grep 'MemTotal' /proc/meminfo
 grep 'SwapTotal' /proc/meminfo
 
 # Linux内核版本
-uname -rm
+uname -r
 
 # 硬盘使用量
 df -h
