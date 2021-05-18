@@ -1,5 +1,5 @@
 
->Samba可以使Linux在Windows网上邻居中进行通讯。默认情况下，主机必须处在同一网段。
+>Samba可以使Linux在Windows网上邻居中进行通讯。默认情况下，主机间必须处在同一网段。
 
 ### 安装
 
@@ -37,7 +37,8 @@ exit
 vim /etc/samba/smb.conf
 ```
 
-```inf
+```ini
+;;略
 ```
 
 ### 使用
