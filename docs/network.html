@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css">
       
       
       
@@ -268,7 +268,14 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#networkindexhtml">Network</a>
 <ul>
-<li><a href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</a>
+<ul>
+<li><a href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE">&#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</a></li>
+<li><a href="#%E4%B8%B4%E6%97%B6%E9%85%8D%E7%BD%AE">&#x4E34;&#x65F6;&#x914D;&#x7F6E;</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">&#x6587;&#x672C;&#x914D;&#x7F6E;</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C">&#x67E5;&#x770B;&#x7F51;&#x7EDC;</a></li>
+</ul>
+</li>
 <li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</a></li>
 <li><a href="#%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</a></li>
 <li><a href="#ping">PING</a></li>
@@ -277,20 +284,38 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 <h2 class="mume-header" id="%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</h2>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</span>
-nmtui
-</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ifconfig</span> -a
+<h3 class="mume-header" id="%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE">&#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</h3>
 
-<span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;IP</span>
-<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet&apos;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash">nmtui
+</pre><h3 class="mume-header" id="%E4%B8%B4%E6%97%B6%E9%85%8D%E7%BD%AE">&#x4E34;&#x65F6;&#x914D;&#x7F6E;</h3>
 
-<span class="token comment"># &#x7F51;&#x5361;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
-<span class="token function">ls</span> -l /etc/sysconfig/network-scripts/ifcfg-e*
-</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x4E34;&#x65F6;&#x4FEE;&#x6539;IP</span>
-<span class="token function">ifconfig</span> <span class="token operator">&lt;</span>&#x7F51;&#x5361;&#x540D;&#x79F0;<span class="token punctuation">[</span>:0<span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span> <span class="token punctuation">[</span>netmask <span class="token operator">&lt;</span>mask<span class="token operator">&gt;</span><span class="token punctuation">]</span> <span class="token comment"># &#x4E34;&#x65F6;&#x6DFB;&#x52A0;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ifconfig</span> <span class="token operator">&lt;</span>&#x7F51;&#x5361;&#x540D;&#x79F0;<span class="token punctuation">[</span>:0<span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span> <span class="token punctuation">[</span>netmask <span class="token operator">&lt;</span>mask<span class="token operator">&gt;</span><span class="token punctuation">]</span> <span class="token comment"># &#x4E34;&#x65F6;&#x6DFB;&#x52A0;</span>
 <span class="token function">ifconfig</span> <span class="token operator">&lt;</span>&#x7F51;&#x5361;&#x540D;&#x79F0;<span class="token punctuation">[</span>:0<span class="token punctuation">]</span><span class="token operator">&gt;</span> del <span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span>              <span class="token comment"># &#x4E34;&#x65F6;&#x5220;&#x9664;</span>
+</pre><h3 class="mume-header" id="%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">&#x6587;&#x672C;&#x914D;&#x7F6E;</h3>
 
-<span class="token comment"># DNS&#x670D;&#x52A1;&#x5668;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x7F51;&#x5361;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">ls</span> -l /etc/sysconfig/network-scripts/ifcfg-e*
+
+<span class="token comment"># &#x4FEE;&#x6539;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</span>
+<span class="token function">vi</span> <span class="token string">&apos;/etc/sysconfig/network-scripts/ifcfg-eth0&apos;</span>
+</pre><pre data-role="codeBlock" data-info="conf" class="language-conf"><code>DEVICE=eth0
+HWADDR=00:0C:29:A7:78:C2
+TYPE=Ethernet
+UUID=1608d33d-9cfe-4ea2-8594-85613be62510
+ONBOOT=yes
+BOOTPROTO=none
+IPADDR=192.168.12.167
+PREFIX=24
+GATEWAY=192.168.12.1
+DNS1=8.8.8.8
+</code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS-6</span>
+<span class="token function">service</span> network restart
+
+<span class="token comment"># CentOS-7</span>
+systemctl restart network
+</pre><h3 class="mume-header" id="%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C">&#x67E5;&#x770B;&#x7F51;&#x7EDC;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># DNS&#x670D;&#x52A1;&#x5668;</span>
 <span class="token function">cat</span> /etc/resolv.conf
 
 <span class="token comment"># HOST&#x89E3;&#x6790;</span>
@@ -298,6 +323,14 @@ nmtui
 
 <span class="token comment"># &#x4E3B;&#x673A;&#x540D;</span>
 <span class="token function">cat</span> /etc/hostname
+<span class="token function">hostname</span> -f
+<span class="token function">uname</span> -n
+
+<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</span>
+<span class="token function">ifconfig</span> -a
+
+<span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;IP</span>
+<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet&apos;</span>
 </pre><h2 class="mume-header" id="%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># systemctl {status | stop | start | disable | enable} firewalld.service</span>

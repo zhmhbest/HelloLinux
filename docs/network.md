@@ -7,26 +7,53 @@
 
 ## 配置网络
 
+### 图形化配置
+
 ```bash
-# 图形化配置
 nmtui
 ```
 
+### 临时配置
+
 ```bash
-ifconfig -a
+ifconfig <网卡名称[:0]> <ip> [netmask <mask>] # 临时添加
+ifconfig <网卡名称[:0]> del <ip>              # 临时删除
+```
 
-# 查看当前IP
-ifconfig -a | grep 'inet'
+### 文本配置
 
+```bash
 # 网卡配置文件
 ls -l /etc/sysconfig/network-scripts/ifcfg-e*
+
+# 修改网络配置
+vi '/etc/sysconfig/network-scripts/ifcfg-eth0'
+```
+
+```conf
+DEVICE=eth0
+HWADDR=00:0C:29:A7:78:C2
+TYPE=Ethernet
+UUID=1608d33d-9cfe-4ea2-8594-85613be62510
+ONBOOT=yes
+BOOTPROTO=none
+IPADDR=192.168.12.167
+PREFIX=24
+GATEWAY=192.168.12.1
+DNS1=8.8.8.8
 ```
 
 ```bash
-# 临时修改IP
-ifconfig <网卡名称[:0]> <ip> [netmask <mask>] # 临时添加
-ifconfig <网卡名称[:0]> del <ip>              # 临时删除
+# CentOS-6
+service network restart
 
+# CentOS-7
+systemctl restart network
+```
+
+### 查看网络
+
+```bash
 # DNS服务器
 cat /etc/resolv.conf
 
@@ -35,6 +62,14 @@ cat /etc/hosts
 
 # 主机名
 cat /etc/hostname
+hostname -f
+uname -n
+
+# 查看网络配置
+ifconfig -a
+
+# 查看当前IP
+ifconfig -a | grep 'inet'
 ```
 
 ## 防火墙
