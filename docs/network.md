@@ -70,6 +70,9 @@ ifconfig -a
 
 # 查看当前IP
 ifconfig -a | grep 'inet'
+
+# 查看网口
+ip addr
 ```
 
 ## 防火墙
