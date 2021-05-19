@@ -42,8 +42,13 @@ ls -l
 mkdir '/mnt/cdrom'
 mount '/dev/cdrom' '/mnt/cdrom'
 
+# 制作镜像目录
+mkdir '/mnt/repo'
+ln -s '/mnt/cdrom/Packages' '/mnt/repo/Packages'
+cp -R '/mnt/cdrom/repodata/' '/mnt/repo/'
+
 # 创建镜像源配置
-echo -e "[local]\nname=local\nbaseurl=file:///mnt/cdrom\nenabled=1\ngpgcheck=0">'/etc/yum.repos.d/local.repo'
+echo -e "[local]\nname=local\nbaseurl=file:///mnt/repo\nenabled=1\ngpgcheck=0">'/etc/yum.repos.d/local.repo'
 
 # 更新源缓存
 yum clean all
@@ -56,8 +61,8 @@ yum repolist
 添加**网络适配器**，使用**NAT**模式。
 
 ```bash
-# Aliyun源
-wget -O '/etc/yum.repos.d/CentOS-Aliyun-Base.repo' 'https://mirrors.aliyun.com/repo/Centos-7.repo'
+# CentOS-7 Aliyun
+wget -O '/etc/yum.repos.d/CentOS-Base.repo' 'https://mirrors.aliyun.com/repo/Centos-7.repo'
 
 # 更新源缓存
 yum clean all
@@ -69,6 +74,13 @@ yum repolist
 
 ```bash
 yum -y install wget net-tools bzip2 zip unzip vim
+
+# Or
+
+cd '/mnt/cdrom/Packages'
+rpm -ivh wget-*
+rpm -ivh zip-*
+rpm -ivh unzip-*
 ```
 
 ## 关闭SELINUX

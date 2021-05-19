@@ -335,8 +335,13 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token function">mkdir</span> <span class="token string">&apos;/mnt/cdrom&apos;</span>
 <span class="token function">mount</span> <span class="token string">&apos;/dev/cdrom&apos;</span> <span class="token string">&apos;/mnt/cdrom&apos;</span>
 
+<span class="token comment"># &#x5236;&#x4F5C;&#x955C;&#x50CF;&#x76EE;&#x5F55;</span>
+<span class="token function">mkdir</span> <span class="token string">&apos;/mnt/repo&apos;</span>
+<span class="token function">ln</span> -s <span class="token string">&apos;/mnt/cdrom/Packages&apos;</span> <span class="token string">&apos;/mnt/repo/Packages&apos;</span>
+<span class="token function">cp</span> -R <span class="token string">&apos;/mnt/cdrom/repodata/&apos;</span> <span class="token string">&apos;/mnt/repo/&apos;</span>
+
 <span class="token comment"># &#x521B;&#x5EFA;&#x955C;&#x50CF;&#x6E90;&#x914D;&#x7F6E;</span>
-<span class="token builtin class-name">echo</span> -e <span class="token string">&quot;[local]<span class="token entity" title="\n">\n</span>name=local<span class="token entity" title="\n">\n</span>baseurl=file:///mnt/cdrom<span class="token entity" title="\n">\n</span>enabled=1<span class="token entity" title="\n">\n</span>gpgcheck=0&quot;</span><span class="token operator">&gt;</span><span class="token string">&apos;/etc/yum.repos.d/local.repo&apos;</span>
+<span class="token builtin class-name">echo</span> -e <span class="token string">&quot;[local]<span class="token entity" title="\n">\n</span>name=local<span class="token entity" title="\n">\n</span>baseurl=file:///mnt/repo<span class="token entity" title="\n">\n</span>enabled=1<span class="token entity" title="\n">\n</span>gpgcheck=0&quot;</span><span class="token operator">&gt;</span><span class="token string">&apos;/etc/yum.repos.d/local.repo&apos;</span>
 
 <span class="token comment"># &#x66F4;&#x65B0;&#x6E90;&#x7F13;&#x5B58;</span>
 yum clean all
@@ -345,8 +350,8 @@ yum repolist
 </pre><h3 class="mume-header" id="%E7%BD%91%E7%BB%9C%E6%BA%90">&#x7F51;&#x7EDC;&#x6E90;</h3>
 
 <p>&#x6DFB;&#x52A0;<strong>&#x7F51;&#x7EDC;&#x9002;&#x914D;&#x5668;</strong>&#xFF0C;&#x4F7F;&#x7528;<strong>NAT</strong>&#x6A21;&#x5F0F;&#x3002;</p>
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># Aliyun&#x6E90;</span>
-<span class="token function">wget</span> -O <span class="token string">&apos;/etc/yum.repos.d/CentOS-Aliyun-Base.repo&apos;</span> <span class="token string">&apos;https://mirrors.aliyun.com/repo/Centos-7.repo&apos;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS-7 Aliyun</span>
+<span class="token function">wget</span> -O <span class="token string">&apos;/etc/yum.repos.d/CentOS-Base.repo&apos;</span> <span class="token string">&apos;https://mirrors.aliyun.com/repo/Centos-7.repo&apos;</span>
 
 <span class="token comment"># &#x66F4;&#x65B0;&#x6E90;&#x7F13;&#x5B58;</span>
 yum clean all
@@ -355,6 +360,13 @@ yum repolist
 </pre><h3 class="mume-header" id="%E5%9F%BA%E6%9C%AC%E5%B7%A5%E5%85%B7">&#x57FA;&#x672C;&#x5DE5;&#x5177;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y <span class="token function">install</span> <span class="token function">wget</span> net-tools <span class="token function">bzip2</span> <span class="token function">zip</span> <span class="token function">unzip</span> <span class="token function">vim</span>
+
+<span class="token comment"># Or</span>
+
+<span class="token builtin class-name">cd</span> <span class="token string">&apos;/mnt/cdrom/Packages&apos;</span>
+<span class="token function">rpm</span> -ivh wget-*
+<span class="token function">rpm</span> -ivh zip-*
+<span class="token function">rpm</span> -ivh unzip-*
 </pre><h2 class="mume-header" id="%E5%85%B3%E9%97%ADselinux">&#x5173;&#x95ED;SELINUX</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5F00;&#x542F;</span>
