@@ -23,6 +23,9 @@ uname -r
 # 硬盘使用量
 df -h
 
+# 目录存储使用量
+du -h --max-depth=1 /root
+
 # 查看CPU负载
 uptime
 

@@ -72,6 +72,9 @@ ifconfig -a
 ifconfig -a | grep 'inet'
 
 # 查看网口
+nmcli con show
+
+# 查看网口物理地址
 ip addr
 ```
 
