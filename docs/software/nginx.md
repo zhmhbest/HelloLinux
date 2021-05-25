@@ -2,7 +2,7 @@
 ### 安装
 
 ```bash
-yum install -y yum-utils
+yum -y install yum-utils
 vi '/etc/yum.repos.d/nginx.repo'
 ```
 
@@ -42,12 +42,18 @@ firewall-cmd --permanent --zone=public --add-service=http
 firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --reload
 
-# 控制
-nginx            # 启动
-nginx -s stop    # 快速关闭
-nginx -s quit    # 正常关闭
-nginx -s reload  # 重新加载配置文件
-nginx -s reopen  # 重新打开日志文件
+# 控制（不推荐）
+# nginx            # 启动
+# nginx -s stop    # 快速关闭
+# nginx -s quit    # 正常关闭
+# nginx -s reload  # 重新加载配置文件
+# nginx -s reopen  # 重新打开日志文件
+
+# 服务
+systemctl enable  nginx
+systemctl start   nginx
+systemctl restart nginx
+systemctl status  nginx
 ```
 
 ### 配置
@@ -57,6 +63,8 @@ nginx -s reopen  # 重新打开日志文件
 ```bash
 ll '/usr/share/nginx/html'  # 默认页面所在目录
 ll '/etc/nginx'             # 配置所在目录
+
+vi '/etc/nginx/nginx.conf'
 ```
 
 ```bash
@@ -123,7 +131,7 @@ http {
 
         location / {
             root    /usr/share/nginx/html;
-            index   index.html index.htm;
+            index   index.php index.html index.htm;
         }
 
         # 文件服务器
@@ -142,13 +150,13 @@ http {
         # }
 
         # CGI-PHP on 127.0.0.1:9000
-        #location ~ \.php$ {
-        #    root           html;
-        #    fastcgi_pass   127.0.0.1:9000;
-        #    fastcgi_index  index.php;
-        #    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
-        #    include        fastcgi_params;
-        #}
+        location ~\.php$ {
+           root           /usr/share/nginx/html;
+           fastcgi_pass   127.0.0.1:9000;
+           fastcgi_index  index.php;
+           fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+           include        fastcgi_params;
+        }
 
         # 禁止访问隐藏文件
         location ~ /\. {

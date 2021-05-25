@@ -1,7 +1,5 @@
-<!--
-### Apache2
 
-#### 安装
+### 安装
 
 ```bash
 # 安装
@@ -16,4 +14,3 @@ firewall-cmd --reload
 systemctl enable httpd
 systemctl start  httpd
 ```
--->

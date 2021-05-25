@@ -268,7 +268,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#softwareindexhtml">Software</a>
 <ul>
-<li><a href="#sshd">sshd</a>
+<li><a href="#ssh">SSH</a>
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">&#x914D;&#x7F6E;&#x6587;&#x4EF6;</a></li>
@@ -281,21 +281,32 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 </ul>
 </li>
-<li><a href="#nginx">Nginx</a>
+<li><a href="#apache2">Apache2</a>
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</a></li>
+</ul>
+</li>
+<li><a href="#nginx">Nginx</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE">&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
 <li><a href="#mariadb">Mariadb</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE-1">&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
-<li><a href="#aria2">aria2</a>
+<li><a href="#php">Php</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-2">&#x914D;&#x7F6E;</a></li>
+</ul>
+</li>
+<li><a href="#aria2">Aria2</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-5">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">&#x53C2;&#x6570;&#x8BF4;&#x660E;</a></li>
 </ul>
 </li>
@@ -306,14 +317,14 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 <li><a href="#samba">Samba</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE-2">&#x914D;&#x7F6E;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-6">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-3">&#x914D;&#x7F6E;</a></li>
 <li><a href="#%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</a></li>
 </ul>
 </li>
 <li><a href="#drbd">DRBD</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85-5">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-7">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F">&#x914D;&#x7F6E;&#x4E3B;&#x4ECE;&#x6A21;&#x5F0F;</a>
 <ul>
 <li><a href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99">&#x5173;&#x95ED;&#x9632;&#x706B;&#x5899;</a></li>
@@ -332,7 +343,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 </li>
 </ul>
-<h2 class="mume-header" id="sshd">sshd</h2>
+<h2 class="mume-header" id="ssh">SSH</h2>
 
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85">&#x5B89;&#x88C5;</h3>
 
@@ -414,11 +425,26 @@ systemctl restart sshd
 
 <span class="token comment"># &#x68C0;&#x67E5;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x5BC6;&#x7801;&#x767B;&#x5F55;</span>
 <span class="token function">ssh</span> root@localhost -p <span class="token number">2048</span>
-</pre><h2 class="mume-header" id="nginx">Nginx</h2>
+</pre><h2 class="mume-header" id="apache2">Apache2</h2>
 
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash">yum <span class="token function">install</span> -y yum-utils
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
+yum <span class="token function">install</span> -y httpd
+
+<span class="token comment"># &#x9632;&#x706B;&#x5899;</span>
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-service<span class="token operator">=</span>http
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-service<span class="token operator">=</span>https
+firewall-cmd --reload
+
+<span class="token comment"># &#x542F;&#x52A8;</span>
+systemctl <span class="token builtin class-name">enable</span> httpd
+systemctl start  httpd
+</pre><h2 class="mume-header" id="nginx">Nginx</h2>
+
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y <span class="token function">install</span> yum-utils
 <span class="token function">vi</span> <span class="token string">&apos;/etc/yum.repos.d/nginx.repo&apos;</span>
 </pre><p><a href="http://nginx.org/en/linux_packages.html#RHEL-CentOS"><code>nginx.repo</code></a></p>
 <pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">nginx-stable</span><span class="token punctuation">]</span></span>
@@ -451,12 +477,18 @@ firewall-cmd --permanent --zone<span class="token operator">=</span>public --add
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-service<span class="token operator">=</span>https
 firewall-cmd --reload
 
-<span class="token comment"># &#x63A7;&#x5236;</span>
-nginx            <span class="token comment"># &#x542F;&#x52A8;</span>
-nginx -s stop    <span class="token comment"># &#x5FEB;&#x901F;&#x5173;&#x95ED;</span>
-nginx -s quit    <span class="token comment"># &#x6B63;&#x5E38;&#x5173;&#x95ED;</span>
-nginx -s reload  <span class="token comment"># &#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
-nginx -s reopen  <span class="token comment"># &#x91CD;&#x65B0;&#x6253;&#x5F00;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;</span>
+<span class="token comment"># &#x63A7;&#x5236;&#xFF08;&#x4E0D;&#x63A8;&#x8350;&#xFF09;</span>
+<span class="token comment"># nginx            # &#x542F;&#x52A8;</span>
+<span class="token comment"># nginx -s stop    # &#x5FEB;&#x901F;&#x5173;&#x95ED;</span>
+<span class="token comment"># nginx -s quit    # &#x6B63;&#x5E38;&#x5173;&#x95ED;</span>
+<span class="token comment"># nginx -s reload  # &#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token comment"># nginx -s reopen  # &#x91CD;&#x65B0;&#x6253;&#x5F00;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;</span>
+
+<span class="token comment"># &#x670D;&#x52A1;</span>
+systemctl <span class="token builtin class-name">enable</span>  nginx
+systemctl start   nginx
+systemctl restart nginx
+systemctl status  nginx
 </pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE">&#x914D;&#x7F6E;</h3>
 
 <blockquote>
@@ -464,6 +496,8 @@ nginx -s reopen  <span class="token comment"># &#x91CD;&#x65B0;&#x6253;&#x5F00;&
 </blockquote>
 <pre data-role="codeBlock" data-info="bash" class="language-bash">ll <span class="token string">&apos;/usr/share/nginx/html&apos;</span>  <span class="token comment"># &#x9ED8;&#x8BA4;&#x9875;&#x9762;&#x6240;&#x5728;&#x76EE;&#x5F55;</span>
 ll <span class="token string">&apos;/etc/nginx&apos;</span>             <span class="token comment"># &#x914D;&#x7F6E;&#x6240;&#x5728;&#x76EE;&#x5F55;</span>
+
+<span class="token function">vi</span> <span class="token string">&apos;/etc/nginx/nginx.conf&apos;</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash">user nginx<span class="token punctuation">;</span>             <span class="token comment"># &#x7528;&#x6237;</span>
 worker_processes <span class="token number">1</span><span class="token punctuation">;</span>     <span class="token comment"># &#x5141;&#x8BB8;&#x751F;&#x6210;&#x7684;&#x8FDB;&#x7A0B;&#x6570;</span>
 
@@ -527,7 +561,7 @@ http <span class="token punctuation">{</span>
 
         location / <span class="token punctuation">{</span>
             root    /usr/share/nginx/html<span class="token punctuation">;</span>
-            index   index.html index.htm<span class="token punctuation">;</span>
+            index   index.php index.html index.htm<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
 
         <span class="token comment"># &#x6587;&#x4EF6;&#x670D;&#x52A1;&#x5668;</span>
@@ -546,13 +580,13 @@ http <span class="token punctuation">{</span>
         <span class="token comment"># }</span>
 
         <span class="token comment"># CGI-PHP on 127.0.0.1:9000</span>
-        <span class="token comment">#location ~ \.php$ {</span>
-        <span class="token comment">#    root           html;</span>
-        <span class="token comment">#    fastcgi_pass   127.0.0.1:9000;</span>
-        <span class="token comment">#    fastcgi_index  index.php;</span>
-        <span class="token comment">#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span>
-        <span class="token comment">#    include        fastcgi_params;</span>
-        <span class="token comment">#}</span>
+        location ~<span class="token punctuation">\</span>.php$ <span class="token punctuation">{</span>
+           root           /usr/share/nginx/html<span class="token punctuation">;</span>
+           fastcgi_pass   <span class="token number">127.0</span>.0.1:9000<span class="token punctuation">;</span>
+           fastcgi_index  index.php<span class="token punctuation">;</span>
+           fastcgi_param  SCRIPT_FILENAME  <span class="token variable">$document_root</span><span class="token variable">$fastcgi_script_name</span><span class="token punctuation">;</span>
+           include        fastcgi_params<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
 
         <span class="token comment"># &#x7981;&#x6B62;&#x8BBF;&#x95EE;&#x9690;&#x85CF;&#x6587;&#x4EF6;</span>
         location ~ /<span class="token punctuation">\</span>. <span class="token punctuation">{</span>
@@ -571,7 +605,7 @@ stream <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 </pre><h2 class="mume-header" id="mariadb">Mariadb</h2>
 
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
 yum <span class="token function">install</span> -y mariadb mariadb-server
@@ -604,9 +638,39 @@ mysql -uroot -p
 <span class="token keyword">REVOKE</span> <span class="token keyword">ALL</span> <span class="token keyword">ON</span> <span class="token operator">*</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token string">&apos;user_name&apos;</span><span class="token variable">@&apos;%&apos;</span><span class="token punctuation">;</span>
 <span class="token keyword">GRANT</span> <span class="token keyword">ALL</span> <span class="token keyword">PRIVILEGES</span> <span class="token keyword">ON</span> <span class="token punctuation">`</span>db_name<span class="token punctuation">`</span><span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword">TO</span> <span class="token string">&apos;user_name&apos;</span><span class="token variable">@&apos;%&apos;</span> <span class="token keyword">WITH</span> <span class="token keyword">GRANT</span> <span class="token keyword">OPTION</span><span class="token punctuation">;</span>
 QUIT<span class="token punctuation">;</span>
-</pre><h2 class="mume-header" id="aria2">aria2</h2>
+</pre><h2 class="mume-header" id="php">Php</h2>
 
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
+yum -y <span class="token function">install</span> <span class="token string">&apos;http://rpms.remirepo.net/enterprise/remi-release-7.rpm&apos;</span>
+yum -y <span class="token function">install</span> --enablerepo<span class="token operator">=</span>remi-php72 php-devel php php-cli php-common php-gd php-ldap php-mbstring php-mcrypth php-pdo php-mysqlnd php-fpm php-opcache php-pecl-redis php-pecl-mongodb
+
+<span class="token comment"># &#x68C0;&#x67E5;&#x662F;&#x5426;&#x5B89;&#x88C5;&#x6210;&#x529F;</span>
+php -v
+
+<span class="token comment"># &#x5DF2;&#x5B89;&#x88C5;&#x6269;&#x5C55;</span>
+php -m
+
+<span class="token comment"># &#x6D4B;&#x8BD5;</span>
+<span class="token comment"># Apache2</span>
+<span class="token function">pushd</span> <span class="token string">&apos;/var/www/html&apos;</span>
+<span class="token comment"># Nginx</span>
+<span class="token function">pushd</span> <span class="token string">&apos;/usr/share/nginx/html&apos;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;&lt;?php phpinfo(); ?&gt;&apos;</span><span class="token operator">&gt;</span>info.php
+
+<span class="token comment"># &#x542F;&#x52A8;&#x670D;&#x52A1;</span>
+systemctl <span class="token builtin class-name">enable</span> php-fpm
+systemctl start  php-fpm
+systemctl status php-fpm
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-2">&#x914D;&#x7F6E;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">vi</span> <span class="token string">&apos;/etc/php.ini&apos;</span>
+</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">PHP</span><span class="token punctuation">]</span></span>
+<span class="token comment">;...</span>
+</pre><h2 class="mume-header" id="aria2">Aria2</h2>
+
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-5">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y groupinstall <span class="token string">&apos;Development Tools&apos;</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">aria2_version</span><span class="token operator">=</span><span class="token string">&apos;1.19.0&apos;</span>
@@ -656,7 +720,7 @@ python get-pip.py
 <blockquote>
 <p>Samba&#x53EF;&#x4EE5;&#x4F7F;Linux&#x5728;Windows&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x4E2D;&#x8FDB;&#x884C;&#x901A;&#x8BAF;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E3B;&#x673A;&#x95F4;&#x5FC5;&#x987B;&#x5904;&#x5728;&#x540C;&#x4E00;&#x7F51;&#x6BB5;&#x3002;</p>
 </blockquote>
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-6">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;&#x670D;&#x52A1;</span>
 <span class="token function">rpm</span> -qi samba
@@ -667,7 +731,7 @@ systemctl status smb
 systemctl start smb
 systemctl stop smb
 systemctl restart smb
-</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-2">&#x914D;&#x7F6E;</h3>
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-3">&#x914D;&#x7F6E;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6DFB;&#x52A0;&#x7528;&#x6237;</span>
 <span class="token function">useradd</span> sambauser      <span class="token comment"># &#x6DFB;&#x52A0;&#x7CFB;&#x7EDF;&#x7528;&#x6237;</span>
@@ -697,7 +761,7 @@ smbpasswd -a sambauser <span class="token comment"># &#x65B0;&#x589E;&#x7528;&#x
 <p><strong>Distributed Replicated Block Device(DRBD)&#x662F;</strong>&#x4E00;&#x4E2A;&#x7528;&#x8F6F;&#x4EF6;&#x5B9E;&#x73B0;&#x7684;&#x3001;&#x65E0;&#x5171;&#x4EAB;&#x7684;&#x3001;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x955C;&#x50CF;&#x5757;&#x8BBE;&#x5907;&#x5185;&#x5BB9;&#x7684;&#x5B58;&#x50A8;&#x590D;&#x5236;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;&#x5176;&#x4E0E;RAID1&#x7684;&#x4E3B;&#x8981;&#x533A;&#x522B;&#x5728;&#x4E8E;&#xFF0C;&#x524D;&#x8005;&#x4F7F;&#x7528;RAID&#x63A7;&#x5236;&#x5668;&#x63A5;&#x5165;&#x5230;&#x4E00;&#x53F0;&#x4E3B;&#x673A;&#x4E0A;&#xFF0C;&#x800C;DRBD&#x662F;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x8282;&#x70B9;&#x4E3B;&#x673A;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x6570;&#x636E;&#x7684;&#x955C;&#x50CF;&#x5907;&#x4EFD;&#x3002;</p>
 </blockquote>
 <p><img src="./images/drbd.png" alt="drbd"></p>
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-5">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-7">&#x5B89;&#x88C5;</h3>
 
 <table>
 <thead>
