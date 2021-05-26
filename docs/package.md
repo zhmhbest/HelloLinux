@@ -41,6 +41,48 @@ zip -r <压缩包>.zip <待压缩文件路径>
 unzip [-d <解压到目录>] <压缩包>.zip
 ```
 
+#### 合并第二个ZIP到第一个中
+
+```bash
+function combineZIP() {
+    # $1 FirstZip
+    # $2 SecondZip
+    # $3 SecondPreFix
+
+    # 缓存目录
+    tmpDir=/tmp/CombineZIP_$(echo $RANDOM | md5sum | cut -c 1-8)
+    mkdir "$tmpDir"
+
+    # 获取压缩包路径
+    if [ "."==$(dirname $1) ]; then
+        firstZip="$(pwd)/$(basename $1)"
+    else
+        firstZip=$1
+    fi
+    if [ "."==$(dirname $2) ]; then
+        SecondZip="$(pwd)/$(basename $2)"
+    else
+        SecondZip=$2
+    fi
+    echo $SecondZip
+
+    # 展开第二个Zip
+    secondExtractDir="$tmpDir/$3"
+    mkdir -p "$secondExtractDir"
+    unzip -d "$secondExtractDir" "$SecondZip"
+
+    # 合并压缩
+    pushd "$tmpDir"
+    zip -r "$firstZip" ./
+    popd
+
+    # 移除缓存目录
+    rm -Rf "$tmpDir"
+}
+combineZIP 0.zip 1.zip /prefix
+combineZIP 0.zip 1.zip .
+```
+
 ### 7zip
 
 下载[7zip](https://sourceforge.net/projects/p7zip/files/p7zip/)
