@@ -25,6 +25,8 @@ systemctl start  php-fpm
 systemctl status php-fpm
 ```
 
+![php-fpm](images/php-fpm.png)
+
 ### 配置
 
 ```bash
