@@ -439,7 +439,7 @@ function genRandom8Chars() {
 ```bash
 function combineZIP() {
     # description: 将SecondZip合并到FirstZip中
-    # dependencies: [genRandom8Chars, ]
+    # dependencies: [genRandom8Chars, getAbsolutePath]
     # $1: firstZip
     # $2: secondZip
     # $3: [secondPreFix] default=.
