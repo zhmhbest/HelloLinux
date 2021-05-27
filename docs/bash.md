@@ -378,7 +378,26 @@ echo 123 | md5sum | cut -c '1-32' | tr 'a-z' 'A-Z'
 echo '123' | sha256sum | cut -c '1-64' | tr 'a-z' 'A-Z'
 ```
 
-## files
+## Shells
+
+### 修改配置
+
+```bash
+function changeConfig() {
+    # $1 file
+    # $2 key
+    # $3 split
+    # $4 value
+    line=`egrep -n "^\s*${2}\s*${3}" "$1"` && {
+        n=`echo $line|awk -F':' '{print $1}'`
+        sed -i -e "${n}c\\${2}${3}${4}" "$1"
+        echo update
+    } || {
+        echo "${2}${3}${4}">>"$1"
+        echo append
+    }
+}
+```
 
 ### 递归枚举目录下所有文件
 
@@ -389,4 +408,93 @@ IFS=`echo -en "\n\b"`; basePath="."; for i in `ls -R`; do
         echo $filename, $extName
     fi
 done
+```
+
+### 获取绝对路径
+
+```bash
+function getAbsolutePath() {
+    # $1: fileName
+    local first=${1:0:1}
+    if [ "." == "$first" ]; then
+        echo "$(pwd)/$(echo $1 | cut -c 3-${#1})"
+    elif [ "/" == "$first" ]; then
+        echo "$1"
+    else
+        echo "$(pwd)/$1"
+    fi
+}
+```
+
+### 生成8位随机字符
+
+```bash
+function genRandom8Chars() {
+    echo $RANDOM | md5sum | cut -c 1-8
+}
+```
+
+### 合并第二个ZIP到第一个中
+
+```bash
+function combineZIP() {
+    # description: 将SecondZip合并到FirstZip中
+    # dependencies: [genRandom8Chars, ]
+    # $1: firstZip
+    # $2: secondZip
+    # $3: [secondPreFix] default=.
+    # $4: [dumpPath] default=/tmp
+    # $5: [backupPath] default=$(dirname firstZip)
+
+    # 获取压缩包路径
+    local firstZip="$(getAbsolutePath "$1")"
+    local secondZip="$(getAbsolutePath "$2")"
+    if [ ! -f "$firstZip" ] || [ ! -f "$secondZip" ]; then
+        echo "ZipFile dose not exist!"
+        return 1
+    fi
+    # echo $firstZip
+    # echo $SecondZip
+
+    # 临时展开根目录
+    if [ -n "$4"  ] && [ -d "$4" ]; then
+        local extractRootPath="$(getAbsolutePath "$4")/CombineZIP_$(genRandom8Chars)"
+    else
+        local extractRootPath="/tmp/CombineZIP_$(genRandom8Chars)"
+    fi
+    if [ ! -d "$extractRootPath" ]; then mkdir "$extractRootPath"; fi
+    # 临时展开目录
+    if [ -z "$3" ]; then
+        local extractPath="${extractRootPath}"
+    else
+        local extractPath="${extractRootPath}/$3"
+    fi
+    mkdir -p "$extractPath"
+    # echo $extractPath
+
+    # 备份目录
+    if [ -z "$5" ]; then
+        local backupPath="$(dirname "$firstZip")"
+    else
+        local backupPath="$(getAbsolutePath "$5")"
+    fi
+    if [ ! -d "$backupPath" ]; then
+        echo "BackupPath dose not exist!"
+        return 1
+    else
+        cp -v "$firstZip" "$backupPath/$(date '+%Y%m%d%H%M%S')-$(basename "$firstZip")"
+    fi
+    # echo $backupPath
+
+    # 展开第二个Zip
+    unzip -d "$extractPath" "$secondZip"
+
+    # 合并压缩
+    pushd "$extractRootPath"
+    zip -r "$firstZip" ./
+    popd
+
+    # 移除缓存目录
+    rm -Rf "$extractRootPath"
+}
 ```

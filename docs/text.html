@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css">
       
       
       
@@ -271,11 +271,6 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#grep">grep</a></li>
 <li><a href="#sed">sed</a></li>
 <li><a href="#awk">awk</a></li>
-<li><a href="#scripts">Scripts</a>
-<ul>
-<li><a href="#changeconfig">changeConfig</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -307,18 +302,18 @@ pre[data-line] .line-highlight[data-end]:after {
 </pre><h2 class="mume-header" id="sed">sed</h2>
 
 <p><code>sed [OPTION]... { -e&lt;script&gt; | -f&lt;script-file&gt; } [file]...</code></p>
-<pre data-role="codeBlock" data-info="txt" class="language-txt"><code>OPTION
+<pre data-role="codeBlock" data-info="txt" class="language-txt">OPTION
     -i      &#x76F4;&#x63A5;&#x4FEE;&#x6539;&#x6E90;&#x6587;&#x4EF6;
     -n      &#x4EC5;&#x663E;&#x793A;&#x5904;&#x7406;&#x7684;&#x7ED3;&#x679C;
     -r      &#x4F7F;&#x7528;&#x6269;&#x5C55;&#x7684;&#x6B63;&#x5219;
-</code></pre><pre data-role="codeBlock" data-info="txt" class="language-txt"><code>SCRIPT
+</pre><pre data-role="codeBlock" data-info="txt" class="language-txt">SCRIPT
     i       &#x63D2;&#x5165;&#xFF08;&#x539F;&#x884C;&#x524D;&#xFF09;
     a       &#x63D2;&#x5165;&#xFF08;&#x539F;&#x884C;&#x524D;&#xFF09;
     c       &#x66FF;&#x6362;
     d       &#x5220;&#x9664;
     s       &#x66FF;&#x6362;
     p       &#x6253;&#x5370;
-</code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">cp</span> /etc/selinux/config ./test
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">cp</span> /etc/selinux/config ./test
 
 <span class="token comment"># &#x6253;&#x5370;&#x7B2C;[3,6]&#x884C;</span>
 <span class="token function">sed</span> -ne <span class="token string">&apos;3,6p&apos;</span> ./test
@@ -351,10 +346,10 @@ pre[data-line] .line-highlight[data-end]:after {
 <p><a href="https://www.runoob.com/linux/linux-comm-awk.html">&#x53C2;&#x8003;&#x94FE;&#x63A5;</a></p>
 </blockquote>
 <p><code>{awk | gawk} [OPTION] { &lt;script&gt; | -f&lt;file&gt;.awk } file ...</code></p>
-<pre data-role="codeBlock" data-info="txt" class="language-txt"><code>OPTION
+<pre data-role="codeBlock" data-info="txt" class="language-txt">OPTION
     -F &lt;ch&gt;         &#x6BCF;&#x884C;&#x5B57;&#x6BB5;&#x7684;&#x5206;&#x9694;&#x7B26;
     -v &lt;var&gt;=&lt;val&gt;  &#x5B9A;&#x4E49;&#x53D8;&#x91CF;
-</code></pre><pre data-role="codeBlock" data-info="txt" class="language-txt"><code>SCRIPT
+</pre><pre data-role="codeBlock" data-info="txt" class="language-txt">SCRIPT
     $0              &#x6574;&#x884C;&#x6587;&#x672C;
     $&lt;n&gt;            &#x8BE5;&#x884C;&#x7B2C;n&#x4E2A;&#x5B57;&#x6BB5;
     FS              &#x5206;&#x9694;&#x7B26;
@@ -379,7 +374,7 @@ pre[data-line] .line-highlight[data-end]:after {
     sub(pattern, replaced, str1)    &#x66FF;&#x6362;&#x7B2C;&#x4E00;&#x6B21;
     gsub(pattern, replaced, str1)   &#x5168;&#x5C40;&#x641C;&#x7D22;&#x66FF;&#x6362;
     split(str1, var, str2)          &#x4EE5;str2&#x5206;&#x5272;str1&#x5B58;&#x5165;var
-</code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6253;&#x5370;&#x7B2C;&#x4E8C;&#x884C;</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6253;&#x5370;&#x7B2C;&#x4E8C;&#x884C;</span>
 <span class="token function">awk</span> <span class="token string">&apos;2 == NF&apos;</span> ./test
 
 <span class="token comment"># &#x6253;&#x5370;&#x6B63;&#x5219;&#x5339;&#x914D;&#x7684;&#x884C;</span>
@@ -391,24 +386,6 @@ pre[data-line] .line-highlight[data-end]:after {
 
 <span class="token comment"># &#x8BFB;&#x53D6;inf&#x6587;&#x4EF6;</span>
 <span class="token function">gawk</span> -F<span class="token string">&apos;=&apos;</span> <span class="token string">&apos;{if(&quot;1&quot;==NF || /^;/){next} print <span class="token variable">$1</span>,<span class="token variable">$2</span>}&apos;</span> ./test
-</pre><h2 class="mume-header" id="scripts">Scripts</h2>
-
-<h3 class="mume-header" id="changeconfig">changeConfig</h3>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">changeConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token comment"># $1 file</span>
-    <span class="token comment"># $2 key</span>
-    <span class="token comment"># $3 split</span>
-    <span class="token comment"># $4 value</span>
-    <span class="token assign-left variable">line</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">egrep</span> -n <span class="token string">&quot;^\s*<span class="token variable">${2}</span>\s*<span class="token variable">${3}</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span><span class="token variable">`</span></span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">{</span>
-        <span class="token assign-left variable">n</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">echo</span> $line<span class="token operator">|</span><span class="token function">awk</span> -F<span class="token string">&apos;:&apos;</span> <span class="token string">&apos;{print <span class="token variable">$1</span>}&apos;</span><span class="token variable">`</span></span>
-        <span class="token function">sed</span> -i -e <span class="token string">&quot;<span class="token variable">${n}</span>c<span class="token entity" title="\\">\\</span><span class="token variable">${2}</span><span class="token variable">${3}</span><span class="token variable">${4}</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span>
-        <span class="token builtin class-name">echo</span> update
-    <span class="token punctuation">}</span> <span class="token operator">||</span> <span class="token punctuation">{</span>
-        <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${2}</span><span class="token variable">${3}</span><span class="token variable">${4}</span>&quot;</span><span class="token operator">&gt;&gt;</span><span class="token string">&quot;<span class="token variable">$1</span>&quot;</span>
-        <span class="token builtin class-name">echo</span> append
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
 </pre>
       </div>
       

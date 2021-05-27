@@ -301,9 +301,13 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#hash">hash</a></li>
 </ul>
 </li>
-<li><a href="#files">files</a>
+<li><a href="#shells">Shells</a>
 <ul>
+<li><a href="#%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE">&#x4FEE;&#x6539;&#x914D;&#x7F6E;</a></li>
 <li><a href="#%E9%80%92%E5%BD%92%E6%9E%9A%E4%B8%BE%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6">&#x9012;&#x5F52;&#x679A;&#x4E3E;&#x76EE;&#x5F55;&#x4E0B;&#x6240;&#x6709;&#x6587;&#x4EF6;</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84">&#x83B7;&#x53D6;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;</a></li>
+<li><a href="#%E7%94%9F%E6%88%908%E4%BD%8D%E9%9A%8F%E6%9C%BA%E5%AD%97%E7%AC%A6">&#x751F;&#x6210;8&#x4F4D;&#x968F;&#x673A;&#x5B57;&#x7B26;</a></li>
+<li><a href="#%E5%90%88%E5%B9%B6%E7%AC%AC%E4%BA%8C%E4%B8%AAzip%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%B8%AD">&#x5408;&#x5E76;&#x7B2C;&#x4E8C;&#x4E2A;ZIP&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x4E2D;</a></li>
 </ul>
 </li>
 </ul>
@@ -614,9 +618,25 @@ isdigits qwe
 
 <span class="token comment"># Sha256</span>
 <span class="token builtin class-name">echo</span> <span class="token string">&apos;123&apos;</span> <span class="token operator">|</span> sha256sum <span class="token operator">|</span> <span class="token function">cut</span> -c <span class="token string">&apos;1-64&apos;</span> <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">&apos;a-z&apos;</span> <span class="token string">&apos;A-Z&apos;</span>
-</pre><h2 class="mume-header" id="files">files</h2>
+</pre><h2 class="mume-header" id="shells">Shells</h2>
 
-<h3 class="mume-header" id="%E9%80%92%E5%BD%92%E6%9E%9A%E4%B8%BE%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6">&#x9012;&#x5F52;&#x679A;&#x4E3E;&#x76EE;&#x5F55;&#x4E0B;&#x6240;&#x6709;&#x6587;&#x4EF6;</h3>
+<h3 class="mume-header" id="%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE">&#x4FEE;&#x6539;&#x914D;&#x7F6E;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">changeConfig</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment"># $1 file</span>
+    <span class="token comment"># $2 key</span>
+    <span class="token comment"># $3 split</span>
+    <span class="token comment"># $4 value</span>
+    <span class="token assign-left variable">line</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">egrep</span> -n <span class="token string">&quot;^\s*<span class="token variable">${2}</span>\s*<span class="token variable">${3}</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span><span class="token variable">`</span></span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">{</span>
+        <span class="token assign-left variable">n</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">echo</span> $line<span class="token operator">|</span><span class="token function">awk</span> -F<span class="token string">&apos;:&apos;</span> <span class="token string">&apos;{print <span class="token variable">$1</span>}&apos;</span><span class="token variable">`</span></span>
+        <span class="token function">sed</span> -i -e <span class="token string">&quot;<span class="token variable">${n}</span>c<span class="token entity" title="\\">\\</span><span class="token variable">${2}</span><span class="token variable">${3}</span><span class="token variable">${4}</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span>
+        <span class="token builtin class-name">echo</span> update
+    <span class="token punctuation">}</span> <span class="token operator">||</span> <span class="token punctuation">{</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">${2}</span><span class="token variable">${3}</span><span class="token variable">${4}</span>&quot;</span><span class="token operator">&gt;&gt;</span><span class="token string">&quot;<span class="token variable">$1</span>&quot;</span>
+        <span class="token builtin class-name">echo</span> append
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><h3 class="mume-header" id="%E9%80%92%E5%BD%92%E6%9E%9A%E4%B8%BE%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6">&#x9012;&#x5F52;&#x679A;&#x4E3E;&#x76EE;&#x5F55;&#x4E0B;&#x6240;&#x6709;&#x6587;&#x4EF6;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable"><span class="token environment constant">IFS</span></span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">echo</span> -en <span class="token string">&quot;<span class="token entity" title="\n">\n</span><span class="token entity" title="\b">\b</span>&quot;</span><span class="token variable">`</span></span><span class="token punctuation">;</span> <span class="token assign-left variable">basePath</span><span class="token operator">=</span><span class="token string">&quot;.&quot;</span><span class="token punctuation">;</span> <span class="token keyword">for</span> <span class="token for-or-select variable">i</span> <span class="token keyword">in</span> <span class="token variable"><span class="token variable">`</span><span class="token function">ls</span> -R<span class="token variable">`</span></span><span class="token punctuation">;</span> <span class="token keyword">do</span>
     <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${i<span class="token operator">:</span>(-1)}</span>&quot;</span> <span class="token operator">=</span> <span class="token string">&quot;:&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token assign-left variable">basePath</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${i<span class="token operator">:</span><span class="token operator">:</span>(-1)}</span>&quot;</span><span class="token punctuation">;</span> <span class="token keyword">else</span>
@@ -624,6 +644,86 @@ isdigits qwe
         <span class="token builtin class-name">echo</span> <span class="token variable">$filename</span>, <span class="token variable">$extName</span>
     <span class="token keyword">fi</span>
 <span class="token keyword">done</span>
+</pre><h3 class="mume-header" id="%E8%8E%B7%E5%8F%96%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84">&#x83B7;&#x53D6;&#x7EDD;&#x5BF9;&#x8DEF;&#x5F84;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">getAbsolutePath</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment"># $1: fileName</span>
+    <span class="token builtin class-name">local</span> <span class="token assign-left variable">first</span><span class="token operator">=</span><span class="token variable">${1<span class="token operator">:</span>0<span class="token operator">:</span>1}</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;.&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;<span class="token variable">$first</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>/<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> $1 <span class="token operator">|</span> <span class="token function">cut</span> -c <span class="token number">3</span>-$<span class="token punctuation">{</span>#1<span class="token punctuation">}</span><span class="token variable">)</span></span>&quot;</span>
+    <span class="token keyword">elif</span> <span class="token punctuation">[</span> <span class="token string">&quot;/&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;<span class="token variable">$first</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span>
+    <span class="token keyword">else</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">pwd</span><span class="token variable">)</span></span>/<span class="token variable">$1</span>&quot;</span>
+    <span class="token keyword">fi</span>
+<span class="token punctuation">}</span>
+</pre><h3 class="mume-header" id="%E7%94%9F%E6%88%908%E4%BD%8D%E9%9A%8F%E6%9C%BA%E5%AD%97%E7%AC%A6">&#x751F;&#x6210;8&#x4F4D;&#x968F;&#x673A;&#x5B57;&#x7B26;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">genRandom8Chars</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin class-name">echo</span> <span class="token environment constant">$RANDOM</span> <span class="token operator">|</span> md5sum <span class="token operator">|</span> <span class="token function">cut</span> -c <span class="token number">1</span>-8
+<span class="token punctuation">}</span>
+</pre><h3 class="mume-header" id="%E5%90%88%E5%B9%B6%E7%AC%AC%E4%BA%8C%E4%B8%AAzip%E5%88%B0%E7%AC%AC%E4%B8%80%E4%B8%AA%E4%B8%AD">&#x5408;&#x5E76;&#x7B2C;&#x4E8C;&#x4E2A;ZIP&#x5230;&#x7B2C;&#x4E00;&#x4E2A;&#x4E2D;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">combineZIP</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment"># description: &#x5C06;SecondZip&#x5408;&#x5E76;&#x5230;FirstZip&#x4E2D;</span>
+    <span class="token comment"># dependencies: [genRandom8Chars, ]</span>
+    <span class="token comment"># $1: firstZip</span>
+    <span class="token comment"># $2: secondZip</span>
+    <span class="token comment"># $3: [secondPreFix] default=.</span>
+    <span class="token comment"># $4: [dumpPath] default=/tmp</span>
+    <span class="token comment"># $5: [backupPath] default=$(dirname firstZip)</span>
+
+    <span class="token comment"># &#x83B7;&#x53D6;&#x538B;&#x7F29;&#x5305;&#x8DEF;&#x5F84;</span>
+    <span class="token builtin class-name">local</span> <span class="token assign-left variable">firstZip</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span>getAbsolutePath <span class="token string">&quot;<span class="token variable">$1</span>&quot;</span><span class="token variable">)</span></span>&quot;</span>
+    <span class="token builtin class-name">local</span> <span class="token assign-left variable">secondZip</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span>getAbsolutePath <span class="token string">&quot;<span class="token variable">$2</span>&quot;</span><span class="token variable">)</span></span>&quot;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -f <span class="token string">&quot;<span class="token variable">$firstZip</span>&quot;</span> <span class="token punctuation">]</span> <span class="token operator">||</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -f <span class="token string">&quot;<span class="token variable">$secondZip</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;ZipFile dose not exist!&quot;</span>
+        <span class="token builtin class-name">return</span> <span class="token number">1</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment"># echo $firstZip</span>
+    <span class="token comment"># echo $SecondZip</span>
+
+    <span class="token comment"># &#x4E34;&#x65F6;&#x5C55;&#x5F00;&#x6839;&#x76EE;&#x5F55;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -n <span class="token string">&quot;<span class="token variable">$4</span>&quot;</span>  <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> -d <span class="token string">&quot;<span class="token variable">$4</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">local</span> <span class="token assign-left variable">extractRootPath</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span>getAbsolutePath <span class="token string">&quot;<span class="token variable">$4</span>&quot;</span><span class="token variable">)</span></span>/CombineZIP_<span class="token variable"><span class="token variable">$(</span>genRandom8Chars<span class="token variable">)</span></span>&quot;</span>
+    <span class="token keyword">else</span>
+        <span class="token builtin class-name">local</span> <span class="token assign-left variable">extractRootPath</span><span class="token operator">=</span><span class="token string">&quot;/tmp/CombineZIP_<span class="token variable"><span class="token variable">$(</span>genRandom8Chars<span class="token variable">)</span></span>&quot;</span>
+    <span class="token keyword">fi</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token string">&quot;<span class="token variable">$extractRootPath</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> <span class="token string">&quot;<span class="token variable">$extractRootPath</span>&quot;</span><span class="token punctuation">;</span> <span class="token keyword">fi</span>
+    <span class="token comment"># &#x4E34;&#x65F6;&#x5C55;&#x5F00;&#x76EE;&#x5F55;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -z <span class="token string">&quot;<span class="token variable">$3</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">local</span> <span class="token assign-left variable">extractPath</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${extractRootPath}</span>&quot;</span>
+    <span class="token keyword">else</span>
+        <span class="token builtin class-name">local</span> <span class="token assign-left variable">extractPath</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${extractRootPath}</span>/<span class="token variable">$3</span>&quot;</span>
+    <span class="token keyword">fi</span>
+    <span class="token function">mkdir</span> -p <span class="token string">&quot;<span class="token variable">$extractPath</span>&quot;</span>
+    <span class="token comment"># echo $extractPath</span>
+
+    <span class="token comment"># &#x5907;&#x4EFD;&#x76EE;&#x5F55;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -z <span class="token string">&quot;<span class="token variable">$5</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">local</span> <span class="token assign-left variable">backupPath</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span><span class="token function">dirname</span> <span class="token string">&quot;<span class="token variable">$firstZip</span>&quot;</span><span class="token variable">)</span></span>&quot;</span>
+    <span class="token keyword">else</span>
+        <span class="token builtin class-name">local</span> <span class="token assign-left variable">backupPath</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable"><span class="token variable">$(</span>getAbsolutePath <span class="token string">&quot;<span class="token variable">$5</span>&quot;</span><span class="token variable">)</span></span>&quot;</span>
+    <span class="token keyword">fi</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token string">&quot;<span class="token variable">$backupPath</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;BackupPath dose not exist!&quot;</span>
+        <span class="token builtin class-name">return</span> <span class="token number">1</span>
+    <span class="token keyword">else</span>
+        <span class="token function">cp</span> -v <span class="token string">&quot;<span class="token variable">$firstZip</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$backupPath</span>/<span class="token variable"><span class="token variable">$(</span><span class="token function">date</span> <span class="token string">&apos;+%Y%m%d%H%M%S&apos;</span><span class="token variable">)</span></span>-<span class="token variable"><span class="token variable">$(</span><span class="token function">basename</span> <span class="token string">&quot;<span class="token variable">$firstZip</span>&quot;</span><span class="token variable">)</span></span>&quot;</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment"># echo $backupPath</span>
+
+    <span class="token comment"># &#x5C55;&#x5F00;&#x7B2C;&#x4E8C;&#x4E2A;Zip</span>
+    <span class="token function">unzip</span> -d <span class="token string">&quot;<span class="token variable">$extractPath</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$secondZip</span>&quot;</span>
+
+    <span class="token comment"># &#x5408;&#x5E76;&#x538B;&#x7F29;</span>
+    <span class="token function">pushd</span> <span class="token string">&quot;<span class="token variable">$extractRootPath</span>&quot;</span>
+    <span class="token function">zip</span> -r <span class="token string">&quot;<span class="token variable">$firstZip</span>&quot;</span> ./
+    <span class="token function">popd</span>
+
+    <span class="token comment"># &#x79FB;&#x9664;&#x7F13;&#x5B58;&#x76EE;&#x5F55;</span>
+    <span class="token function">rm</span> -Rf <span class="token string">&quot;<span class="token variable">$extractRootPath</span>&quot;</span>
+<span class="token punctuation">}</span>
 </pre>
       </div>
       
