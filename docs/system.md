@@ -52,10 +52,10 @@ vi /etc/fstab
 ```bash
 # 添加开机时自动运行的命令（也可启动服务）
 vi '/etc/rc.d/rc.local'
-chmod 744 '/etc/rc.d/rc.local'
+chmod +x '/etc/rc.d/rc.local'
 
 # 禁用
-# chmod 644 '/etc/rc.d/rc.local'
+chmod -x '/etc/rc.d/rc.local'
 ```
 
 ## 系统状态
@@ -218,7 +218,7 @@ nohup 启动文件 > 日志文件.log 2>&1 &
 jobs
 ```
 
-## FileSystem
+## 文件系统
 
 ```bash
 # 查看磁盘UUID和文件系统

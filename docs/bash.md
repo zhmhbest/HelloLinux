@@ -76,6 +76,7 @@ echo $(uname -s)
 
 ```bash
 function dollar() {
+    echo Random: $RANDOM
     echo param1: $1
     echo param2: $2
     echo param3: ${3}
@@ -174,7 +175,7 @@ isdigits qwe
 echo "123" | egrep "[0-9]+">/dev/nul && {
     echo Number
 } || {
-    echo Nan
+    echo NaN
 }
 echo "abc" | egrep "[0-9]+">/dev/nul && {
     echo Number
@@ -268,6 +269,22 @@ echo ${var^^}
 echo ${var,,}
 ```
 
+### cut
+
+```bash
+# 裁剪字符串（前三个）
+echo '0123456789' | cut -c '1-3'
+
+# 裁剪第n块
+echo 'Peter,Male,18,12322223333' | cut -d ',' -f '3'
+
+# 裁剪第n和m块
+echo 'Peter,Male,18,12322223333' | cut -d ',' -f '1,4'
+
+# 裁剪第n至m块
+echo 'Peter,Male,18,12322223333' | cut -d ',' -f '1-3'
+```
+
 ### substr
 
 ```bash
@@ -287,6 +304,22 @@ echo ${var:0:5}
 
 # right(length)=${variable: -length}
 echo ${var: -4}
+```
+
+### tr
+
+```bash
+# 删除字符A和字符C
+echo 'ABC abc ABC' | tr -d 'AC'
+
+# 删除数字
+echo 'ABC123 abc456 ABC789' | tr -d '0-9'
+
+# `|`转换为`,`
+echo 'ABC|ABC' | tr '|' ','
+
+# 小写换大写
+echo 'abcdef' | tr 'a-z' 'A-Z'
 ```
 
 ### replace
@@ -333,6 +366,16 @@ for part in "${arr[@]}"; do echo $part; done
 # Split(i)
 arr=($(echo $var | tr "i" "\n"))
 for part in "${arr[@]}"; do echo $part; done
+```
+
+### hash
+
+```bash
+# MD5
+echo 123 | md5sum | cut -c '1-32' | tr 'a-z' 'A-Z'
+
+# Sha256
+echo '123' | sha256sum | cut -c '1-64' | tr 'a-z' 'A-Z'
 ```
 
 ## files

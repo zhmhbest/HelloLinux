@@ -47,6 +47,11 @@ mkdir '/mnt/repo'
 ln -s '/mnt/cdrom/Packages' '/mnt/repo/Packages'
 cp -R '/mnt/cdrom/repodata/' '/mnt/repo/'
 
+# 设置开机挂载镜像盘
+echo "mount '/dev/cdrom' '/mnt/cdrom'">>'/etc/rc.d/rc.local'
+tail -n 3 '/etc/rc.d/rc.local'
+chmod +x '/etc/rc.d/rc.local'
+
 # 创建镜像源配置
 echo -e "[local]\nname=local\nbaseurl=file:///mnt/repo\nenabled=1\ngpgcheck=0">'/etc/yum.repos.d/local.repo'
 

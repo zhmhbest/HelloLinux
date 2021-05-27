@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css">
       
       
       
@@ -293,9 +293,12 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#length">length</a></li>
 <li><a href="#case-1">case</a></li>
+<li><a href="#cut">cut</a></li>
 <li><a href="#substr">substr</a></li>
+<li><a href="#tr">tr</a></li>
 <li><a href="#replace">replace</a></li>
 <li><a href="#split">split</a></li>
+<li><a href="#hash">hash</a></li>
 </ul>
 </li>
 <li><a href="#files">files</a>
@@ -365,6 +368,7 @@ pre[data-line] .line-highlight[data-end]:after {
 </pre><h2 class="mume-header" id="%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7">&#x7279;&#x6B8A;&#x7B26;&#x53F7;</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token keyword">function</span> <span class="token function-name function">dollar</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token builtin class-name">echo</span> Random: <span class="token environment constant">$RANDOM</span>
     <span class="token builtin class-name">echo</span> param1: <span class="token variable">$1</span>
     <span class="token builtin class-name">echo</span> param2: <span class="token variable">$2</span>
     <span class="token builtin class-name">echo</span> param3: <span class="token variable">${3}</span>
@@ -445,7 +449,7 @@ isdigits qwe
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token builtin class-name">echo</span> <span class="token string">&quot;123&quot;</span> <span class="token operator">|</span> <span class="token function">egrep</span> <span class="token string">&quot;[0-9]+&quot;</span><span class="token operator">&gt;</span>/dev/nul <span class="token operator">&amp;&amp;</span> <span class="token punctuation">{</span>
     <span class="token builtin class-name">echo</span> Number
 <span class="token punctuation">}</span> <span class="token operator">||</span> <span class="token punctuation">{</span>
-    <span class="token builtin class-name">echo</span> Nan
+    <span class="token builtin class-name">echo</span> NaN
 <span class="token punctuation">}</span>
 <span class="token builtin class-name">echo</span> <span class="token string">&quot;abc&quot;</span> <span class="token operator">|</span> <span class="token function">egrep</span> <span class="token string">&quot;[0-9]+&quot;</span><span class="token operator">&gt;</span>/dev/nul <span class="token operator">&amp;&amp;</span> <span class="token punctuation">{</span>
     <span class="token builtin class-name">echo</span> Number
@@ -519,6 +523,19 @@ isdigits qwe
 
 <span class="token comment"># &#x8F6C;&#x4E3A;&#x5C0F;&#x5199;</span>
 <span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">,,</span>}</span>
+</pre><h3 class="mume-header" id="cut">cut</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x88C1;&#x526A;&#x5B57;&#x7B26;&#x4E32;&#xFF08;&#x524D;&#x4E09;&#x4E2A;&#xFF09;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;0123456789&apos;</span> <span class="token operator">|</span> <span class="token function">cut</span> -c <span class="token string">&apos;1-3&apos;</span>
+
+<span class="token comment"># &#x88C1;&#x526A;&#x7B2C;n&#x5757;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;Peter,Male,18,12322223333&apos;</span> <span class="token operator">|</span> <span class="token function">cut</span> -d <span class="token string">&apos;,&apos;</span> -f <span class="token string">&apos;3&apos;</span>
+
+<span class="token comment"># &#x88C1;&#x526A;&#x7B2C;n&#x548C;m&#x5757;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;Peter,Male,18,12322223333&apos;</span> <span class="token operator">|</span> <span class="token function">cut</span> -d <span class="token string">&apos;,&apos;</span> -f <span class="token string">&apos;1,4&apos;</span>
+
+<span class="token comment"># &#x88C1;&#x526A;&#x7B2C;n&#x81F3;m&#x5757;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;Peter,Male,18,12322223333&apos;</span> <span class="token operator">|</span> <span class="token function">cut</span> -d <span class="token string">&apos;,&apos;</span> -f <span class="token string">&apos;1-3&apos;</span>
 </pre><h3 class="mume-header" id="substr">substr</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">&quot;0123456789&quot;</span>
@@ -537,6 +554,19 @@ isdigits qwe
 
 <span class="token comment"># right(length)=${variable: -length}</span>
 <span class="token builtin class-name">echo</span> <span class="token variable">${var<span class="token operator">:</span> -4}</span>
+</pre><h3 class="mume-header" id="tr">tr</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5220;&#x9664;&#x5B57;&#x7B26;A&#x548C;&#x5B57;&#x7B26;C</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;ABC abc ABC&apos;</span> <span class="token operator">|</span> <span class="token function">tr</span> -d <span class="token string">&apos;AC&apos;</span>
+
+<span class="token comment"># &#x5220;&#x9664;&#x6570;&#x5B57;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;ABC123 abc456 ABC789&apos;</span> <span class="token operator">|</span> <span class="token function">tr</span> -d <span class="token string">&apos;0-9&apos;</span>
+
+<span class="token comment"># `|`&#x8F6C;&#x6362;&#x4E3A;`,`</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;ABC|ABC&apos;</span> <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">&apos;|&apos;</span> <span class="token string">&apos;,&apos;</span>
+
+<span class="token comment"># &#x5C0F;&#x5199;&#x6362;&#x5927;&#x5199;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;abcdef&apos;</span> <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">&apos;a-z&apos;</span> <span class="token string">&apos;A-Z&apos;</span>
 </pre><h3 class="mume-header" id="replace">replace</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">var</span><span class="token operator">=</span><span class="token string">&quot;/home/user/.ssh/known_hosts&quot;</span>
@@ -577,6 +607,13 @@ isdigits qwe
 <span class="token comment"># Split(i)</span>
 <span class="token assign-left variable">arr</span><span class="token operator">=</span><span class="token punctuation">(</span><span class="token variable"><span class="token variable">$(</span><span class="token builtin class-name">echo</span> $var <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">&quot;i&quot;</span> <span class="token string">&quot;<span class="token entity" title="\n">\n</span>&quot;</span><span class="token variable">)</span></span><span class="token punctuation">)</span>
 <span class="token keyword">for</span> <span class="token for-or-select variable">part</span> <span class="token keyword">in</span> <span class="token string">&quot;<span class="token variable">${arr<span class="token punctuation">[</span>@<span class="token punctuation">]</span>}</span>&quot;</span><span class="token punctuation">;</span> <span class="token keyword">do</span> <span class="token builtin class-name">echo</span> <span class="token variable">$part</span><span class="token punctuation">;</span> <span class="token keyword">done</span>
+</pre><h3 class="mume-header" id="hash">hash</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># MD5</span>
+<span class="token builtin class-name">echo</span> <span class="token number">123</span> <span class="token operator">|</span> md5sum <span class="token operator">|</span> <span class="token function">cut</span> -c <span class="token string">&apos;1-32&apos;</span> <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">&apos;a-z&apos;</span> <span class="token string">&apos;A-Z&apos;</span>
+
+<span class="token comment"># Sha256</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&apos;123&apos;</span> <span class="token operator">|</span> sha256sum <span class="token operator">|</span> <span class="token function">cut</span> -c <span class="token string">&apos;1-64&apos;</span> <span class="token operator">|</span> <span class="token function">tr</span> <span class="token string">&apos;a-z&apos;</span> <span class="token string">&apos;A-Z&apos;</span>
 </pre><h2 class="mume-header" id="files">files</h2>
 
 <h3 class="mume-header" id="%E9%80%92%E5%BD%92%E6%9E%9A%E4%B8%BE%E7%9B%AE%E5%BD%95%E4%B8%8B%E6%89%80%E6%9C%89%E6%96%87%E4%BB%B6">&#x9012;&#x5F52;&#x679A;&#x4E3E;&#x76EE;&#x5F55;&#x4E0B;&#x6240;&#x6709;&#x6587;&#x4EF6;</h3>

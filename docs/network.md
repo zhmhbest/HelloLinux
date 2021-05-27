@@ -62,7 +62,7 @@ cat /etc/hosts
 
 # 主机名
 cat /etc/hostname
-hostname -f
+hostname
 uname -n
 
 # 查看网络配置
@@ -76,6 +76,7 @@ nmcli con show
 
 # 查看网口物理地址
 ip addr
+ip a
 ```
 
 ## 防火墙
@@ -142,6 +143,9 @@ netstat -tunap
 ## PING
 
 ```bash
+# 查看是否可以被Ping
+test 0 -eq `cat /proc/sys/net/ipv4/icmp_echo_ignore_all` && echo 'Ping: true' || echo 'Ping: false'
+
 # 临时禁止
 echo 1>/proc/sys/net/ipv4/icmp_echo_ignore_all
 # 临时启用
@@ -149,9 +153,9 @@ echo 0>/proc/sys/net/ipv4/icmp_echo_ignore_all
 
 # 永久禁止
 changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all = 1
-sysctl -p
+sysctl -p # 立即加载配置
 
 # 永久启动
 changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all = 0
-sysctl -p
+sysctl -p # 立即加载配置
 ```

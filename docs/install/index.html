@@ -340,6 +340,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token function">ln</span> -s <span class="token string">&apos;/mnt/cdrom/Packages&apos;</span> <span class="token string">&apos;/mnt/repo/Packages&apos;</span>
 <span class="token function">cp</span> -R <span class="token string">&apos;/mnt/cdrom/repodata/&apos;</span> <span class="token string">&apos;/mnt/repo/&apos;</span>
 
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x5F00;&#x673A;&#x6302;&#x8F7D;&#x955C;&#x50CF;&#x76D8;</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;mount &apos;/dev/cdrom&apos; &apos;/mnt/cdrom&apos;&quot;</span><span class="token operator">&gt;&gt;</span><span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
+<span class="token function">tail</span> -n <span class="token number">3</span> <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
+<span class="token function">chmod</span> +x <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
+
 <span class="token comment"># &#x521B;&#x5EFA;&#x955C;&#x50CF;&#x6E90;&#x914D;&#x7F6E;</span>
 <span class="token builtin class-name">echo</span> -e <span class="token string">&quot;[local]<span class="token entity" title="\n">\n</span>name=local<span class="token entity" title="\n">\n</span>baseurl=file:///mnt/repo<span class="token entity" title="\n">\n</span>enabled=1<span class="token entity" title="\n">\n</span>gpgcheck=0&quot;</span><span class="token operator">&gt;</span><span class="token string">&apos;/etc/yum.repos.d/local.repo&apos;</span>
 

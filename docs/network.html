@@ -323,7 +323,7 @@ systemctl restart network
 
 <span class="token comment"># &#x4E3B;&#x673A;&#x540D;</span>
 <span class="token function">cat</span> /etc/hostname
-<span class="token function">hostname</span> -f
+<span class="token function">hostname</span>
 <span class="token function">uname</span> -n
 
 <span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</span>
@@ -335,11 +335,9 @@ systemctl restart network
 <span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x53E3;</span>
 nmcli con show
 
-<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x53E3;</span>
+<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x53E3;&#x7269;&#x7406;&#x5730;&#x5740;</span>
 <span class="token function">ip</span> addr
-
-<span class="token comment"># &#x67E5;&#x770B;&#x6307;&#x5B9A;&#x7F51;&#x53E3;UUID</span>
-uuidgen eth0
+<span class="token function">ip</span> a
 </pre><h2 class="mume-header" id="%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># systemctl {status | stop | start | disable | enable} firewalld.service</span>
@@ -397,18 +395,21 @@ firewall-cmd --reload
 <span class="token function">netstat</span> -tunap
 </pre><h2 class="mume-header" id="ping">PING</h2>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x4E34;&#x65F6;&#x7981;&#x6B62;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x88AB;Ping</span>
+<span class="token builtin class-name">test</span> <span class="token number">0</span> -eq <span class="token variable"><span class="token variable">`</span><span class="token function">cat</span> /proc/sys/net/ipv4/icmp_echo_ignore_all<span class="token variable">`</span></span> <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span> <span class="token string">&apos;Ping: true&apos;</span> <span class="token operator">||</span> <span class="token builtin class-name">echo</span> <span class="token string">&apos;Ping: false&apos;</span>
+
+<span class="token comment"># &#x4E34;&#x65F6;&#x7981;&#x6B62;</span>
 <span class="token builtin class-name">echo</span> <span class="token operator"><span class="token file-descriptor important">1</span>&gt;</span>/proc/sys/net/ipv4/icmp_echo_ignore_all
 <span class="token comment"># &#x4E34;&#x65F6;&#x542F;&#x7528;</span>
 <span class="token builtin class-name">echo</span> <span class="token operator"><span class="token file-descriptor important">0</span>&gt;</span>/proc/sys/net/ipv4/icmp_echo_ignore_all
 
 <span class="token comment"># &#x6C38;&#x4E45;&#x7981;&#x6B62;</span>
 changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all <span class="token operator">=</span> <span class="token number">1</span>
-sysctl -p
+sysctl -p <span class="token comment"># &#x7ACB;&#x5373;&#x52A0;&#x8F7D;&#x914D;&#x7F6E;</span>
 
 <span class="token comment"># &#x6C38;&#x4E45;&#x542F;&#x52A8;</span>
 changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all <span class="token operator">=</span> <span class="token number">0</span>
-sysctl -p
+sysctl -p <span class="token comment"># &#x7ACB;&#x5373;&#x52A0;&#x8F7D;&#x914D;&#x7F6E;</span>
 </pre>
       </div>
       
