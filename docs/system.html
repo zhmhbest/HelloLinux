@@ -287,6 +287,12 @@ pre[data-line] .line-highlight[data-end]:after {
 </ul>
 </li>
 <li><a href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</a>
+<ul>
+<li><a href="#centos6">CentOS6</a></li>
+<li><a href="#centos7">CentOS7</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -503,6 +509,60 @@ blkid
 <span class="token function">mkdir</span> vmount<span class="token punctuation">;</span> <span class="token function">mount</span> vdisk.img vmount/
 <span class="token function">pushd</span> vmount/<span class="token punctuation">;</span> <span class="token function">touch</span> hello<span class="token punctuation">;</span> <span class="token function">popd</span>
 <span class="token function">umount</span> vmount/<span class="token punctuation">;</span> ll vmount/
+</pre><h2 class="mume-header" id="%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</h2>
+
+<h3 class="mume-header" id="centos6">CentOS6</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">chkconfig</span> MyService on
+<span class="token function">chkconfig</span> MyService off
+
+<span class="token function">service</span> MyService start
+<span class="token function">service</span> MyService restart
+<span class="token function">service</span> MyService stop
+</pre><h3 class="mume-header" id="centos7">CentOS7</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash">systemctl <span class="token builtin class-name">enable</span>  MyService
+systemctl disable MyService
+
+systemctl stop    MyService
+systemctl start   MyService
+systemctl restart MyService
+systemctl stop    MyService
+
+ll /usr/lib/systemd/system/
+<span class="token comment"># vim MyServiceservice</span>
+</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Unit</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">Description</span><span class="token punctuation">=</span><span class="token value attr-value">MyService</span>
+<span class="token key attr-name">Documentation</span><span class="token punctuation">=</span><span class="token value attr-value">http://???/docs/</span>
+<span class="token comment"># &#x5728;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x4E4B;&#x540E;&#x542F;&#x52A8;</span>
+<span class="token key attr-name">After</span><span class="token punctuation">=</span><span class="token value attr-value">network-online.target</span>
+<span class="token comment"># &#x5728;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x4E4B;&#x524D;&#x542F;&#x52A8;</span>
+<span class="token key attr-name">Before</span><span class="token punctuation">=</span>
+<span class="token comment"># &#x5F31;&#x4F9D;&#x8D56;&#xFF08;&#x4F9D;&#x8D56;&#x7684;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x5931;&#x8D25;&#x4E0D;&#x5F71;&#x54CD;&#x672C;&#x670D;&#x52A1;&#x8FD0;&#x884C;&#xFF09;</span>
+<span class="token key attr-name">Wants</span><span class="token punctuation">=</span><span class="token value attr-value">network-online.target</span>
+<span class="token comment"># &#x5F3A;&#x4F9D;&#x8D56;&#xFF08;&#x4F9D;&#x8D56;&#x7684;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x5931;&#x8D25;&#x672C;&#x670D;&#x52A1;&#x4E5F;&#x4F1A;&#x9000;&#x51FA;&#xFF09;</span>
+<span class="token key attr-name">Requires</span><span class="token punctuation">=</span>
+
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Service</span><span class="token punctuation">]</span></span>
+<span class="token comment"># &#x542F;&#x52A8;&#x7C7B;&#x578B;&#xFF08;simple&#x3001;forking&#x3001;oneshot&#x3001;dbus&#x3001;notify&#x3001;idle&#xFF09;</span>
+<span class="token key attr-name">Type</span><span class="token punctuation">=</span><span class="token value attr-value">forking</span>
+<span class="token key attr-name">PIDFile</span><span class="token punctuation">=</span><span class="token value attr-value">/var/run/???.pid</span>
+
+<span class="token comment"># &#x81EA;&#x5B9A;&#x4E49;&#x73AF;&#x5883;&#x53D8;&#x91CF;</span>
+<span class="token key attr-name">EnvironmentFile</span><span class="token punctuation">=</span><span class="token value attr-value">/???/???.env</span>
+<span class="token key attr-name">Environment</span><span class="token punctuation">=</span><span class="token value attr-value">var1=val1</span>
+<span class="token key attr-name">Environment</span><span class="token punctuation">=</span><span class="token value attr-value">var2=val2</span>
+
+<span class="token comment"># systemctl start MyService</span>
+<span class="token key attr-name">ExecStart</span><span class="token punctuation">=</span><span class="token value attr-value">Command</span>
+<span class="token comment"># systemctl restart MyService</span>
+<span class="token key attr-name">ExecReload</span><span class="token punctuation">=</span><span class="token value attr-value">Command</span>
+<span class="token comment"># systemctl stop MyService</span>
+<span class="token key attr-name">ExecStop</span><span class="token punctuation">=</span><span class="token value attr-value">Command</span>
+
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Install</span><span class="token punctuation">]</span></span>
+<span class="token comment"># &#x670D;&#x52A1;&#x6240;&#x5728;&#x670D;&#x52A1;&#x7EC4;</span>
+<span class="token key attr-name">WantedBy</span><span class="token punctuation">=</span><span class="token value attr-value">multi-user.target</span>
 </pre>
       </div>
       
