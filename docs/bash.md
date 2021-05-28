@@ -525,15 +525,21 @@ function changeConfig() {
     # $2 key
     # $3 split
     # $4 value
-    line=`egrep -n "^\s*${2}\s*${3}" "$1"` && {
-        n=`echo $line|awk -F':' '{print $1}'`
-        sed -i -e "${n}c\\${2}${3}${4}" "$1"
-        echo update
-    } || {
-        echo "${2}${3}${4}">>"$1"
-        echo append
-    }
+    local filter='if($0~/^#.*/ || 0==length($1))next'
+    local pinter="if(\"$2\"==\$1)print NR\":\"\$0"
+    local s=$(awk -F"$3" "{$filter;$pinter}" "$1")
+    local v="${2}${3}${4}"
+    if [ -z "$s" ]; then
+        echo "$v">>"$1"
+        echo append $v
+    else
+        local n=$(echo $s | awk -F':' '{print $1}')
+        sed -i -e "${n}c\\$v" "$1"
+        echo update $s '->' $v
+    fi
 }
+changeConfig /etc/ssh/sshd_config Port ' ' 2048
+changeConfig /etc/ssh/sshd_config Port ' ' 22
 ```
 
 ### 枚举目录下文件
