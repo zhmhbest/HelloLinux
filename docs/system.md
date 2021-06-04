@@ -220,6 +220,8 @@ jobs
 
 ## 文件系统
 
+### 磁盘
+
 ```bash
 # 查看磁盘UUID和文件系统
 blkid
@@ -236,6 +238,21 @@ du -sh /etc
 df -h
 ```
 
+### 卷管理
+
+```bash
+# 物理卷(PV)
+pvs
+
+# 逻辑卷(LV)
+lvs
+
+# 卷组(VG)
+vgs
+```
+
+### 连接
+
 ```bash
 # 软连接
 ln –s <source> <link>
@@ -244,6 +261,8 @@ ln –s <source> <link>
 # 建立硬连接
 ln <source> <link>
 ```
+
+### 虚拟磁盘
 
 ```bash
 # 磁盘管理（交互式）

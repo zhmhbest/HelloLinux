@@ -286,7 +286,14 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E5%90%8E%E5%8F%B0%E8%BF%9B%E7%A8%8B">&#x540E;&#x53F0;&#x8FDB;&#x7A0B;</a></li>
 </ul>
 </li>
-<li><a href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</a>
+<ul>
+<li><a href="#%E7%A3%81%E7%9B%98">&#x78C1;&#x76D8;</a></li>
+<li><a href="#%E5%8D%B7%E7%AE%A1%E7%90%86">&#x5377;&#x7BA1;&#x7406;</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5">&#x8FDE;&#x63A5;</a></li>
+<li><a href="#%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98">&#x865A;&#x62DF;&#x78C1;&#x76D8;</a></li>
+</ul>
+</li>
 <li><a href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</a>
 <ul>
 <li><a href="#centos6">CentOS6</a></li>
@@ -481,6 +488,8 @@ yum -y <span class="token function">install</span> <span class="token function">
 <span class="token function">jobs</span>
 </pre><h2 class="mume-header" id="%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</h2>
 
+<h3 class="mume-header" id="%E7%A3%81%E7%9B%98">&#x78C1;&#x76D8;</h3>
+
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x78C1;&#x76D8;UUID&#x548C;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;</span>
 blkid
 
@@ -491,13 +500,27 @@ blkid
 
 <span class="token comment"># &#x67E5;&#x770B;&#x6240;&#x6709;&#x5206;&#x533A;&#x4F7F;&#x7528;&#x60C5;&#x51B5;</span>
 <span class="token function">df</span> -h
-</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x8F6F;&#x8FDE;&#x63A5;</span>
+</pre><h3 class="mume-header" id="%E5%8D%B7%E7%AE%A1%E7%90%86">&#x5377;&#x7BA1;&#x7406;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x7269;&#x7406;&#x5377;(PV)</span>
+pvs
+
+<span class="token comment"># &#x903B;&#x8F91;&#x5377;(LV)</span>
+lvs
+
+<span class="token comment"># &#x5377;&#x7EC4;(VG)</span>
+vgs
+</pre><h3 class="mume-header" id="%E8%BF%9E%E6%8E%A5">&#x8FDE;&#x63A5;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x8F6F;&#x8FDE;&#x63A5;</span>
 <span class="token function">ln</span> &#x2013;s <span class="token operator">&lt;</span>source<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>link<span class="token operator">&gt;</span>
 <span class="token comment"># mklink /j &lt;link&gt; &lt;source&gt;</span>
 
 <span class="token comment"># &#x5EFA;&#x7ACB;&#x786C;&#x8FDE;&#x63A5;</span>
 <span class="token function">ln</span> <span class="token operator">&lt;</span>source<span class="token operator">&gt;</span> <span class="token operator">&lt;</span>link<span class="token operator">&gt;</span>
-</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x78C1;&#x76D8;&#x7BA1;&#x7406;&#xFF08;&#x4EA4;&#x4E92;&#x5F0F;&#xFF09;</span>
+</pre><h3 class="mume-header" id="%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98">&#x865A;&#x62DF;&#x78C1;&#x76D8;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x78C1;&#x76D8;&#x7BA1;&#x7406;&#xFF08;&#x4EA4;&#x4E92;&#x5F0F;&#xFF09;</span>
 <span class="token function">dd</span> <span class="token assign-left variable">if</span><span class="token operator">=</span>/dev/zero <span class="token assign-left variable">of</span><span class="token operator">=</span>vdisk.img <span class="token assign-left variable">bs</span><span class="token operator">=</span>1M <span class="token assign-left variable">count</span><span class="token operator">=</span><span class="token number">128</span>
 <span class="token function">fdisk</span> ./vdisk.img
 <span class="token comment"># n(&#x521B;&#x5EFA;&#x5206;&#x533A;) p(&#x4E3B;&#x5206;&#x533A;) ... w(&#x4FDD;&#x5B58;)</span>
