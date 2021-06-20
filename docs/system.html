@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
       
       
       
@@ -292,6 +292,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E5%8D%B7%E7%AE%A1%E7%90%86">&#x5377;&#x7BA1;&#x7406;</a></li>
 <li><a href="#%E8%BF%9E%E6%8E%A5">&#x8FDE;&#x63A5;</a></li>
 <li><a href="#%E8%99%9A%E6%8B%9F%E7%A3%81%E7%9B%98">&#x865A;&#x62DF;&#x78C1;&#x76D8;</a></li>
+<li><a href="#ntfs">NTFS</a>
+<ul>
+<li><a href="#%E4%BF%AE%E5%A4%8D%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF">&#x4FEE;&#x590D;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x9519;&#x8BEF;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</a>
@@ -532,6 +537,13 @@ vgs
 <span class="token function">mkdir</span> vmount<span class="token punctuation">;</span> <span class="token function">mount</span> vdisk.img vmount/
 <span class="token function">pushd</span> vmount/<span class="token punctuation">;</span> <span class="token function">touch</span> hello<span class="token punctuation">;</span> <span class="token function">popd</span>
 <span class="token function">umount</span> vmount/<span class="token punctuation">;</span> ll vmount/
+</pre><h3 class="mume-header" id="ntfs">NTFS</h3>
+
+<h4 class="mume-header" id="%E4%BF%AE%E5%A4%8D%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF">&#x4FEE;&#x590D;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x9519;&#x8BEF;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># The disk contains an unclean file system (?, ?).</span>
+<span class="token comment"># The file system wasn&apos;t safely closed on Windows. Fixing.</span>
+ntfsfix /dev/sda1
 </pre><h2 class="mume-header" id="%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</h2>
 
 <h3 class="mume-header" id="centos6">CentOS6</h3>

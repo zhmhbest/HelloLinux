@@ -279,6 +279,16 @@ pushd vmount/; touch hello; popd
 umount vmount/; ll vmount/
 ```
 
+### NTFS
+
+#### 修复文件系统错误
+
+```bash
+# The disk contains an unclean file system (?, ?).
+# The file system wasn't safely closed on Windows. Fixing.
+ntfsfix /dev/sda1
+```
+
 ## 服务管理
 
 ### CentOS6
