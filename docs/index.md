@@ -3,7 +3,11 @@
 
 # [Linux](https://github.com/zhmhbest/HelloLinux)
 
-## [Install](install/index.html)
+## Install
+
+### [CentOS](install/centos/index.html)
+
+### [Ubuntu Server](install/ubuntu_server/index.html)
 
 ## [System](system.html)
 
