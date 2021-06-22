@@ -7,30 +7,34 @@
 
 ## 配置网络
 
+### 临时配置
+
+```bash
+# ifconfig <网卡名称> <ip> [netmask <mask>] # 临时添加
+# ifconfig <网卡名称> del <ip>              # 临时删除
+```
+
 ### 图形化配置
+
+#### CentOS
 
 ```bash
 nmtui
 ```
 
-### 临时配置
-
-```bash
-ifconfig <网卡名称[:0]> <ip> [netmask <mask>] # 临时添加
-ifconfig <网卡名称[:0]> del <ip>              # 临时删除
-```
-
 ### 文本配置
+
+#### CentOS
 
 ```bash
 # 网卡配置文件
 ls -l /etc/sysconfig/network-scripts/ifcfg-e*
 
-# 修改网络配置
-vi '/etc/sysconfig/network-scripts/ifcfg-eth0'
+# 查看网卡配置
+cat '/etc/sysconfig/network-scripts/ifcfg-eth0'
 ```
 
-```conf
+```ini
 DEVICE=eth0
 HWADDR=00:0C:29:A7:78:C2
 TYPE=Ethernet
@@ -44,11 +48,44 @@ DNS1=8.8.8.8
 ```
 
 ```bash
-# CentOS-6
+# 应用网络配置 CentOS-6
 service network restart
 
-# CentOS-7
+# 应用网络配置 CentOS-7
 systemctl restart network
+```
+
+#### Ubuntu
+
+```bash
+# 查看网卡配置
+cat /etc/netplan/00-installer-config.yaml
+```
+
+```yaml
+network:
+    ethernets:
+        ens33:
+            dhcp4: true
+    version: 2
+```
+
+```yaml
+network:
+    ethernets:
+        ens33:
+            dhcp4: no
+            addresses: [192.168.1.100/24]
+            optional: true
+            gateway4: 192.168.1.1
+            nameservers:
+                addresses: [8.8.8.8]
+    version: 2
+```
+
+```bash
+# 应用网络配置
+sudo netplan apply
 ```
 
 ### 查看网络
@@ -69,17 +106,21 @@ uname -n
 ifconfig -a
 
 # 查看当前IP
-ifconfig -a | grep 'inet'
+ifconfig -a | grep 'inet' | awk '{print $2}'
 
 # 查看网口
+nmcli device show | grep 'DEVICE'
+nmcli connection show
 nmcli con show
 
-# 查看网口物理地址
+# 查看网口物理信息
 ip addr
 ip a
 ```
 
 ## 防火墙
+
+#### CentOS
 
 ```bash
 # systemctl {status | stop | start | disable | enable} firewalld.service
@@ -113,6 +154,38 @@ firewall-cmd --reload
 firewall-cmd --permanent --zone=public --remove-port=8080/tcp
 firewall-cmd --permanent --zone=public --remove-service=https
 firewall-cmd --reload
+```
+
+#### Ubuntu
+
+```bash
+# sudo ufw {enable | disable | status}
+echo y | sudo ufw enable
+sudo ufw status
+
+# 默认策略（允许所有出站、拒绝所有进站）
+sudo ufw default allow outgoing
+sudo ufw default deny incoming
+
+# 基本配置
+# sudo ufw allow <协议>
+# sudo ufw allow <端口>
+# sudo ufw allow <端口>/<协议>
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+
+# 高级配置
+# sudo ufw {allow | deny} [{in | out}] [on <网卡>] [from <IP>] [to any port <端口>]
+sudo ufw allow in on ens33 to any port 80
+sudo ufw deny in from 192.168.1.99
+sudo ufw deny in to any port 8080
+
+# 当前策略
+sudo ufw status verbose
+
+# 重置所有规则
+sudo ufw reset
 ```
 
 ## 网络状态
@@ -158,4 +231,69 @@ sysctl -p # 立即加载配置
 # 永久启动
 changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all = 0
 sysctl -p # 立即加载配置
+```
+
+
+## 服务管理
+
+### CentOS6
+
+```bash
+chkconfig ${ServieName} on
+chkconfig ${ServieName} off
+
+service ${ServieName} start
+service ${ServieName} restart
+service ${ServieName} stop
+```
+
+### CentOS7/Ubuntu
+
+```bash
+systemctl enable  ${ServieName}
+systemctl disable ${ServieName}
+
+systemctl stop    ${ServieName}
+systemctl start   ${ServieName}
+systemctl restart ${ServieName}
+systemctl stop    ${ServieName}
+
+ll '/etc/systemd/system/'
+ll '/usr/lib/systemd/system/'
+# vim MyService
+```
+
+```ini
+[Unit]
+Description=MyService
+Documentation=http://???/docs/
+# 在哪些服务之后启动
+After=network-online.target
+# 在哪些服务之前启动
+Before=
+# 弱依赖（依赖的服务启动失败不影响本服务运行）
+Wants=network-online.target
+# 强依赖（依赖的服务启动失败本服务也会退出）
+Requires=
+
+[Service]
+# 启动类型（simple、forking、oneshot、dbus、notify、idle）
+Type=forking
+PIDFile=/var/run/???.pid
+
+# 自定义环境变量
+EnvironmentFile=/???/???.env
+Environment=var1=val1
+Environment=var2=val2
+
+# systemctl start MyService
+ExecStart=Command
+# systemctl restart MyService
+ExecReload=Command
+# systemctl stop MyService
+ExecStop=Command
+
+[Install]
+# 服务所在服务组
+WantedBy=multi-user.target
 ```

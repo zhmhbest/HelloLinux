@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
       
       
       
@@ -270,49 +270,94 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</a>
 <ul>
-<li><a href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE">&#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</a></li>
 <li><a href="#%E4%B8%B4%E6%97%B6%E9%85%8D%E7%BD%AE">&#x4E34;&#x65F6;&#x914D;&#x7F6E;</a></li>
-<li><a href="#%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">&#x6587;&#x672C;&#x914D;&#x7F6E;</a></li>
+<li><a href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE">&#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</a>
+<ul>
+<li><a href="#centos">CentOS</a></li>
+</ul>
+</li>
+<li><a href="#%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">&#x6587;&#x672C;&#x914D;&#x7F6E;</a>
+<ul>
+<li><a href="#centos-1">CentOS</a></li>
+<li><a href="#ubuntu">Ubuntu</a></li>
+</ul>
+</li>
 <li><a href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C">&#x67E5;&#x770B;&#x7F51;&#x7EDC;</a></li>
 </ul>
 </li>
-<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</a>
+<ul>
+<li><a href="#centos-2">CentOS</a></li>
+<li><a href="#ubuntu-1">Ubuntu</a></li>
+</ul>
+</li>
 <li><a href="#%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</a></li>
 <li><a href="#ping">PING</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</a>
+<ul>
+<li><a href="#centos6">CentOS6</a></li>
+<li><a href="#centos7ubuntu">CentOS7/Ubuntu</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 <h2 class="mume-header" id="%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</h2>
 
-<h3 class="mume-header" id="%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE">&#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</h3>
+<h3 class="mume-header" id="%E4%B8%B4%E6%97%B6%E9%85%8D%E7%BD%AE">&#x4E34;&#x65F6;&#x914D;&#x7F6E;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># ifconfig &lt;&#x7F51;&#x5361;&#x540D;&#x79F0;&gt; &lt;ip&gt; [netmask &lt;mask&gt;] # &#x4E34;&#x65F6;&#x6DFB;&#x52A0;</span>
+<span class="token comment"># ifconfig &lt;&#x7F51;&#x5361;&#x540D;&#x79F0;&gt; del &lt;ip&gt;              # &#x4E34;&#x65F6;&#x5220;&#x9664;</span>
+</pre><h3 class="mume-header" id="%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE">&#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</h3>
+
+<h4 class="mume-header" id="centos">CentOS</h4>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash">nmtui
-</pre><h3 class="mume-header" id="%E4%B8%B4%E6%97%B6%E9%85%8D%E7%BD%AE">&#x4E34;&#x65F6;&#x914D;&#x7F6E;</h3>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ifconfig</span> <span class="token operator">&lt;</span>&#x7F51;&#x5361;&#x540D;&#x79F0;<span class="token punctuation">[</span>:0<span class="token punctuation">]</span><span class="token operator">&gt;</span> <span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span> <span class="token punctuation">[</span>netmask <span class="token operator">&lt;</span>mask<span class="token operator">&gt;</span><span class="token punctuation">]</span> <span class="token comment"># &#x4E34;&#x65F6;&#x6DFB;&#x52A0;</span>
-<span class="token function">ifconfig</span> <span class="token operator">&lt;</span>&#x7F51;&#x5361;&#x540D;&#x79F0;<span class="token punctuation">[</span>:0<span class="token punctuation">]</span><span class="token operator">&gt;</span> del <span class="token operator">&lt;</span>ip<span class="token operator">&gt;</span>              <span class="token comment"># &#x4E34;&#x65F6;&#x5220;&#x9664;</span>
 </pre><h3 class="mume-header" id="%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">&#x6587;&#x672C;&#x914D;&#x7F6E;</h3>
+
+<h4 class="mume-header" id="centos-1">CentOS</h4>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x7F51;&#x5361;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
 <span class="token function">ls</span> -l /etc/sysconfig/network-scripts/ifcfg-e*
 
-<span class="token comment"># &#x4FEE;&#x6539;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</span>
-<span class="token function">vi</span> <span class="token string">&apos;/etc/sysconfig/network-scripts/ifcfg-eth0&apos;</span>
-</pre><pre data-role="codeBlock" data-info="conf" class="language-conf"><code>DEVICE=eth0
-HWADDR=00:0C:29:A7:78:C2
-TYPE=Ethernet
-UUID=1608d33d-9cfe-4ea2-8594-85613be62510
-ONBOOT=yes
-BOOTPROTO=none
-IPADDR=192.168.12.167
-PREFIX=24
-GATEWAY=192.168.12.1
-DNS1=8.8.8.8
-</code></pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS-6</span>
+<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x914D;&#x7F6E;</span>
+<span class="token function">cat</span> <span class="token string">&apos;/etc/sysconfig/network-scripts/ifcfg-eth0&apos;</span>
+</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token key attr-name">DEVICE</span><span class="token punctuation">=</span><span class="token value attr-value">eth0</span>
+<span class="token key attr-name">HWADDR</span><span class="token punctuation">=</span><span class="token value attr-value">00:0C:29:A7:78:C2</span>
+<span class="token key attr-name">TYPE</span><span class="token punctuation">=</span><span class="token value attr-value">Ethernet</span>
+<span class="token key attr-name">UUID</span><span class="token punctuation">=</span><span class="token value attr-value">1608d33d-9cfe-4ea2-8594-85613be62510</span>
+<span class="token key attr-name">ONBOOT</span><span class="token punctuation">=</span><span class="token value attr-value">yes</span>
+<span class="token key attr-name">BOOTPROTO</span><span class="token punctuation">=</span><span class="token value attr-value">none</span>
+<span class="token key attr-name">IPADDR</span><span class="token punctuation">=</span><span class="token value attr-value">192.168.12.167</span>
+<span class="token key attr-name">PREFIX</span><span class="token punctuation">=</span><span class="token value attr-value">24</span>
+<span class="token key attr-name">GATEWAY</span><span class="token punctuation">=</span><span class="token value attr-value">192.168.12.1</span>
+<span class="token key attr-name">DNS1</span><span class="token punctuation">=</span><span class="token value attr-value">8.8.8.8</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5E94;&#x7528;&#x7F51;&#x7EDC;&#x914D;&#x7F6E; CentOS-6</span>
 <span class="token function">service</span> network restart
 
-<span class="token comment"># CentOS-7</span>
+<span class="token comment"># &#x5E94;&#x7528;&#x7F51;&#x7EDC;&#x914D;&#x7F6E; CentOS-7</span>
 systemctl restart network
+</pre><h4 class="mume-header" id="ubuntu">Ubuntu</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x914D;&#x7F6E;</span>
+<span class="token function">cat</span> /etc/netplan/00-installer-config.yaml
+</pre><pre data-role="codeBlock" data-info="yaml" class="language-yaml"><span class="token key atrule">network</span><span class="token punctuation">:</span>
+    <span class="token key atrule">ethernets</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ens33</span><span class="token punctuation">:</span>
+            <span class="token key atrule">dhcp4</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+    <span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">2</span>
+</pre><pre data-role="codeBlock" data-info="yaml" class="language-yaml"><span class="token key atrule">network</span><span class="token punctuation">:</span>
+    <span class="token key atrule">ethernets</span><span class="token punctuation">:</span>
+        <span class="token key atrule">ens33</span><span class="token punctuation">:</span>
+            <span class="token key atrule">dhcp4</span><span class="token punctuation">:</span> no
+            <span class="token key atrule">addresses</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>192.168.1.100/24<span class="token punctuation">]</span>
+            <span class="token key atrule">optional</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+            <span class="token key atrule">gateway4</span><span class="token punctuation">:</span> 192.168.1.1
+            <span class="token key atrule">nameservers</span><span class="token punctuation">:</span>
+                <span class="token key atrule">addresses</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>8.8.8.8<span class="token punctuation">]</span>
+    <span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">2</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5E94;&#x7528;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</span>
+<span class="token function">sudo</span> netplan apply
 </pre><h3 class="mume-header" id="%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C">&#x67E5;&#x770B;&#x7F51;&#x7EDC;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># DNS&#x670D;&#x52A1;&#x5668;</span>
@@ -330,15 +375,19 @@ systemctl restart network
 <span class="token function">ifconfig</span> -a
 
 <span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;IP</span>
-<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet&apos;</span>
+<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet&apos;</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print <span class="token variable">$2</span>}&apos;</span>
 
 <span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x53E3;</span>
+nmcli device show <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;DEVICE&apos;</span>
+nmcli connection show
 nmcli con show
 
-<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x53E3;&#x7269;&#x7406;&#x5730;&#x5740;</span>
+<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x53E3;&#x7269;&#x7406;&#x4FE1;&#x606F;</span>
 <span class="token function">ip</span> addr
 <span class="token function">ip</span> a
 </pre><h2 class="mume-header" id="%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</h2>
+
+<h4 class="mume-header" id="centos-2">CentOS</h4>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># systemctl {status | stop | start | disable | enable} firewalld.service</span>
 
@@ -371,6 +420,35 @@ firewall-cmd --reload
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --remove-port<span class="token operator">=</span><span class="token number">8080</span>/tcp
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --remove-service<span class="token operator">=</span>https
 firewall-cmd --reload
+</pre><h4 class="mume-header" id="ubuntu-1">Ubuntu</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># sudo ufw {enable | disable | status}</span>
+<span class="token builtin class-name">echo</span> y <span class="token operator">|</span> <span class="token function">sudo</span> ufw <span class="token builtin class-name">enable</span>
+<span class="token function">sudo</span> ufw status
+
+<span class="token comment"># &#x9ED8;&#x8BA4;&#x7B56;&#x7565;&#xFF08;&#x5141;&#x8BB8;&#x6240;&#x6709;&#x51FA;&#x7AD9;&#x3001;&#x62D2;&#x7EDD;&#x6240;&#x6709;&#x8FDB;&#x7AD9;&#xFF09;</span>
+<span class="token function">sudo</span> ufw default allow outgoing
+<span class="token function">sudo</span> ufw default deny incoming
+
+<span class="token comment"># &#x57FA;&#x672C;&#x914D;&#x7F6E;</span>
+<span class="token comment"># sudo ufw allow &lt;&#x534F;&#x8BAE;&gt;</span>
+<span class="token comment"># sudo ufw allow &lt;&#x7AEF;&#x53E3;&gt;</span>
+<span class="token comment"># sudo ufw allow &lt;&#x7AEF;&#x53E3;&gt;/&lt;&#x534F;&#x8BAE;&gt;</span>
+<span class="token function">sudo</span> ufw allow <span class="token function">ssh</span>
+<span class="token function">sudo</span> ufw allow http
+<span class="token function">sudo</span> ufw allow https
+
+<span class="token comment"># &#x9AD8;&#x7EA7;&#x914D;&#x7F6E;</span>
+<span class="token comment"># sudo ufw {allow | deny} [{in | out}] [on &lt;&#x7F51;&#x5361;&gt;] [from &lt;IP&gt;] [to any port &lt;&#x7AEF;&#x53E3;&gt;]</span>
+<span class="token function">sudo</span> ufw allow <span class="token keyword">in</span> on ens33 to any port <span class="token number">80</span>
+<span class="token function">sudo</span> ufw deny <span class="token keyword">in</span> from <span class="token number">192.168</span>.1.99
+<span class="token function">sudo</span> ufw deny <span class="token keyword">in</span> to any port <span class="token number">8080</span>
+
+<span class="token comment"># &#x5F53;&#x524D;&#x7B56;&#x7565;</span>
+<span class="token function">sudo</span> ufw status verbose
+
+<span class="token comment"># &#x91CD;&#x7F6E;&#x6240;&#x6709;&#x89C4;&#x5219;</span>
+<span class="token function">sudo</span> ufw reset
 </pre><h2 class="mume-header" id="%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># -i  &#x7F51;&#x5361;&#x4FE1;&#x606F;</span>
@@ -410,6 +488,61 @@ sysctl -p <span class="token comment"># &#x7ACB;&#x5373;&#x52A0;&#x8F7D;&#x914D;
 <span class="token comment"># &#x6C38;&#x4E45;&#x542F;&#x52A8;</span>
 changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all <span class="token operator">=</span> <span class="token number">0</span>
 sysctl -p <span class="token comment"># &#x7ACB;&#x5373;&#x52A0;&#x8F7D;&#x914D;&#x7F6E;</span>
+</pre><h2 class="mume-header" id="%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</h2>
+
+<h3 class="mume-header" id="centos6">CentOS6</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">chkconfig</span> <span class="token variable">${ServieName}</span> on
+<span class="token function">chkconfig</span> <span class="token variable">${ServieName}</span> off
+
+<span class="token function">service</span> <span class="token variable">${ServieName}</span> start
+<span class="token function">service</span> <span class="token variable">${ServieName}</span> restart
+<span class="token function">service</span> <span class="token variable">${ServieName}</span> stop
+</pre><h3 class="mume-header" id="centos7ubuntu">CentOS7/Ubuntu</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash">systemctl <span class="token builtin class-name">enable</span>  <span class="token variable">${ServieName}</span>
+systemctl disable <span class="token variable">${ServieName}</span>
+
+systemctl stop    <span class="token variable">${ServieName}</span>
+systemctl start   <span class="token variable">${ServieName}</span>
+systemctl restart <span class="token variable">${ServieName}</span>
+systemctl stop    <span class="token variable">${ServieName}</span>
+
+ll <span class="token string">&apos;/etc/systemd/system/&apos;</span>
+ll <span class="token string">&apos;/usr/lib/systemd/system/&apos;</span>
+<span class="token comment"># vim MyService</span>
+</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Unit</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">Description</span><span class="token punctuation">=</span><span class="token value attr-value">MyService</span>
+<span class="token key attr-name">Documentation</span><span class="token punctuation">=</span><span class="token value attr-value">http://???/docs/</span>
+<span class="token comment"># &#x5728;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x4E4B;&#x540E;&#x542F;&#x52A8;</span>
+<span class="token key attr-name">After</span><span class="token punctuation">=</span><span class="token value attr-value">network-online.target</span>
+<span class="token comment"># &#x5728;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x4E4B;&#x524D;&#x542F;&#x52A8;</span>
+<span class="token key attr-name">Before</span><span class="token punctuation">=</span>
+<span class="token comment"># &#x5F31;&#x4F9D;&#x8D56;&#xFF08;&#x4F9D;&#x8D56;&#x7684;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x5931;&#x8D25;&#x4E0D;&#x5F71;&#x54CD;&#x672C;&#x670D;&#x52A1;&#x8FD0;&#x884C;&#xFF09;</span>
+<span class="token key attr-name">Wants</span><span class="token punctuation">=</span><span class="token value attr-value">network-online.target</span>
+<span class="token comment"># &#x5F3A;&#x4F9D;&#x8D56;&#xFF08;&#x4F9D;&#x8D56;&#x7684;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x5931;&#x8D25;&#x672C;&#x670D;&#x52A1;&#x4E5F;&#x4F1A;&#x9000;&#x51FA;&#xFF09;</span>
+<span class="token key attr-name">Requires</span><span class="token punctuation">=</span>
+
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Service</span><span class="token punctuation">]</span></span>
+<span class="token comment"># &#x542F;&#x52A8;&#x7C7B;&#x578B;&#xFF08;simple&#x3001;forking&#x3001;oneshot&#x3001;dbus&#x3001;notify&#x3001;idle&#xFF09;</span>
+<span class="token key attr-name">Type</span><span class="token punctuation">=</span><span class="token value attr-value">forking</span>
+<span class="token key attr-name">PIDFile</span><span class="token punctuation">=</span><span class="token value attr-value">/var/run/???.pid</span>
+
+<span class="token comment"># &#x81EA;&#x5B9A;&#x4E49;&#x73AF;&#x5883;&#x53D8;&#x91CF;</span>
+<span class="token key attr-name">EnvironmentFile</span><span class="token punctuation">=</span><span class="token value attr-value">/???/???.env</span>
+<span class="token key attr-name">Environment</span><span class="token punctuation">=</span><span class="token value attr-value">var1=val1</span>
+<span class="token key attr-name">Environment</span><span class="token punctuation">=</span><span class="token value attr-value">var2=val2</span>
+
+<span class="token comment"># systemctl start MyService</span>
+<span class="token key attr-name">ExecStart</span><span class="token punctuation">=</span><span class="token value attr-value">Command</span>
+<span class="token comment"># systemctl restart MyService</span>
+<span class="token key attr-name">ExecReload</span><span class="token punctuation">=</span><span class="token value attr-value">Command</span>
+<span class="token comment"># systemctl stop MyService</span>
+<span class="token key attr-name">ExecStop</span><span class="token punctuation">=</span><span class="token value attr-value">Command</span>
+
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Install</span><span class="token punctuation">]</span></span>
+<span class="token comment"># &#x670D;&#x52A1;&#x6240;&#x5728;&#x670D;&#x52A1;&#x7EC4;</span>
+<span class="token key attr-name">WantedBy</span><span class="token punctuation">=</span><span class="token value attr-value">multi-user.target</span>
 </pre>
       </div>
       
