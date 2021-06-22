@@ -181,4 +181,53 @@ yum -y --enablerepo=<源名称> install <软件名>
 
 ### dpkg
 
+```bash
+```
+
 ### apt-get
+
+```bash
+# 更新本机软件包索引信息
+sudo apt-get update
+
+
+# 根据关键字查找包
+apt-cache search ${keyword}
+# 显示已安装的软件包信息
+apt-cache show ${PackageName}
+apt-cache showpkg ${PackageName}
+# 查看软件包的依赖包
+apt-cache depends ${PackageName}
+
+
+# 安装软件
+sudo apt-get install ${PackageName}
+sudo apt-get install ${PackageName}=${Version}
+# 重新安装损坏的软件
+sudo apt-get --reinstall install ${PackageName}
+
+
+# 卸载软件及其依赖，但会保留配置文件
+sudo apt-get remove ${PackageName}
+# 卸载软件、依赖及其配置文件
+sudo apt-get --purge remove ${PackageName}
+
+
+# 若需要升级或卸载依赖但会影响其它基于此依赖的软件包时，此软件不会被升级
+sudo apt-get -u upgrade ${PackageName}
+# 若需要升级或卸载依赖但会明显导致其它基于此依赖的软件包不可用时，此软件不会被升级
+sudo apt-get -u dist-upgrade ${PackageName}
+# 就是要升级
+sudo apt-get -u install packagename ${PackageName}
+
+
+# 清理缓存的安装包
+sudo apt-get clean
+# 清理版本旧的缓存的安装包
+sudo apt-get autoclean
+```
+
+### apt
+
+```bash
+```

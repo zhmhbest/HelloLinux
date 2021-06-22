@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
       
       
       
@@ -285,6 +285,7 @@ pre[data-line] .line-highlight[data-end]:after {
 <ul>
 <li><a href="#dpkg">dpkg</a></li>
 <li><a href="#apt-get">apt-get</a></li>
+<li><a href="#apt">apt</a></li>
 </ul>
 </li>
 </ul>
@@ -488,9 +489,49 @@ yum -y --enablerepo<span class="token operator">=</span><span class="token opera
 
 <h3 class="mume-header" id="dpkg">dpkg</h3>
 
-<h3 class="mume-header" id="apt-get">apt-get</h3>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"></pre><h3 class="mume-header" id="apt-get">apt-get</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x66F4;&#x65B0;&#x672C;&#x673A;&#x8F6F;&#x4EF6;&#x5305;&#x7D22;&#x5F15;&#x4FE1;&#x606F;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> update
 
 
+<span class="token comment"># &#x6839;&#x636E;&#x5173;&#x952E;&#x5B57;&#x67E5;&#x627E;&#x5305;</span>
+<span class="token function">apt-cache</span> search <span class="token variable">${keyword}</span>
+<span class="token comment"># &#x663E;&#x793A;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x4FE1;&#x606F;</span>
+<span class="token function">apt-cache</span> show <span class="token variable">${PackageName}</span>
+<span class="token function">apt-cache</span> showpkg <span class="token variable">${PackageName}</span>
+<span class="token comment"># &#x67E5;&#x770B;&#x8F6F;&#x4EF6;&#x5305;&#x7684;&#x4F9D;&#x8D56;&#x5305;</span>
+<span class="token function">apt-cache</span> depends <span class="token variable">${PackageName}</span>
+
+
+<span class="token comment"># &#x5B89;&#x88C5;&#x8F6F;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token variable">${PackageName}</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> <span class="token variable">${PackageName}</span><span class="token operator">=</span><span class="token variable">${Version}</span>
+<span class="token comment"># &#x91CD;&#x65B0;&#x5B89;&#x88C5;&#x635F;&#x574F;&#x7684;&#x8F6F;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> --reinstall <span class="token function">install</span> <span class="token variable">${PackageName}</span>
+
+
+<span class="token comment"># &#x5378;&#x8F7D;&#x8F6F;&#x4EF6;&#x53CA;&#x5176;&#x4F9D;&#x8D56;&#xFF0C;&#x4F46;&#x4F1A;&#x4FDD;&#x7559;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> remove <span class="token variable">${PackageName}</span>
+<span class="token comment"># &#x5378;&#x8F7D;&#x8F6F;&#x4EF6;&#x3001;&#x4F9D;&#x8D56;&#x53CA;&#x5176;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> --purge remove <span class="token variable">${PackageName}</span>
+
+
+<span class="token comment"># &#x82E5;&#x9700;&#x8981;&#x5347;&#x7EA7;&#x6216;&#x5378;&#x8F7D;&#x4F9D;&#x8D56;&#x4F46;&#x4F1A;&#x5F71;&#x54CD;&#x5176;&#x5B83;&#x57FA;&#x4E8E;&#x6B64;&#x4F9D;&#x8D56;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x65F6;&#xFF0C;&#x6B64;&#x8F6F;&#x4EF6;&#x4E0D;&#x4F1A;&#x88AB;&#x5347;&#x7EA7;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> -u upgrade <span class="token variable">${PackageName}</span>
+<span class="token comment"># &#x82E5;&#x9700;&#x8981;&#x5347;&#x7EA7;&#x6216;&#x5378;&#x8F7D;&#x4F9D;&#x8D56;&#x4F46;&#x4F1A;&#x660E;&#x663E;&#x5BFC;&#x81F4;&#x5176;&#x5B83;&#x57FA;&#x4E8E;&#x6B64;&#x4F9D;&#x8D56;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x4E0D;&#x53EF;&#x7528;&#x65F6;&#xFF0C;&#x6B64;&#x8F6F;&#x4EF6;&#x4E0D;&#x4F1A;&#x88AB;&#x5347;&#x7EA7;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> -u dist-upgrade <span class="token variable">${PackageName}</span>
+<span class="token comment"># &#x5C31;&#x662F;&#x8981;&#x5347;&#x7EA7;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> -u <span class="token function">install</span> packagename <span class="token variable">${PackageName}</span>
+
+
+<span class="token comment"># &#x6E05;&#x7406;&#x7F13;&#x5B58;&#x7684;&#x5B89;&#x88C5;&#x5305;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> clean
+<span class="token comment"># &#x6E05;&#x7406;&#x7248;&#x672C;&#x65E7;&#x7684;&#x7F13;&#x5B58;&#x7684;&#x5B89;&#x88C5;&#x5305;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> autoclean
+</pre><h3 class="mume-header" id="apt">apt</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"></pre>
       </div>
       
       
