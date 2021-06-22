@@ -29,3 +29,17 @@
 - **Install OpenSSH server**
 - **Popular snaps**
 - **Installing**
+
+## 软件
+
+```bash
+# 必备工具
+sudo apt install network-manager
+sudo apt install net-tools
+sudo apt install zip unzip
+
+# X11应用
+sudo apt install x11-apps
+# 测试X11
+xclock
+```

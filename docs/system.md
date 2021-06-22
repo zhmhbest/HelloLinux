@@ -49,13 +49,32 @@ vi /etc/fstab
 
 ### 开机运行
 
+#### CentOS
+
 ```bash
 # 添加开机时自动运行的命令（也可启动服务）
-vi '/etc/rc.d/rc.local'
 chmod +x '/etc/rc.d/rc.local'
+vi '/etc/rc.d/rc.local'
+```
 
-# 禁用
-chmod -x '/etc/rc.d/rc.local'
+#### Ubuntu
+
+```bash
+sudo sh -c 'echo "#!/bin/sh">/etc/rc.local'
+sudo sh -c 'echo "touch /__startup__">>/etc/rc.local'
+sudo chmod +x /etc/rc.local
+
+# 测试启动
+sudo systemctl start rc-local
+ll '/__startup__' && sudo rm '/__startup__'
+sudo systemctl stop rc-local
+
+# 开机启动脚本
+sudo systemctl enable rc-local
+sudo systemctl status rc-local
+
+# 编辑启动脚本
+vi '/etc/rc.local'
 ```
 
 ## 系统状态
@@ -228,6 +247,9 @@ blkid
 
 # 查看磁盘UUID
 ls -l /dev/disk/by-uuid
+
+# 生成新的UUID
+uuidgen
 ```
 
 ```bash
@@ -287,67 +309,4 @@ umount vmount/; ll vmount/
 # The disk contains an unclean file system (?, ?).
 # The file system wasn't safely closed on Windows. Fixing.
 ntfsfix /dev/sda1
-```
-
-## 服务管理
-
-### CentOS6
-
-```bash
-chkconfig MyService on
-chkconfig MyService off
-
-service MyService start
-service MyService restart
-service MyService stop
-```
-
-### CentOS7
-
-```bash
-systemctl enable  MyService
-systemctl disable MyService
-
-systemctl stop    MyService
-systemctl start   MyService
-systemctl restart MyService
-systemctl stop    MyService
-
-ll /usr/lib/systemd/system/
-# vim MyServiceservice
-```
-
-```ini
-[Unit]
-Description=MyService
-Documentation=http://???/docs/
-# 在哪些服务之后启动
-After=network-online.target
-# 在哪些服务之前启动
-Before=
-# 弱依赖（依赖的服务启动失败不影响本服务运行）
-Wants=network-online.target
-# 强依赖（依赖的服务启动失败本服务也会退出）
-Requires=
-
-[Service]
-# 启动类型（simple、forking、oneshot、dbus、notify、idle）
-Type=forking
-PIDFile=/var/run/???.pid
-
-# 自定义环境变量
-EnvironmentFile=/???/???.env
-Environment=var1=val1
-Environment=var2=val2
-
-# systemctl start MyService
-ExecStart=Command
-# systemctl restart MyService
-ExecReload=Command
-# systemctl stop MyService
-ExecStop=Command
-
-[Install]
-# 服务所在服务组
-WantedBy=multi-user.target
 ```

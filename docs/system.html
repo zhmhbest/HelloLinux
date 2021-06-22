@@ -272,7 +272,12 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E5%BC%80%E6%9C%BA%E6%93%8D%E4%BD%9C">&#x5F00;&#x673A;&#x64CD;&#x4F5C;</a>
 <ul>
 <li><a href="#%E5%BC%80%E6%9C%BA%E6%8C%82%E8%BD%BD">&#x5F00;&#x673A;&#x6302;&#x8F7D;</a></li>
-<li><a href="#%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8C">&#x5F00;&#x673A;&#x8FD0;&#x884C;</a></li>
+<li><a href="#%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8C">&#x5F00;&#x673A;&#x8FD0;&#x884C;</a>
+<ul>
+<li><a href="#centos">CentOS</a></li>
+<li><a href="#ubuntu">Ubuntu</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81">&#x7CFB;&#x7EDF;&#x72B6;&#x6001;</a></li>
@@ -297,12 +302,6 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E4%BF%AE%E5%A4%8D%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E9%94%99%E8%AF%AF">&#x4FEE;&#x590D;&#x6587;&#x4EF6;&#x7CFB;&#x7EDF;&#x9519;&#x8BEF;</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</a>
-<ul>
-<li><a href="#centos6">CentOS6</a></li>
-<li><a href="#centos7">CentOS7</a></li>
 </ul>
 </li>
 </ul>
@@ -346,12 +345,28 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token comment"># /dev/mapper/centos-swap                     swap    swap    defaults        0 0</span>
 </pre><h3 class="mume-header" id="%E5%BC%80%E6%9C%BA%E8%BF%90%E8%A1%8C">&#x5F00;&#x673A;&#x8FD0;&#x884C;</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6DFB;&#x52A0;&#x5F00;&#x673A;&#x65F6;&#x81EA;&#x52A8;&#x8FD0;&#x884C;&#x7684;&#x547D;&#x4EE4;&#xFF08;&#x4E5F;&#x53EF;&#x542F;&#x52A8;&#x670D;&#x52A1;&#xFF09;</span>
-<span class="token function">vi</span> <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
-<span class="token function">chmod</span> +x <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
+<h4 class="mume-header" id="centos">CentOS</h4>
 
-<span class="token comment"># &#x7981;&#x7528;</span>
-<span class="token function">chmod</span> -x <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6DFB;&#x52A0;&#x5F00;&#x673A;&#x65F6;&#x81EA;&#x52A8;&#x8FD0;&#x884C;&#x7684;&#x547D;&#x4EE4;&#xFF08;&#x4E5F;&#x53EF;&#x542F;&#x52A8;&#x670D;&#x52A1;&#xFF09;</span>
+<span class="token function">chmod</span> +x <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
+<span class="token function">vi</span> <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
+</pre><h4 class="mume-header" id="ubuntu">Ubuntu</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">sudo</span> <span class="token function">sh</span> -c <span class="token string">&apos;echo &quot;#!/bin/sh&quot;&gt;/etc/rc.local&apos;</span>
+<span class="token function">sudo</span> <span class="token function">sh</span> -c <span class="token string">&apos;echo &quot;touch /__startup__&quot;&gt;&gt;/etc/rc.local&apos;</span>
+<span class="token function">sudo</span> <span class="token function">chmod</span> +x /etc/rc.local
+
+<span class="token comment"># &#x6D4B;&#x8BD5;&#x542F;&#x52A8;</span>
+<span class="token function">sudo</span> systemctl start rc-local
+ll <span class="token string">&apos;/__startup__&apos;</span> <span class="token operator">&amp;&amp;</span> <span class="token function">sudo</span> <span class="token function">rm</span> <span class="token string">&apos;/__startup__&apos;</span>
+<span class="token function">sudo</span> systemctl stop rc-local
+
+<span class="token comment"># &#x5F00;&#x673A;&#x542F;&#x52A8;&#x811A;&#x672C;</span>
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> rc-local
+<span class="token function">sudo</span> systemctl status rc-local
+
+<span class="token comment"># &#x7F16;&#x8F91;&#x542F;&#x52A8;&#x811A;&#x672C;</span>
+<span class="token function">vi</span> <span class="token string">&apos;/etc/rc.local&apos;</span>
 </pre><h2 class="mume-header" id="%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81">&#x7CFB;&#x7EDF;&#x72B6;&#x6001;</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x7CFB;&#x7EDF;&#x72B6;&#x6001;&#x63A7;&#x5236;</span>
@@ -500,6 +515,9 @@ blkid
 
 <span class="token comment"># &#x67E5;&#x770B;&#x78C1;&#x76D8;UUID</span>
 <span class="token function">ls</span> -l /dev/disk/by-uuid
+
+<span class="token comment"># &#x751F;&#x6210;&#x65B0;&#x7684;UUID</span>
+uuidgen
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x76EE;&#x5F55;&#x5360;&#x7528;&#x7A7A;&#x95F4;&#x5927;&#x5C0F;</span>
 <span class="token function">du</span> -sh /etc
 
@@ -544,60 +562,6 @@ vgs
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># The disk contains an unclean file system (?, ?).</span>
 <span class="token comment"># The file system wasn&apos;t safely closed on Windows. Fixing.</span>
 ntfsfix /dev/sda1
-</pre><h2 class="mume-header" id="%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</h2>
-
-<h3 class="mume-header" id="centos6">CentOS6</h3>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">chkconfig</span> MyService on
-<span class="token function">chkconfig</span> MyService off
-
-<span class="token function">service</span> MyService start
-<span class="token function">service</span> MyService restart
-<span class="token function">service</span> MyService stop
-</pre><h3 class="mume-header" id="centos7">CentOS7</h3>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash">systemctl <span class="token builtin class-name">enable</span>  MyService
-systemctl disable MyService
-
-systemctl stop    MyService
-systemctl start   MyService
-systemctl restart MyService
-systemctl stop    MyService
-
-ll /usr/lib/systemd/system/
-<span class="token comment"># vim MyServiceservice</span>
-</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Unit</span><span class="token punctuation">]</span></span>
-<span class="token key attr-name">Description</span><span class="token punctuation">=</span><span class="token value attr-value">MyService</span>
-<span class="token key attr-name">Documentation</span><span class="token punctuation">=</span><span class="token value attr-value">http://???/docs/</span>
-<span class="token comment"># &#x5728;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x4E4B;&#x540E;&#x542F;&#x52A8;</span>
-<span class="token key attr-name">After</span><span class="token punctuation">=</span><span class="token value attr-value">network-online.target</span>
-<span class="token comment"># &#x5728;&#x54EA;&#x4E9B;&#x670D;&#x52A1;&#x4E4B;&#x524D;&#x542F;&#x52A8;</span>
-<span class="token key attr-name">Before</span><span class="token punctuation">=</span>
-<span class="token comment"># &#x5F31;&#x4F9D;&#x8D56;&#xFF08;&#x4F9D;&#x8D56;&#x7684;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x5931;&#x8D25;&#x4E0D;&#x5F71;&#x54CD;&#x672C;&#x670D;&#x52A1;&#x8FD0;&#x884C;&#xFF09;</span>
-<span class="token key attr-name">Wants</span><span class="token punctuation">=</span><span class="token value attr-value">network-online.target</span>
-<span class="token comment"># &#x5F3A;&#x4F9D;&#x8D56;&#xFF08;&#x4F9D;&#x8D56;&#x7684;&#x670D;&#x52A1;&#x542F;&#x52A8;&#x5931;&#x8D25;&#x672C;&#x670D;&#x52A1;&#x4E5F;&#x4F1A;&#x9000;&#x51FA;&#xFF09;</span>
-<span class="token key attr-name">Requires</span><span class="token punctuation">=</span>
-
-<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Service</span><span class="token punctuation">]</span></span>
-<span class="token comment"># &#x542F;&#x52A8;&#x7C7B;&#x578B;&#xFF08;simple&#x3001;forking&#x3001;oneshot&#x3001;dbus&#x3001;notify&#x3001;idle&#xFF09;</span>
-<span class="token key attr-name">Type</span><span class="token punctuation">=</span><span class="token value attr-value">forking</span>
-<span class="token key attr-name">PIDFile</span><span class="token punctuation">=</span><span class="token value attr-value">/var/run/???.pid</span>
-
-<span class="token comment"># &#x81EA;&#x5B9A;&#x4E49;&#x73AF;&#x5883;&#x53D8;&#x91CF;</span>
-<span class="token key attr-name">EnvironmentFile</span><span class="token punctuation">=</span><span class="token value attr-value">/???/???.env</span>
-<span class="token key attr-name">Environment</span><span class="token punctuation">=</span><span class="token value attr-value">var1=val1</span>
-<span class="token key attr-name">Environment</span><span class="token punctuation">=</span><span class="token value attr-value">var2=val2</span>
-
-<span class="token comment"># systemctl start MyService</span>
-<span class="token key attr-name">ExecStart</span><span class="token punctuation">=</span><span class="token value attr-value">Command</span>
-<span class="token comment"># systemctl restart MyService</span>
-<span class="token key attr-name">ExecReload</span><span class="token punctuation">=</span><span class="token value attr-value">Command</span>
-<span class="token comment"># systemctl stop MyService</span>
-<span class="token key attr-name">ExecStop</span><span class="token punctuation">=</span><span class="token value attr-value">Command</span>
-
-<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Install</span><span class="token punctuation">]</span></span>
-<span class="token comment"># &#x670D;&#x52A1;&#x6240;&#x5728;&#x670D;&#x52A1;&#x7EC4;</span>
-<span class="token key attr-name">WantedBy</span><span class="token punctuation">=</span><span class="token value attr-value">multi-user.target</span>
 </pre>
       </div>
       
