@@ -207,12 +207,14 @@ sudo apt-get install ${PackageName}=${Version}
 sudo apt-get --reinstall install ${PackageName}
 
 
-# 卸载软件及其依赖，但会保留配置文件
+# 卸载软件及其依赖，但保留配置文件
 sudo apt-get remove ${PackageName}
 # 卸载软件、依赖及其配置文件
 sudo apt-get --purge remove ${PackageName}
 
 
+# 升级所有已安装的软件
+sudo apt-get upgrade
 # 若需要升级或卸载依赖但会影响其它基于此依赖的软件包时，此软件不会被升级
 sudo apt-get -u upgrade ${PackageName}
 # 若需要升级或卸载依赖但会明显导致其它基于此依赖的软件包不可用时，此软件不会被升级
@@ -225,9 +227,41 @@ sudo apt-get -u install packagename ${PackageName}
 sudo apt-get clean
 # 清理版本旧的缓存的安装包
 sudo apt-get autoclean
+# 自动删除不需要的依赖包
+sudo apt-get autoremove
 ```
 
 ### apt
 
 ```bash
+# 更新本机软件包索引信息
+sudo apt update
+
+
+# 列出所有软件包
+apt list
+# 搜索应用程序
+apt search ${keyword}
+# 显示安装细节
+apt show ${PackageName}
+
+
+# 安装软件包
+sudo apt install ${PackageName}=${Version}
+
+
+# 移除软件包，但保留配置文件
+sudo apt remove ${PackageName}
+# 移除软件包及配置文件
+sudo apt purge ${PackageName}
+
+
+# 升级所有已安装的软件
+sudo apt upgrade ${PackageName}
+# 升级所有已安装的软件，并尝试自动处理依赖
+sudo apt full-upgrade ${PackageName}
+
+
+# 自动删除不需要的包
+sudo apt autoremove
 ```

@@ -511,12 +511,14 @@ yum -y --enablerepo<span class="token operator">=</span><span class="token opera
 <span class="token function">sudo</span> <span class="token function">apt-get</span> --reinstall <span class="token function">install</span> <span class="token variable">${PackageName}</span>
 
 
-<span class="token comment"># &#x5378;&#x8F7D;&#x8F6F;&#x4EF6;&#x53CA;&#x5176;&#x4F9D;&#x8D56;&#xFF0C;&#x4F46;&#x4F1A;&#x4FDD;&#x7559;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token comment"># &#x5378;&#x8F7D;&#x8F6F;&#x4EF6;&#x53CA;&#x5176;&#x4F9D;&#x8D56;&#xFF0C;&#x4F46;&#x4FDD;&#x7559;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> remove <span class="token variable">${PackageName}</span>
 <span class="token comment"># &#x5378;&#x8F7D;&#x8F6F;&#x4EF6;&#x3001;&#x4F9D;&#x8D56;&#x53CA;&#x5176;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> --purge remove <span class="token variable">${PackageName}</span>
 
 
+<span class="token comment"># &#x5347;&#x7EA7;&#x6240;&#x6709;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> upgrade
 <span class="token comment"># &#x82E5;&#x9700;&#x8981;&#x5347;&#x7EA7;&#x6216;&#x5378;&#x8F7D;&#x4F9D;&#x8D56;&#x4F46;&#x4F1A;&#x5F71;&#x54CD;&#x5176;&#x5B83;&#x57FA;&#x4E8E;&#x6B64;&#x4F9D;&#x8D56;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x65F6;&#xFF0C;&#x6B64;&#x8F6F;&#x4EF6;&#x4E0D;&#x4F1A;&#x88AB;&#x5347;&#x7EA7;</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> -u upgrade <span class="token variable">${PackageName}</span>
 <span class="token comment"># &#x82E5;&#x9700;&#x8981;&#x5347;&#x7EA7;&#x6216;&#x5378;&#x8F7D;&#x4F9D;&#x8D56;&#x4F46;&#x4F1A;&#x660E;&#x663E;&#x5BFC;&#x81F4;&#x5176;&#x5B83;&#x57FA;&#x4E8E;&#x6B64;&#x4F9D;&#x8D56;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x4E0D;&#x53EF;&#x7528;&#x65F6;&#xFF0C;&#x6B64;&#x8F6F;&#x4EF6;&#x4E0D;&#x4F1A;&#x88AB;&#x5347;&#x7EA7;</span>
@@ -529,9 +531,41 @@ yum -y --enablerepo<span class="token operator">=</span><span class="token opera
 <span class="token function">sudo</span> <span class="token function">apt-get</span> clean
 <span class="token comment"># &#x6E05;&#x7406;&#x7248;&#x672C;&#x65E7;&#x7684;&#x7F13;&#x5B58;&#x7684;&#x5B89;&#x88C5;&#x5305;</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> autoclean
+<span class="token comment"># &#x81EA;&#x52A8;&#x5220;&#x9664;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x4F9D;&#x8D56;&#x5305;</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> autoremove
 </pre><h3 class="mume-header" id="apt">apt</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"></pre>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x66F4;&#x65B0;&#x672C;&#x673A;&#x8F6F;&#x4EF6;&#x5305;&#x7D22;&#x5F15;&#x4FE1;&#x606F;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> update
+
+
+<span class="token comment"># &#x5217;&#x51FA;&#x6240;&#x6709;&#x8F6F;&#x4EF6;&#x5305;</span>
+<span class="token function">apt</span> list
+<span class="token comment"># &#x641C;&#x7D22;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;</span>
+<span class="token function">apt</span> search <span class="token variable">${keyword}</span>
+<span class="token comment"># &#x663E;&#x793A;&#x5B89;&#x88C5;&#x7EC6;&#x8282;</span>
+<span class="token function">apt</span> show <span class="token variable">${PackageName}</span>
+
+
+<span class="token comment"># &#x5B89;&#x88C5;&#x8F6F;&#x4EF6;&#x5305;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token variable">${PackageName}</span><span class="token operator">=</span><span class="token variable">${Version}</span>
+
+
+<span class="token comment"># &#x79FB;&#x9664;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x4F46;&#x4FDD;&#x7559;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> remove <span class="token variable">${PackageName}</span>
+<span class="token comment"># &#x79FB;&#x9664;&#x8F6F;&#x4EF6;&#x5305;&#x53CA;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> purge <span class="token variable">${PackageName}</span>
+
+
+<span class="token comment"># &#x5347;&#x7EA7;&#x6240;&#x6709;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> upgrade <span class="token variable">${PackageName}</span>
+<span class="token comment"># &#x5347;&#x7EA7;&#x6240;&#x6709;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;&#xFF0C;&#x5E76;&#x5C1D;&#x8BD5;&#x81EA;&#x52A8;&#x5904;&#x7406;&#x4F9D;&#x8D56;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> full-upgrade <span class="token variable">${PackageName}</span>
+
+
+<span class="token comment"># &#x81EA;&#x52A8;&#x5220;&#x9664;&#x4E0D;&#x9700;&#x8981;&#x7684;&#x5305;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> autoremove
+</pre>
       </div>
       
       
