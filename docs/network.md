@@ -23,6 +23,9 @@ ip addr add 192.168.1.100/24 dev eth0
 
 ```bash
 nmtui
+nmtui edit
+nmtui connect
+nmtui hostname
 ```
 
 ### 文本配置
@@ -259,6 +262,9 @@ sysctl -p # 立即加载配置
 # ip link set <设备名称> {up | down}
 # ip link set <设备名称> netns <空间名称>
 # ip link delete <设备名称> [type {macvlan | macvtap}]
+
+# 查看网卡TYPE
+nmcli
 
 # 测试添加虚拟网卡
 ip link add link ens32 dev vlan0 index 3 type macvlan

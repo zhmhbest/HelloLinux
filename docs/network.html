@@ -322,6 +322,9 @@ pre[data-line] .line-highlight[data-end]:after {
 <h4 class="mume-header" id="centos">CentOS</h4>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash">nmtui
+nmtui edit
+nmtui connect
+nmtui <span class="token function">hostname</span>
 </pre><h3 class="mume-header" id="%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">&#x6587;&#x672C;&#x914D;&#x7F6E;</h3>
 
 <h4 class="mume-header" id="centos-1">CentOS</h4>
@@ -523,6 +526,9 @@ sysctl -p <span class="token comment"># &#x7ACB;&#x5373;&#x52A0;&#x8F7D;&#x914D;
 <span class="token comment"># ip link set &lt;&#x8BBE;&#x5907;&#x540D;&#x79F0;&gt; {up | down}</span>
 <span class="token comment"># ip link set &lt;&#x8BBE;&#x5907;&#x540D;&#x79F0;&gt; netns &lt;&#x7A7A;&#x95F4;&#x540D;&#x79F0;&gt;</span>
 <span class="token comment"># ip link delete &lt;&#x8BBE;&#x5907;&#x540D;&#x79F0;&gt; [type {macvlan | macvtap}]</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;TYPE</span>
+nmcli
 
 <span class="token comment"># &#x6D4B;&#x8BD5;&#x6DFB;&#x52A0;&#x865A;&#x62DF;&#x7F51;&#x5361;</span>
 <span class="token function">ip</span> <span class="token function">link</span> <span class="token function">add</span> <span class="token function">link</span> ens32 dev vlan0 index <span class="token number">3</span> <span class="token builtin class-name">type</span> macvlan
