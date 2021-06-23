@@ -12,6 +12,9 @@
 ```bash
 # ifconfig <网卡名称> <ip> [netmask <mask>] # 临时添加
 # ifconfig <网卡名称> del <ip>              # 临时删除
+
+ifconfig eth0 192.168.1.100 netmask 255.255.255.0
+ip addr add 192.168.1.100/24 dev eth0
 ```
 
 ### 图形化配置
@@ -116,11 +119,14 @@ nmcli con show
 # 查看网口物理信息
 ip addr
 ip a
+
+# 查看网卡名称
+ip a | grep '^[0-9]' | awk -F': ' '{print $2}'
 ```
 
 ## 防火墙
 
-#### CentOS
+### CentOS
 
 ```bash
 # systemctl {status | stop | start | disable | enable} firewalld.service
@@ -156,7 +162,7 @@ firewall-cmd --permanent --zone=public --remove-service=https
 firewall-cmd --reload
 ```
 
-#### Ubuntu
+### Ubuntu
 
 ```bash
 # sudo ufw {enable | disable | status}
@@ -233,6 +239,45 @@ changeConfig /etc/sysctl.conf net.ipv4.icmp_echo_ignore_all = 0
 sysctl -p # 立即加载配置
 ```
 
+## 虚拟网卡
+
+- vlan
+- macvlan: 基于链路层地址（MAC）的虚拟接口
+  - private: 同一主接口下的子接口之间彼此隔离，不能通信（即使从外部的物理交换机也不行）。
+  - vepa(virtual ethernet port aggregator): 默认模式
+  - bridge
+  - passthru: 只允许单个子接口连接主接口，且网卡必须设置成混杂模式。
+- macvtap: 基于链路层地址（MAC）和TAP的虚拟接口
+
+```bash
+# 网络空间
+# ip netns {list | add <空间名称> | delete <空间名称>}
+# ip netns exec <空间名称> <Command>
+
+# 链路配置
+# ip link add link <基于的物理网卡设备> [name | dev] <新虚拟设备名称> [index <序号>] type {vlan | macvlan [mode {private | vepa | bridge | passthru}] | macvtap}
+# ip link set <设备名称> {up | down}
+# ip link set <设备名称> netns <空间名称>
+# ip link delete <设备名称> [type {macvlan | macvtap}]
+
+# 测试添加虚拟网卡
+ip link add link ens32 ens32v1 index 3 type macvlan
+ip link set ens32v1 up
+ip a
+ip link delete ens32v1
+```
+
+## 无线网络
+
+### Ubuntu
+
+```bash
+# Wifi工具
+sudo apt install wireless-tools
+
+# 查看无线网卡
+iwconfig
+```
 
 ## 服务管理
 
