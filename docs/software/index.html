@@ -3,7 +3,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.2/dist/katex.min.css">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.13.11/dist/katex.min.css">
       
       
       
@@ -723,9 +723,10 @@ python get-pip.py
 </blockquote>
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-6">&#x5B89;&#x88C5;</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;&#x670D;&#x52A1;</span>
-<span class="token function">rpm</span> -qi samba
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS</span>
 yum -y <span class="token function">install</span> samba
+<span class="token comment"># Ubuntu</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> samba
 
 <span class="token comment"># &#x670D;&#x52A1;&#x7BA1;&#x7406;</span>
 systemctl status smb

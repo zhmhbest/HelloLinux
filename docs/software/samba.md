@@ -4,23 +4,35 @@
 ### 安装
 
 ```bash
-# 安装服务
-rpm -qi samba
+# 【CentOS】
 yum -y install samba
-
 # 服务管理
 systemctl status smb
 systemctl start smb
 systemctl stop smb
 systemctl restart smb
+
+
+# 【Ubuntu】
+sudo apt install samba
+# Samba没有作为AD域控制器运行：Masking Samba-AD-dc.service
+# 请忽略以下关于找不到deb-systemd-helper这些服务的错误。
+# 服务管理
+systemctl status smbd
+systemctl start smbd
+systemctl stop smbd
+systemctl restart smbd
 ```
 
 ### 配置
 
 ```bash
-# 添加用户
-useradd sambauser      # 添加系统用户
-echo "sambauser" | passwd --stdin sambauser
+# 添加系统用户
+# sudo userdel -r sambauser
+sudo useradd sambauser
+# sudo mkdir /home/sambauser; sudo chown sambauser:sambauser /home/sambauser
+sudo passwd sambauser
+
 smbpasswd -a sambauser # 新增用户（必须也是系统用户）
 # smbpasswd -d sambauser # 冻结用户
 # smbpasswd -e sambauser # 恢复用户
@@ -30,7 +42,6 @@ su - sambauser
 mkdir ./share; chmod 777 ./share
 # 备份配置文件
 mkdir backups; cp /etc/samba/* ./backups
-#
 exit
 
 # 编辑配置文件

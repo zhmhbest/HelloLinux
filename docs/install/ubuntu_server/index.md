@@ -34,7 +34,7 @@
 
 ```bash
 # 必备工具
-sudo apt install network-manager
+# sudo apt install network-manager
 sudo apt install net-tools
 sudo apt install zip unzip
 
