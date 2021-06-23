@@ -182,6 +182,26 @@ yum -y --enablerepo=<源名称> install <软件名>
 ### dpkg
 
 ```bash
+# 筛选软件包（已安装和未安装）
+dpkg -S ${keyword}
+
+# 查看软件包的内容
+dpkg -c ${PackageFilePath}
+
+# 安装软件包
+dpkg -i ${PackageFilePath}
+
+# 查看所有已经安装的软件
+dpkg -l
+
+# 查看已安装的软件包文件信息
+dpkg -L ${PackageName}
+
+# 查看已安装的软件包状态信息
+dpkg -s ${PackageName}
+
+# 卸载软件包，但保留配置文件
+sudo dpkg -r ${PackageName}
 ```
 
 ### apt-get

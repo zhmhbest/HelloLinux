@@ -489,7 +489,27 @@ yum -y --enablerepo<span class="token operator">=</span><span class="token opera
 
 <h3 class="mume-header" id="dpkg">dpkg</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"></pre><h3 class="mume-header" id="apt-get">apt-get</h3>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x7B5B;&#x9009;&#x8F6F;&#x4EF6;&#x5305;&#xFF08;&#x5DF2;&#x5B89;&#x88C5;&#x548C;&#x672A;&#x5B89;&#x88C5;&#xFF09;</span>
+dpkg -S <span class="token variable">${keyword}</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x8F6F;&#x4EF6;&#x5305;&#x7684;&#x5185;&#x5BB9;</span>
+dpkg -c <span class="token variable">${PackageFilePath}</span>
+
+<span class="token comment"># &#x5B89;&#x88C5;&#x8F6F;&#x4EF6;&#x5305;</span>
+dpkg -i <span class="token variable">${PackageFilePath}</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x6240;&#x6709;&#x5DF2;&#x7ECF;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;</span>
+dpkg -l
+
+<span class="token comment"># &#x67E5;&#x770B;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x6587;&#x4EF6;&#x4FE1;&#x606F;</span>
+dpkg -L <span class="token variable">${PackageName}</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x5DF2;&#x5B89;&#x88C5;&#x7684;&#x8F6F;&#x4EF6;&#x5305;&#x72B6;&#x6001;&#x4FE1;&#x606F;</span>
+dpkg -s <span class="token variable">${PackageName}</span>
+
+<span class="token comment"># &#x5378;&#x8F7D;&#x8F6F;&#x4EF6;&#x5305;&#xFF0C;&#x4F46;&#x4FDD;&#x7559;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
+<span class="token function">sudo</span> dpkg -r <span class="token variable">${PackageName}</span>
+</pre><h3 class="mume-header" id="apt-get">apt-get</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x66F4;&#x65B0;&#x672C;&#x673A;&#x8F6F;&#x4EF6;&#x5305;&#x7D22;&#x5F15;&#x4FE1;&#x606F;</span>
 <span class="token function">sudo</span> <span class="token function">apt-get</span> update
