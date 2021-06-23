@@ -519,22 +519,24 @@ sysctl -p <span class="token comment"># &#x7ACB;&#x5373;&#x52A0;&#x8F7D;&#x914D;
 <span class="token comment"># ip netns exec &lt;&#x7A7A;&#x95F4;&#x540D;&#x79F0;&gt; &lt;Command&gt;</span>
 
 <span class="token comment"># &#x94FE;&#x8DEF;&#x914D;&#x7F6E;</span>
-<span class="token comment"># ip link add link &lt;&#x57FA;&#x4E8E;&#x7684;&#x7269;&#x7406;&#x7F51;&#x5361;&#x8BBE;&#x5907;&gt; [name | dev] &lt;&#x65B0;&#x865A;&#x62DF;&#x8BBE;&#x5907;&#x540D;&#x79F0;&gt; [index &lt;&#x5E8F;&#x53F7;&gt;] type {vlan | macvlan [mode {private | vepa | bridge | passthru}] | macvtap}</span>
+<span class="token comment"># ip link add link &lt;&#x57FA;&#x4E8E;&#x7684;&#x7269;&#x7406;&#x7F51;&#x5361;&#x8BBE;&#x5907;&gt; [name | dev] &lt;&#x65B0;&#x865A;&#x62DF;&#x8BBE;&#x5907;&#x540D;&#x79F0;&gt; [index &lt;&#x5E8F;&#x53F7;&gt;] type {vlan id &lt;&#x865A;&#x62DF;ID&gt;| macvlan [mode {private | vepa | bridge | passthru}] | macvtap}</span>
 <span class="token comment"># ip link set &lt;&#x8BBE;&#x5907;&#x540D;&#x79F0;&gt; {up | down}</span>
 <span class="token comment"># ip link set &lt;&#x8BBE;&#x5907;&#x540D;&#x79F0;&gt; netns &lt;&#x7A7A;&#x95F4;&#x540D;&#x79F0;&gt;</span>
 <span class="token comment"># ip link delete &lt;&#x8BBE;&#x5907;&#x540D;&#x79F0;&gt; [type {macvlan | macvtap}]</span>
 
 <span class="token comment"># &#x6D4B;&#x8BD5;&#x6DFB;&#x52A0;&#x865A;&#x62DF;&#x7F51;&#x5361;</span>
-<span class="token function">ip</span> <span class="token function">link</span> <span class="token function">add</span> <span class="token function">link</span> ens32 ens32v1 index <span class="token number">3</span> <span class="token builtin class-name">type</span> macvlan
-<span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> ens32v1 up
+<span class="token function">ip</span> <span class="token function">link</span> <span class="token function">add</span> <span class="token function">link</span> ens32 dev vlan0 index <span class="token number">3</span> <span class="token builtin class-name">type</span> macvlan
+<span class="token function">ip</span> addr <span class="token function">add</span> <span class="token number">192.168</span>.12.188/24 dev vlan0
+<span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> vlan0 up
 <span class="token function">ip</span> a
-<span class="token function">ip</span> <span class="token function">link</span> delete ens32v1
+<span class="token function">ip</span> <span class="token function">link</span> delete vlan0
 </pre><h2 class="mume-header" id="%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C">&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;</h2>
 
 <h3 class="mume-header" id="ubuntu-2">Ubuntu</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># Wifi&#x5DE5;&#x5177;</span>
 <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> wireless-tools
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> hostapd
 
 <span class="token comment"># &#x67E5;&#x770B;&#x65E0;&#x7EBF;&#x7F51;&#x5361;</span>
 iwconfig

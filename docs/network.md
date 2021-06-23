@@ -255,16 +255,17 @@ sysctl -p # 立即加载配置
 # ip netns exec <空间名称> <Command>
 
 # 链路配置
-# ip link add link <基于的物理网卡设备> [name | dev] <新虚拟设备名称> [index <序号>] type {vlan | macvlan [mode {private | vepa | bridge | passthru}] | macvtap}
+# ip link add link <基于的物理网卡设备> [name | dev] <新虚拟设备名称> [index <序号>] type {vlan id <虚拟ID>| macvlan [mode {private | vepa | bridge | passthru}] | macvtap}
 # ip link set <设备名称> {up | down}
 # ip link set <设备名称> netns <空间名称>
 # ip link delete <设备名称> [type {macvlan | macvtap}]
 
 # 测试添加虚拟网卡
-ip link add link ens32 ens32v1 index 3 type macvlan
-ip link set ens32v1 up
+ip link add link ens32 dev vlan0 index 3 type macvlan
+ip addr add 192.168.12.188/24 dev vlan0
+ip link set vlan0 up
 ip a
-ip link delete ens32v1
+ip link delete vlan0
 ```
 
 ## 无线网络
@@ -274,6 +275,7 @@ ip link delete ens32v1
 ```bash
 # Wifi工具
 sudo apt install wireless-tools
+sudo apt install hostapd
 
 # 查看无线网卡
 iwconfig
