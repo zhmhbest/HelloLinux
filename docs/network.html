@@ -282,7 +282,16 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#ubuntu">Ubuntu</a></li>
 </ul>
 </li>
-<li><a href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C">&#x67E5;&#x770B;&#x7F51;&#x7EDC;</a></li>
+<li><a href="#hostname">HostName</a></li>
+<li><a href="#gateway">Gateway</a></li>
+<li><a href="#dns">DNS</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C">&#x67E5;&#x770B;&#x7F51;&#x7EDC;</a>
+<ul>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80">&#x7F51;&#x7EDC;&#x5730;&#x5740;</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</a></li>
+<li><a href="#%E7%BD%91%E5%8D%A1">&#x7F51;&#x5361;</a></li>
 </ul>
 </li>
 <li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</a>
@@ -291,7 +300,6 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#ubuntu-1">Ubuntu</a></li>
 </ul>
 </li>
-<li><a href="#%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</a></li>
 <li><a href="#ping">PING</a></li>
 <li><a href="#%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1">&#x865A;&#x62DF;&#x7F51;&#x5361;</a></li>
 <li><a href="#%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C">&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;</a>
@@ -370,36 +378,79 @@ systemctl restart network
     <span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">2</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5E94;&#x7528;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</span>
 <span class="token function">sudo</span> netplan apply
-</pre><h3 class="mume-header" id="%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C">&#x67E5;&#x770B;&#x7F51;&#x7EDC;</h3>
+</pre><h3 class="mume-header" id="hostname">HostName</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x83B7;&#x53D6;&#x4E3B;&#x673A;&#x540D;</span>
+<span class="token function">cat</span> /etc/hostname
+<span class="token function">hostname</span>
+<span class="token function">uname</span> -n
+
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x4E3B;&#x673A;&#x540D;</span>
+hostnamectl set-hostname <span class="token variable">${NewHostName}</span>
+</pre><h3 class="mume-header" id="gateway">Gateway</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5173;</span>
+route -n
+
+<span class="token comment"># &#x6DFB;&#x52A0;&#x7F51;&#x5173;</span>
+route <span class="token function">add</span> default gw <span class="token variable">${Gateway}</span>
+</pre><h3 class="mume-header" id="dns">DNS</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># DNS&#x670D;&#x52A1;&#x5668;</span>
 <span class="token function">cat</span> /etc/resolv.conf
 
 <span class="token comment"># HOST&#x89E3;&#x6790;</span>
 <span class="token function">cat</span> /etc/hosts
+</pre><h2 class="mume-header" id="%E6%9F%A5%E7%9C%8B%E7%BD%91%E7%BB%9C">&#x67E5;&#x770B;&#x7F51;&#x7EDC;</h2>
 
-<span class="token comment"># &#x4E3B;&#x673A;&#x540D;</span>
-<span class="token function">cat</span> /etc/hostname
-<span class="token function">hostname</span>
-<span class="token function">uname</span> -n
+<h3 class="mume-header" id="%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80">&#x7F51;&#x7EDC;&#x5730;&#x5740;</h3>
 
-<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</span>
-<span class="token function">ifconfig</span> -a
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">hostname</span> -I
 
-<span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;IP</span>
-<span class="token function">ifconfig</span> -a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;inet&apos;</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{print <span class="token variable">$2</span>}&apos;</span>
+<span class="token function">ip</span> a <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{if(&quot;inet&quot;==<span class="token variable">$1</span>) {print <span class="token variable">$2</span>}}&apos;</span>
 
-<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x53E3;</span>
-nmcli device show <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;DEVICE&apos;</span>
-nmcli connection show
-nmcli con show
+<span class="token function">ifconfig</span> <span class="token operator">|</span> <span class="token function">awk</span> <span class="token string">&apos;{if(&quot;inet&quot;==<span class="token variable">$1</span>) {print <span class="token variable">$2</span>}}&apos;</span>
+</pre><h3 class="mume-header" id="%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</h3>
 
-<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x53E3;&#x7269;&#x7406;&#x4FE1;&#x606F;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># -i  &#x7F51;&#x5361;&#x4FE1;&#x606F;</span>
+<span class="token comment">#     &#x72B6;&#x6001;&#xFF1A;ESTABLISHED</span>
+<span class="token comment"># -a  &#x72B6;&#x6001;&#xFF1A;ALL</span>
+<span class="token comment"># -l  &#x72B6;&#x6001;&#xFF1A;LISTEN</span>
+<span class="token comment"># -t  TCP&#x8FDE;&#x63A5;</span>
+<span class="token comment"># -u  UDP&#x8FDE;&#x63A5;</span>
+<span class="token comment"># -n  &#x7981;&#x7528;&#x53CD;&#x5411;&#x57DF;&#x540D;&#x89E3;&#x6790;</span>
+<span class="token comment"># -p  &#x67E5;&#x770B;&#x8FDB;&#x7A0B;&#x4FE1;&#x606F;</span>
+
+<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x4FE1;&#x606F;</span>
+<span class="token function">netstat</span> -i
+
+<span class="token comment"># &#x72B6;&#x6001;&#xFF1A;ESTABLISHED</span>
+<span class="token function">netstat</span> -tunp
+
+<span class="token comment"># &#x72B6;&#x6001;&#xFF1A;LISTEN</span>
+<span class="token function">netstat</span> -tunlp
+
+<span class="token comment"># &#x72B6;&#x6001;&#xFF1A;ALL</span>
+<span class="token function">netstat</span> -tunap
+</pre><h3 class="mume-header" id="%E7%BD%91%E5%8D%A1">&#x7F51;&#x5361;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">ifconfig</span>
+
 <span class="token function">ip</span> addr
 <span class="token function">ip</span> a
 
-<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x540D;&#x79F0;</span>
-<span class="token function">ip</span> a <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;^[0-9]&apos;</span> <span class="token operator">|</span> <span class="token function">awk</span> -F<span class="token string">&apos;: &apos;</span> <span class="token string">&apos;{print <span class="token variable">$2</span>}&apos;</span>
+<span class="token function">ip</span> <span class="token function">link</span> show
+<span class="token function">ip</span> <span class="token function">link</span>
+<span class="token function">ip</span> l
+
+nmcli device show <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;DEVICE&apos;</span>
+nmcli connection show
+nmcli con show
+nmcli c s
+
+<span class="token comment"># &#x5F00;/&#x5173;&#x7F51;&#x5361;</span>
+<span class="token function">ifup</span> eth0
+<span class="token function">ifdown</span> eth0
 </pre><h2 class="mume-header" id="%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</h2>
 
 <h3 class="mume-header" id="centos-2">CentOS</h3>
@@ -464,28 +515,6 @@ firewall-cmd --reload
 
 <span class="token comment"># &#x91CD;&#x7F6E;&#x6240;&#x6709;&#x89C4;&#x5219;</span>
 <span class="token function">sudo</span> ufw reset
-</pre><h2 class="mume-header" id="%E7%BD%91%E7%BB%9C%E7%8A%B6%E6%80%81">&#x7F51;&#x7EDC;&#x72B6;&#x6001;</h2>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># -i  &#x7F51;&#x5361;&#x4FE1;&#x606F;</span>
-<span class="token comment">#     &#x72B6;&#x6001;&#xFF1A;ESTABLISHED</span>
-<span class="token comment"># -a  &#x72B6;&#x6001;&#xFF1A;ALL</span>
-<span class="token comment"># -l  &#x72B6;&#x6001;&#xFF1A;LISTEN</span>
-<span class="token comment"># -t  TCP&#x8FDE;&#x63A5;</span>
-<span class="token comment"># -u  UDP&#x8FDE;&#x63A5;</span>
-<span class="token comment"># -n  &#x7981;&#x7528;&#x53CD;&#x5411;&#x57DF;&#x540D;&#x89E3;&#x6790;</span>
-<span class="token comment"># -p  &#x67E5;&#x770B;&#x8FDB;&#x7A0B;&#x4FE1;&#x606F;</span>
-
-<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x4FE1;&#x606F;</span>
-<span class="token function">netstat</span> -i
-
-<span class="token comment"># &#x72B6;&#x6001;&#xFF1A;ESTABLISHED</span>
-<span class="token function">netstat</span> -tunp
-
-<span class="token comment"># &#x72B6;&#x6001;&#xFF1A;LISTEN</span>
-<span class="token function">netstat</span> -tunlp
-
-<span class="token comment"># &#x72B6;&#x6001;&#xFF1A;ALL</span>
-<span class="token function">netstat</span> -tunap
 </pre><h2 class="mume-header" id="ping">PING</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x88AB;Ping</span>
@@ -534,7 +563,7 @@ nmcli
 <span class="token function">ip</span> <span class="token function">link</span> <span class="token function">add</span> <span class="token function">link</span> ens32 dev vlan0 index <span class="token number">3</span> <span class="token builtin class-name">type</span> macvlan
 <span class="token function">ip</span> addr <span class="token function">add</span> <span class="token number">192.168</span>.12.188/24 dev vlan0
 <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> vlan0 up
-<span class="token function">ip</span> a
+<span class="token function">ip</span> addr
 <span class="token function">ip</span> <span class="token function">link</span> delete vlan0
 </pre><h2 class="mume-header" id="%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C">&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;</h2>
 

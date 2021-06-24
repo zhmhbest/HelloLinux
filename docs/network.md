@@ -94,7 +94,29 @@ network:
 sudo netplan apply
 ```
 
-### 查看网络
+### HostName
+
+```bash
+# 获取主机名
+cat /etc/hostname
+hostname
+uname -n
+
+# 设置主机名
+hostnamectl set-hostname ${NewHostName}
+```
+
+### Gateway
+
+```bash
+# 查看网关
+route -n
+
+# 添加网关
+route add default gw ${Gateway}
+```
+
+### DNS
 
 ```bash
 # DNS服务器
@@ -102,29 +124,65 @@ cat /etc/resolv.conf
 
 # HOST解析
 cat /etc/hosts
+```
 
-# 主机名
-cat /etc/hostname
-hostname
-uname -n
+## 查看网络
 
-# 查看网络配置
-ifconfig -a
+### 网络地址
 
-# 查看当前IP
-ifconfig -a | grep 'inet' | awk '{print $2}'
+```bash
+hostname -I
 
-# 查看网口
-nmcli device show | grep 'DEVICE'
-nmcli connection show
-nmcli con show
+ip a | awk '{if("inet"==$1) {print $2}}'
 
-# 查看网口物理信息
+ifconfig | awk '{if("inet"==$1) {print $2}}'
+```
+
+### 网络状态
+
+```bash
+# -i  网卡信息
+#     状态：ESTABLISHED
+# -a  状态：ALL
+# -l  状态：LISTEN
+# -t  TCP连接
+# -u  UDP连接
+# -n  禁用反向域名解析
+# -p  查看进程信息
+
+# 查看网卡信息
+netstat -i
+
+# 状态：ESTABLISHED
+netstat -tunp
+
+# 状态：LISTEN
+netstat -tunlp
+
+# 状态：ALL
+netstat -tunap
+```
+
+### 网卡
+
+```bash
+ifconfig
+
 ip addr
 ip a
 
-# 查看网卡名称
-ip a | grep '^[0-9]' | awk -F': ' '{print $2}'
+ip link show
+ip link
+ip l
+
+nmcli device show | grep 'DEVICE'
+nmcli connection show
+nmcli con show
+nmcli c s
+
+# 开/关网卡
+ifup eth0
+ifdown eth0
 ```
 
 ## 防火墙
@@ -197,31 +255,6 @@ sudo ufw status verbose
 sudo ufw reset
 ```
 
-## 网络状态
-
-```bash
-# -i  网卡信息
-#     状态：ESTABLISHED
-# -a  状态：ALL
-# -l  状态：LISTEN
-# -t  TCP连接
-# -u  UDP连接
-# -n  禁用反向域名解析
-# -p  查看进程信息
-
-# 查看网卡信息
-netstat -i
-
-# 状态：ESTABLISHED
-netstat -tunp
-
-# 状态：LISTEN
-netstat -tunlp
-
-# 状态：ALL
-netstat -tunap
-```
-
 ## PING
 
 ```bash
@@ -270,7 +303,7 @@ nmcli
 ip link add link ens32 dev vlan0 index 3 type macvlan
 ip addr add 192.168.12.188/24 dev vlan0
 ip link set vlan0 up
-ip a
+ip addr
 ip link delete vlan0
 ```
 
