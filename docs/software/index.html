@@ -458,9 +458,17 @@ systemctl status vsftpd
 
 <span class="token comment"># Ubuntu</span>
 <span class="token function">egrep</span> -v <span class="token string">&apos;^#&apos;</span> /etc/vsftpd.conf
-<span class="token function">vim</span> /etc/vsftpd.conf
+<span class="token function">sudo</span> <span class="token function">vim</span> /etc/vsftpd.conf
 </pre><pre data-role="codeBlock" data-info="properties" class="language-properties"><span class="token comment"># &#x8BBF;&#x95EE;&#x6210;&#x529F;&#x6B22;&#x8FCE;&#x8BED;</span>
 <span class="token attr-name">ftpd_banner</span><span class="token punctuation">=</span><span class="token attr-value">Welcome to the FTP service.</span>
+<span class="token comment"># &#x5141;&#x8BB8;&#x4E3A;&#x76EE;&#x5F55;&#x914D;&#x7F6E;&#x663E;&#x793A;&#x4FE1;&#x606F;</span>
+<span class="token attr-name">dirmessage_enable</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+
+<span class="token comment"># &#x76D1;&#x542C;</span>
+<span class="token attr-name">listen</span><span class="token punctuation">=</span><span class="token attr-value">NO</span>
+<span class="token attr-name">listen_ipv6</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+<span class="token comment"># &#x786E;&#x4FDD;&#x4F20;&#x8F93;&#x8FDE;&#x63A5;&#x6E90;&#x81EA;&#x7AEF;&#x53E3;20</span>
+<span class="token attr-name">connect_from_port_20</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
 
 <span class="token comment"># &#x662F;&#x53EF;&#x7528;`ls -R`&#x547D;&#x4EE4;</span>
 <span class="token attr-name">ls_recurse_enable</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
@@ -485,14 +493,31 @@ systemctl status vsftpd
 <span class="token attr-name">local_enable</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
 <span class="token attr-name">local_umask</span><span class="token punctuation">=</span><span class="token attr-value">022</span>
 <span class="token comment"># &#x9650;&#x5236;&#x7528;&#x6237;&#x5230;&#x5176;&#x5BB6;&#x76EE;&#x5F55;</span>
-<span class="token attr-name">chroot_local_user</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+<span class="token comment"># chroot_local_user=YES</span>
+<span class="token comment"># allow_writeable_chroot=YES</span>
 <span class="token comment"># &#x5F53;&#x542F;&#x7528;chroot&#x540E;&#xFF0C;&#x6587;&#x4EF6;&#x4E2D;&#x662F;&#x4E0D;&#x542F;&#x7528;chroot&#x7684;&#x7528;&#x6237;</span>
 <span class="token comment"># chroot_list_enable=YES</span>
 <span class="token comment"># chroot_list_file=/etc/vsftpd.chroot_list</span>
+<span class="token comment"># &#x7528;&#x4F5C;chroot&#x76D1;&#x72F1;&#xFF08;&#x5EFA;&#x8BAE;&#x4F7F;&#x7528;&#x9ED8;&#x8BA4;&#x914D;&#x7F6E;&#xFF09;</span>
+<span class="token attr-name">secure_chroot_dir</span><span class="token punctuation">=</span><span class="token attr-value">/var/run/vsftpd/empty</span>
 
-<span class="token comment"># &#x88AB;&#x52A8;&#x8FDE;&#x63A5;&#x65F6;&#x7AEF;&#x53E3;&#x8303;&#x56F4;</span>
-<span class="token attr-name">pasv_max_port</span><span class="token punctuation">=</span><span class="token attr-value">40000</span>
-<span class="token attr-name">pasv_min_port</span><span class="token punctuation">=</span><span class="token attr-value">40010</span>
+<span class="token comment"># SSL</span>
+<span class="token comment"># rsa_cert_file=</span>
+<span class="token comment"># rsa_private_key_file=</span>
+<span class="token comment"># ssl_enable=NO</span>
+
+<span class="token comment"># LOG</span>
+<span class="token comment"># &#x8BB0;&#x5F55;&#x4E0A;&#x4F20;&#x4E0B;&#x8F7D;&#x65E5;&#x5FD7;</span>
+<span class="token attr-name">xferlog_enable</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+<span class="token comment"># &#x8BB0;&#x5F55;&#x5230;xferlog_file&#x6240;&#x6307;&#x6587;&#x4EF6;</span>
+<span class="token attr-name">xferlog_std_format</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+<span class="token attr-name">xferlog_file</span><span class="token punctuation">=</span><span class="token attr-value">/var/log/vsftpd.log</span>
+
+<span class="token comment"># &#x88AB;&#x52A8;&#x8FDE;&#x63A5;</span>
+<span class="token attr-name">pasv_enable</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+<span class="token attr-name">pasv_min_port</span><span class="token punctuation">=</span><span class="token attr-value">40000</span>
+<span class="token attr-name">pasv_max_port</span><span class="token punctuation">=</span><span class="token attr-value">40010</span>
+<span class="token attr-name">pasv_promiscuous</span><span class="token punctuation">=</span><span class="token attr-value">NO</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash">systemctl restart vsftpd
 </pre><h2 class="mume-header" id="apache2">Apache2</h2>
 

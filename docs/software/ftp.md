@@ -28,12 +28,20 @@ vim /etc/vsftpd/vsftpd.conf
 
 # Ubuntu
 egrep -v '^#' /etc/vsftpd.conf
-vim /etc/vsftpd.conf
+sudo vim /etc/vsftpd.conf
 ```
 
 ```properties
 # 访问成功欢迎语
 ftpd_banner=Welcome to the FTP service.
+# 允许为目录配置显示信息
+dirmessage_enable=YES
+
+# 监听
+listen=NO
+listen_ipv6=YES
+# 确保传输连接源自端口20
+connect_from_port_20=YES
 
 # 是可用`ls -R`命令
 ls_recurse_enable=YES
@@ -58,14 +66,31 @@ anon_mkdir_write_enable=NO
 local_enable=YES
 local_umask=022
 # 限制用户到其家目录
-chroot_local_user=YES
+# chroot_local_user=YES
+# allow_writeable_chroot=YES
 # 当启用chroot后，文件中是不启用chroot的用户
 # chroot_list_enable=YES
 # chroot_list_file=/etc/vsftpd.chroot_list
+# 用作chroot监狱（建议使用默认配置）
+secure_chroot_dir=/var/run/vsftpd/empty
 
-# 被动连接时端口范围
-pasv_max_port=40000
-pasv_min_port=40010
+# SSL
+# rsa_cert_file=
+# rsa_private_key_file=
+# ssl_enable=NO
+
+# LOG
+# 记录上传下载日志
+xferlog_enable=YES
+# 记录到xferlog_file所指文件
+xferlog_std_format=YES
+xferlog_file=/var/log/vsftpd.log
+
+# 被动连接
+pasv_enable=YES
+pasv_min_port=40000
+pasv_max_port=40010
+pasv_promiscuous=NO
 ```
 
 ```bash
