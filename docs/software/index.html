@@ -281,32 +281,38 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 </ul>
 </li>
-<li><a href="#apache2">Apache2</a>
+<li><a href="#ftp">FTP</a>
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</a></li>
-</ul>
-</li>
-<li><a href="#nginx">Nginx</a>
-<ul>
-<li><a href="#%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE">&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
-<li><a href="#mariadb">Mariadb</a>
+<li><a href="#apache2">Apache2</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</a></li>
+</ul>
+</li>
+<li><a href="#nginx">Nginx</a>
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE-1">&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
-<li><a href="#php">Php</a>
+<li><a href="#mariadb">Mariadb</a>
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE-2">&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
-<li><a href="#aria2">Aria2</a>
+<li><a href="#php">Php</a>
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85-5">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-3">&#x914D;&#x7F6E;</a></li>
+</ul>
+</li>
+<li><a href="#aria2">Aria2</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-6">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E5%8F%82%E6%95%B0%E8%AF%B4%E6%98%8E">&#x53C2;&#x6570;&#x8BF4;&#x660E;</a></li>
 </ul>
 </li>
@@ -317,14 +323,14 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 <li><a href="#samba">Samba</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85-6">&#x5B89;&#x88C5;</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE-3">&#x914D;&#x7F6E;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-7">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-4">&#x914D;&#x7F6E;</a></li>
 <li><a href="#%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</a></li>
 </ul>
 </li>
 <li><a href="#drbd">DRBD</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85-7">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-8">&#x5B89;&#x88C5;</a></li>
 <li><a href="#%E9%85%8D%E7%BD%AE%E4%B8%BB%E4%BB%8E%E6%A8%A1%E5%BC%8F">&#x914D;&#x7F6E;&#x4E3B;&#x4ECE;&#x6A21;&#x5F0F;</a>
 <ul>
 <li><a href="#%E5%85%B3%E9%97%AD%E9%98%B2%E7%81%AB%E5%A2%99">&#x5173;&#x95ED;&#x9632;&#x706B;&#x5899;</a></li>
@@ -425,9 +431,72 @@ systemctl restart sshd
 
 <span class="token comment"># &#x68C0;&#x67E5;&#x662F;&#x5426;&#x53EF;&#x4EE5;&#x5BC6;&#x7801;&#x767B;&#x5F55;</span>
 <span class="token function">ssh</span> root@localhost -p <span class="token number">2048</span>
-</pre><h2 class="mume-header" id="apache2">Apache2</h2>
+</pre><h2 class="mume-header" id="ftp">FTP</h2>
 
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS</span>
+yum -y <span class="token function">install</span> vsftpd
+firewall-cmd --zone<span class="token operator">=</span>public --add-port<span class="token operator">=</span><span class="token number">20</span>-21/tcp --permanent
+firewall-cmd --zone<span class="token operator">=</span>public --add-port<span class="token operator">=</span><span class="token number">40000</span>-40010/tcp --permanent
+firewall-cmd --reload
+firewall-cmd --list-all
+
+<span class="token comment"># Ubuntu</span>
+<span class="token comment"># sudo apt-get install vsftpd</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> vsftpd
+<span class="token function">sudo</span> ufw allow to any port <span class="token number">20,21</span>,40000:40010 proto tcp
+<span class="token function">sudo</span> ufw status verbose
+
+<span class="token comment"># &#x670D;&#x52A1;&#x7BA1;&#x7406;</span>
+systemctl status vsftpd
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE">&#x914D;&#x7F6E;</h3>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS</span>
+<span class="token function">egrep</span> -v <span class="token string">&apos;^#&apos;</span> /etc/vsftpd/vsftpd.conf
+<span class="token function">vim</span> /etc/vsftpd/vsftpd.conf
+
+<span class="token comment"># Ubuntu</span>
+<span class="token function">egrep</span> -v <span class="token string">&apos;^#&apos;</span> /etc/vsftpd.conf
+<span class="token function">vim</span> /etc/vsftpd.conf
+</pre><pre data-role="codeBlock" data-info="properties" class="language-properties"><span class="token comment"># &#x8BBF;&#x95EE;&#x6210;&#x529F;&#x6B22;&#x8FCE;&#x8BED;</span>
+<span class="token attr-name">ftpd_banner</span><span class="token punctuation">=</span><span class="token attr-value">Welcome to the FTP service.</span>
+
+<span class="token comment"># &#x662F;&#x53EF;&#x7528;`ls -R`&#x547D;&#x4EE4;</span>
+<span class="token attr-name">ls_recurse_enable</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+
+<span class="token comment"># &#x4E0A;&#x4F20;&#x603B;&#x5F00;&#x5173;</span>
+<span class="token attr-name">write_enable</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+
+<span class="token comment"># &#x533F;&#x540D;&#x7528;&#x6237;</span>
+<span class="token attr-name">anonymous_enable</span><span class="token punctuation">=</span><span class="token attr-value">NO</span>
+<span class="token attr-name">anon_umask</span><span class="token punctuation">=</span><span class="token attr-value">077</span>
+<span class="token comment"># &#x533F;&#x540D;&#x7528;&#x6237;&#x767B;&#x5F55;&#x4E0D;&#x8BE2;&#x95EE;&#x5BC6;&#x7801;</span>
+<span class="token attr-name">no_anon_password</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+<span class="token attr-name">anon_upload_enable</span><span class="token punctuation">=</span><span class="token attr-value">NO</span>
+<span class="token attr-name">anon_mkdir_write_enable</span><span class="token punctuation">=</span><span class="token attr-value">NO</span>
+<span class="token comment"># &#x533F;&#x540D;&#x7528;&#x6237;&#x4E3B;&#x76EE;&#x5F55;</span>
+<span class="token comment"># anon_root=</span>
+<span class="token comment"># &#x533F;&#x540D;&#x7528;&#x6237;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x540E;&#x4FEE;&#x6539;&#x5176;&#x6240;&#x6709;&#x8005;</span>
+<span class="token comment">#chown_uploads=YES</span>
+<span class="token comment">#chown_username=whoever</span>
+
+<span class="token comment"># &#x672C;&#x5730;&#x7528;&#x6237;</span>
+<span class="token attr-name">local_enable</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+<span class="token attr-name">local_umask</span><span class="token punctuation">=</span><span class="token attr-value">022</span>
+<span class="token comment"># &#x9650;&#x5236;&#x7528;&#x6237;&#x5230;&#x5176;&#x5BB6;&#x76EE;&#x5F55;</span>
+<span class="token attr-name">chroot_local_user</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
+<span class="token comment"># &#x5F53;&#x542F;&#x7528;chroot&#x540E;&#xFF0C;&#x6587;&#x4EF6;&#x4E2D;&#x662F;&#x4E0D;&#x542F;&#x7528;chroot&#x7684;&#x7528;&#x6237;</span>
+<span class="token comment"># chroot_list_enable=YES</span>
+<span class="token comment"># chroot_list_file=/etc/vsftpd.chroot_list</span>
+
+<span class="token comment"># &#x88AB;&#x52A8;&#x8FDE;&#x63A5;&#x65F6;&#x7AEF;&#x53E3;&#x8303;&#x56F4;</span>
+<span class="token attr-name">pasv_max_port</span><span class="token punctuation">=</span><span class="token attr-value">40000</span>
+<span class="token attr-name">pasv_min_port</span><span class="token punctuation">=</span><span class="token attr-value">40010</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash">systemctl restart vsftpd
+</pre><h2 class="mume-header" id="apache2">Apache2</h2>
+
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
 yum <span class="token function">install</span> -y httpd
@@ -442,7 +511,7 @@ systemctl <span class="token builtin class-name">enable</span> httpd
 systemctl start  httpd
 </pre><h2 class="mume-header" id="nginx">Nginx</h2>
 
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y <span class="token function">install</span> yum-utils
 <span class="token function">vi</span> <span class="token string">&apos;/etc/yum.repos.d/nginx.repo&apos;</span>
@@ -489,7 +558,7 @@ systemctl <span class="token builtin class-name">enable</span>  nginx
 systemctl start   nginx
 systemctl restart nginx
 systemctl status  nginx
-</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE">&#x914D;&#x7F6E;</h3>
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-1">&#x914D;&#x7F6E;</h3>
 
 <blockquote>
 <p><a href="https://docs.nginx.com/nginx/admin-guide/">Admin Guide</a></p>
@@ -605,7 +674,7 @@ stream <span class="token punctuation">{</span>
 <span class="token punctuation">}</span>
 </pre><h2 class="mume-header" id="mariadb">Mariadb</h2>
 
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
 yum <span class="token function">install</span> -y mariadb mariadb-server
@@ -623,7 +692,7 @@ firewall-cmd --permanent --query-port<span class="token operator">=</span><span 
 <span class="token comment"># &#x542F;&#x52A8;</span>
 systemctl <span class="token builtin class-name">enable</span> mariadb
 systemctl start  mariadb
-</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-1">&#x914D;&#x7F6E;</h3>
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-2">&#x914D;&#x7F6E;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x521D;&#x59CB;&#x5316;</span>
 mysql_secure_installation
@@ -640,7 +709,7 @@ mysql -uroot -p
 QUIT<span class="token punctuation">;</span>
 </pre><h2 class="mume-header" id="php">Php</h2>
 
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-5">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
 yum -y <span class="token function">install</span> <span class="token string">&apos;http://rpms.remirepo.net/enterprise/remi-release-7.rpm&apos;</span>
@@ -664,14 +733,14 @@ systemctl <span class="token builtin class-name">enable</span> php-fpm
 systemctl start  php-fpm
 systemctl status php-fpm
 </pre><p><img src="images/php-fpm.png" alt="php-fpm"></p>
-<h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-2">&#x914D;&#x7F6E;</h3>
+<h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-3">&#x914D;&#x7F6E;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">vi</span> <span class="token string">&apos;/etc/php.ini&apos;</span>
 </pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">PHP</span><span class="token punctuation">]</span></span>
 <span class="token comment">;...</span>
 </pre><h2 class="mume-header" id="aria2">Aria2</h2>
 
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-5">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-6">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y groupinstall <span class="token string">&apos;Development Tools&apos;</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">aria2_version</span><span class="token operator">=</span><span class="token string">&apos;1.19.0&apos;</span>
@@ -721,9 +790,9 @@ python get-pip.py
 <blockquote>
 <p>Samba&#x53EF;&#x4EE5;&#x4F7F;Linux&#x5728;Windows&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x4E2D;&#x8FDB;&#x884C;&#x901A;&#x8BAF;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E3B;&#x673A;&#x95F4;&#x5FC5;&#x987B;&#x5904;&#x5728;&#x540C;&#x4E00;&#x7F51;&#x6BB5;&#x3002;</p>
 </blockquote>
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-6">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-7">&#x5B89;&#x88C5;</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x3010;CentOS&#x3011;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS</span>
 yum -y <span class="token function">install</span> samba
 <span class="token comment"># &#x670D;&#x52A1;&#x7BA1;&#x7406;</span>
 systemctl status smb
@@ -732,7 +801,7 @@ systemctl stop smb
 systemctl restart smb
 
 
-<span class="token comment"># &#x3010;Ubuntu&#x3011;</span>
+<span class="token comment"># Ubuntu</span>
 <span class="token comment"># sudo apt-get install samba samba-common</span>
 <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> samba
 <span class="token comment"># Samba&#x6CA1;&#x6709;&#x4F5C;&#x4E3A;AD&#x57DF;&#x63A7;&#x5236;&#x5668;&#x8FD0;&#x884C;&#xFF1A;Masking Samba-AD-dc.service</span>
@@ -742,7 +811,7 @@ systemctl status smbd
 systemctl start smbd
 systemctl stop smbd
 systemctl restart smbd
-</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-3">&#x914D;&#x7F6E;</h3>
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-4">&#x914D;&#x7F6E;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6DFB;&#x52A0;&#x7CFB;&#x7EDF;&#x7528;&#x6237;</span>
 <span class="token function">sudo</span> adduser sambauser
@@ -811,7 +880,7 @@ systemctl restart smbd
 <p><strong>Distributed Replicated Block Device(DRBD)&#x662F;</strong>&#x4E00;&#x4E2A;&#x7528;&#x8F6F;&#x4EF6;&#x5B9E;&#x73B0;&#x7684;&#x3001;&#x65E0;&#x5171;&#x4EAB;&#x7684;&#x3001;&#x670D;&#x52A1;&#x5668;&#x4E4B;&#x95F4;&#x955C;&#x50CF;&#x5757;&#x8BBE;&#x5907;&#x5185;&#x5BB9;&#x7684;&#x5B58;&#x50A8;&#x590D;&#x5236;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#x3002;&#x5176;&#x4E0E;RAID1&#x7684;&#x4E3B;&#x8981;&#x533A;&#x522B;&#x5728;&#x4E8E;&#xFF0C;&#x524D;&#x8005;&#x4F7F;&#x7528;RAID&#x63A7;&#x5236;&#x5668;&#x63A5;&#x5165;&#x5230;&#x4E00;&#x53F0;&#x4E3B;&#x673A;&#x4E0A;&#xFF0C;&#x800C;DRBD&#x662F;&#x901A;&#x8FC7;&#x7F51;&#x7EDC;&#x5B9E;&#x73B0;&#x4E0D;&#x540C;&#x8282;&#x70B9;&#x4E3B;&#x673A;&#x5B58;&#x50A8;&#x8BBE;&#x5907;&#x6570;&#x636E;&#x7684;&#x955C;&#x50CF;&#x5907;&#x4EFD;&#x3002;</p>
 </blockquote>
 <p><img src="./images/drbd.png" alt="drbd"></p>
-<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-7">&#x5B89;&#x88C5;</h3>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-8">&#x5B89;&#x88C5;</h3>
 
 <table>
 <thead>

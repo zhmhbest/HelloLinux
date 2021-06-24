@@ -4,7 +4,7 @@
 ### 安装
 
 ```bash
-# 【CentOS】
+# CentOS
 yum -y install samba
 # 服务管理
 systemctl status smb
@@ -13,7 +13,7 @@ systemctl stop smb
 systemctl restart smb
 
 
-# 【Ubuntu】
+# Ubuntu
 # sudo apt-get install samba samba-common
 sudo apt install samba
 # Samba没有作为AD域控制器运行：Masking Samba-AD-dc.service

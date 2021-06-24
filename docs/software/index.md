@@ -9,6 +9,10 @@
 
 @import "sshd.md"
 
+## FTP
+
+@import "ftp.md"
+
 ## Apache2
 
 @import "apache2.md"
