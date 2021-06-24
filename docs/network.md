@@ -243,8 +243,14 @@ sudo ufw allow http
 sudo ufw allow https
 
 # 高级配置
-# sudo ufw {allow | deny} [{in | out}] [on <网卡>] [from <IP>] [to any port <端口>]
+# sudo ufw {allow | deny} [{in | out}]
+#       [on <网卡>]
+#       [from {any | <IP>} [port <端口>]]
+#       [to {any | <IP>} [port <端口>]]
+#       [proto {tcp | udp}]
+sudo ufw allow in on ens33 from any to any port 80
 sudo ufw allow in on ens33 to any port 80
+sudo ufw allow to any port 20,21,40000:40010 proto tcp
 sudo ufw deny in from 192.168.1.99
 sudo ufw deny in to any port 8080
 

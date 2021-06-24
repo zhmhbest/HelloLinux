@@ -505,8 +505,14 @@ firewall-cmd --reload
 <span class="token function">sudo</span> ufw allow https
 
 <span class="token comment"># &#x9AD8;&#x7EA7;&#x914D;&#x7F6E;</span>
-<span class="token comment"># sudo ufw {allow | deny} [{in | out}] [on &lt;&#x7F51;&#x5361;&gt;] [from &lt;IP&gt;] [to any port &lt;&#x7AEF;&#x53E3;&gt;]</span>
+<span class="token comment"># sudo ufw {allow | deny} [{in | out}]</span>
+<span class="token comment">#       [on &lt;&#x7F51;&#x5361;&gt;]</span>
+<span class="token comment">#       [from {any | &lt;IP&gt;} [port &lt;&#x7AEF;&#x53E3;&gt;]]</span>
+<span class="token comment">#       [to {any | &lt;IP&gt;} [port &lt;&#x7AEF;&#x53E3;&gt;]]</span>
+<span class="token comment">#       [proto {tcp | udp}]</span>
+<span class="token function">sudo</span> ufw allow <span class="token keyword">in</span> on ens33 from any to any port <span class="token number">80</span>
 <span class="token function">sudo</span> ufw allow <span class="token keyword">in</span> on ens33 to any port <span class="token number">80</span>
+<span class="token function">sudo</span> ufw allow to any port <span class="token number">20,21</span>,40000:40010 proto tcp
 <span class="token function">sudo</span> ufw deny <span class="token keyword">in</span> from <span class="token number">192.168</span>.1.99
 <span class="token function">sudo</span> ufw deny <span class="token keyword">in</span> to any port <span class="token number">8080</span>
 
