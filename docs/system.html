@@ -403,8 +403,14 @@ init --help
 <span class="token function">sudo</span> systemctl set-default graphical.target  <span class="token comment"># init 5</span>
 </pre><h2 class="mume-header" id="%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86">&#x7528;&#x6237;&#x7BA1;&#x7406;</h2>
 
+<ul>
+<li><code>adduser</code>: &#x4F1A;&#x81EA;&#x52A8;&#x4E3A;&#x521B;&#x5EFA;&#x7684;&#x7528;&#x6237;&#x6307;&#x5B9A;&#x4E3B;&#x76EE;&#x5F55;&#x3001;&#x7CFB;&#x7EDF;Shell&#x7248;&#x672C;&#xFF0C;&#x4F1A;&#x5728;&#x521B;&#x5EFA;&#x65F6;&#x8F93;&#x5165;&#x7528;&#x6237;&#x5BC6;&#x7801;&#x3002;</li>
+<li><code>useradd</code>: &#x5982;&#x679C;&#x4E0D;&#x4F7F;&#x7528;&#x4EFB;&#x4F55;&#x53C2;&#x6570;&#xFF0C;&#x5219;&#x521B;&#x5EFA;&#x7684;&#x7528;&#x6237;&#x65E0;&#x5BC6;&#x7801;&#x3001;&#x65E0;&#x4E3B;&#x76EE;&#x5F55;&#x3001;&#x6CA1;&#x6709;&#x6307;&#x5B9A;Shell&#x7248;&#x672C;&#x3002;</li>
+<li><code>deluser</code></li>
+<li><code>userdel</code></li>
+</ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;ID&#x5206;&#x914D;&#x89C4;&#x5219;</span>
-<span class="token function">egrep</span> -v <span class="token string">&quot;^$|^#&quot;</span> /etc/login.defs
+<span class="token function">egrep</span> -v <span class="token string">&apos;^$|^#&apos;</span> /etc/login.defs
 
 <span class="token comment"># &#x65B0;&#x5EFA;&#x7528;&#x6237;</span>
 <span class="token comment"># useradd [-d &lt;&#x5BB6;&#x76EE;&#x5F55;&gt; | -M] [-u &lt;&#x7528;&#x6237;ID&gt;] [-g &lt;&#x4E3B;&#x7EC4;(&#x5DF2;&#x5B58;&#x5728;)&gt;] [-G &lt;&#x9644;&#x52A0;&#x7EC4;&gt;[,...]] [-s /bin/bash] &lt;&#x7528;&#x6237;&#x540D;&gt;</span>

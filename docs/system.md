@@ -122,9 +122,14 @@ sudo systemctl set-default graphical.target  # init 5
 
 ## 用户管理
 
+- `adduser`: 会自动为创建的用户指定主目录、系统Shell版本，会在创建时输入用户密码。
+- `useradd`: 如果不使用任何参数，则创建的用户无密码、无主目录、没有指定Shell版本。
+- `deluser`
+- `userdel`
+
 ```bash
 # 查看ID分配规则
-egrep -v "^$|^#" /etc/login.defs
+egrep -v '^$|^#' /etc/login.defs
 
 # 新建用户
 # useradd [-d <家目录> | -M] [-u <用户ID>] [-g <主组(已存在)>] [-G <附加组>[,...]] [-s /bin/bash] <用户名>
