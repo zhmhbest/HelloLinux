@@ -974,14 +974,39 @@ systemctl restart smb
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">sambauser</span><span class="token operator">=</span>YourName
 <span class="token function">sudo</span> <span class="token function">su</span> - <span class="token variable">$sambauser</span>
 <span class="token function">mkdir</span> ./share<span class="token punctuation">;</span> <span class="token function">chmod</span> <span class="token number">777</span> ./share
+<span class="token function">mkdir</span> ./share/A<span class="token punctuation">;</span> <span class="token function">chmod</span> <span class="token number">777</span> ./share/A
+<span class="token function">mkdir</span> ./share/B<span class="token punctuation">;</span> <span class="token function">chmod</span> <span class="token number">777</span> ./share/B
 <span class="token function">mkdir</span> ./share/E<span class="token punctuation">;</span> <span class="token function">chmod</span> <span class="token number">777</span> ./share/E
 <span class="token function">mkdir</span> ./share/F<span class="token punctuation">;</span> <span class="token function">chmod</span> <span class="token number">777</span> ./share/F
 
 <span class="token function">sudo</span> smbpasswd -a <span class="token variable">$sambauser</span>
 
 <span class="token function">sudo</span> <span class="token function">vim</span> /etc/samba/smb.conf
-</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">E</span><span class="token punctuation">]</span></span>
-    <span class="token key attr-name">comment</span> <span class="token punctuation">=</span> <span class="token value attr-value">E</span>
+</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token comment"># &#x624B;&#x52A8;&#x5168;&#x5C40;&#x66FF;&#x6362; sambauser -&gt; YourName</span>
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">A</span><span class="token punctuation">]</span></span>
+    <span class="token key attr-name">comment</span> <span class="token punctuation">=</span> <span class="token value attr-value">&#x6302;&#x8F7D;&#x70B9;A</span>
+    <span class="token key attr-name">path</span> <span class="token punctuation">=</span> <span class="token value attr-value">/home/sambauser/share/A</span>
+    <span class="token key attr-name">available</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
+    <span class="token key attr-name">browseable</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
+    <span class="token key attr-name">writable</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
+    <span class="token key attr-name">public</span> <span class="token punctuation">=</span> <span class="token value attr-value">no</span>
+    <span class="token key attr-name">guest ok</span> <span class="token punctuation">=</span> <span class="token value attr-value">no</span>
+    <span class="token key attr-name">workgroup</span> <span class="token punctuation">=</span> <span class="token value attr-value">samba</span>
+    <span class="token key attr-name">valid users</span> <span class="token punctuation">=</span> <span class="token value attr-value">@sambauser</span>
+    <span class="token key attr-name">write list</span> <span class="token punctuation">=</span> <span class="token value attr-value">@sambauser</span>
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">B</span><span class="token punctuation">]</span></span>
+    <span class="token key attr-name">comment</span> <span class="token punctuation">=</span> <span class="token value attr-value">&#x6302;&#x8F7D;&#x70B9;B</span>
+    <span class="token key attr-name">path</span> <span class="token punctuation">=</span> <span class="token value attr-value">/home/sambauser/share/B</span>
+    <span class="token key attr-name">available</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
+    <span class="token key attr-name">browseable</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
+    <span class="token key attr-name">writable</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
+    <span class="token key attr-name">public</span> <span class="token punctuation">=</span> <span class="token value attr-value">no</span>
+    <span class="token key attr-name">guest ok</span> <span class="token punctuation">=</span> <span class="token value attr-value">no</span>
+    <span class="token key attr-name">workgroup</span> <span class="token punctuation">=</span> <span class="token value attr-value">samba</span>
+    <span class="token key attr-name">valid users</span> <span class="token punctuation">=</span> <span class="token value attr-value">@sambauser</span>
+    <span class="token key attr-name">write list</span> <span class="token punctuation">=</span> <span class="token value attr-value">@sambauser</span>
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">E</span><span class="token punctuation">]</span></span>
+    <span class="token key attr-name">comment</span> <span class="token punctuation">=</span> <span class="token value attr-value">&#x6302;&#x8F7D;&#x70B9;E</span>
     <span class="token key attr-name">path</span> <span class="token punctuation">=</span> <span class="token value attr-value">/home/sambauser/share/E</span>
     <span class="token key attr-name">available</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
     <span class="token key attr-name">browseable</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
@@ -992,8 +1017,8 @@ systemctl restart smb
     <span class="token key attr-name">valid users</span> <span class="token punctuation">=</span> <span class="token value attr-value">@sambauser</span>
     <span class="token key attr-name">write list</span> <span class="token punctuation">=</span> <span class="token value attr-value">@sambauser</span>
 <span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">F</span><span class="token punctuation">]</span></span>
-    <span class="token key attr-name">comment</span> <span class="token punctuation">=</span> <span class="token value attr-value">F</span>
-    <span class="token key attr-name">path</span> <span class="token punctuation">=</span> <span class="token value attr-value">/home/sambauser/share/E</span>
+    <span class="token key attr-name">comment</span> <span class="token punctuation">=</span> <span class="token value attr-value">&#x6302;&#x8F7D;&#x70B9;F</span>
+    <span class="token key attr-name">path</span> <span class="token punctuation">=</span> <span class="token value attr-value">/home/sambauser/share/F</span>
     <span class="token key attr-name">available</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
     <span class="token key attr-name">browseable</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
     <span class="token key attr-name">writable</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
@@ -1003,6 +1028,9 @@ systemctl restart smb
     <span class="token key attr-name">valid users</span> <span class="token punctuation">=</span> <span class="token value attr-value">@sambauser</span>
     <span class="token key attr-name">write list</span> <span class="token punctuation">=</span> <span class="token value attr-value">@sambauser</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">sudo</span> systemctl restart smbd
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash">ll /dev/sd*
+<span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda1 /home/<span class="token variable">$sambauser</span>/share/E
+<span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda2 /home/<span class="token variable">$sambauser</span>/share/F
 </pre><h3 class="mume-header" id="%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</h3>
 
 <pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token comment">REM &#x8BBF;&#x95EE;&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;</span>

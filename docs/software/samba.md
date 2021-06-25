@@ -115,6 +115,8 @@ sudo systemctl restart smbd
 sambauser=YourName
 sudo su - $sambauser
 mkdir ./share; chmod 777 ./share
+mkdir ./share/A; chmod 777 ./share/A
+mkdir ./share/B; chmod 777 ./share/B
 mkdir ./share/E; chmod 777 ./share/E
 mkdir ./share/F; chmod 777 ./share/F
 
@@ -124,8 +126,31 @@ sudo vim /etc/samba/smb.conf
 ```
 
 ```ini
+# 手动全局替换 sambauser -> YourName
+[A]
+    comment = 挂载点A
+    path = /home/sambauser/share/A
+    available = yes
+    browseable = yes
+    writable = yes
+    public = no
+    guest ok = no
+    workgroup = samba
+    valid users = @sambauser
+    write list = @sambauser
+[B]
+    comment = 挂载点B
+    path = /home/sambauser/share/B
+    available = yes
+    browseable = yes
+    writable = yes
+    public = no
+    guest ok = no
+    workgroup = samba
+    valid users = @sambauser
+    write list = @sambauser
 [E]
-    comment = E
+    comment = 挂载点E
     path = /home/sambauser/share/E
     available = yes
     browseable = yes
@@ -136,8 +161,8 @@ sudo vim /etc/samba/smb.conf
     valid users = @sambauser
     write list = @sambauser
 [F]
-    comment = F
-    path = /home/sambauser/share/E
+    comment = 挂载点F
+    path = /home/sambauser/share/F
     available = yes
     browseable = yes
     writable = yes
@@ -150,6 +175,12 @@ sudo vim /etc/samba/smb.conf
 
 ```bash
 sudo systemctl restart smbd
+```
+
+```bash
+ll /dev/sd*
+sudo mount /dev/sda1 /home/$sambauser/share/E
+sudo mount /dev/sda2 /home/$sambauser/share/F
 ```
 
 ### 使用
