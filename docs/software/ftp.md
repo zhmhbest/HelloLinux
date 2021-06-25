@@ -8,12 +8,14 @@ firewall-cmd --zone=public --add-port=20-21/tcp --permanent
 firewall-cmd --zone=public --add-port=40000-40010/tcp --permanent
 firewall-cmd --reload
 firewall-cmd --list-all
+systemctl enable vsftpd
 
 # Ubuntu
 # sudo apt-get install vsftpd
 sudo apt install vsftpd
 sudo ufw allow to any port 20,21,40000:40010 proto tcp
 sudo ufw status verbose
+systemctl enable vsftpd
 
 # 服务管理
 systemctl status vsftpd

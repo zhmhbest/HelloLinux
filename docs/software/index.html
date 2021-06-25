@@ -447,12 +447,14 @@ firewall-cmd --zone<span class="token operator">=</span>public --add-port<span c
 firewall-cmd --zone<span class="token operator">=</span>public --add-port<span class="token operator">=</span><span class="token number">40000</span>-40010/tcp --permanent
 firewall-cmd --reload
 firewall-cmd --list-all
+systemctl <span class="token builtin class-name">enable</span> vsftpd
 
 <span class="token comment"># Ubuntu</span>
 <span class="token comment"># sudo apt-get install vsftpd</span>
 <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> vsftpd
 <span class="token function">sudo</span> ufw allow to any port <span class="token number">20,21</span>,40000:40010 proto tcp
 <span class="token function">sudo</span> ufw status verbose
+systemctl <span class="token builtin class-name">enable</span> vsftpd
 
 <span class="token comment"># &#x670D;&#x52A1;&#x7BA1;&#x7406;</span>
 systemctl status vsftpd
