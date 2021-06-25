@@ -519,27 +519,53 @@ echo '123' | sha256sum | cut -c '1-64' | tr 'a-z' 'A-Z'
 
 ### 修改配置
 
+```pascal
+if(0==length($1))next;
+if($0~/^\s*#/)print $0;
+```
+
 ```bash
+# function changeConfig() {
+#     # $1 file
+#     # $2 key
+#     # $3 split
+#     # $4 value
+#     local filter='if($0~/^#/ || 0==length($1))next'
+#     local pinter="if(\"$2\"==\$1)print NR\":\"\$0"
+#     local s=$(awk -F"$3" "{$filter;$pinter}" "$1")
+#     local v="${2}${3}${4}"
+#     if [ -z "$s" ]; then
+#         echo "$v">>"$1"
+#         echo append $v
+#     else
+#         local n=$(echo $s | awk -F':' '{print $1}')
+#         sed -i -e "${n}c\\$v" "$1"
+#         echo update $s '->' $v
+#     fi
+# }
 function changeConfig() {
-    # $1 file
-    # $2 key
-    # $3 split
-    # $4 value
-    local filter='if($0~/^#.*/ || 0==length($1))next'
-    local pinter="if(\"$2\"==\$1)print NR\":\"\$0"
-    local s=$(awk -F"$3" "{$filter;$pinter}" "$1")
-    local v="${2}${3}${4}"
-    if [ -z "$s" ]; then
-        echo "$v">>"$1"
+    local FILE="$1"
+    local KEY="$2"
+    local DIV="$3"
+    local VAL="$4"
+    # ^<Space>#?<Space>KEY<Space>DIV
+    local m="^(\s*?)#?(\s*?)$KEY(\s*?)$DIV"
+    local p='NR"|"$0'
+    local r=$(awk -F"$DIV" "{if(0==length(\$1))next; if(\$0~/$m/)print $p}" "$FILE" | head -n 1)
+    local v="$KEY$DIV$VAL"
+    if [ -z "$r" ]; then
+        echo "$v">>"$FILE"
         echo append $v
     else
-        local n=$(echo $s | awk -F':' '{print $1}')
-        sed -i -e "${n}c\\$v" "$1"
-        echo update $s '->' $v
+        local n=$(echo $r | awk -F'|' '{print $1}')
+        sed -i -e "${n}c\\$v" "$FILE"
+        echo update $r '->' $v
     fi
 }
+
 changeConfig /etc/ssh/sshd_config Port ' ' 2048
 changeConfig /etc/ssh/sshd_config Port ' ' 22
+awk '{if($0~/^#/||0==length($0))next; print $0}' /etc/ssh/sshd_config
 ```
 
 ### 枚举目录下文件

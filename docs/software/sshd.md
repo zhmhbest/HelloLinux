@@ -11,7 +11,12 @@ sudo apt-get install openssh-server
 
 ### 配置文件
 
-`/etc/ssh/sshd_config`
+```bash
+# 查看配置
+awk '{if($0~/^#/||0==length($0))next; print $0}' /etc/ssh/sshd_config
+
+vim '/etc/ssh/sshd_config'
+```
 
 ```conf
 # Port 22

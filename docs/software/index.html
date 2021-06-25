@@ -370,8 +370,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> openssh-server
 </pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">&#x914D;&#x7F6E;&#x6587;&#x4EF6;</h3>
 
-<p><code>/etc/ssh/sshd_config</code></p>
-<pre data-role="codeBlock" data-info="conf" class="language-conf"><code># Port 22
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x914D;&#x7F6E;</span>
+<span class="token function">awk</span> <span class="token string">&apos;{if(<span class="token variable">$0</span>~/^#/||0==length(<span class="token variable">$0</span>))next; print <span class="token variable">$0</span>}&apos;</span> /etc/ssh/sshd_config
+
+<span class="token function">vim</span> <span class="token string">&apos;/etc/ssh/sshd_config&apos;</span>
+</pre><pre data-role="codeBlock" data-info="conf" class="language-conf"><code># Port 22
 #AddressFamily any
 AddressFamily inet
 #ListenAddress 0.0.0.0
@@ -498,8 +501,8 @@ systemctl status vsftpd
 <span class="token comment"># &#x533F;&#x540D;&#x7528;&#x6237;&#x4E3B;&#x76EE;&#x5F55;</span>
 <span class="token comment"># anon_root=</span>
 <span class="token comment"># &#x533F;&#x540D;&#x7528;&#x6237;&#x4E0A;&#x4F20;&#x6587;&#x4EF6;&#x540E;&#x4FEE;&#x6539;&#x5176;&#x6240;&#x6709;&#x8005;</span>
-<span class="token comment">#chown_uploads=YES</span>
-<span class="token comment">#chown_username=whoever</span>
+<span class="token comment"># chown_uploads=YES</span>
+<span class="token comment"># chown_username=whoever</span>
 
 <span class="token comment"># &#x672C;&#x5730;&#x7528;&#x6237;</span>
 <span class="token attr-name">local_enable</span><span class="token punctuation">=</span><span class="token attr-value">YES</span>
@@ -534,6 +537,7 @@ systemctl status vsftpd
 </pre><h4 class="mume-header" id="ubuntu%E8%BF%BD%E5%8A%A0%E8%AE%BE%E7%BD%AE">Ubuntu&#x8FFD;&#x52A0;&#x8BBE;&#x7F6E;</h4>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x8FFD;&#x52A0;&#x8BBE;&#x7F6E;</span>
+<span class="token function">sudo</span> <span class="token function">su</span> -
 <span class="token assign-left variable">vsftpd</span><span class="token operator">=</span>/etc/vsftpd.conf
 changeConfig <span class="token variable">$vsftpd</span> write_enable <span class="token operator">=</span> YES
 
