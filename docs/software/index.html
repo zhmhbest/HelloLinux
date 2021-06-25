@@ -1029,8 +1029,25 @@ systemctl restart smb
     <span class="token key attr-name">write list</span> <span class="token punctuation">=</span> <span class="token value attr-value">@sambauser</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">sudo</span> systemctl restart smbd
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash">ll /dev/sd*
-<span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda1 /home/<span class="token variable">$sambauser</span>/share/E
-<span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda2 /home/<span class="token variable">$sambauser</span>/share/F
+
+<span class="token comment"># &#x6302;&#x8F7D;</span>
+<span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda2 /home/<span class="token variable">$sambauser</span>/share/E
+<span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda3 /home/<span class="token variable">$sambauser</span>/share/F
+
+<span class="token comment"># &#x5378;&#x8F7D;</span>
+<span class="token function">sudo</span> systemctl restart smbd
+<span class="token function">sudo</span> <span class="token function">umount</span> /home/<span class="token variable">$sambauser</span>/share/E
+<span class="token function">sudo</span> <span class="token function">umount</span> /home/<span class="token variable">$sambauser</span>/share/F
+
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x5F00;&#x673A;&#x6302;&#x8F7D;</span>
+<span class="token function">sudo</span> <span class="token function">vim</span> /etc/rc.local
+</pre><p><code>/etc/rc.local</code></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5982;&#x679C;&#x5B58;&#x5728;&#x5219;&#x5F00;&#x673A;&#x6302;&#x8F7D;&#x786C;&#x76D8;</span>
+<span class="token assign-left variable">sambauser</span><span class="token operator">=</span>zhmhbest
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -e /dev/sd2 <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> -e /dev/sd3 <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda2 /home/<span class="token variable">$sambauser</span>/share/E
+    <span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda3 /home/<span class="token variable">$sambauser</span>/share/F
+<span class="token keyword">fi</span>
 </pre><h3 class="mume-header" id="%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</h3>
 
 <pre data-role="codeBlock" data-info="batch" class="language-batch"><span class="token comment">REM &#x8BBF;&#x95EE;&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;</span>
