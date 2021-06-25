@@ -87,10 +87,18 @@ systemctl restart nginx
 >[Admin Guide](https://docs.nginx.com/nginx/admin-guide/)
 
 ```bash
-ll '/usr/share/nginx/html'  # 默认页面所在目录
 ll '/etc/nginx'             # 配置所在目录
+ll '/usr/share/nginx/html'  # CentOS7默认页面所在目录
+ll '/var/www/html'          # Ubuntu20默认页面所在目录
 
+# 查看配置
+egrep -v '^\s*#' '/etc/nginx/nginx.conf'
+
+# 编辑配置（通用）
 vim '/etc/nginx/nginx.conf'
+
+# 编辑配置（Ubuntu20）
+sudo vim '/etc/nginx/sites-available/default'
 ```
 
 ```bash
@@ -199,4 +207,8 @@ stream {
         # ...
     }
 }
+```
+
+```bash
+sudo systemctl restart nginx
 ```

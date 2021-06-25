@@ -196,12 +196,32 @@ sudo vim /etc/rc.local
 `/etc/rc.local`
 
 ```bash
+#!/bin/sh
 # 如果存在则开机挂载硬盘
-sambauser=zhmhbest
+sambauser=YourName
 if [ -e /dev/sda2 ] && [ -e /dev/sda3 ]; then
-    echo $sambauser
     sudo mount /dev/sda2 /home/$sambauser/share/E
     sudo mount /dev/sda3 /home/$sambauser/share/F
+fi
+```
+
+```bash
+sudo touch /usr/bin/udisk
+sudo chmod 755 /usr/bin/udisk
+ll /usr/bin/udisk
+
+sudo vim /usr/bin/udisk
+```
+
+`/usr/bin/udisk`
+
+```bash
+#!/bin/sh
+sambauser=YourName
+if [ -e /dev/sda2 ] && [ -e /dev/sda3 ]; then
+    sudo systemctl restart smbd
+    sudo umount /home/$sambauser/share/E
+    sudo umount /home/$sambauser/share/F
 fi
 ```
 

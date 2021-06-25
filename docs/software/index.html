@@ -644,10 +644,18 @@ systemctl restart nginx
 <blockquote>
 <p><a href="https://docs.nginx.com/nginx/admin-guide/">Admin Guide</a></p>
 </blockquote>
-<pre data-role="codeBlock" data-info="bash" class="language-bash">ll <span class="token string">&apos;/usr/share/nginx/html&apos;</span>  <span class="token comment"># &#x9ED8;&#x8BA4;&#x9875;&#x9762;&#x6240;&#x5728;&#x76EE;&#x5F55;</span>
-ll <span class="token string">&apos;/etc/nginx&apos;</span>             <span class="token comment"># &#x914D;&#x7F6E;&#x6240;&#x5728;&#x76EE;&#x5F55;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash">ll <span class="token string">&apos;/etc/nginx&apos;</span>             <span class="token comment"># &#x914D;&#x7F6E;&#x6240;&#x5728;&#x76EE;&#x5F55;</span>
+ll <span class="token string">&apos;/usr/share/nginx/html&apos;</span>  <span class="token comment"># CentOS7&#x9ED8;&#x8BA4;&#x9875;&#x9762;&#x6240;&#x5728;&#x76EE;&#x5F55;</span>
+ll <span class="token string">&apos;/var/www/html&apos;</span>          <span class="token comment"># Ubuntu20&#x9ED8;&#x8BA4;&#x9875;&#x9762;&#x6240;&#x5728;&#x76EE;&#x5F55;</span>
 
+<span class="token comment"># &#x67E5;&#x770B;&#x914D;&#x7F6E;</span>
+<span class="token function">egrep</span> -v <span class="token string">&apos;^\s*#&apos;</span> <span class="token string">&apos;/etc/nginx/nginx.conf&apos;</span>
+
+<span class="token comment"># &#x7F16;&#x8F91;&#x914D;&#x7F6E;&#xFF08;&#x901A;&#x7528;&#xFF09;</span>
 <span class="token function">vim</span> <span class="token string">&apos;/etc/nginx/nginx.conf&apos;</span>
+
+<span class="token comment"># &#x7F16;&#x8F91;&#x914D;&#x7F6E;&#xFF08;Ubuntu20&#xFF09;</span>
+<span class="token function">sudo</span> <span class="token function">vim</span> <span class="token string">&apos;/etc/nginx/sites-available/default&apos;</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash">user nginx<span class="token punctuation">;</span>             <span class="token comment"># &#x7528;&#x6237;</span>
 worker_processes <span class="token number">1</span><span class="token punctuation">;</span>     <span class="token comment"># &#x5141;&#x8BB8;&#x751F;&#x6210;&#x7684;&#x8FDB;&#x7A0B;&#x6570;</span>
 
@@ -753,6 +761,7 @@ stream <span class="token punctuation">{</span>
         <span class="token comment"># ...</span>
     <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">sudo</span> systemctl restart nginx
 </pre><h2 class="mume-header" id="mariadb">Mariadb</h2>
 
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-4">&#x5B89;&#x88C5;</h3>
@@ -1042,12 +1051,25 @@ systemctl restart smb
 <span class="token comment"># &#x8BBE;&#x7F6E;&#x5F00;&#x673A;&#x6302;&#x8F7D;</span>
 <span class="token function">sudo</span> <span class="token function">vim</span> /etc/rc.local
 </pre><p><code>/etc/rc.local</code></p>
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5982;&#x679C;&#x5B58;&#x5728;&#x5219;&#x5F00;&#x673A;&#x6302;&#x8F7D;&#x786C;&#x76D8;</span>
-<span class="token assign-left variable">sambauser</span><span class="token operator">=</span>zhmhbest
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token shebang important">#!/bin/sh</span>
+<span class="token comment"># &#x5982;&#x679C;&#x5B58;&#x5728;&#x5219;&#x5F00;&#x673A;&#x6302;&#x8F7D;&#x786C;&#x76D8;</span>
+<span class="token assign-left variable">sambauser</span><span class="token operator">=</span>YourName
 <span class="token keyword">if</span> <span class="token punctuation">[</span> -e /dev/sda2 <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> -e /dev/sda3 <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
-    <span class="token builtin class-name">echo</span> <span class="token variable">$sambauser</span>
     <span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda2 /home/<span class="token variable">$sambauser</span>/share/E
     <span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda3 /home/<span class="token variable">$sambauser</span>/share/F
+<span class="token keyword">fi</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">sudo</span> <span class="token function">touch</span> /usr/bin/udisk
+<span class="token function">sudo</span> <span class="token function">chmod</span> <span class="token number">755</span> /usr/bin/udisk
+ll /usr/bin/udisk
+
+<span class="token function">sudo</span> <span class="token function">vim</span> /usr/bin/udisk
+</pre><p><code>/usr/bin/udisk</code></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token shebang important">#!/bin/sh</span>
+<span class="token assign-left variable">sambauser</span><span class="token operator">=</span>YourName
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -e /dev/sda2 <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> -e /dev/sda3 <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token function">sudo</span> systemctl restart smbd
+    <span class="token function">sudo</span> <span class="token function">umount</span> /home/<span class="token variable">$sambauser</span>/share/E
+    <span class="token function">sudo</span> <span class="token function">umount</span> /home/<span class="token variable">$sambauser</span>/share/F
 <span class="token keyword">fi</span>
 </pre><h3 class="mume-header" id="%E4%BD%BF%E7%94%A8">&#x4F7F;&#x7528;</h3>
 
