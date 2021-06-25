@@ -157,7 +157,7 @@ isdigits qwe
 
 `-eq` `-ne` `-gt` `-lt` `-ge` `-le`
 
-`&&` `||`
+`!` `&&` `||`
 
 #### condition
 

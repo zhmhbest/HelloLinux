@@ -352,9 +352,15 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token function">vi</span> <span class="token string">&apos;/etc/rc.d/rc.local&apos;</span>
 </pre><h4 class="mume-header" id="ubuntu">Ubuntu</h4>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">sudo</span> <span class="token function">sh</span> -c <span class="token string">&apos;echo &quot;#!/bin/sh&quot;&gt;/etc/rc.local&apos;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x786E;&#x8BA4;&#x5B58;&#x5728;&#x5F00;&#x673A;&#x517C;&#x5BB9;&#x670D;&#x52A1;</span>
+ll <span class="token string">&apos;/usr/lib/systemd/system/&apos;</span> <span class="token operator">|</span> <span class="token function">grep</span> <span class="token string">&apos;rc-local&apos;</span>
+systemctl status rc-local
+
+<span class="token comment"># &#x521B;&#x5EFA;&#x5F00;&#x673A;&#x811A;&#x672C;</span>
+<span class="token function">sudo</span> <span class="token function">sh</span> -c <span class="token string">&apos;echo &quot;#!/bin/sh&quot;&gt;/etc/rc.local&apos;</span>
 <span class="token function">sudo</span> <span class="token function">sh</span> -c <span class="token string">&apos;echo &quot;touch /__startup__&quot;&gt;&gt;/etc/rc.local&apos;</span>
 <span class="token function">sudo</span> <span class="token function">chmod</span> +x /etc/rc.local
+ll <span class="token string">&apos;/etc/rc.local&apos;</span>
 
 <span class="token comment"># &#x6D4B;&#x8BD5;&#x542F;&#x52A8;</span>
 <span class="token function">sudo</span> systemctl start rc-local
@@ -366,7 +372,7 @@ ll <span class="token string">&apos;/__startup__&apos;</span> <span class="token
 <span class="token function">sudo</span> systemctl status rc-local
 
 <span class="token comment"># &#x7F16;&#x8F91;&#x542F;&#x52A8;&#x811A;&#x672C;</span>
-<span class="token function">vi</span> <span class="token string">&apos;/etc/rc.local&apos;</span>
+<span class="token function">vim</span> <span class="token string">&apos;/etc/rc.local&apos;</span>
 </pre><h2 class="mume-header" id="%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81">&#x7CFB;&#x7EDF;&#x72B6;&#x6001;</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x7CFB;&#x7EDF;&#x72B6;&#x6001;&#x63A7;&#x5236;</span>
@@ -524,6 +530,9 @@ blkid
 
 <span class="token comment"># &#x751F;&#x6210;&#x65B0;&#x7684;UUID</span>
 uuidgen
+
+<span class="token comment"># &#x67E5;&#x770B;&#x78C1;&#x76D8;&#x4FE1;&#x606F;</span>
+<span class="token function">sudo</span> hdparm -I /dev/sda
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x76EE;&#x5F55;&#x5360;&#x7528;&#x7A7A;&#x95F4;&#x5927;&#x5C0F;</span>
 <span class="token function">du</span> -sh /etc
 

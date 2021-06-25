@@ -60,9 +60,15 @@ vi '/etc/rc.d/rc.local'
 #### Ubuntu
 
 ```bash
+# 确认存在开机兼容服务
+ll '/usr/lib/systemd/system/' | grep 'rc-local'
+systemctl status rc-local
+
+# 创建开机脚本
 sudo sh -c 'echo "#!/bin/sh">/etc/rc.local'
 sudo sh -c 'echo "touch /__startup__">>/etc/rc.local'
 sudo chmod +x /etc/rc.local
+ll '/etc/rc.local'
 
 # 测试启动
 sudo systemctl start rc-local
@@ -74,7 +80,7 @@ sudo systemctl enable rc-local
 sudo systemctl status rc-local
 
 # 编辑启动脚本
-vi '/etc/rc.local'
+vim '/etc/rc.local'
 ```
 
 ## 系统状态
@@ -255,6 +261,9 @@ ls -l /dev/disk/by-uuid
 
 # 生成新的UUID
 uuidgen
+
+# 查看磁盘信息
+sudo hdparm -I /dev/sda
 ```
 
 ```bash
