@@ -61,8 +61,8 @@ anon_mkdir_write_enable=NO
 # 匿名用户主目录
 # anon_root=
 # 匿名用户上传文件后修改其所有者
-#chown_uploads=YES
-#chown_username=whoever
+# chown_uploads=YES
+# chown_username=whoever
 
 # 本地用户
 local_enable=YES
@@ -96,5 +96,25 @@ pasv_promiscuous=NO
 ```
 
 ```bash
+systemctl restart vsftpd
+```
+
+#### Ubuntu追加设置
+
+```bash
+# 追加设置
+sudo su -
+vsftpd=/etc/vsftpd.conf
+changeConfig $vsftpd write_enable = YES
+
+changeConfig $vsftpd chroot_local_user = YES
+changeConfig $vsftpd allow_writeable_chroot = YES
+
+changeConfig $vsftpd pasv_enable = YES
+changeConfig $vsftpd pasv_min_port = 40000
+changeConfig $vsftpd pasv_max_port = 40010
+changeConfig $vsftpd pasv_promiscuous = NO
+
+egrep -v '^#' $vsftpd
 systemctl restart vsftpd
 ```

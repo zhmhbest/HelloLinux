@@ -284,7 +284,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#ftp">FTP</a>
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85-1">&#x5B89;&#x88C5;</a></li>
-<li><a href="#%E9%85%8D%E7%BD%AE">&#x914D;&#x7F6E;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE">&#x914D;&#x7F6E;</a>
+<ul>
+<li><a href="#ubuntu%E8%BF%BD%E5%8A%A0%E8%AE%BE%E7%BD%AE">Ubuntu&#x8FFD;&#x52A0;&#x8BBE;&#x7F6E;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#apache2">Apache2</a>
@@ -527,6 +531,22 @@ systemctl status vsftpd
 <span class="token attr-name">pasv_max_port</span><span class="token punctuation">=</span><span class="token attr-value">40010</span>
 <span class="token attr-name">pasv_promiscuous</span><span class="token punctuation">=</span><span class="token attr-value">NO</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash">systemctl restart vsftpd
+</pre><h4 class="mume-header" id="ubuntu%E8%BF%BD%E5%8A%A0%E8%AE%BE%E7%BD%AE">Ubuntu&#x8FFD;&#x52A0;&#x8BBE;&#x7F6E;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x8FFD;&#x52A0;&#x8BBE;&#x7F6E;</span>
+<span class="token assign-left variable">vsftpd</span><span class="token operator">=</span>/etc/vsftpd.conf
+changeConfig <span class="token variable">$vsftpd</span> write_enable <span class="token operator">=</span> YES
+
+changeConfig <span class="token variable">$vsftpd</span> chroot_local_user <span class="token operator">=</span> YES
+changeConfig <span class="token variable">$vsftpd</span> allow_writeable_chroot <span class="token operator">=</span> YES
+
+changeConfig <span class="token variable">$vsftpd</span> pasv_enable <span class="token operator">=</span> YES
+changeConfig <span class="token variable">$vsftpd</span> pasv_min_port <span class="token operator">=</span> <span class="token number">40000</span>
+changeConfig <span class="token variable">$vsftpd</span> pasv_max_port <span class="token operator">=</span> <span class="token number">40010</span>
+changeConfig <span class="token variable">$vsftpd</span> pasv_promiscuous <span class="token operator">=</span> NO
+
+<span class="token function">egrep</span> -v <span class="token string">&apos;^#&apos;</span> <span class="token variable">$vsftpd</span>
+systemctl restart vsftpd
 </pre><h2 class="mume-header" id="apache2">Apache2</h2>
 
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-2">&#x5B89;&#x88C5;</h3>
