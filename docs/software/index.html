@@ -1044,7 +1044,8 @@ systemctl restart smb
 </pre><p><code>/etc/rc.local</code></p>
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5982;&#x679C;&#x5B58;&#x5728;&#x5219;&#x5F00;&#x673A;&#x6302;&#x8F7D;&#x786C;&#x76D8;</span>
 <span class="token assign-left variable">sambauser</span><span class="token operator">=</span>zhmhbest
-<span class="token keyword">if</span> <span class="token punctuation">[</span> -e /dev/sd2 <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> -e /dev/sd3 <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -e /dev/sda2 <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token punctuation">[</span> -e /dev/sda3 <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token variable">$sambauser</span>
     <span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda2 /home/<span class="token variable">$sambauser</span>/share/E
     <span class="token function">sudo</span> <span class="token function">mount</span> /dev/sda3 /home/<span class="token variable">$sambauser</span>/share/F
 <span class="token keyword">fi</span>

@@ -198,7 +198,8 @@ sudo vim /etc/rc.local
 ```bash
 # 如果存在则开机挂载硬盘
 sambauser=zhmhbest
-if [ -e /dev/sd2 ] && [ -e /dev/sd3 ]; then
+if [ -e /dev/sda2 ] && [ -e /dev/sda3 ]; then
+    echo $sambauser
     sudo mount /dev/sda2 /home/$sambauser/share/E
     sudo mount /dev/sda3 /home/$sambauser/share/F
 fi
