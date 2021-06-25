@@ -36,10 +36,13 @@ systemctl status smbd
 ### 配置
 
 ```bash
+sambauser=YourName
+echo $sambauser
+
 # 添加系统用户
-sudo adduser sambauser
+sudo adduser $sambauser
 # 切换到该用户
-sudo su - sambauser
+sudo su - $sambauser
 # 创建共享文件夹
 mkdir ./share; chmod 777 ./share
 # 备份配置文件
@@ -49,7 +52,7 @@ exit
 # sudo smbpasswd -a <系统用户名> # 新增用户
 # sudo smbpasswd -d <系统用户名> # 冻结用户
 # sudo smbpasswd -e <系统用户名> # 恢复用户
-sudo smbpasswd -a sambauser
+sudo smbpasswd -a $sambauser
 # New SMB password:
 # Retype new SMB password:
 # Added user ?.
@@ -69,7 +72,7 @@ sudo vim /etc/samba/smb.conf
     # 略
 
 # 追加配置内容（[]内的内容，决定了访问时在IP下的文件夹名称）
-[sambashare]
+[DirectoryName]
     comment = 共享目录
     path = /home/sambauser/share
 
@@ -77,7 +80,7 @@ sudo vim /etc/samba/smb.conf
     available = yes
     browseable = yes
     writable = yes
-    # read only = yes
+    # read only = no
     create mask = 0644
     directory mask = 0755
 
@@ -103,7 +106,50 @@ sudo vim /etc/samba/smb.conf
 # CentOS
 systemctl restart smb
 # Ubuntu
-systemctl restart smbd
+sudo systemctl restart smbd
+```
+
+#### RaspberryPi
+
+```bash
+sambauser=YourName
+sudo su - $sambauser
+mkdir ./share; chmod 777 ./share
+mkdir ./share/E; chmod 777 ./share/E
+mkdir ./share/F; chmod 777 ./share/F
+
+sudo smbpasswd -a $sambauser
+
+sudo vim /etc/samba/smb.conf
+```
+
+```ini
+[E]
+    comment = E
+    path = /home/sambauser/share/E
+    available = yes
+    browseable = yes
+    writable = yes
+    public = no
+    guest ok = no
+    workgroup = samba
+    valid users = @sambauser
+    write list = @sambauser
+[F]
+    comment = F
+    path = /home/sambauser/share/E
+    available = yes
+    browseable = yes
+    writable = yes
+    public = no
+    guest ok = no
+    workgroup = samba
+    valid users = @sambauser
+    write list = @sambauser
+```
+
+```bash
+sudo systemctl restart smbd
 ```
 
 ### 使用
