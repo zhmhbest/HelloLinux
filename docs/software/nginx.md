@@ -1,9 +1,12 @@
 
 ### 安装
 
+#### CentOS
+
 ```bash
+# 添加源
 yum -y install yum-utils
-vi '/etc/yum.repos.d/nginx.repo'
+vim '/etc/yum.repos.d/nginx.repo'
 ```
 
 [`nginx.repo`](http://nginx.org/en/linux_packages.html#RHEL-CentOS)
@@ -41,7 +44,30 @@ tail -2 /etc/passwd
 firewall-cmd --permanent --zone=public --add-service=http
 firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --reload
+# 开机启动
+sudo systemctl enable nginx
+```
 
+#### Ubuntu
+
+```bash
+# 安装
+sudo apt install nginx
+
+# 测试安装成功
+nginx -v
+
+# 防火墙
+sudo ufw allow http
+sudo ufw allow https
+
+# 开机启动
+sudo systemctl enable nginx
+```
+
+#### 控制
+
+```bash
 # 控制（不推荐）
 # nginx            # 启动
 # nginx -s stop    # 快速关闭
@@ -50,10 +76,10 @@ firewall-cmd --reload
 # nginx -s reopen  # 重新打开日志文件
 
 # 服务
+systemctl status  nginx
 systemctl enable  nginx
 systemctl start   nginx
 systemctl restart nginx
-systemctl status  nginx
 ```
 
 ### 配置
@@ -64,7 +90,7 @@ systemctl status  nginx
 ll '/usr/share/nginx/html'  # 默认页面所在目录
 ll '/etc/nginx'             # 配置所在目录
 
-vi '/etc/nginx/nginx.conf'
+vim '/etc/nginx/nginx.conf'
 ```
 
 ```bash

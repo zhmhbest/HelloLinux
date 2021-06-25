@@ -294,7 +294,13 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 <li><a href="#nginx">Nginx</a>
 <ul>
-<li><a href="#%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</a>
+<ul>
+<li><a href="#centos">CentOS</a></li>
+<li><a href="#ubuntu">Ubuntu</a></li>
+<li><a href="#%E6%8E%A7%E5%88%B6">&#x63A7;&#x5236;</a></li>
+</ul>
+</li>
 <li><a href="#%E9%85%8D%E7%BD%AE-1">&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
@@ -538,8 +544,11 @@ systemctl start  httpd
 
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-3">&#x5B89;&#x88C5;</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash">yum -y <span class="token function">install</span> yum-utils
-<span class="token function">vi</span> <span class="token string">&apos;/etc/yum.repos.d/nginx.repo&apos;</span>
+<h4 class="mume-header" id="centos">CentOS</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6DFB;&#x52A0;&#x6E90;</span>
+yum -y <span class="token function">install</span> yum-utils
+<span class="token function">vim</span> <span class="token string">&apos;/etc/yum.repos.d/nginx.repo&apos;</span>
 </pre><p><a href="http://nginx.org/en/linux_packages.html#RHEL-CentOS"><code>nginx.repo</code></a></p>
 <pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">nginx-stable</span><span class="token punctuation">]</span></span>
 <span class="token key attr-name">name</span><span class="token punctuation">=</span><span class="token value attr-value">nginx stable repo</span>
@@ -570,8 +579,25 @@ nginx -v
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-service<span class="token operator">=</span>http
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-service<span class="token operator">=</span>https
 firewall-cmd --reload
+<span class="token comment"># &#x5F00;&#x673A;&#x542F;&#x52A8;</span>
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> nginx
+</pre><h4 class="mume-header" id="ubuntu">Ubuntu</h4>
 
-<span class="token comment"># &#x63A7;&#x5236;&#xFF08;&#x4E0D;&#x63A8;&#x8350;&#xFF09;</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nginx
+
+<span class="token comment"># &#x6D4B;&#x8BD5;&#x5B89;&#x88C5;&#x6210;&#x529F;</span>
+nginx -v
+
+<span class="token comment"># &#x9632;&#x706B;&#x5899;</span>
+<span class="token function">sudo</span> ufw allow http
+<span class="token function">sudo</span> ufw allow https
+
+<span class="token comment"># &#x5F00;&#x673A;&#x542F;&#x52A8;</span>
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> nginx
+</pre><h4 class="mume-header" id="%E6%8E%A7%E5%88%B6">&#x63A7;&#x5236;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x63A7;&#x5236;&#xFF08;&#x4E0D;&#x63A8;&#x8350;&#xFF09;</span>
 <span class="token comment"># nginx            # &#x542F;&#x52A8;</span>
 <span class="token comment"># nginx -s stop    # &#x5FEB;&#x901F;&#x5173;&#x95ED;</span>
 <span class="token comment"># nginx -s quit    # &#x6B63;&#x5E38;&#x5173;&#x95ED;</span>
@@ -579,10 +605,10 @@ firewall-cmd --reload
 <span class="token comment"># nginx -s reopen  # &#x91CD;&#x65B0;&#x6253;&#x5F00;&#x65E5;&#x5FD7;&#x6587;&#x4EF6;</span>
 
 <span class="token comment"># &#x670D;&#x52A1;</span>
+systemctl status  nginx
 systemctl <span class="token builtin class-name">enable</span>  nginx
 systemctl start   nginx
 systemctl restart nginx
-systemctl status  nginx
 </pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-1">&#x914D;&#x7F6E;</h3>
 
 <blockquote>
@@ -591,7 +617,7 @@ systemctl status  nginx
 <pre data-role="codeBlock" data-info="bash" class="language-bash">ll <span class="token string">&apos;/usr/share/nginx/html&apos;</span>  <span class="token comment"># &#x9ED8;&#x8BA4;&#x9875;&#x9762;&#x6240;&#x5728;&#x76EE;&#x5F55;</span>
 ll <span class="token string">&apos;/etc/nginx&apos;</span>             <span class="token comment"># &#x914D;&#x7F6E;&#x6240;&#x5728;&#x76EE;&#x5F55;</span>
 
-<span class="token function">vi</span> <span class="token string">&apos;/etc/nginx/nginx.conf&apos;</span>
+<span class="token function">vim</span> <span class="token string">&apos;/etc/nginx/nginx.conf&apos;</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash">user nginx<span class="token punctuation">;</span>             <span class="token comment"># &#x7528;&#x6237;</span>
 worker_processes <span class="token number">1</span><span class="token punctuation">;</span>     <span class="token comment"># &#x5141;&#x8BB8;&#x751F;&#x6210;&#x7684;&#x8FDB;&#x7A0B;&#x6570;</span>
 
