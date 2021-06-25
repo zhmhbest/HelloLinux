@@ -813,17 +813,27 @@ python get-pip.py
 </pre><h2 class="mume-header" id="samba">Samba</h2>
 
 <blockquote>
-<p>Samba&#x53EF;&#x4EE5;&#x4F7F;Linux&#x5728;Windows&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x4E2D;&#x8FDB;&#x884C;&#x901A;&#x8BAF;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E3B;&#x673A;&#x95F4;&#x5FC5;&#x987B;&#x5904;&#x5728;&#x540C;&#x4E00;&#x7F51;&#x6BB5;&#x3002;</p>
+<p>Samba&#x53EF;&#x4EE5;&#x5728;Windows&#x7F51;&#x4E0A;&#x90BB;&#x5C45;&#x4E2D;&#x8FDB;&#x884C;&#x901A;&#x8BAF;&#x3002;&#x8BE5;&#x534F;&#x8BAE;&#x7F3A;&#x4E4F;&#x8DEF;&#x7531;&#x548C;&#x7F51;&#x7EDC;&#x5C42;&#x5BFB;&#x5740;&#x529F;&#x80FD;&#xFF0C;&#x5373;&#x4E3B;&#x673A;&#x95F4;&#x5FC5;&#x987B;&#x5904;&#x5728;&#x540C;&#x4E00;&#x7F51;&#x6BB5;&#x3002;</p>
+<ol>
+<li>Port 137/udp - &#x540D;&#x5B57;&#x670D;&#x52A1;</li>
+<li>Port 138/udp - &#x6570;&#x636E;&#x62A5;&#x670D;&#x52A1;</li>
+<li>Port 139/tcp - &#x6587;&#x4EF6;&#x548C;&#x6253;&#x5370;&#x5171;&#x4EAB;</li>
+<li>Port 389/tcp - &#x8F7B;&#x578B;&#x76EE;&#x5F55;&#x8BBF;&#x95EE;&#xFF08;LDAP&#xFF09;</li>
+<li>Port 445/tcp - &#x5B9E;&#x73B0;&#x7F51;&#x7EDC;&#x6587;&#x4EF6;&#x5171;&#x4EAB;</li>
+<li>Port 901/tcp - &#x7F51;&#x9875;&#x7BA1;&#x7406;</li>
+</ol>
 </blockquote>
 <h3 class="mume-header" id="%E5%AE%89%E8%A3%85-7">&#x5B89;&#x88C5;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS</span>
 yum -y <span class="token function">install</span> samba
+firewall-cmd --permanent --query-port<span class="token operator">=</span><span class="token number">137</span>-138/udp
+firewall-cmd --permanent --query-port<span class="token operator">=</span><span class="token number">139</span>/tcp
+firewall-cmd --permanent --query-port<span class="token operator">=</span><span class="token number">445</span>/tcp
+firewall-cmd --reload
 <span class="token comment"># &#x670D;&#x52A1;&#x7BA1;&#x7406;</span>
+systemctl <span class="token builtin class-name">enable</span> smb
 systemctl status smb
-systemctl start smb
-systemctl stop smb
-systemctl restart smb
 
 
 <span class="token comment"># Ubuntu</span>
@@ -832,10 +842,10 @@ systemctl restart smb
 <span class="token comment"># Samba&#x6CA1;&#x6709;&#x4F5C;&#x4E3A;AD&#x57DF;&#x63A7;&#x5236;&#x5668;&#x8FD0;&#x884C;&#xFF1A;Masking Samba-AD-dc.service</span>
 <span class="token comment"># &#x8BF7;&#x5FFD;&#x7565;&#x4EE5;&#x4E0B;&#x5173;&#x4E8E;&#x627E;&#x4E0D;&#x5230;deb-systemd-helper&#x8FD9;&#x4E9B;&#x670D;&#x52A1;&#x7684;&#x9519;&#x8BEF;&#x3002;</span>
 <span class="token comment"># &#x670D;&#x52A1;&#x7BA1;&#x7406;</span>
+<span class="token function">sudo</span> ufw allow to any port <span class="token number">137,138</span> proto udp
+<span class="token function">sudo</span> ufw allow to any port <span class="token number">139,445</span> proto tcp
+<span class="token function">sudo</span> systemctl <span class="token builtin class-name">enable</span> smbd
 systemctl status smbd
-systemctl start smbd
-systemctl stop smbd
-systemctl restart smbd
 </pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-4">&#x914D;&#x7F6E;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x6DFB;&#x52A0;&#x7CFB;&#x7EDF;&#x7528;&#x6237;</span>
@@ -848,7 +858,6 @@ systemctl restart smbd
 <span class="token function">mkdir</span> ./backups<span class="token punctuation">;</span> <span class="token function">cp</span> -R /etc/samba/* ./backups
 <span class="token builtin class-name">exit</span>
 
-
 <span class="token comment"># sudo smbpasswd -a &lt;&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#x540D;&gt; # &#x65B0;&#x589E;&#x7528;&#x6237;</span>
 <span class="token comment"># sudo smbpasswd -d &lt;&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#x540D;&gt; # &#x51BB;&#x7ED3;&#x7528;&#x6237;</span>
 <span class="token comment"># sudo smbpasswd -e &lt;&#x7CFB;&#x7EDF;&#x7528;&#x6237;&#x540D;&gt; # &#x6062;&#x590D;&#x7528;&#x6237;</span>
@@ -857,13 +866,18 @@ systemctl restart smbd
 <span class="token comment"># Retype new SMB password:</span>
 <span class="token comment"># Added user ?.</span>
 
-
 <span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;&#x914D;&#x7F6E;</span>
 <span class="token function">egrep</span> -v <span class="token string">&apos;^$|^#|^;&apos;</span> /etc/samba/smb.conf
 <span class="token comment"># &#x7F16;&#x8F91;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
 <span class="token function">sudo</span> <span class="token function">vim</span> /etc/samba/smb.conf
-</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token comment"># &#x8FFD;&#x52A0;&#x914D;&#x7F6E;&#x5185;&#x5BB9;</span>
-<span class="token comment"># []&#x5185;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x51B3;&#x5B9A;&#x4E86;&#x8BBF;&#x95EE;&#x65F6;&#x5728;IP&#x4E0B;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x540D;&#x79F0;</span>
+</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">global</span><span class="token punctuation">]</span></span>
+    <span class="token comment"># &#x7565;</span>
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">printers</span><span class="token punctuation">]</span></span>
+    <span class="token comment"># &#x7565;</span>
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">print$</span><span class="token punctuation">]</span></span>
+    <span class="token comment"># &#x7565;</span>
+
+<span class="token comment"># &#x8FFD;&#x52A0;&#x914D;&#x7F6E;&#x5185;&#x5BB9;&#xFF08;[]&#x5185;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x51B3;&#x5B9A;&#x4E86;&#x8BBF;&#x95EE;&#x65F6;&#x5728;IP&#x4E0B;&#x7684;&#x6587;&#x4EF6;&#x5939;&#x540D;&#x79F0;&#xFF09;</span>
 <span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">sambashare</span><span class="token punctuation">]</span></span>
     <span class="token key attr-name">comment</span> <span class="token punctuation">=</span> <span class="token value attr-value">&#x5171;&#x4EAB;&#x76EE;&#x5F55;</span>
     <span class="token key attr-name">path</span> <span class="token punctuation">=</span> <span class="token value attr-value">/home/sambauser/share</span>
@@ -872,6 +886,7 @@ systemctl restart smbd
     <span class="token key attr-name">available</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
     <span class="token key attr-name">browseable</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
     <span class="token key attr-name">writable</span> <span class="token punctuation">=</span> <span class="token value attr-value">yes</span>
+    <span class="token comment"># read only = yes</span>
     <span class="token key attr-name">create mask</span> <span class="token punctuation">=</span> <span class="token value attr-value">0644</span>
     <span class="token key attr-name">directory mask</span> <span class="token punctuation">=</span> <span class="token value attr-value">0755</span>
 

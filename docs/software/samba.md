@@ -1,16 +1,24 @@
 
->Samba可以使Linux在Windows网上邻居中进行通讯。默认情况下，主机间必须处在同一网段。
+>Samba可以在Windows网上邻居中进行通讯。该协议缺乏路由和网络层寻址功能，即主机间必须处在同一网段。
+>1. Port 137/udp - 名字服务
+>2. Port 138/udp - 数据报服务
+>3. Port 139/tcp - 文件和打印共享
+>4. Port 389/tcp - 轻型目录访问（LDAP）
+>5. Port 445/tcp - 实现网络文件共享
+>6. Port 901/tcp - 网页管理
 
 ### 安装
 
 ```bash
 # CentOS
 yum -y install samba
+firewall-cmd --permanent --query-port=137-138/udp
+firewall-cmd --permanent --query-port=139/tcp
+firewall-cmd --permanent --query-port=445/tcp
+firewall-cmd --reload
 # 服务管理
+systemctl enable smb
 systemctl status smb
-systemctl start smb
-systemctl stop smb
-systemctl restart smb
 
 
 # Ubuntu
@@ -19,10 +27,10 @@ sudo apt install samba
 # Samba没有作为AD域控制器运行：Masking Samba-AD-dc.service
 # 请忽略以下关于找不到deb-systemd-helper这些服务的错误。
 # 服务管理
+sudo ufw allow to any port 137,138 proto udp
+sudo ufw allow to any port 139,445 proto tcp
+sudo systemctl enable smbd
 systemctl status smbd
-systemctl start smbd
-systemctl stop smbd
-systemctl restart smbd
 ```
 
 ### 配置
@@ -38,7 +46,6 @@ mkdir ./share; chmod 777 ./share
 mkdir ./backups; cp -R /etc/samba/* ./backups
 exit
 
-
 # sudo smbpasswd -a <系统用户名> # 新增用户
 # sudo smbpasswd -d <系统用户名> # 冻结用户
 # sudo smbpasswd -e <系统用户名> # 恢复用户
@@ -47,7 +54,6 @@ sudo smbpasswd -a sambauser
 # Retype new SMB password:
 # Added user ?.
 
-
 # 查看当前配置
 egrep -v '^$|^#|^;' /etc/samba/smb.conf
 # 编辑配置文件
@@ -55,8 +61,14 @@ sudo vim /etc/samba/smb.conf
 ```
 
 ```ini
-# 追加配置内容
-# []内的内容，决定了访问时在IP下的文件夹名称
+[global]
+    # 略
+[printers]
+    # 略
+[print$]
+    # 略
+
+# 追加配置内容（[]内的内容，决定了访问时在IP下的文件夹名称）
 [sambashare]
     comment = 共享目录
     path = /home/sambauser/share
@@ -65,6 +77,7 @@ sudo vim /etc/samba/smb.conf
     available = yes
     browseable = yes
     writable = yes
+    # read only = yes
     create mask = 0644
     directory mask = 0755
 

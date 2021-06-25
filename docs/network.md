@@ -190,7 +190,8 @@ ifdown eth0
 ### CentOS
 
 ```bash
-# systemctl {status | stop | start | disable | enable} firewalld.service
+# systemctl {status | stop | start | disable | enable} firewalld
+systemctl status firewalld
 
 # 防火墙-状态
 firewall-cmd --state
