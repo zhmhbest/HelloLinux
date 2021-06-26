@@ -119,6 +119,7 @@ mkdir ./share/A; chmod 777 ./share/A
 mkdir ./share/B; chmod 777 ./share/B
 mkdir ./share/E; chmod 777 ./share/E
 mkdir ./share/F; chmod 777 ./share/F
+mkdir ./share/public; chmod 777 ./share/public
 
 sudo smbpasswd -a $sambauser
 
@@ -171,6 +172,15 @@ sudo vim /etc/samba/smb.conf
     workgroup = samba
     valid users = @sambauser
     write list = @sambauser
+[public]
+    comment = 公开区域
+    path = /home/sambauser/share/public
+    available = yes
+    browseable = yes
+    writable = no
+    public = yes
+    guest ok = yes
+    workgroup = samba
 ```
 
 ```bash
