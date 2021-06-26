@@ -271,15 +271,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E9%85%8D%E7%BD%AE%E7%BD%91%E7%BB%9C">&#x914D;&#x7F6E;&#x7F51;&#x7EDC;</a>
 <ul>
 <li><a href="#%E4%B8%B4%E6%97%B6%E9%85%8D%E7%BD%AE">&#x4E34;&#x65F6;&#x914D;&#x7F6E;</a></li>
-<li><a href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE">&#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</a>
-<ul>
-<li><a href="#centos">CentOS</a></li>
-</ul>
-</li>
+<li><a href="#%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE">&#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</a></li>
 <li><a href="#%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">&#x6587;&#x672C;&#x914D;&#x7F6E;</a>
 <ul>
-<li><a href="#centos-1">CentOS</a></li>
-<li><a href="#ubuntu">Ubuntu</a></li>
+<li><a href="#centos%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">CentOS&#x6587;&#x672C;&#x914D;&#x7F6E;</a></li>
+<li><a href="#ubuntu%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">Ubuntu&#x6587;&#x672C;&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
 <li><a href="#hostname">HostName</a></li>
@@ -296,15 +292,23 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 <li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</a>
 <ul>
-<li><a href="#centos-2">CentOS</a></li>
-<li><a href="#ubuntu-1">Ubuntu</a></li>
+<li><a href="#centos%E9%98%B2%E7%81%AB%E5%A2%99">CentOS&#x9632;&#x706B;&#x5899;</a></li>
+<li><a href="#ubuntu%E9%98%B2%E7%81%AB%E5%A2%99">Ubuntu&#x9632;&#x706B;&#x5899;</a></li>
 </ul>
 </li>
 <li><a href="#ping">PING</a></li>
 <li><a href="#%E8%99%9A%E6%8B%9F%E7%BD%91%E5%8D%A1">&#x865A;&#x62DF;&#x7F51;&#x5361;</a></li>
 <li><a href="#%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C">&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;</a>
 <ul>
-<li><a href="#ubuntu-2">Ubuntu</a></li>
+<li><a href="#%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F">&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;</a></li>
+<li><a href="#ubuntu%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C">Ubuntu&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;</a>
+<ul>
+<li><a href="#%E8%99%9A%E6%8B%9F%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1">&#x865A;&#x62DF;&#x65E0;&#x7EBF;&#x7F51;&#x5361;</a></li>
+<li><a href="#%E8%BF%9E%E6%8E%A5wifi">&#x8FDE;&#x63A5;WIFI</a></li>
+<li><a href="#ap%E6%A8%A1%E5%BC%8F">AP&#x6A21;&#x5F0F;</a></li>
+<li><a href="#raspberrypi%E5%88%9B%E5%BB%BA%E7%83%AD%E7%82%B9">RaspberryPi&#x521B;&#x5EFA;&#x70ED;&#x70B9;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</a>
@@ -327,15 +331,14 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token function">ip</span> addr <span class="token function">add</span> <span class="token number">192.168</span>.1.100/24 dev eth0
 </pre><h3 class="mume-header" id="%E5%9B%BE%E5%BD%A2%E5%8C%96%E9%85%8D%E7%BD%AE">&#x56FE;&#x5F62;&#x5316;&#x914D;&#x7F6E;</h3>
 
-<h4 class="mume-header" id="centos">CentOS</h4>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash">nmtui
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x9700;&#x8981;NetworkManager&#x670D;&#x52A1;&#x652F;&#x6301;</span>
+nmtui
 nmtui edit
 nmtui connect
 nmtui <span class="token function">hostname</span>
 </pre><h3 class="mume-header" id="%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">&#x6587;&#x672C;&#x914D;&#x7F6E;</h3>
 
-<h4 class="mume-header" id="centos-1">CentOS</h4>
+<h4 class="mume-header" id="centos%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">CentOS&#x6587;&#x672C;&#x914D;&#x7F6E;</h4>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x7F51;&#x5361;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span>
 <span class="token function">ls</span> -l /etc/sysconfig/network-scripts/ifcfg-e*
@@ -357,25 +360,37 @@ nmtui <span class="token function">hostname</span>
 
 <span class="token comment"># &#x5E94;&#x7528;&#x7F51;&#x7EDC;&#x914D;&#x7F6E; CentOS-7</span>
 systemctl restart network
-</pre><h4 class="mume-header" id="ubuntu">Ubuntu</h4>
+</pre><h4 class="mume-header" id="ubuntu%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">Ubuntu&#x6587;&#x672C;&#x914D;&#x7F6E;</h4>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x914D;&#x7F6E;</span>
-<span class="token function">cat</span> /etc/netplan/00-installer-config.yaml
+<pre data-role="codeBlock" data-info="bash" class="language-bash">ll /etc/netplan/
+
+<span class="token comment"># sudo vim /etc/netplan/00-installer-config.yaml</span>
+<span class="token comment"># sudo vim /etc/netplan/50-cloud-init.yaml</span>
+<span class="token function">sudo</span> <span class="token function">vim</span> /etc/netplan/*.yaml
 </pre><pre data-role="codeBlock" data-info="yaml" class="language-yaml"><span class="token key atrule">network</span><span class="token punctuation">:</span>
+    <span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">2</span>
     <span class="token key atrule">ethernets</span><span class="token punctuation">:</span>
         <span class="token key atrule">ens33</span><span class="token punctuation">:</span>
             <span class="token key atrule">dhcp4</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
-    <span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">2</span>
 </pre><pre data-role="codeBlock" data-info="yaml" class="language-yaml"><span class="token key atrule">network</span><span class="token punctuation">:</span>
+    <span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">2</span>
     <span class="token key atrule">ethernets</span><span class="token punctuation">:</span>
-        <span class="token key atrule">ens33</span><span class="token punctuation">:</span>
+        <span class="token key atrule">eth0</span><span class="token punctuation">:</span>
+            <span class="token key atrule">optional</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
             <span class="token key atrule">dhcp4</span><span class="token punctuation">:</span> no
             <span class="token key atrule">addresses</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>192.168.1.100/24<span class="token punctuation">]</span>
-            <span class="token key atrule">optional</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
             <span class="token key atrule">gateway4</span><span class="token punctuation">:</span> 192.168.1.1
             <span class="token key atrule">nameservers</span><span class="token punctuation">:</span>
                 <span class="token key atrule">addresses</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>8.8.8.8<span class="token punctuation">]</span>
-    <span class="token key atrule">version</span><span class="token punctuation">:</span> <span class="token number">2</span>
+            <span class="token comment"># match:</span>
+            <span class="token comment">#     macaddress: AA:BB:CC:DD:EE:FF</span>
+    <span class="token key atrule">wifis</span><span class="token punctuation">:</span>
+        <span class="token key atrule">wlan0</span><span class="token punctuation">:</span>
+            <span class="token key atrule">optional</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+            <span class="token key atrule">dhcp4</span><span class="token punctuation">:</span> <span class="token boolean important">true</span>
+            <span class="token key atrule">access-points</span><span class="token punctuation">:</span>
+                <span class="token key atrule">&quot;&#x8981;&#x8FDE;&#x63A5;&#x7684;WIFI&#x7684;SSID&quot;</span><span class="token punctuation">:</span>
+                    <span class="token key atrule">password</span><span class="token punctuation">:</span> <span class="token string">&quot;&#x8981;&#x8FDE;&#x63A5;&#x7684;WIFI&#x7684;PASSWORD&quot;</span>
 </pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5E94;&#x7528;&#x7F51;&#x7EDC;&#x914D;&#x7F6E;</span>
 <span class="token function">sudo</span> netplan apply
 </pre><h3 class="mume-header" id="hostname">HostName</h3>
@@ -453,7 +468,7 @@ nmcli c s
 <span class="token function">ifdown</span> eth0
 </pre><h2 class="mume-header" id="%E9%98%B2%E7%81%AB%E5%A2%99">&#x9632;&#x706B;&#x5899;</h2>
 
-<h3 class="mume-header" id="centos-2">CentOS</h3>
+<h3 class="mume-header" id="centos%E9%98%B2%E7%81%AB%E5%A2%99">CentOS&#x9632;&#x706B;&#x5899;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># systemctl {status | stop | start | disable | enable} firewalld</span>
 systemctl status firewalld
@@ -487,7 +502,7 @@ firewall-cmd --reload
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --remove-port<span class="token operator">=</span><span class="token number">8080</span>/tcp
 firewall-cmd --permanent --zone<span class="token operator">=</span>public --remove-service<span class="token operator">=</span>https
 firewall-cmd --reload
-</pre><h3 class="mume-header" id="ubuntu-1">Ubuntu</h3>
+</pre><h3 class="mume-header" id="ubuntu%E9%98%B2%E7%81%AB%E5%A2%99">Ubuntu&#x9632;&#x706B;&#x5899;</h3>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># sudo ufw {enable | disable | status}</span>
 <span class="token builtin class-name">echo</span> y <span class="token operator">|</span> <span class="token function">sudo</span> ufw <span class="token builtin class-name">enable</span>
@@ -574,14 +589,76 @@ nmcli
 <span class="token function">ip</span> <span class="token function">link</span> delete vlan0
 </pre><h2 class="mume-header" id="%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C">&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;</h2>
 
-<h3 class="mume-header" id="ubuntu-2">Ubuntu</h3>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x662F;&#x5426;&#x6709;&#x65E0;&#x7EBF;&#x7F51;&#x5361;</span>
+<span class="token function">ip</span> a<span class="token operator">|</span><span class="token function">grep</span> wlan<span class="token operator">&gt;</span>/dev/null <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">echo</span> OK <span class="token operator">||</span> <span class="token builtin class-name">echo</span> None
+<span class="token comment"># OK</span>
+</pre><h3 class="mume-header" id="%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F">&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># Wifi&#x5DE5;&#x5177;</span>
+<ul>
+<li>managed/station: &#x53EF;&#x4EE5;&#x8FDE;&#x63A5;AP&#xFF08;&#x4ECE;&#x6A21;&#x5F0F;&#xFF09;</li>
+<li>ap: &#x65E0;&#x7EBF;&#x70ED;&#x70B9;&#xFF08;&#x4E3B;&#x6A21;&#x5F0F;&#xFF09;</li>
+<li>ibss/adhoc: &#x6BCF;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x5BF9;&#x7B49;&#x7684;&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;</li>
+<li>monitor: &#x6240;&#x6709;&#x6570;&#x636E;&#x5305;&#x65E0;&#x8FC7;&#x6EE4;&#x5730;&#x4F20;&#x8F93;&#x5230;&#x4E3B;&#x673A;</li>
+<li>mesh: &#x52A8;&#x6001;&#x5EFA;&#x7ACB;&#x8DEF;&#x7531;&#xFF0C;&#x8282;&#x70B9;&#x540C;&#x65F6;&#x4F5C;&#x4E3A;AP&#x548C;&#x8DEF;&#x7531;&#x5668;</li>
+<li>wds: &#x7528;&#x4E8E;&#x5EF6;&#x4F38;&#x6269;&#x5C55;&#x65E0;&#x7EBF;&#x4FE1;&#x53F7;</li>
+</ul>
+<h3 class="mume-header" id="ubuntu%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9C">Ubuntu&#x65E0;&#x7EBF;&#x7F51;&#x7EDC;</h3>
+
+<h4 class="mume-header" id="%E8%99%9A%E6%8B%9F%E6%97%A0%E7%BA%BF%E7%BD%91%E5%8D%A1">&#x865A;&#x62DF;&#x65E0;&#x7EBF;&#x7F51;&#x5361;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5FC5;&#x5907;&#x8F6F;&#x4EF6;</span>
 <span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> wireless-tools
-<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> hostapd
 
-<span class="token comment"># &#x67E5;&#x770B;&#x65E0;&#x7EBF;&#x7F51;&#x5361;</span>
-iwconfig
+<span class="token comment"># &#x67E5;&#x770B;&#x7F51;&#x5361;&#x6A21;&#x5F0F;</span>
+iwconfig wlan0
+
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x7F51;&#x5361;&#x6A21;&#x5F0F;</span>
+<span class="token function">sudo</span> iwconfig wlan0 mode monitor
+
+<span class="token comment"># &#x521B;&#x5EFA;&#x865A;&#x62DF;&#x65E0;&#x7EBF;&#x7F51;&#x5361;</span>
+<span class="token comment"># iw {dev &lt;devname&gt; | phy &lt;phyname&gt;}</span>
+<span class="token comment">#       interface add &lt;name&gt;</span>
+<span class="token comment">#       type &lt;managed | ibss | monitor | mesh | wds&gt;</span>
+<span class="token comment">#       [mesh_id &lt;meshid&gt;]</span>
+<span class="token comment">#       [4addr on|off]</span>
+<span class="token comment">#       [addr &lt;mac-addr&gt;]</span>
+<span class="token function">sudo</span> <span class="token function">ip</span> <span class="token function">link</span> <span class="token builtin class-name">set</span> wlan0 down
+<span class="token function">sudo</span> iw dev wlan0 interface <span class="token function">add</span> wlan0v0 <span class="token builtin class-name">type</span> station
+</pre><h4 class="mume-header" id="%E8%BF%9E%E6%8E%A5wifi">&#x8FDE;&#x63A5;WIFI</h4>
+
+<p>&#x8BE6;&#x89C1;<a href="#ubuntu%E6%96%87%E6%9C%AC%E9%85%8D%E7%BD%AE">Ubuntu&#x6587;&#x672C;&#x914D;&#x7F6E;</a></p>
+<h4 class="mume-header" id="ap%E6%A8%A1%E5%BC%8F">AP&#x6A21;&#x5F0F;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5FC5;&#x5907;&#x8F6F;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> hostapd
+<span class="token comment"># &#x5F85;&#x8865;&#x5145;</span>
+</pre><h4 class="mume-header" id="raspberrypi%E5%88%9B%E5%BB%BA%E7%83%AD%E7%82%B9">RaspberryPi&#x521B;&#x5EFA;&#x70ED;&#x70B9;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x5B89;&#x88C5;&#x4F9D;&#x8D56;&#x8F6F;&#x4EF6;</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> <span class="token function">make</span>
+<span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> util-linux procps hostapd iproute2 iw haveged dnsmasq
+
+<span class="token comment"># &#x5B89;&#x88C5;create_ap</span>
+<span class="token function">sudo</span> <span class="token function">mkdir</span> /usr/applications
+<span class="token builtin class-name">cd</span> /usr/applications
+<span class="token function">sudo</span> <span class="token function">git</span> clone https://github.com/oblique/create_ap.git
+<span class="token builtin class-name">cd</span> create_ap/
+<span class="token function">sudo</span> <span class="token function">make</span> <span class="token function">install</span>
+<span class="token comment"># make uninstall</span>
+
+<span class="token comment"># &#x6D4B;&#x8BD5;&#x5B89;&#x88C5;</span>
+create_ap --version
+
+<span class="token comment"># &#x6D4B;&#x8BD5;&#x8FD0;&#x884C;</span>
+<span class="token function">sudo</span> create_ap wlan0 eth0 RaspberryPi 88zhmh99
+
+<span class="token comment"># &#x7F16;&#x8F91;&#x670D;&#x52A1;</span>
+<span class="token function">vim</span> /usr/lib/systemd/system/create_ap.service
+
+<span class="token comment"># &#x670D;&#x52A1;&#x7BA1;&#x7406;</span>
+systemctl start create_ap
+systemctl <span class="token builtin class-name">enable</span> create_ap
+systemctl status create_ap
 </pre><h2 class="mume-header" id="%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</h2>
 
 <h3 class="mume-header" id="centos6">CentOS6</h3>

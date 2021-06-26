@@ -19,9 +19,8 @@ ip addr add 192.168.1.100/24 dev eth0
 
 ### 图形化配置
 
-#### CentOS
-
 ```bash
+# 需要NetworkManager服务支持
 nmtui
 nmtui edit
 nmtui connect
@@ -30,7 +29,7 @@ nmtui hostname
 
 ### 文本配置
 
-#### CentOS
+#### CentOS文本配置
 
 ```bash
 # 网卡配置文件
@@ -61,32 +60,44 @@ service network restart
 systemctl restart network
 ```
 
-#### Ubuntu
+#### Ubuntu文本配置
 
 ```bash
-# 查看网卡配置
-cat /etc/netplan/00-installer-config.yaml
+ll /etc/netplan/
+
+# sudo vim /etc/netplan/00-installer-config.yaml
+# sudo vim /etc/netplan/50-cloud-init.yaml
+sudo vim /etc/netplan/*.yaml
 ```
 
 ```yaml
 network:
+    version: 2
     ethernets:
         ens33:
             dhcp4: true
-    version: 2
 ```
 
 ```yaml
 network:
+    version: 2
     ethernets:
-        ens33:
+        eth0:
+            optional: true
             dhcp4: no
             addresses: [192.168.1.100/24]
-            optional: true
             gateway4: 192.168.1.1
             nameservers:
                 addresses: [8.8.8.8]
-    version: 2
+            # match:
+            #     macaddress: AA:BB:CC:DD:EE:FF
+    wifis:
+        wlan0:
+            optional: true
+            dhcp4: true
+            access-points:
+                "要连接的WIFI的SSID":
+                    password: "要连接的WIFI的PASSWORD"
 ```
 
 ```bash
@@ -187,7 +198,7 @@ ifdown eth0
 
 ## 防火墙
 
-### CentOS
+### CentOS防火墙
 
 ```bash
 # systemctl {status | stop | start | disable | enable} firewalld
@@ -224,7 +235,7 @@ firewall-cmd --permanent --zone=public --remove-service=https
 firewall-cmd --reload
 ```
 
-### Ubuntu
+### Ubuntu防火墙
 
 ```bash
 # sudo ufw {enable | disable | status}
@@ -316,15 +327,86 @@ ip link delete vlan0
 
 ## 无线网络
 
-### Ubuntu
+```bash
+# 查看是否有无线网卡
+ip a|grep wlan>/dev/null && echo OK || echo None
+# OK
+```
+
+### 工作模式
+
+- managed/station: 可以连接AP（从模式）
+- ap: 无线热点（主模式）
+- ibss/adhoc: 每个节点的对等的无线网络
+- monitor: 所有数据包无过滤地传输到主机
+- mesh: 动态建立路由，节点同时作为AP和路由器
+- wds: 用于延伸扩展无线信号
+
+### Ubuntu无线网络
+
+#### 虚拟无线网卡
 
 ```bash
-# Wifi工具
+# 必备软件
 sudo apt install wireless-tools
-sudo apt install hostapd
 
-# 查看无线网卡
-iwconfig
+# 查看网卡模式
+iwconfig wlan0
+
+# 设置网卡模式
+sudo iwconfig wlan0 mode monitor
+
+# 创建虚拟无线网卡
+# iw {dev <devname> | phy <phyname>}
+#       interface add <name>
+#       type <managed | ibss | monitor | mesh | wds>
+#       [mesh_id <meshid>]
+#       [4addr on|off]
+#       [addr <mac-addr>]
+sudo ip link set wlan0 down
+sudo iw dev wlan0 interface add wlan0v0 type station
+```
+
+#### 连接WIFI
+
+详见[Ubuntu文本配置](#ubuntu文本配置)
+
+#### AP模式
+
+```bash
+# 必备软件
+sudo apt install hostapd
+# 待补充
+```
+
+#### RaspberryPi创建热点
+
+```bash
+# 安装依赖软件
+sudo apt install make
+sudo apt-get install util-linux procps hostapd iproute2 iw haveged dnsmasq
+
+# 安装create_ap
+sudo mkdir /usr/applications
+cd /usr/applications
+sudo git clone https://github.com/oblique/create_ap.git
+cd create_ap/
+sudo make install
+# make uninstall
+
+# 测试安装
+create_ap --version
+
+# 测试运行
+sudo create_ap wlan0 eth0 RaspberryPi 88zhmh99
+
+# 编辑服务
+vim /usr/lib/systemd/system/create_ap.service
+
+# 服务管理
+systemctl start create_ap
+systemctl enable create_ap
+systemctl status create_ap
 ```
 
 ## 服务管理
