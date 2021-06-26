@@ -651,7 +651,8 @@ iwconfig wlan0
 create_ap --version
 
 <span class="token comment"># &#x6D4B;&#x8BD5;&#x8FD0;&#x884C;</span>
-<span class="token function">sudo</span> create_ap wlan0 eth0 RaspberryPi 88zhmh99
+<span class="token comment"># create_ap [options] WIFI&#x8BBE;&#x5907; &#x7F51;&#x7EDC;&#x8BBE;&#x5907; SSID PASSWORD</span>
+<span class="token function">sudo</span> create_ap --no-virt wlan0 eth0 RaspberryPi 88zhmh99
 
 <span class="token comment"># &#x7F16;&#x8F91;&#x670D;&#x52A1;</span>
 <span class="token function">vim</span> /usr/lib/systemd/system/create_ap.service

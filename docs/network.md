@@ -399,7 +399,8 @@ sudo make install
 create_ap --version
 
 # 测试运行
-sudo create_ap wlan0 eth0 RaspberryPi 88zhmh99
+# create_ap [options] WIFI设备 网络设备 SSID PASSWORD
+sudo create_ap --no-virt wlan0 eth0 RaspberryPi 88zhmh99
 
 # 编辑服务
 vim /usr/lib/systemd/system/create_ap.service
