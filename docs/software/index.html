@@ -360,6 +360,11 @@ pre[data-line] .line-highlight[data-end]:after {
 </li>
 </ul>
 </li>
+<li><a href="#nodejs">NodeJs</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-9">&#x5B89;&#x88C5;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1266,6 +1271,31 @@ drbdsetup /dev/drbd0 primary
 <span class="token comment"># &#x6302;&#x8F7D;&#x5206;&#x533A;&#xFF08;&#x4EC5;&#x5728;Secondary&#x6267;&#x884C;&#xFF09;</span>
 <span class="token function">mkdir</span> /data
 <span class="token function">mount</span> /dev/drbd0 /data
+</pre><h2 class="mume-header" id="nodejs">NodeJs</h2>
+
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-9">&#x5B89;&#x88C5;</h3>
+
+<ul>
+<li><a href="http://nodejs.cn/download/current/">Download</a></li>
+</ul>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -f /usr/applications <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> /usr/applications<span class="token punctuation">;</span> <span class="token keyword">fi</span>
+<span class="token assign-left variable">node_ver</span><span class="token operator">=</span><span class="token string">&apos;v14.17.1&apos;</span>
+<span class="token assign-left variable">node_dir</span><span class="token operator">=</span>node-<span class="token variable">$node_ver</span>-linux-x64
+<span class="token function">pushd</span> /tmp
+<span class="token function">wget</span> <span class="token string">&quot;https://npm.taobao.org/mirrors/node/<span class="token variable">$node_ver</span>/<span class="token variable">$node_dir</span>.tar.xz&quot;</span>
+<span class="token function">tar</span> -xvf <span class="token variable">$node_dir</span>.tar.xz -C /usr/applications
+<span class="token function">ln</span> -s /usr/applications/<span class="token variable">$node_dir</span>/bin/node /usr/bin/node
+<span class="token function">ln</span> -s /usr/applications/<span class="token variable">$node_dir</span>/bin/npm /usr/bin/npm
+<span class="token function">ln</span> -s /usr/applications/<span class="token variable">$node_dir</span>/bin/npx /usr/bin/npx
+<span class="token function">rm</span> -f <span class="token variable">$node_dir</span>.tar.xz
+<span class="token function">popd</span>
+
+<span class="token comment"># Ubuntu</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nodejs
+
+<span class="token comment"># &#x68C0;&#x6D4B;&#x5B89;&#x88C5;&#x6210;&#x529F;</span>
+node -v
 </pre>
       </div>
       
