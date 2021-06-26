@@ -376,10 +376,11 @@ sudo iw dev wlan0 interface add wlan0v0 type station
 ```bash
 # 必备软件
 sudo apt install hostapd
+
 # 待补充
 ```
 
-#### RaspberryPi创建热点
+#### RaspberryPi创建AP
 
 ```bash
 # 安装依赖软件
