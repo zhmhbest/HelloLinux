@@ -52,3 +52,7 @@
 ## NATAPP
 
 @import "natapp.md"
+
+## AdGuardHome
+
+@import "adguard_home.md"

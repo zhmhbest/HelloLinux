@@ -371,6 +371,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E9%85%8D%E7%BD%AE-5">&#x914D;&#x7F6E;</a></li>
 </ul>
 </li>
+<li><a href="#adguardhome">AdGuardHome</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-11">&#x5B89;&#x88C5;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1357,6 +1362,48 @@ node -v
 
 <span class="token comment"># &#x67E5;&#x770B;&#x6620;&#x5C04;&#x7684;IP</span>
 <span class="token function">sudo</span> <span class="token function">grep</span> <span class="token string">&apos; Tunnel established at &apos;</span> /usr/applications/natapp/output.log <span class="token operator">|</span> <span class="token function">awk</span> -F<span class="token string">&apos; Tunnel established at &apos;</span> <span class="token string">&apos;{print <span class="token variable">$2</span>}&apos;</span>
+</pre><h2 class="mume-header" id="adguardhome">AdGuardHome</h2>
+
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-11">&#x5B89;&#x88C5;</h3>
+
+<p><a href="https://github.com/AdguardTeam/AdGuardHome">AdGuardHome</a></p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># Applications</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d /usr/applications <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">sudo</span> <span class="token function">mkdir</span> /usr/applications<span class="token punctuation">;</span> <span class="token keyword">fi</span>
+
+<span class="token comment"># &#x68C0;&#x67E5;DNS&#x914D;&#x7F6E;&#xFF08;&#x542B;&#x6709;8.8.8.8&#xFF09;</span>
+<span class="token function">grep</span> <span class="token string">&apos;^nameserver&apos;</span> /etc/resolv.conf
+
+<span class="token function">sudo</span> <span class="token function">mkdir</span> /usr/applications/AdGuard
+<span class="token builtin class-name">cd</span> /usr/applications/AdGuard
+<span class="token function">sudo</span> <span class="token function">wget</span> <span class="token string">&apos;http://raw.githubusercontent.com/AdguardTeam/AdGuardHome/master/scripts/install.sh&apos;</span>
+<span class="token function">sudo</span> <span class="token function">bash</span> ./install.sh
+<span class="token comment"># sudo /opt/AdGuardHome/AdGuardHome -s start|stop|restart|status|install|uninstall</span>
+
+<span class="token comment"># CentOS&#x9632;&#x706B;&#x5899;</span>
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-port<span class="token operator">=</span><span class="token number">3000</span>/tcp
+firewall-cmd --permanent --zone<span class="token operator">=</span>public --add-port<span class="token operator">=</span><span class="token number">53</span>/tcp
+firewall-cmd --reload
+
+<span class="token comment"># Ubuntu&#x9632;&#x706B;&#x5899;</span>
+<span class="token function">sudo</span> ufw allow to any port <span class="token number">3000</span> proto tcp
+<span class="token function">sudo</span> ufw allow to any port <span class="token number">53</span> proto tcp
+<span class="token function">sudo</span> ufw status verbose
+
+<span class="token comment"># &#x5B89;&#x88C5;&#x51C6;&#x5907;</span>
+<span class="token function">sudo</span> /opt/AdGuardHome/AdGuardHome -s start
+<span class="token comment"># &#x8BBF;&#x95EE;&#x7F51;&#x9875;&lt;http://ip:3000/install.html&gt;&#x5B8C;&#x6210;&#x540E;&#x7EED;&#x5B89;&#x88C5;</span>
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x300A;&#x7F51;&#x9875;&#x7BA1;&#x7406;&#x300B;&#x7AEF;&#x53E3;&#x4E3A;3000</span>
+<span class="token comment"># &#x8BBE;&#x7F6E;&#x300A;DNS &#x670D;&#x52A1;&#x5668;&#x300B;&#x7AEF;&#x53E3;&#x4E3A;53</span>
+
+<span class="token comment"># &#x670D;&#x52A1;&#x7BA1;&#x7406;</span>
+systemctl status AdGuardHome
+
+<span class="token comment"># &#x5378;&#x8F7D;</span>
+<span class="token function">sudo</span> systemctl stop AdGuardHome
+<span class="token function">sudo</span> systemctl disable AdGuardHome
+<span class="token function">sudo</span> <span class="token function">bash</span> /usr/applications/AdGuard/install.sh -u
+systemctl status AdGuardHome
+ll /opt/AdGuardHome/
 </pre>
       </div>
       
