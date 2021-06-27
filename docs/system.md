@@ -315,12 +315,46 @@ pushd vmount/; touch hello; popd
 umount vmount/; ll vmount/
 ```
 
-### NTFS
+### Ubuntu文件系统
 
-#### 修复文件系统错误
+#### 修复NTFS文件系统错误
 
 ```bash
 # The disk contains an unclean file system (?, ?).
 # The file system wasn't safely closed on Windows. Fixing.
 ntfsfix /dev/sda1
+```
+
+#### 挂载VHD
+
+```bash
+# sudo apt install nbd-client
+sudo apt install qemu-kvm
+sudo apt install exfat-utils exfat-fuse
+
+# 检查nbd驱动
+modinfo nbd
+# 加载nbd驱动
+sudo modprobe nbd max_part=8
+ll /dev/nbd*
+
+# 连接VHD
+sudo qemu-nbd -f raw -c /dev/nbd0 ${VHD磁盘}
+# 查看是否连接
+sudo fdisk -l /dev/nbd0
+# 断开VHD
+sudo qemu-nbd -d /dev/nbd0
+# 查看VHD分区
+ll /dev/nbd0*
+
+# Demo
+sambauser=zhmhbest
+sudo qemu-nbd -f raw -c /dev/nbd0 /home/$sambauser/share/F/Data/Disks/Core.vhd
+ll /dev/nbd0*
+sudo mount /dev/nbd0p1 /home/$sambauser/share/B
+ll /home/$sambauser/share/B
+#
+sudo umount /home/$sambauser/share/B
+sudo qemu-nbd -d /dev/nbd0
+sudo fdisk -l /dev/nbd0
 ```
