@@ -5,7 +5,7 @@
 
 ```bash
 # CentOS
-if [ ! -f /usr/applications ]; then mkdir /usr/applications; fi
+if [ ! -d /usr/applications ]; then mkdir /usr/applications; fi
 node_ver='v14.17.1'
 node_dir=node-$node_ver-linux-x64
 pushd /tmp

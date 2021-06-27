@@ -365,6 +365,12 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E5%AE%89%E8%A3%85-9">&#x5B89;&#x88C5;</a></li>
 </ul>
 </li>
+<li><a href="#natapp">NATAPP</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-10">&#x5B89;&#x88C5;</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-5">&#x914D;&#x7F6E;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -1289,7 +1295,7 @@ drbdsetup /dev/drbd0 primary
 <li><a href="http://nodejs.cn/download/current/">Download</a></li>
 </ul>
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS</span>
-<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -f /usr/applications <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> /usr/applications<span class="token punctuation">;</span> <span class="token keyword">fi</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d /usr/applications <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> /usr/applications<span class="token punctuation">;</span> <span class="token keyword">fi</span>
 <span class="token assign-left variable">node_ver</span><span class="token operator">=</span><span class="token string">&apos;v14.17.1&apos;</span>
 <span class="token assign-left variable">node_dir</span><span class="token operator">=</span>node-<span class="token variable">$node_ver</span>-linux-x64
 <span class="token function">pushd</span> /tmp
@@ -1306,6 +1312,51 @@ drbdsetup /dev/drbd0 primary
 
 <span class="token comment"># &#x68C0;&#x6D4B;&#x5B89;&#x88C5;&#x6210;&#x529F;</span>
 node -v
+</pre><h2 class="mume-header" id="natapp">NATAPP</h2>
+
+<p>NATAPP&#x5185;&#x7F51;&#x7A7F;&#x900F;&#x89E3;&#x51B3;&#x65B9;&#x6848;</p>
+<h3 class="mume-header" id="%E5%AE%89%E8%A3%85-10">&#x5B89;&#x88C5;</h3>
+
+<p>&#x4ECE;<a href="https://natapp.cn/#download">&#x6B64;&#x5904;</a>&#x590D;&#x5236;&#x8981;&#x4E0B;&#x8F7D;&#x7684;<code>natapp_url</code>&#x5730;&#x5740;&#x3002;</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># Applications</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d /usr/applications <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">sudo</span> <span class="token function">mkdir</span> /usr/applications<span class="token punctuation">;</span> <span class="token keyword">fi</span>
+
+<span class="token function">sudo</span> <span class="token function">mkdir</span> /usr/applications/natapp
+<span class="token builtin class-name">cd</span> /usr/applications/natapp
+<span class="token assign-left variable">natapp_url</span><span class="token operator">=</span><span class="token string">&apos;&apos;</span>
+<span class="token function">sudo</span> <span class="token function">wget</span> <span class="token variable">$natapp_url</span> -O natapp
+</pre><h3 class="mume-header" id="%E9%85%8D%E7%BD%AE-5">&#x914D;&#x7F6E;</h3>
+
+<p>&#x4ECE;<a href="https://natapp.cn/tunnel/lists">&#x6B64;&#x5904;</a>&#x914D;&#x7F6E;&#x4E2D;&#x590D;&#x5236;<code>authtoken</code>&#x3002;</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x8FD0;&#x884C;&#x914D;&#x7F6E;</span>
+<span class="token function">sudo</span> <span class="token function">vim</span> /usr/applications/natapp/config.ini
+</pre><p><code>config.ini</code></p>
+<pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">default</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">authtoken</span><span class="token punctuation">=</span><span class="token value attr-value">1122334455667788</span>
+<span class="token key attr-name">clienttoken</span><span class="token punctuation">=</span>
+<span class="token key attr-name">log</span><span class="token punctuation">=</span><span class="token value attr-value">/usr/applications/natapp/output.log</span>
+<span class="token key attr-name">loglevel</span><span class="token punctuation">=</span><span class="token value attr-value">INFO</span>
+<span class="token key attr-name">http_proxy</span><span class="token punctuation">=</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">sudo</span> <span class="token function">vim</span> <span class="token string">&apos;/usr/lib/systemd/system/natapp.service&apos;</span>
+</pre><p><code>natapp.service</code></p>
+<pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Unit</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">Description</span><span class="token punctuation">=</span><span class="token value attr-value">NATAPP Service</span>
+<span class="token key attr-name">After</span><span class="token punctuation">=</span><span class="token value attr-value">network.target</span>
+
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Service</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">Type</span><span class="token punctuation">=</span><span class="token value attr-value">simple</span>
+<span class="token key attr-name">ExecStart</span><span class="token punctuation">=</span><span class="token value attr-value">/usr/applications/natapp/natapp -config /usr/applications/natapp/config.ini</span>
+<span class="token key attr-name">KillSignal</span><span class="token punctuation">=</span><span class="token value attr-value">SIGINT</span>
+<span class="token key attr-name">Restart</span><span class="token punctuation">=</span><span class="token value attr-value">on-failure</span>
+<span class="token key attr-name">RestartSec</span><span class="token punctuation">=</span><span class="token value attr-value">5</span>
+
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Install</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">WantedBy</span><span class="token punctuation">=</span><span class="token value attr-value">multi-user.target</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash">systemctl status natapp
+<span class="token function">sudo</span> systemctl start natapp
+
+<span class="token comment"># &#x67E5;&#x770B;&#x6620;&#x5C04;&#x7684;IP</span>
+<span class="token function">sudo</span> <span class="token function">grep</span> <span class="token string">&apos; Tunnel established at &apos;</span> /usr/applications/natapp/output.log <span class="token operator">|</span> <span class="token function">awk</span> -F<span class="token string">&apos; Tunnel established at &apos;</span> <span class="token string">&apos;{print <span class="token variable">$2</span>}&apos;</span>
 </pre>
       </div>
       
