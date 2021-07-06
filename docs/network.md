@@ -474,3 +474,26 @@ ExecStop=Command
 # 服务所在服务组
 WantedBy=multi-user.target
 ```
+
+#### 创建简单服务
+
+```bash
+vim "/usr/lib/systemd/system/${ServiceName}.service"
+```
+
+```ini
+[Unit]
+Description=服务描述名称
+# After=network.target
+# After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=启动命令
+KillSignal=SIGINT
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```

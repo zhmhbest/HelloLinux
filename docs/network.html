@@ -314,7 +314,11 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E6%9C%8D%E5%8A%A1%E7%AE%A1%E7%90%86">&#x670D;&#x52A1;&#x7BA1;&#x7406;</a>
 <ul>
 <li><a href="#centos6">CentOS6</a></li>
-<li><a href="#centos7ubuntu">CentOS7/Ubuntu</a></li>
+<li><a href="#centos7ubuntu">CentOS7/Ubuntu</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E7%AE%80%E5%8D%95%E6%9C%8D%E5%8A%A1">&#x521B;&#x5EFA;&#x7B80;&#x5355;&#x670D;&#x52A1;</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -715,6 +719,23 @@ ll <span class="token string">&apos;/usr/lib/systemd/system/&apos;</span>
 
 <span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Install</span><span class="token punctuation">]</span></span>
 <span class="token comment"># &#x670D;&#x52A1;&#x6240;&#x5728;&#x670D;&#x52A1;&#x7EC4;</span>
+<span class="token key attr-name">WantedBy</span><span class="token punctuation">=</span><span class="token value attr-value">multi-user.target</span>
+</pre><h4 class="mume-header" id="%E5%88%9B%E5%BB%BA%E7%AE%80%E5%8D%95%E6%9C%8D%E5%8A%A1">&#x521B;&#x5EFA;&#x7B80;&#x5355;&#x670D;&#x52A1;</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">vim</span> <span class="token string">&quot;/usr/lib/systemd/system/<span class="token variable">${ServiceName}</span>.service&quot;</span>
+</pre><pre data-role="codeBlock" data-info="ini" class="language-ini"><span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Unit</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">Description</span><span class="token punctuation">=</span><span class="token value attr-value">&#x670D;&#x52A1;&#x63CF;&#x8FF0;&#x540D;&#x79F0;</span>
+<span class="token comment"># After=network.target</span>
+<span class="token comment"># After=network-online.target</span>
+
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Service</span><span class="token punctuation">]</span></span>
+<span class="token key attr-name">Type</span><span class="token punctuation">=</span><span class="token value attr-value">simple</span>
+<span class="token key attr-name">ExecStart</span><span class="token punctuation">=</span><span class="token value attr-value">&#x542F;&#x52A8;&#x547D;&#x4EE4;</span>
+<span class="token key attr-name">KillSignal</span><span class="token punctuation">=</span><span class="token value attr-value">SIGINT</span>
+<span class="token key attr-name">Restart</span><span class="token punctuation">=</span><span class="token value attr-value">on-failure</span>
+<span class="token key attr-name">RestartSec</span><span class="token punctuation">=</span><span class="token value attr-value">5</span>
+
+<span class="token header"><span class="token punctuation">[</span><span class="token section-name selector">Install</span><span class="token punctuation">]</span></span>
 <span class="token key attr-name">WantedBy</span><span class="token punctuation">=</span><span class="token value attr-value">multi-user.target</span>
 </pre>
       </div>
