@@ -1299,24 +1299,29 @@ drbdsetup /dev/drbd0 primary
 <ul>
 <li><a href="http://nodejs.cn/download/current/">Download</a></li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS</span>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS/Ubuntu</span>
 <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d /usr/applications <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> /usr/applications<span class="token punctuation">;</span> <span class="token keyword">fi</span>
-<span class="token assign-left variable">node_ver</span><span class="token operator">=</span><span class="token string">&apos;v14.17.1&apos;</span>
-<span class="token assign-left variable">node_dir</span><span class="token operator">=</span>node-<span class="token variable">$node_ver</span>-linux-x64
-<span class="token function">pushd</span> /tmp
-<span class="token function">wget</span> <span class="token string">&quot;https://npm.taobao.org/mirrors/node/<span class="token variable">$node_ver</span>/<span class="token variable">$node_dir</span>.tar.xz&quot;</span>
-<span class="token function">tar</span> -xvf <span class="token variable">$node_dir</span>.tar.xz -C /usr/applications
-<span class="token function">ln</span> -s /usr/applications/<span class="token variable">$node_dir</span>/bin/node /usr/bin/node
-<span class="token function">ln</span> -s /usr/applications/<span class="token variable">$node_dir</span>/bin/npm /usr/bin/npm
-<span class="token function">ln</span> -s /usr/applications/<span class="token variable">$node_dir</span>/bin/npx /usr/bin/npx
-<span class="token function">rm</span> -f <span class="token variable">$node_dir</span>.tar.xz
-<span class="token function">popd</span>
 
-<span class="token comment"># Ubuntu</span>
-<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> nodejs
+<span class="token assign-left variable">node_ver</span><span class="token operator">=</span><span class="token string">&apos;v14.17.1&apos;</span>
+<span class="token assign-left variable">node_cpu</span><span class="token operator">=</span><span class="token string">&apos;linux-x64&apos;</span>
+<span class="token comment"># node_cpu=&apos;linux-armv7l&apos;</span>
+<span class="token comment"># node_cpu=&apos;linux-arm64&apos;</span>
+<span class="token assign-left variable">node_name</span><span class="token operator">=</span>node-<span class="token variable">$node_ver</span>-<span class="token variable">$node_cpu</span>
+
+<span class="token function">pushd</span> /tmp
+<span class="token function">wget</span> <span class="token string">&quot;https://npm.taobao.org/mirrors/node/<span class="token variable">$node_ver</span>/<span class="token variable">$node_name</span>.tar.xz&quot;</span>
+<span class="token function">tar</span> -xvf <span class="token variable">$node_name</span>.tar.xz -C /usr/applications
+<span class="token comment"># rm /usr/bin/node /usr/bin/npm /usr/bin/npx</span>
+<span class="token function">ln</span> -s /usr/applications/<span class="token variable">$node_name</span>/bin/node /usr/bin/node
+<span class="token function">ln</span> -s /usr/applications/<span class="token variable">$node_name</span>/bin/npm /usr/bin/npm
+<span class="token function">ln</span> -s /usr/applications/<span class="token variable">$node_name</span>/bin/npx /usr/bin/npx
+<span class="token function">rm</span> -f <span class="token variable">$node_name</span>.tar.xz
+<span class="token function">popd</span>
 
 <span class="token comment"># &#x68C0;&#x6D4B;&#x5B89;&#x88C5;&#x6210;&#x529F;</span>
 node -v
+<span class="token function">npm</span> -v
+npx -v
 </pre><h2 class="mume-header" id="natapp">NATAPP</h2>
 
 <p>NATAPP&#x5185;&#x7F51;&#x7A7F;&#x900F;&#x89E3;&#x51B3;&#x65B9;&#x6848;</p>
