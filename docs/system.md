@@ -264,6 +264,9 @@ uuidgen
 
 # 查看磁盘信息
 sudo hdparm -I /dev/sda
+
+# 测试磁盘访问速度
+sudo hdparm -t /dev/sda
 ```
 
 ```bash
