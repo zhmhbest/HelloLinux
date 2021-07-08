@@ -126,6 +126,42 @@ sudo systemctl set-default multi-user.target # init 3
 sudo systemctl set-default graphical.target  # init 5
 ```
 
+## 时间日期
+
+### 时区
+
+```bash
+# 查看当前时区
+timedatectl | grep 'Time zone'
+cat /etc/timezone
+
+# 查看可用时区
+timedatectl list-timezones | grep 'Asia/'
+
+# 设置时区
+sudo timedatectl set-timezone 'Asia/Shanghai'
+```
+
+### 日期
+
+```bash
+# 查看当前系统时间
+hwclock
+date
+# UTC: 世界标准时间
+# GMT: 格林尼治时间
+# CST: 中国标准时间
+
+# 格式化时间
+date "+%Y-%m-%d %H:%M:%S"                # 格式化显示当前时间
+date -d "1996-10-16 12:33:23"            # Type1: 显示字符串所描述的时间
+date -d "-2 months"                      # Type2: 显示字符串所描述的时间
+date -d "-2 months" "+%Y-%m-%d %H:%M:%S" # Type3: 显示字符串所描述的时间
+
+# 修改时间
+date -s "1996-10-16 12:33:23"           # 设为字符串所描述的时间
+```
+
 ## 用户管理
 
 - `adduser`: 会自动为创建的用户指定主目录、系统Shell版本，会在创建时输入用户密码。

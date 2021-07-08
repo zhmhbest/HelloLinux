@@ -272,7 +272,6 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA">&#x8F93;&#x5165;&#x8F93;&#x51FA;</a></li>
 <li><a href="#%E5%8F%98%E9%87%8F%E4%B8%8E%E5%BC%95%E5%8F%B7">&#x53D8;&#x91CF;&#x4E0E;&#x5F15;&#x53F7;</a></li>
 <li><a href="#%E7%89%B9%E6%AE%8A%E7%AC%A6%E5%8F%B7">&#x7279;&#x6B8A;&#x7B26;&#x53F7;</a></li>
-<li><a href="#%E6%97%A5%E6%9C%9F">&#x65E5;&#x671F;</a></li>
 <li><a href="#%E4%BC%91%E7%9C%A0">&#x4F11;&#x7720;</a></li>
 <li><a href="#%E6%8E%A7%E5%88%B6%E8%AF%AD%E5%8F%A5">&#x63A7;&#x5236;&#x8BED;&#x53E5;</a>
 <ul>
@@ -396,23 +395,6 @@ pre[data-line] .line-highlight[data-end]:after {
 <span class="token builtin class-name">echo</span> PID:<span class="token variable">$$</span>
 dollar A B <span class="token string">&quot;C D&quot;</span>
 <span class="token builtin class-name">echo</span> code:<span class="token variable">$?</span>
-</pre><h2 class="mume-header" id="%E6%97%A5%E6%9C%9F">&#x65E5;&#x671F;</h2>
-
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x67E5;&#x770B;&#x5F53;&#x524D;&#x7CFB;&#x7EDF;&#x65F6;&#x95F4;</span>
-hwclock
-<span class="token function">date</span>
-<span class="token comment"># UTC: &#x4E16;&#x754C;&#x6807;&#x51C6;&#x65F6;&#x95F4;</span>
-<span class="token comment"># GMT: &#x683C;&#x6797;&#x5C3C;&#x6CBB;&#x65F6;&#x95F4;</span>
-<span class="token comment"># CST: &#x4E2D;&#x56FD;&#x6807;&#x51C6;&#x65F6;&#x95F4;</span>
-
-<span class="token comment"># &#x683C;&#x5F0F;&#x5316;&#x65F6;&#x95F4;</span>
-<span class="token function">date</span> <span class="token string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span>                <span class="token comment"># &#x683C;&#x5F0F;&#x5316;&#x663E;&#x793A;&#x5F53;&#x524D;&#x65F6;&#x95F4;</span>
-<span class="token function">date</span> -d <span class="token string">&quot;1996-10-16 12:33:23&quot;</span>            <span class="token comment"># Type1: &#x663E;&#x793A;&#x5B57;&#x7B26;&#x4E32;&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x65F6;&#x95F4;</span>
-<span class="token function">date</span> -d <span class="token string">&quot;-2 months&quot;</span>                      <span class="token comment"># Type2: &#x663E;&#x793A;&#x5B57;&#x7B26;&#x4E32;&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x65F6;&#x95F4;</span>
-<span class="token function">date</span> -d <span class="token string">&quot;-2 months&quot;</span> <span class="token string">&quot;+%Y-%m-%d %H:%M:%S&quot;</span> <span class="token comment"># Type3: &#x663E;&#x793A;&#x5B57;&#x7B26;&#x4E32;&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x65F6;&#x95F4;</span>
-
-<span class="token comment"># &#x4FEE;&#x6539;&#x65F6;&#x95F4;</span>
-<span class="token function">date</span> -s <span class="token string">&quot;1996-10-16 12:33:23&quot;</span>           <span class="token comment"># &#x8BBE;&#x4E3A;&#x5B57;&#x7B26;&#x4E32;&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x65F6;&#x95F4;</span>
 </pre><h2 class="mume-header" id="%E4%BC%91%E7%9C%A0">&#x4F11;&#x7720;</h2>
 
 <pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># sleep 1d 2h 3m 30s</span>
