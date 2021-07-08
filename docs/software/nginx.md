@@ -175,8 +175,9 @@ http {
             alias   html/files/;
             autoindex on;               # 显示目录
             autoindex_exact_size off;   # 显示详细文件大小
-            autoindex_localtime on;     # 显示文件时间
-            charset utf-8;
+            autoindex_localtime on;     # 使用本地时间
+            autoindex_format html;      # html | xml | json | jsonp
+            charset utf-8;              # 解决文件乱码问题
         }
 
         # Proxy-PHP on 127.0.0.1:80
