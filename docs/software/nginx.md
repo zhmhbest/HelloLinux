@@ -176,6 +176,7 @@ http {
             autoindex on;               # 显示目录
             autoindex_exact_size off;   # 显示详细文件大小
             autoindex_localtime on;     # 显示文件时间
+            charset utf-8;
         }
 
         # Proxy-PHP on 127.0.0.1:80
