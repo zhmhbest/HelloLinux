@@ -329,6 +329,12 @@ pre[data-line] .line-highlight[data-end]:after {
 <li><a href="#python">Python</a>
 <ul>
 <li><a href="#python-27">Python 2.7</a></li>
+<li><a href="#python-3">Python 3</a>
+<ul>
+<li><a href="#ubuntu-1">Ubuntu</a></li>
+</ul>
+</li>
+<li><a href="#conda">Conda</a></li>
 </ul>
 </li>
 <li><a href="#samba">Samba</a>
@@ -889,10 +895,77 @@ aria2c -k 1M -x <span class="token number">16</span> -j <span class="token numbe
 aria2c -c <span class="token boolean">true</span> -k 1M -x <span class="token number">16</span> -j <span class="token number">5</span> <span class="token operator">&lt;</span>url<span class="token operator">&gt;</span>
 </pre><h2 class="mume-header" id="python">Python</h2>
 
+<p>&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;Python&#x7A0B;&#x5E8F;&#xFF0C;CentOS7&#x81EA;&#x5E26;2.7&#x7248;&#x672C;&#xFF0C;CentOS8&#x548C;&#x65B0;&#x7248;Ubuntu&#x81EA;&#x5E26;3+&#x7248;&#x672C;&#x3002;</p>
 <h3 class="mume-header" id="python-27">Python 2.7</h3>
 
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">wget</span> https://bootstrap.pypa.io/pip/2.7/get-pip.py
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x4E3A;CentOS7&#x8865;&#x5145;&#x5B89;&#x88C5;pip&#x7A0B;&#x5E8F;</span>
+<span class="token function">wget</span> <span class="token string">&apos;https://bootstrap.pypa.io/pip/2.7/get-pip.py&apos;</span>
 python get-pip.py
+</pre><h3 class="mume-header" id="python-3">Python 3</h3>
+
+<h4 class="mume-header" id="ubuntu-1">Ubuntu</h4>
+
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> python3
+python3 -V
+<span class="token function">sudo</span> <span class="token function">ln</span> -s <span class="token string">&apos;/usr/bin/python3&apos;</span> <span class="token string">&apos;/usr/bin/python&apos;</span>
+python -V
+
+<span class="token comment"># &#x5B89;&#x88C5;pip</span>
+<span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> python3-pip
+pip3 -V
+pip -V
+</pre><h3 class="mume-header" id="conda">Conda</h3>
+
+<ul>
+<li><a href="https://repo.anaconda.com/miniconda/">Download</a></li>
+</ul>
+<pre data-role="codeBlock" data-info="python" class="language-python"><span class="token triple-quoted-string string">&quot;&quot;&quot;
+    &#x7B5B;&#x9009;&#x53EF;&#x5B89;&#x88C5;&#x7248;&#x672C;
+&quot;&quot;&quot;</span>
+<span class="token keyword">from</span> os <span class="token keyword">import</span> path
+<span class="token keyword">import</span> requests
+<span class="token comment"># pip install lxml</span>
+<span class="token keyword">import</span> pandas <span class="token keyword">as</span> pd
+
+df <span class="token operator">=</span> pd<span class="token punctuation">.</span>read_html<span class="token punctuation">(</span>requests<span class="token punctuation">.</span>get<span class="token punctuation">(</span><span class="token string">&quot;https://repo.anaconda.com/miniconda/&quot;</span><span class="token punctuation">)</span><span class="token punctuation">.</span>text<span class="token punctuation">)</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span>
+df <span class="token operator">=</span> df<span class="token punctuation">[</span>df<span class="token punctuation">[</span><span class="token string">&quot;Filename&quot;</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token builtin">apply</span><span class="token punctuation">(</span>
+    <span class="token keyword">lambda</span> x<span class="token punctuation">:</span>
+    x<span class="token punctuation">.</span>startswith<span class="token punctuation">(</span><span class="token string">&quot;Miniconda&quot;</span><span class="token punctuation">)</span> <span class="token keyword">and</span> x<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">&quot;latest&quot;</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span>
+    <span class="token keyword">and</span> x<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">&quot;Linux&quot;</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span> <span class="token keyword">and</span> x<span class="token punctuation">.</span>find<span class="token punctuation">(</span><span class="token string">&quot;x86_64&quot;</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span>
+<span class="token punctuation">)</span><span class="token punctuation">]</span>
+df <span class="token operator">=</span> df<span class="token punctuation">.</span>sort_values<span class="token punctuation">(</span>by<span class="token operator">=</span><span class="token punctuation">[</span><span class="token string">&quot;Last Modified&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Filename&quot;</span><span class="token punctuation">]</span><span class="token punctuation">,</span> ascending<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">)</span>
+df<span class="token punctuation">.</span>to_csv<span class="token punctuation">(</span>
+    path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>path<span class="token punctuation">.</span>dirname<span class="token punctuation">(</span>path<span class="token punctuation">.</span>abspath<span class="token punctuation">(</span>__file__<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">&quot;miniconda.csv&quot;</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    index<span class="token operator">=</span><span class="token boolean">False</span><span class="token punctuation">,</span> encoding<span class="token operator">=</span><span class="token string">&quot;utf-8&quot;</span>
+<span class="token punctuation">)</span>
+</pre><pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token assign-left variable">python_ver</span><span class="token operator">=</span><span class="token string">&apos;py38_4.9.2&apos;</span>
+<span class="token assign-left variable">python_cpu</span><span class="token operator">=</span><span class="token string">&apos;Linux-x86_64&apos;</span>
+<span class="token assign-left variable">python_name</span><span class="token operator">=</span><span class="token string">&quot;Miniconda3-<span class="token variable">$python_ver</span>-<span class="token variable">$python_cpu</span>.sh&quot;</span>
+
+<span class="token function">pushd</span> /tmp
+<span class="token function">wget</span> <span class="token string">&quot;https://repo.anaconda.com/miniconda/<span class="token variable">$python_name</span>&quot;</span>
+<span class="token function">sudo</span> <span class="token function">bash</span> ./<span class="token variable">$python_name</span>
+
+<span class="token comment"># In order to continue the installation process, please review the license agreement.</span>
+<span class="token comment"># Please, press ENTER to continue</span>
+<span class="token comment"># &gt;&gt;&gt; &lt;ENTER&gt;</span>
+
+<span class="token comment"># Miniconda3 will now be installed into this location:</span>
+<span class="token comment">#   - Press ENTER to confirm the location</span>
+<span class="token comment">#   - Press CTRL-C to abort the installation</span>
+<span class="token comment">#   - Or specify a different location below</span>
+<span class="token comment"># &gt;&gt;&gt; /usr/applications/miniconda3</span>
+
+<span class="token comment"># Do you wish the installer to initialize Miniconda3</span>
+<span class="token comment"># by running conda init? [yes|no]</span>
+<span class="token comment"># &gt;&gt;&gt; yes</span>
+
+<span class="token function">rm</span> -f <span class="token variable">$python_name</span>
+<span class="token function">popd</span>
+
+<span class="token comment"># Conda</span>
+<span class="token function">sudo</span> <span class="token function">ln</span> -s /usr/applications/miniconda3/bin/conda /usr/bin/conda
+conda -V
 </pre><h2 class="mume-header" id="samba">Samba</h2>
 
 <blockquote>
@@ -1301,7 +1374,8 @@ drbdsetup /dev/drbd0 primary
 <ul>
 <li><a href="http://nodejs.cn/download/current/">Download</a></li>
 </ul>
-<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># CentOS/Ubuntu</span>
+<p>&#x9002;&#x7528;&#x4E8E;CentOS/Ubuntu&#x7B49;&#x7CFB;&#x7EDF;</p>
+<pre data-role="codeBlock" data-info="bash" class="language-bash"><span class="token comment"># &#x51C6;&#x5907;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x76EE;&#x5F55;</span>
 <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d /usr/applications <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span> <span class="token function">mkdir</span> /usr/applications<span class="token punctuation">;</span> <span class="token keyword">fi</span>
 
 <span class="token assign-left variable">node_ver</span><span class="token operator">=</span><span class="token string">&apos;v14.17.1&apos;</span>

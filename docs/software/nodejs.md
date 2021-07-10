@@ -3,8 +3,10 @@
 
 - [Download](http://nodejs.cn/download/current/)
 
+适用于CentOS/Ubuntu等系统
+
 ```bash
-# CentOS/Ubuntu
+# 准备应用程序目录
 if [ ! -d /usr/applications ]; then mkdir /usr/applications; fi
 
 node_ver='v14.17.1'
