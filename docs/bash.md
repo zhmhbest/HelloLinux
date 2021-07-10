@@ -661,3 +661,20 @@ function combineZIP() {
     rm -Rf "$extractRootPath"
 }
 ```
+
+### 检查文件是否已修改
+
+```bash
+function focus() {
+    fileName="$1"
+    memMod=0
+    while true; do
+        curMod=$(stat -c '%Y' "$fileName")
+        if (($memMod != $curMod)); then
+            echo "文件已改变"
+            memMod=$curMod
+        fi
+        sleep 1;
+    done
+}
+```

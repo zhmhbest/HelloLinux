@@ -61,6 +61,21 @@ WantedBy=multi-user.target
 systemctl status natapp
 sudo systemctl start natapp
 
-# 查看映射的IP
-sudo grep ' Tunnel established at ' /usr/applications/natapp/output.log | awk -F' Tunnel established at ' '{print $2}'
+# 查看映射的地址
+sudo grep ' Tunnel established at ' /usr/applications/natapp/output.log | awk -F' Tunnel established at ' '{print $2}' | tail -n 1
+```
+
+```bash
+# 实时获取地址
+fileName="/usr/applications/natapp/output.log"
+msgSplit=' Tunnel established at '
+memMod=0
+while true; do
+    curMod=$(stat -c '%Y' "$fileName")
+    if (($memMod != $curMod)); then
+        sudo grep "$msgSplit" $fileName | awk -F"$msgSplit" '{print $2}' | tail -n 1
+        memMod=$curMod
+    fi
+    sleep 1;
+done
 ```
